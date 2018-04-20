@@ -1,4 +1,5 @@
 export default function manageState(state = {
+  loggedIn: true,
   something: [],
 }, action) {
 
@@ -11,6 +12,7 @@ export default function manageState(state = {
           action.something
         ]
       }
+      
 
     default:
       return state;
