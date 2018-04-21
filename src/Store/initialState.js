@@ -1,6 +1,6 @@
 const initialState = {
-  loggedIn: true,
-  activeMenuItem: 'Option 1',
+  loggedIn: false,
+  activeMenuItem: '',
 
 };
 

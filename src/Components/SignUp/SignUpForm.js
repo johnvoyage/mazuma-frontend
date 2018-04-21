@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Checkbox, Form } from 'semantic-ui-react'
 
-const LogInForm = () => (
+const SignUpForm = () => (
   <Form>
     <Form.Field>
       <label>First Name</label>
@@ -18,4 +18,4 @@ const LogInForm = () => (
   </Form>
 )
 
-export default LogInForm
+export default SignUpForm

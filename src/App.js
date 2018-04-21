@@ -11,7 +11,6 @@ class App extends Component {
         <TopMenu />
         <MainSegmentOne />
         <MainSegmentTwo />
-
       </div>
     );
   }
