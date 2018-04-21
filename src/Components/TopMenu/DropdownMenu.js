@@ -10,7 +10,6 @@ const DropdownMenu = (props) => {
       <Dropdown.Item>
         <Icon name='dropdown' />
         <span className='text'>New</span>
-
         <Dropdown.Menu>
           <Dropdown.Item>Document</Dropdown.Item>
           <Dropdown.Item>Image</Dropdown.Item>

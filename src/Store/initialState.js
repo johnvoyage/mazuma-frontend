@@ -1,8 +1,7 @@
 const initialState = {
   loggedIn: true,
-  something: 0,
-  activeMenuItem: 'home',
-  
+  activeMenuItem: 'Option 1',
+
 };
 
 export default initialState;

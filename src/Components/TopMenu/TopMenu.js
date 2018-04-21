@@ -6,8 +6,6 @@ import LoggedOutTopMenu from './LoggedOutTopMenu';
 
 const TopMenu = (props) => {
 
-  console.log(props)
-
   return (
     <div>
       {
@@ -25,20 +23,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  // console.log(dispatch)
-  return {
-    // increment: () => {
-    //   dispatch({ type: 'SOMETHING', something: 2 })
-    // },
-    // decrement: () => {
-    //   dispatch({ type: 'SOMETHING_ELSE', something: 3 })
-    // }
-
-  }
-}
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(TopMenu);

@@ -3,26 +3,43 @@ import { connect } from 'react-redux';
 import { Menu, Dropdown } from 'semantic-ui-react';
 import DropdownMenu from './DropdownMenu';
 
+const menuOptions = [
+  'Option 1',
+  'Option 2',
+  'Option 3',
+  'Log Out'
+]
 
 const LoggedInTopMenu = (props) => {
 
-  console.log(props)
-
   return (
-    <Menu pointing secondary fluid widths={5}>
-      <Menu.Item name="You're" active={true} onClick={this.handleItemClick} />
-      <Menu.Item name='logged' active={false} onClick={this.handleItemClick} />
-      <Menu.Item name='in' active={false} onClick={this.handleItemClick} />
-      <Menu.Item name='Log Out' active={false} onClick={this.handleItemClick} />
+    <Menu pointing secondary fluid widths={ menuOptions.length + 1 }>
+      <Menu.Item
+        name={ menuOptions[0] }
+        active={props.activeMenuItem === menuOptions[0]}
+        onClick={props.changeActiveMenuItem(menuOptions[0])}
+      />
+      <Menu.Item
+        name={ menuOptions[1] }
+        active={props.activeMenuItem === menuOptions[1]}
+        onClick={props.changeActiveMenuItem(menuOptions[1])}
+      />
+      <Menu.Item
+        name={ menuOptions[2] }
+        active={props.activeMenuItem === menuOptions[2]}
+        onClick={props.changeActiveMenuItem(menuOptions[2])}
+      />
+      <Menu.Item
+        name={ menuOptions[3] }
+        active={props.activeMenuItem === menuOptions[3]}
+        onClick={props.changeLogInStatus}
+      />
       <Dropdown item icon='sidebar' simple>
         <DropdownMenu />
       </Dropdown>
-
-
     </Menu>
   )
 }
-
 
 const mapStateToProps = (state) => {
   return {
@@ -31,18 +48,15 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  // console.log(dispatch)
   return {
-    // increment: () => {
-    //   dispatch({ type: 'SOMETHING', something: 2 })
-    // },
-    // decrement: () => {
-    //   dispatch({ type: 'SOMETHING_ELSE', something: 3 })
-    // }
-
+    changeLogInStatus: () => {
+      dispatch({ type: 'CHANGE_LOG_IN_STATUS'})
+    },
+    changeActiveMenuItem: (activeMenuItem) => {
+      dispatch({ type: 'CHANGE_ACTIVE_MENU_ITEM', activeMenuItem})
+    }
   }
 }
-
 
 export default connect(
   mapStateToProps,
