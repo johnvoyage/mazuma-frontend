@@ -25,7 +25,7 @@ const MainSegmentOne = (props) => {
       activeItem = "LO 1";
       break;
     case loggedOutMenuOptions[2]:
-      activeItem = "LO 2";
+      activeItem = <SignUpForm />;
       break;
     case loggedOutMenuOptions[3]:
       activeItem = "LO 3"
