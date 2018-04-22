@@ -1,8 +1,13 @@
 const initialState = {
-  loggedInUser: '',
-  loggedInPassword: '',
-  loggedIn: false,
-  activeMenuItem: '',
+  userInfo: {
+    id: null,
+    email: null,
+    ticker: null,
+  },
+  // loggedInUser: '',
+  // loggedInPassword: '',
+  // loggedIn: false,
+  activeMenuItem: null,
 
 };
 

@@ -44,7 +44,11 @@ const TopMenu = (props) => {
         active={ props.activeMenuItem === menuOptions[3] }
         onClick={
           // props.changeLogInStatus
-          () => props.changeActiveMenuItem(menuOptions[3])
+          props.loggedIn ?
+            () => props.logUserOut()
+          :
+            () => props.changeActiveMenuItem(menuOptions[3])
+
         }
       />
       <Dropdown item icon='sidebar' simple>
@@ -57,15 +61,15 @@ const TopMenu = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    loggedIn: state.loggedIn,
+    loggedIn: state.userInfo.email ? true : false,
     activeMenuItem: state.activeMenuItem,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    changeLogInStatus: () => {
-      dispatch({ type: 'CHANGE_LOG_IN_STATUS'})
+    logUserOut: () => {
+      dispatch({ type: 'LOG_USER_OUT' })
     },
 
     changeActiveMenuItem: (activeMenuItem) => {
