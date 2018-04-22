@@ -42,7 +42,10 @@ const TopMenu = (props) => {
       <Menu.Item
         name={ menuOptions[3] }
         active={ props.activeMenuItem === menuOptions[3] }
-        onClick={ props.changeLogInStatus }
+        onClick={
+          // props.changeLogInStatus
+          () => props.changeActiveMenuItem(menuOptions[3])
+        }
       />
       <Dropdown item icon='sidebar' simple>
         <DropdownMenu />

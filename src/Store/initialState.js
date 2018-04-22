@@ -1,4 +1,6 @@
 const initialState = {
+  loggedInUser: '',
+  loggedInPassword: '',
   loggedIn: false,
   activeMenuItem: '',
 

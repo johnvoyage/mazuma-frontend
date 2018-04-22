@@ -2,6 +2,8 @@ import React from 'react';
 import { Segment } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import SignUpForm from '../SignUp/SignUpForm';
+import SignInForm from '../SignIn/SignInForm';
+
 import { loggedInMenuOptions, loggedOutMenuOptions } from '../TopMenu/MenuOptions';
 
 
@@ -12,6 +14,7 @@ const MainSegmentOne = (props) => {
   switch (props.activeMenuItem) {
     case loggedInMenuOptions[0]:
       activeItem = "LI 0";
+      break;
     case loggedInMenuOptions[1]:
       activeItem = "LI 1";
       break;
@@ -28,7 +31,7 @@ const MainSegmentOne = (props) => {
       activeItem = <SignUpForm />;
       break;
     case loggedOutMenuOptions[3]:
-      activeItem = "LO 3"
+      activeItem = <SignInForm />;
       break;
     default:
       activeItem = "SHOULDNT GET HERE"
