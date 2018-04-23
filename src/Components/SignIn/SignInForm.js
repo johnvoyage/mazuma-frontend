@@ -6,14 +6,12 @@ import api from '../API/api';
 const SignInForm = (props) => {
 
   let formInput = {}
-  // let inputErrors = {}
 
   const handleSubmit = (event) => {
     event.preventDefault()
     api.auth
       .login(formInput.email, formInput.password)
       .then(json => {
-        // console.log(json)
         if (json.error) {
           console.log("ERROR")
         } else {
@@ -24,7 +22,6 @@ const SignInForm = (props) => {
 
   const handleChange = (event) => {
     formInput = { ...formInput, [event.target.name]: event.target.value }
-    // console.log(formInput)
   }
 
   return(
@@ -48,34 +45,27 @@ const SignInForm = (props) => {
           placeholder='password'
           value={formInput.password}
           onChange={ handleChange }
-
         />
       </Form.Field>
       <Button type='submit'>Sign In</Button>
     </Form>
   )
 }
+
 const mapStateToProps = (state) => {
   return {
     userInfo: state.userInfo
-    // activeMenuItem: state.activeMenuItem,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  console.log(dispatch)
   return {
-    // changeLogInStatus: () => {
-    //   dispatch({ type: 'CHANGE_LOG_IN_STATUS'})
-    // },
-
     logUserIn: (userInfo) => {
-      console.log(userInfo)
+      localStorage.setItem('token', userInfo.jwt)
       dispatch({ type: 'LOG_USER_IN', userInfo})
     }
   }
 }
-
 
 export default connect(
   mapStateToProps,

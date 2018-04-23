@@ -4,23 +4,15 @@ import { Menu, Dropdown } from 'semantic-ui-react';
 import DropdownMenu from './DropdownMenu';
 import { loggedInMenuOptions, loggedOutMenuOptions } from './MenuOptions';
 
-// const loggedOutMenuOptions = [
-//   'Mazuma',
-//   'LO Option 2',
-//   'Sign Up',
-//   'Sign In'
-// ]
-//
-// const loggedInMenuOptions = [
-//   'Username',
-//   'Spending',
-//   'Net worth',
-//   'Sign Out'
-// ]
+
 
 const TopMenu = (props) => {
 
-  const menuOptions = props.loggedIn ? loggedInMenuOptions : loggedOutMenuOptions
+  const loggedIn = !!props.userInfo.email
+
+  loggedInMenuOptions[0] = props.userInfo.email
+
+  const menuOptions = loggedIn ? loggedInMenuOptions : loggedOutMenuOptions
 
   return (
     <Menu pointing secondary fluid widths={ menuOptions.length + 1 }>
@@ -43,12 +35,10 @@ const TopMenu = (props) => {
         name={ menuOptions[3] }
         active={ props.activeMenuItem === menuOptions[3] }
         onClick={
-          // props.changeLogInStatus
-          props.loggedIn ?
+          loggedIn ?
             () => props.logUserOut()
           :
             () => props.changeActiveMenuItem(menuOptions[3])
-
         }
       />
       <Dropdown item icon='sidebar' simple>
@@ -61,7 +51,7 @@ const TopMenu = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    loggedIn: state.userInfo.email ? true : false,
+    userInfo: state.userInfo,
     activeMenuItem: state.activeMenuItem,
   };
 };
@@ -69,6 +59,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     logUserOut: () => {
+      localStorage.removeItem('token')
       dispatch({ type: 'LOG_USER_OUT' })
     },
 

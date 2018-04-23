@@ -26,11 +26,12 @@ store.subscribe(() => {
 })
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Router>
+  <Router>
+    <Provider store={store}>
+
       <App store={store} />
-    </Router>
-  </Provider>,
+    </Provider>
+  </Router>,
   document.getElementById('root')
 );
 // registerServiceWorker();
