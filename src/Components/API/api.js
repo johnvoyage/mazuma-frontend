@@ -8,10 +8,6 @@ const headers = {
   Authorization: token
 };
 
-// const getTransactions = () => {
-//   return fetch...
-// }
-
 const login = (email, password) => {
   return fetch(`${API_ROOT}/auth/`, {
     method: 'POST',
@@ -29,10 +25,23 @@ const getCurrentUser = () => {
   }).then(response => response.json())
 };
 
+const signUserUp = (email, password, tickerSymbol) => {
+  return fetch(`${API_ROOT}/users/`, {
+    method: 'POST',
+    headers: headers,
+    body: JSON.stringify({
+      email,
+      password,
+      tickerSymbol
+    })
+  }).then(response => response.json())
+}
+
 export default {
   auth: {
     login,
-    getCurrentUser
+    getCurrentUser,
+    signUserUp
   },
   // transactions: {
   //   getTransactions

@@ -24,6 +24,8 @@ const reducer = (state = initialState, action) => {
         },
         activeMenuItem: 'Mazuma'
       };
+    case 'TOGGLE_TERMS_AGREEMENT':
+      return {...state, userInfo: { ...state.userInfo, agreedToTerms: !state.userInfo.agreedToTerms } }
     case 'CHANGE_ACTIVE_MENU_ITEM':
       return {
         ...state,

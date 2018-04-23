@@ -3,6 +3,7 @@ const initialState = {
     id: null,
     email: null,
     ticker: null,
+    agreedToTerms: false,
   },
   // loggedInUser: '',
   // loggedInPassword: '',

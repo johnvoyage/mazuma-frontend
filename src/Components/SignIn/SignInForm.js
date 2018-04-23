@@ -43,7 +43,7 @@ const SignInForm = (props) => {
           name='password'
           type='password'
           placeholder='password'
-          value={formInput.password}
+          value={ formInput.password }
           onChange={ handleChange }
         />
       </Form.Field>

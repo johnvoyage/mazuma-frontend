@@ -1,15 +1,18 @@
 import React from 'react';
 import api from '../API/api';
+import { connect } from 'react-redux'
 import { Button, Checkbox, Form } from 'semantic-ui-react';
 
+
 const SignUpForm = (props) => {
+
 
   let formInput = {}
 
   const handleSubmit = (event) => {
     event.preventDefault()
     api.auth
-      .login(formInput.email, formInput.password)
+      .signUserUp(formInput.email, formInput.password, formInput.tickerSymbol)
       .then(json => {
         if (json.error) {
           console.log("ERROR")
@@ -18,27 +21,79 @@ const SignUpForm = (props) => {
         }
       })
   }
+
+  const handleChange = (event) => {
+    formInput = { ...formInput, [event.target.name]: event.target.value }
+  }
+
   return(
-    <Form>
-      <Form.Field>
+    <Form
+      onSubmit={ handleSubmit }
+    >
+      <Form.Field
+        required
+      >
         <label>Email</label>
-        <input placeholder='email' />
+        <input
+          name='email'
+          placeholder='email'
+          value={ formInput.email }
+          onChange={ handleChange }
+        />
       </Form.Field>
-      <Form.Field>
+      <Form.Field
+        required
+      >
         <label>Password</label>
-        <input placeholder='password' />
+        <input
+          name='password'
+          type='password'
+          placeholder='password'
+          value={ formInput.password }
+          onChange={ handleChange }
+        />
       </Form.Field>
       <Form.Field>
         <label>Ticker Symbol</label>
-        <input placeholder='ticker symbol' />
+        <input
+          name='ticker symbol'
+          placeholder='ticker symbol'
+          value={ formInput.password }
+          onChange={ handleChange }
+        />
       </Form.Field>
-      <Form.Field>
-        <Checkbox label='I agree to the Terms and Conditions' />
+      <Form.Field required>
+        <Checkbox
+          label='I agree to the Terms and Conditions'
+          onChange={ props.toggleTermsAgreement }
+        />
       </Form.Field>
-      <Button type='submit'>Create Account</Button>
+      <Button
+        type='submit'
+        disabled={ !props.agreedToTerms }
+      >
+        Create Account
+      </Button>
     </Form>
   )
 
 }
 
-export default SignUpForm
+const mapStateToProps = (state) => {
+  return {
+    agreedToTerms: state.userInfo.agreedToTerms
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    toggleTermsAgreement: () => {
+      dispatch({ type: 'TOGGLE_TERMS_AGREEMENT' })
+    }
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SignUpForm)
