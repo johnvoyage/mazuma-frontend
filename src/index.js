@@ -22,7 +22,7 @@ const store = createStore(
 );
 
 store.subscribe(() => {
-  console.log('the new state is', store.getState())
+  // console.log('the new state is', store.getState())
 })
 
 ReactDOM.render(

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Segment } from 'semantic-ui-react';
 import { connect } from 'react-redux';
+import UserAccountPage from '../UserAccount/UserAccountPage'
 import SignUpForm from '../SignUp/SignUpForm';
 import SignInForm from '../SignIn/SignInForm';
 
@@ -13,7 +14,7 @@ const MainSegmentOne = (props) => {
 
   switch (props.activeMenuItem) {
     case loggedInMenuOptions[0]:
-      activeItem = "LI 0";
+      activeItem = <UserAccountPage />;
       break;
     case loggedInMenuOptions[1]:
       activeItem = "LI 1";

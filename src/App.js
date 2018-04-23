@@ -14,7 +14,7 @@ class App extends Component {
       api.auth
         .getCurrentUser()
         .then(json => {
-          console.log(json)
+          // console.log(json)
           if (json.error) {
             console.log("ERROR")
           } else {

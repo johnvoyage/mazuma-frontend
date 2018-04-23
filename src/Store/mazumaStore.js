@@ -11,7 +11,8 @@ const reducer = (state = initialState, action) => {
           id: action.userInfo.id,
           email: action.userInfo.email,
           ticker: 'comeback',
-        }
+        },
+        activeMenuItem: action.userInfo.email
       }
     case 'LOG_USER_IN':
       return {
