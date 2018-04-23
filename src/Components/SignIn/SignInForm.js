@@ -21,7 +21,10 @@ const SignInForm = (props) => {
   }
 
   const handleChange = (event) => {
-    formInput = { ...formInput, [event.target.name]: event.target.value }
+    formInput = {
+      ...formInput,
+      [event.target.name]: event.target.value
+    }
   }
 
   return(
@@ -33,7 +36,7 @@ const SignInForm = (props) => {
         <input
           name='email'
           placeholder='email'
-          value={formInput.email}
+          value={ formInput.email }
           onChange={ handleChange }
         />
       </Form.Field>

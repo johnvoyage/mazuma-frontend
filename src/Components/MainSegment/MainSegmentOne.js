@@ -34,7 +34,7 @@ const MainSegmentOne = (props) => {
       activeItem = <SignInForm />;
       break;
     default:
-      activeItem = "SHOULDNT GET HERE"
+      activeItem = "Defaaaaault in Main Seg 1"
   }
 
   return(

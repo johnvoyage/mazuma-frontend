@@ -1,9 +1,18 @@
 import initialState from './initialState';
 
 const reducer = (state = initialState, action) => {
-  console.log('current state: ', state);
-  console.log('action: ', action);
+  // console.log('current state: ', state);
+  // console.log('action: ', action);
   switch (action.type) {
+    case 'SIGN_USER_UP':
+      return {
+        ...state,
+        userInfo: {
+          id: action.userInfo.id,
+          email: action.userInfo.email,
+          ticker: 'comeback',
+        }
+      }
     case 'LOG_USER_IN':
       return {
         ...state,
@@ -25,7 +34,14 @@ const reducer = (state = initialState, action) => {
         activeMenuItem: 'Mazuma'
       };
     case 'TOGGLE_TERMS_AGREEMENT':
-      return {...state, userInfo: { ...state.userInfo, agreedToTerms: !state.userInfo.agreedToTerms } }
+      return {
+        ...state,
+        formValidity: { ...state.formValidity, signUpForm: !state.formValidity.signUpForm } }
+    // case 'TERMS_AGREEMENT_INIT':
+    //   return {
+    //     ...state,
+    //     formValidity: { ...state.formValidity, signUpForm: false }
+    //   }
     case 'CHANGE_ACTIVE_MENU_ITEM':
       return {
         ...state,

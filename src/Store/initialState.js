@@ -3,7 +3,11 @@ const initialState = {
     id: null,
     email: null,
     ticker: null,
-    agreedToTerms: false,
+    // agreedToTerms: false,
+  },
+  formValidity: {
+    // formInput: {},
+    signUpForm: false,
   },
   // loggedInUser: '',
   // loggedInPassword: '',

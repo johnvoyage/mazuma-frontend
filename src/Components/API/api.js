@@ -9,6 +9,7 @@ const headers = {
 };
 
 const login = (email, password) => {
+  // debugger
   return fetch(`${API_ROOT}/auth/`, {
     method: 'POST',
     headers: headers,
@@ -25,17 +26,18 @@ const getCurrentUser = () => {
   }).then(response => response.json())
 };
 
-const signUserUp = (email, password, tickerSymbol) => {
+const signUserUp = (email, password /*, tickerSymbol*/) => {
+  // debugger
   return fetch(`${API_ROOT}/users/`, {
     method: 'POST',
     headers: headers,
     body: JSON.stringify({
       email,
       password,
-      tickerSymbol
+      // tickerSymbol
     })
   }).then(response => response.json())
-}
+};
 
 export default {
   auth: {

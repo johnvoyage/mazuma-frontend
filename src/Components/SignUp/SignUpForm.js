@@ -3,27 +3,29 @@ import api from '../API/api';
 import { connect } from 'react-redux'
 import { Button, Checkbox, Form } from 'semantic-ui-react';
 
-
 const SignUpForm = (props) => {
-
 
   let formInput = {}
 
   const handleSubmit = (event) => {
     event.preventDefault()
     api.auth
-      .signUserUp(formInput.email, formInput.password, formInput.tickerSymbol)
+      .signUserUp(formInput.email, formInput.password /*, formInput.tickerSymbol */)
       .then(json => {
         if (json.error) {
           console.log("ERROR")
         } else {
-          props.logUserIn(json)
+          props.signUserUp(json)
         }
       })
   }
 
   const handleChange = (event) => {
-    formInput = { ...formInput, [event.target.name]: event.target.value }
+    formInput = {
+      ...formInput,
+      [event.target.name]: event.target.value
+    }
+    console.log(formInput)
   }
 
   return(
@@ -65,12 +67,12 @@ const SignUpForm = (props) => {
       <Form.Field required>
         <Checkbox
           label='I agree to the Terms and Conditions'
-          onChange={ props.toggleTermsAgreement }
+          // onChange={ props.toggleTermsAgreement }
         />
       </Form.Field>
       <Button
         type='submit'
-        disabled={ !props.agreedToTerms }
+        // disabled={ !props.agreedToTerms }
       >
         Create Account
       </Button>
@@ -81,14 +83,21 @@ const SignUpForm = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    agreedToTerms: state.userInfo.agreedToTerms
+    // agreedToTerms: state.formValidity.signUpForm
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    // termsAgreementInit: () => {
+    //   dispatch({ type: 'TERMS_AGREEMENT_INIT' })
+    // },
     toggleTermsAgreement: () => {
       dispatch({ type: 'TOGGLE_TERMS_AGREEMENT' })
+    },
+    signUserUp: (userInfo) => {
+      console.log(userInfo)
+      dispatch({ type: 'SIGN_USER_UP', userInfo })
     }
   }
 }
