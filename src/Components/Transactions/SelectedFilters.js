@@ -3,7 +3,7 @@ import { Button, Checkbox, Grid, Segment } from 'semantic-ui-react';
 // import { connect } from 'react-redux';
 
 
-const Transactions = (props) => {
+const SelectedFilters = (props) => {
 
 
   return(
@@ -38,4 +38,4 @@ const Transactions = (props) => {
 
 }
 
-export default Transactions
+export default SelectedFilters

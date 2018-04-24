@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { Button } from 'semantic-ui-react'
+import { Button, Popup } from 'semantic-ui-react'
 
 
 const UserAccountPage = (props) => {
@@ -13,7 +13,12 @@ const UserAccountPage = (props) => {
 
       <Button.Group attached='bottom'>
         <Button>Edit Account</Button>
-        <Button negative>Delete Account</Button>
+        <Popup
+          trigger={<Button color='red' content='Delete Account' />}
+          content={<Button color='red' content='Click to Confirm' />}
+          on='click'
+          position='top center'
+        />
       </Button.Group>
     </div>
   )

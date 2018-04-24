@@ -1,7 +1,9 @@
 import React from 'react'
 import { Icon, Table } from 'semantic-ui-react'
 import { connect } from 'react-redux';
-import TransactionFilters from './TransactionFilters';
+import SelectedFilters from './SelectedFilters';
+
+import QuickFilters from './QuickFilters';
 
 
 class Transactions extends React.Component {
@@ -9,12 +11,13 @@ class Transactions extends React.Component {
   render() {
     return(
       <div>
-        <TransactionFilters />
+        <SelectedFilters />
+        <QuickFilters />
 
 
         <br />
         <br />
-      
+
 
         <Table celled compact>
           <Table.Header>

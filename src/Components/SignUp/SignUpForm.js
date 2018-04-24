@@ -1,7 +1,8 @@
 import React from 'react';
 import api from '../API/api';
 import { connect } from 'react-redux'
-import { Button, Checkbox, Form } from 'semantic-ui-react';
+import { Accordion, Button, Checkbox, Form } from 'semantic-ui-react';
+import panels from './InitialEntry'
 
 const SignUpForm = (props) => {
 
@@ -64,6 +65,8 @@ const SignUpForm = (props) => {
           onChange={ handleChange }
         />
       </Form.Field>
+
+      <Accordion as={Form.Field} panels={panels} />
       <Form.Field required>
         <Checkbox
           label='I agree to the Terms and Conditions'
