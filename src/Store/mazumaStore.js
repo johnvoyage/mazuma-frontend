@@ -4,13 +4,14 @@ const reducer = (state = initialState, action) => {
   // console.log('current state: ', state);
   // console.log('action: ', action);
   switch (action.type) {
+
+    /* USER ACCOUNT INFO */
     case 'SIGN_USER_UP':
       return {
         ...state,
         userInfo: {
           id: action.userInfo.id,
           email: action.userInfo.email,
-          ticker: 'comeback',
         },
         activeMenuItem: action.userInfo.email
       }
@@ -20,7 +21,6 @@ const reducer = (state = initialState, action) => {
         userInfo: {
           id: action.userInfo.id,
           email: action.userInfo.email,
-          ticker: 'comeback',
         },
         activeMenuItem: action.userInfo.email
       };
@@ -30,28 +30,14 @@ const reducer = (state = initialState, action) => {
         userInfo: {
           id: null,
           email: null,
-          ticker: null,
         },
         activeMenuItem: 'Mazuma'
       };
-    // case 'DELETE_USER_ACCOUNT':
-    //   console.log('heree')
-    //   return {
-    //     ...state
-    //   }
     case 'EDIT_USER_ACCOUNT':
       return {
         ...state
       }
-    // case 'TOGGLE_TERMS_AGREEMENT':
-    //   return {
-    //     ...state,
-    //     formValidity: { ...state.formValidity, signUpForm: !state.formValidity.signUpForm } }
-    // case 'TERMS_AGREEMENT_INIT':
-    //   return {
-    //     ...state,
-    //     formValidity: { ...state.formValidity, signUpForm: false }
-    //   }
+
 
     /* STATE OF THE NAVBAR */
     case 'CHANGE_ACTIVE_MENU_ITEM':
@@ -62,10 +48,16 @@ const reducer = (state = initialState, action) => {
 
     /* STATE OF THE TRANSACTIONS TABLE */
     case 'TOGGLE_TRANSACTION_DESCRIPTION':
+      console.log('here')
       return {
         ...state,
+        transactionContainer: {
+          ...state.transactionContainer,
+          descriptionToggle: !state.transactionContainer.descriptionToggle
+        }
       }
 
+    /* DONE */
     default:
       return state;
   }

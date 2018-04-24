@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Checkbox, Grid } from 'semantic-ui-react';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 
 
 const SelectedFilters = (props) => {
@@ -15,6 +15,7 @@ const SelectedFilters = (props) => {
                 defaultChecked
                 label='Descriptions'
                 toggle
+                onChange={props.toggleTransactionDescription}
               />
           </Grid.Column>
           <Grid.Column width={8}>
@@ -38,4 +39,33 @@ const SelectedFilters = (props) => {
 
 }
 
-export default SelectedFilters
+// export default SelectedFilters
+
+const mapStateToProps = (state) => {
+  return {
+    // email: state.userInfo.email,
+    // ticker: state.userInfo.tickerSymbol
+    // agreedToTerms: state.formValidity.signUpForm
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    // termsAgreementInit: () => {
+    //   dispatch({ type: 'TERMS_AGREEMENT_INIT' })
+    // },
+    toggleTransactionDescription: () => {
+      dispatch({ type: 'TOGGLE_TRANSACTION_DESCRIPTION' })
+    },
+    // signUserUp: (userInfo) => {
+    //   console.log(userInfo)
+    //   dispatch({ type: 'SIGN_USER_UP', userInfo })
+    // }
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+  // null
+)(SelectedFilters)

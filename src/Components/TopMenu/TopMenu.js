@@ -10,11 +10,11 @@ const TopMenu = (props) => {
 
   const loggedIn = !!props.userInfo.email
 
-  loggedIn ? loggedInMenuOptions[0] = props.userInfo.email : null
+  // loggedIn ? loggedInMenuOptions[0] = props.userInfo.email : null
 
   const menuOptions = loggedIn ? loggedInMenuOptions : loggedOutMenuOptions
 
-  console.log(menuOptions)
+  // console.log(menuOptions)
 
   const renderMenuItems = () => {
     return menuOptions.map((menuOption, index) => {

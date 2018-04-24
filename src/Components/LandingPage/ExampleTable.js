@@ -1,6 +1,6 @@
 import React from 'react';
 // import { Segment } from 'semantic-ui-react';
-import exampleData from './ExampleData'
+// import exampleData from './ExampleData'
 
 const ExampleTable = (props) => {
   return(

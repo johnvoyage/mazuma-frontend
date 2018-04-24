@@ -9,7 +9,7 @@ import UserHomeStats from './UserHomeStats';
 
 const UserAccountPage = (props) => {
 
-  console.log(props)
+  // console.log(props)
 
   const handleDelete = (event) => {
     api.auth
