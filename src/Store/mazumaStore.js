@@ -48,7 +48,7 @@ const reducer = (state = initialState, action) => {
 
     /* STATE OF THE TRANSACTIONS TABLE */
     case 'TOGGLE_TRANSACTION_DESCRIPTION':
-      console.log('here')
+      // console.log('here')
       return {
         ...state,
         transactionContainer: {
@@ -56,6 +56,22 @@ const reducer = (state = initialState, action) => {
           descriptionToggle: !state.transactionContainer.descriptionToggle
         }
       }
+      case 'TOGGLE_TRANSACTION_FILTER':
+        return {
+          ...state,
+          transactionContainer: {
+            ...state.transactionContainer,
+            filterSelected: action.filterSelected
+          }
+        }
+      case 'TOGGLE_NEW_TRANSACTION':
+        return {
+          ...state,
+          transactionContainer: {
+            ...state.transactionContainer,
+            newTransaction: !state.transactionContainer.newTransaction
+          }
+        }
 
     /* DONE */
     default:

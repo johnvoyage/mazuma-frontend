@@ -5,31 +5,53 @@ import { connect } from 'react-redux';
 
 const SelectedFilters = (props) => {
 
-
   return(
     <div>
       <Grid>
         <Grid.Row>
           <Grid.Column width={2}>
               <Checkbox
-                defaultChecked
                 label='Descriptions'
                 toggle
+                checked={props.descriptionToggle}
                 onChange={props.toggleTransactionDescription}
               />
           </Grid.Column>
           <Grid.Column width={8}>
               <Button.Group attached='top' floated='left'>
-                <Button toggle active={true}>No Filters</Button>
+                <Button
+                  name='none'
+                  toggle
+                  active={props.filterSelected === 'none'}
+                  content='No Filters'
+                  onClick={props.toggleTransactionFilter}
+                />
                 <Button.Or/>
-                <Button toggle active={false}>Quick Filters</Button>
+                <Button
+                  name='quick'
+                  toggle
+                  active={props.filterSelected === 'quick'}
+                  content='Quick Filters'
+                  onClick={props.toggleTransactionFilter}
+                />
                 <Button.Or/>
-                <Button toggle active={false}>Custom Filters</Button>
+                <Button
+                  name='custom'
+                  toggle
+                  active={props.filterSelected === 'custom'}
+                  content='Custom Filters'
+                  onClick={props.toggleTransactionFilter}
+                />
               </Button.Group>
           </Grid.Column>
           <Grid.Column width={6}>
               <Button.Group attached='top' floated='right'>
-                <Button>New Transaction</Button>
+                <Button
+                  toggle
+                  active={props.newTransaction}
+                  onClick={props.toggleNewTransaction}
+                  content='New Transaction'
+                />
               </Button.Group>
           </Grid.Column>
         </Grid.Row>
@@ -37,35 +59,31 @@ const SelectedFilters = (props) => {
     </div>
   )
 
-}
-
-// export default SelectedFilters
+};
 
 const mapStateToProps = (state) => {
   return {
-    // email: state.userInfo.email,
-    // ticker: state.userInfo.tickerSymbol
-    // agreedToTerms: state.formValidity.signUpForm
+    descriptionToggle: state.transactionContainer.descriptionToggle,
+    newTransaction: state.transactionContainer.newTransaction,
+    filterSelected: state.transactionContainer.filterSelected,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // termsAgreementInit: () => {
-    //   dispatch({ type: 'TERMS_AGREEMENT_INIT' })
-    // },
     toggleTransactionDescription: () => {
       dispatch({ type: 'TOGGLE_TRANSACTION_DESCRIPTION' })
     },
-    // signUserUp: (userInfo) => {
-    //   console.log(userInfo)
-    //   dispatch({ type: 'SIGN_USER_UP', userInfo })
-    // }
-  }
-}
+    toggleTransactionFilter: (event) => {
+      dispatch({ type: 'TOGGLE_TRANSACTION_FILTER', filterSelected: event.target.name })
+    },
+    toggleNewTransaction: () => {
+      dispatch({ type: 'TOGGLE_NEW_TRANSACTION' })
+    }
+  };
+};
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-  // null
-)(SelectedFilters)
+)(SelectedFilters);

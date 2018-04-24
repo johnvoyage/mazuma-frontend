@@ -21,72 +21,98 @@ const entries = [
     description: 'this is description uno'
   },
   {
-    number: 1,
-    date: '1/1/15',
+    number: 2,
+    date: '1/1/17',
     transactions: [
       {
         account: 1003,
         amount: 1000
+      },{
+        account: 1004,
+        amount: -850
+      },{
+        account: 1005,
+        amount: -150
       }
     ],
     description: 'this is description dos'
+  }, {
+    number: 3,
+    date: '2/2/17',
+    transactions: [
+      {
+        account: 1003,
+        amount: 250
+      },{
+        account: 1007,
+        amount: 350
+      },{
+        account: 1004,
+        amount: -200
+      },{
+        account: 1005,
+        amount: -400
+      }
+    ],
+    description: 'this is description tres'
   }
 ]
 
 class TransactionsTable extends React.Component {
 
-  renderDescriptions = () => {
-
-  }
-
-  renderEntries = (transactions) => {
-    return transactions.map((transaction) => {
-      return (
-        <div>
-          <Table.Cell>
-            {transaction.account}
-          </Table.Cell>
-          <Table.Cell>
-            {transaction.amount}
-          </Table.Cell>
-        </div>
-      )
-    })
-  }
 
   renderTransactions = () => {
-    debugger
-    return entries.map((entry) => {
-      console.log(entry)
-      return (
-        <Table.Body>
-          <Table.Row>
-            <Table.Cell rowSpan={entry.transactions.length}>
-              Transaction:   {entry.number}
-              <br />
-              Date:   {entry.date}
-            </Table.Cell>
-            {
-              this.renderEntries(entry.transactions)
-            }
-            <Table.Cell>1001</Table.Cell>
-            <Table.Cell>750</Table.Cell>
-            <Table.Cell rowSpan={entry.transactions.length} selectable textAlign='center'>
-              <Icon name='pencil' />
-            </Table.Cell>
-            <Table.Cell rowSpan={entry.transactions.length} selectable textAlign='center'>
-              <Icon name='remove' />
+    let keyCounter = 1
+    let tableRows = []
+    entries.forEach((entry, index) => {
+
+      tableRows.push(
+        <Table.Row key={`${keyCounter++}`}>
+          <Table.Cell rowSpan={entry.transactions.length}>
+            Transaction:   {entry.number}
+            <br />
+            Date:   {entry.date}
+          </Table.Cell>
+          <Table.Cell>{entry.transactions[0].account}</Table.Cell>
+          <Table.Cell>{entry.transactions[0].amount}</Table.Cell>
+          <Table.Cell rowSpan={entry.transactions.length} selectable textAlign='center'>
+            <Icon name='pencil' />
+          </Table.Cell>
+          <Table.Cell rowSpan={entry.transactions.length} selectable textAlign='center'>
+            <Icon name='remove' />
+          </Table.Cell>
+        </Table.Row>
+      )
+
+      entry.transactions.forEach((transaction, index) => {
+        if (index !== 0) {
+          tableRows.push(
+            <Table.Row key={`${keyCounter++}`}>
+              <Table.Cell>{transaction.account}</Table.Cell>
+              <Table.Cell>{transaction.amount}</Table.Cell>
+            </Table.Row>
+          )
+        }
+      })
+
+      if (this.props.descriptionToggle) {
+        tableRows.push(
+          <Table.Row key={`${keyCounter++}`}>
+            <Table.Cell colSpan={5}>
+              {entry.description}
             </Table.Cell>
           </Table.Row>
-        </Table.Body>
-      )
+        )
+      }
     })
+    return tableRows
   }
 
-  render() {
-    return(
 
-      <Table celled compact>
+  render() {
+    console.log()
+    return(
+      <Table celled structured>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell textAlign='center'>Transaction</Table.HeaderCell>
@@ -96,18 +122,13 @@ class TransactionsTable extends React.Component {
             <Table.HeaderCell />
           </Table.Row>
         </Table.Header>
-        {
-          this.renderTransactions
-        }
-
-
-
+        <Table.Body>
+          {this.renderTransactions()}
+        </Table.Body>
       </Table>
     )
   }
 }
-
-// export default UserAccountPaccount
 
 const mapStateToProps = (state) => {
   return {
@@ -117,80 +138,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-    // termsAgreementInit: () => {
-    //   dispatch({ type: 'TERMS_AGREEMENT_INIT' })
-    // },
-    // toggleTermsAgreement: () => {
-    //   dispatch({ type: 'TOGGLE_TERMS_AGREEMENT' })
-    // },
-    // signUserUp: (userInfo) => {
-    //   console.log(userInfo)
-    //   dispatch({ type: 'SIGN_USER_UP', userInfo })
-    // }
-//   }
-// }
 
 export default connect(
   mapStateToProps,
   // mapDispatchToProps
   null
 )(TransactionsTable)
-
-// <Table.Body>
-//   <Table.Row>
-//     <Table.Cell rowSpan={2}>
-//       Transaction: 1
-//       <br/>
-//       Date: 1/15/16
-//     </Table.Cell>
-//     <Table.Cell>1001</Table.Cell>
-//     <Table.Cell>750</Table.Cell>
-//     <Table.Cell rowSpan={2} selectable textAlign='center'>
-//       <Icon name='pencil' />
-//     </Table.Cell>
-//     <Table.Cell rowSpan={2} selectable textAlign='center'>
-//       <Icon name='remove' />
-//     </Table.Cell>
-//   </Table.Row>
-//
-//
-//   <Table.Row>
-//     <Table.Cell>1007</Table.Cell>
-//     <Table.Cell>750</Table.Cell>
-//   </Table.Row>
-//
-//   <Table.Row>
-//
-//     <Table.Cell colSpan={5}>
-//       The description of this transaction hereeee
-//     </Table.Cell>
-//
-//   </Table.Row>
-//
-//   <Table.Row>
-//     <Table.Cell>
-//       Transaction:2
-//       <br/>
-//       Date: 1/16/16
-//     </Table.Cell>
-//     <Table.Cell>1006</Table.Cell>
-//     <Table.Cell>1,500</Table.Cell>
-//     <Table.Cell selectable textAlign='center'>
-//       <Icon name='pencil' />
-//     </Table.Cell>
-//     <Table.Cell selectable textAlign='center'>
-//       <Icon name='remove' />
-//     </Table.Cell>
-//
-//   </Table.Row>
-//   <Table.Row>
-//
-//     <Table.Cell colSpan={5}>
-//       The description of this transaction hereeee
-//     </Table.Cell>
-//
-//   </Table.Row>
-//
-// </Table.Body>

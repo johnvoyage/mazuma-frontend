@@ -40,7 +40,6 @@ const UserAccountPage = (props) => {
   return(
     <div>
       <h3>Email address: { props.email }</h3>
-      <h3>Ticker symbol: { props.tickerSymbol }</h3>
       <h3>Your numbers:</h3>
       <UserHomeStats />
 
