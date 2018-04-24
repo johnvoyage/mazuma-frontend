@@ -39,11 +39,26 @@ const signUserUp = (email, password /*, tickerSymbol*/) => {
   }).then(response => response.json())
 };
 
+const deleteUserAccount = (accountId) => {
+  // console.log('in api del user acct')
+  // const userId = 2
+  return fetch(`${API_ROOT}/users/${accountId}`, {
+    method: 'DELETE',
+    headers: headers,
+  }).then(response => response.json())
+}
+
+const editUserAccount = () => {
+
+}
+
 export default {
   auth: {
     login,
     getCurrentUser,
-    signUserUp
+    signUserUp,
+    deleteUserAccount,
+    editUserAccount
   },
   // transactions: {
   //   getTransactions

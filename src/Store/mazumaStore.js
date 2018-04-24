@@ -34,6 +34,15 @@ const reducer = (state = initialState, action) => {
         },
         activeMenuItem: 'Mazuma'
       };
+    // case 'DELETE_USER_ACCOUNT':
+    //   console.log('heree')
+    //   return {
+    //     ...state
+    //   }
+    case 'EDIT_USER_ACCOUNT':
+      return {
+        ...state
+      }
     case 'TOGGLE_TERMS_AGREEMENT':
       return {
         ...state,

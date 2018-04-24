@@ -1,4 +1,4 @@
-import { Form } from 'semantic-ui-react';
+// import { Form } from 'semantic-ui-react';
 
 
 const panels = [

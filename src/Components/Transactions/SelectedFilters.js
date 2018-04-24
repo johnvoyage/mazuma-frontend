@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Checkbox, Grid, Segment } from 'semantic-ui-react';
+import { Button, Checkbox, Grid } from 'semantic-ui-react';
 // import { connect } from 'react-redux';
 
 

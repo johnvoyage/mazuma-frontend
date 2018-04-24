@@ -1,7 +1,8 @@
 import React from 'react'
-import { Icon, Table } from 'semantic-ui-react'
+// import { Icon, Table } from 'semantic-ui-react'
 import { connect } from 'react-redux';
 import SelectedFilters from './SelectedFilters';
+import TransactionsTable from './TransactionsTable';
 
 import QuickFilters from './QuickFilters';
 
@@ -17,77 +18,10 @@ class Transactions extends React.Component {
 
         <br />
         <br />
+        <TransactionsTable />
 
 
-        <Table celled compact>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell textAlign='center'>Transaction</Table.HeaderCell>
-              <Table.HeaderCell textAlign='center'>Account</Table.HeaderCell>
-              <Table.HeaderCell textAlign='center'>Amount</Table.HeaderCell>
-              <Table.HeaderCell />
-              <Table.HeaderCell />
-            </Table.Row>
-          </Table.Header>
 
-          <Table.Body>
-            <Table.Row>
-              <Table.Cell rowSpan={2}>
-                Transaction: 1
-                <br/>
-                Date: 1/15/16
-              </Table.Cell>
-              <Table.Cell>1001</Table.Cell>
-              <Table.Cell>750</Table.Cell>
-              <Table.Cell rowSpan={2} selectable textAlign='center'>
-                <Icon name='pencil' />
-              </Table.Cell>
-              <Table.Cell rowSpan={2} selectable textAlign='center'>
-                <Icon name='remove' />
-              </Table.Cell>
-            </Table.Row>
-
-
-            <Table.Row>
-              <Table.Cell>1007</Table.Cell>
-              <Table.Cell>750</Table.Cell>
-            </Table.Row>
-
-            <Table.Row>
-
-              <Table.Cell colSpan={5}>
-                The description of this transaction hereeee
-              </Table.Cell>
-
-            </Table.Row>
-
-            <Table.Row>
-              <Table.Cell>
-                Transaction:2
-                <br/>
-                Date: 1/16/16
-              </Table.Cell>
-              <Table.Cell>1006</Table.Cell>
-              <Table.Cell>1,500</Table.Cell>
-              <Table.Cell selectable textAlign='center'>
-                <Icon name='pencil' />
-              </Table.Cell>
-              <Table.Cell selectable textAlign='center'>
-                <Icon name='remove' />
-              </Table.Cell>
-
-            </Table.Row>
-            <Table.Row>
-
-              <Table.Cell colSpan={5}>
-                The description of this transaction hereeee
-              </Table.Cell>
-
-            </Table.Row>
-
-          </Table.Body>
-
-        </Table>
       </div>
     )
   }
