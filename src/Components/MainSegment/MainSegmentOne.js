@@ -4,9 +4,10 @@ import { connect } from 'react-redux';
 import UserAccountPage from '../UserAccount/UserAccountPage'
 import SignUpForm from '../SignUp/SignUpForm';
 import SignInForm from '../SignIn/SignInForm';
+import Transactions from '../Transactions/Transactions';
+import FAQ from '../FAQ/FAQ';
 
 import { loggedInMenuOptions, loggedOutMenuOptions } from '../TopMenu/MenuOptions';
-
 
 const MainSegmentOne = (props) => {
 
@@ -17,21 +18,30 @@ const MainSegmentOne = (props) => {
       activeItem = <UserAccountPage />;
       break;
     case loggedInMenuOptions[1]:
-      activeItem = "LI 1";
+      activeItem = <Transactions />;
       break;
     case loggedInMenuOptions[2]:
-      activeItem = "LI 2";
+      activeItem = "Spending";
+      break;
+    case loggedInMenuOptions[3]:
+      activeItem = "Net Worth";
+      break;
+    case loggedInMenuOptions[4]:
+      activeItem = "Statistics";
       break;
     case loggedOutMenuOptions[0]:
-      activeItem = "LO 0";
+      activeItem = "Welcome to Mazuma";
       break;
     case loggedOutMenuOptions[1]:
-      activeItem = "LO 1";
+      activeItem = <FAQ />;
       break;
     case loggedOutMenuOptions[2]:
-      activeItem = <SignUpForm />;
+      activeItem = "Forum";
       break;
     case loggedOutMenuOptions[3]:
+      activeItem = <SignUpForm />;
+      break;
+    case loggedOutMenuOptions[4]:
       activeItem = <SignInForm />;
       break;
     default:

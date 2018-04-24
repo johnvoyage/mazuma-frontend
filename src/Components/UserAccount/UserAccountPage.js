@@ -1,21 +1,20 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import Transactions from './Transactions'
 import { Button } from 'semantic-ui-react'
 
 
 const UserAccountPage = (props) => {
-  console.log(props)
+  // console.log(props)
   return(
     <div>
       <h3>Email address: { props.email }</h3>
       <h3>Ticker symbol: { props.tickerSymbol }</h3>
-      <h3>Transactions:</h3>
-      <Transactions />
-      <Button onClick={}>Add transaction</Button>
-      <Button>View all transactions</Button>
+      <h3>Recent Transactions:</h3>
 
-      <Button>Delete Account</Button>
+      <Button.Group attached='bottom'>
+        <Button>Edit Account</Button>
+        <Button negative>Delete Account</Button>
+      </Button.Group>
     </div>
   )
 }
