@@ -13,6 +13,9 @@ class Transactions extends React.Component {
     return(
       <div>
         <SelectedFilters />
+
+        <br />
+        <br />
         <QuickFilters />
 
 
@@ -31,29 +34,29 @@ class Transactions extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    email: state.userInfo.email,
-    ticker: state.userInfo.tickerSymbol
+    // email: state.userInfo.email,
+    // ticker: state.userInfo.tickerSymbol
     // agreedToTerms: state.formValidity.signUpForm
   };
 };
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
+const mapDispatchToProps = (dispatch) => {
+  return {
     // termsAgreementInit: () => {
     //   dispatch({ type: 'TERMS_AGREEMENT_INIT' })
     // },
-    // toggleTermsAgreement: () => {
-    //   dispatch({ type: 'TOGGLE_TERMS_AGREEMENT' })
-    // },
+    toggleTransactionDescription: () => {
+      dispatch({ type: 'TOGGLE_TRANSACTION_DESCRIPTION' })
+    },
     // signUserUp: (userInfo) => {
     //   console.log(userInfo)
     //   dispatch({ type: 'SIGN_USER_UP', userInfo })
     // }
-//   }
-// }
+  }
+}
 
 export default connect(
   mapStateToProps,
-  // mapDispatchToProps
-  null
+  mapDispatchToProps
+  // null
 )(Transactions)

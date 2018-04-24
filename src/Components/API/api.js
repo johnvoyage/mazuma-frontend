@@ -48,9 +48,17 @@ const deleteUserAccount = (accountId) => {
   }).then(response => response.json())
 }
 
-const editUserAccount = () => {
-
+const editUserAccount = (accountId) => {
+  return fetch(`${API_ROOT}/users/${accountId}`, {
+    method: 'PATCH',
+    headers: headers,
+    body: JSON.stringify({
+      // email,
+      // password,
+    })
+  }).then(response => response.json())
 }
+
 
 export default {
   auth: {

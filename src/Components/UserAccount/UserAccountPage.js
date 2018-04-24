@@ -2,6 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { Button, Popup } from 'semantic-ui-react'
 import api from '../API/api';
+import UserHomeStats from './UserHomeStats';
+
 
 
 
@@ -22,14 +24,28 @@ const UserAccountPage = (props) => {
     })
   }
 
+  const handleEdit = (event) => {
+    api.auth
+    .editUserAccount(props.id)
+    .then(json => {
+      if (json.error) {
+        console.log("ERROR")
+      } else {
+        // console.log('here')
+        // props.deleteAccount()
+      }
+    })
+  }
+
   return(
     <div>
       <h3>Email address: { props.email }</h3>
       <h3>Ticker symbol: { props.tickerSymbol }</h3>
-      <h3>Recent Transactions:</h3>
+      <h3>Your numbers:</h3>
+      <UserHomeStats />
 
       <Button.Group attached='bottom'>
-        <Button>Edit Account</Button>
+        <Button onClick={ handleEdit }>Edit Account</Button>
         <Popup
           trigger={<Button color='red' content='Delete Account' />}
           content={<Button

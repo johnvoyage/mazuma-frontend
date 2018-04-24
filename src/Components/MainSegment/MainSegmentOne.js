@@ -5,12 +5,13 @@ import UserAccountPage from '../UserAccount/UserAccountPage'
 import SignUpForm from '../SignUp/SignUpForm';
 import SignInForm from '../SignIn/SignInForm';
 import Transactions from '../Transactions/Transactions';
+import MazumaHomePage from '../LandingPage/MazumaHomePage';
+
 import FAQ from '../FAQ/FAQ';
 
 import { loggedInMenuOptions, loggedOutMenuOptions } from '../TopMenu/MenuOptions';
 
 const MainSegmentOne = (props) => {
-
   let activeItem
 
   switch (props.activeMenuItem) {
@@ -30,7 +31,7 @@ const MainSegmentOne = (props) => {
       activeItem = "Statistics";
       break;
     case loggedOutMenuOptions[0]:
-      activeItem = "Welcome to Mazuma";
+      activeItem = <MazumaHomePage />;
       break;
     case loggedOutMenuOptions[1]:
       activeItem = <FAQ />;
@@ -47,7 +48,7 @@ const MainSegmentOne = (props) => {
     default:
       activeItem = "Defaaaaault in Main Seg 1"
   }
-
+  
   return(
     <Segment>
       {activeItem}

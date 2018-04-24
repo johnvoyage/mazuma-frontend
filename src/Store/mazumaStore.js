@@ -43,20 +43,29 @@ const reducer = (state = initialState, action) => {
       return {
         ...state
       }
-    case 'TOGGLE_TERMS_AGREEMENT':
-      return {
-        ...state,
-        formValidity: { ...state.formValidity, signUpForm: !state.formValidity.signUpForm } }
+    // case 'TOGGLE_TERMS_AGREEMENT':
+    //   return {
+    //     ...state,
+    //     formValidity: { ...state.formValidity, signUpForm: !state.formValidity.signUpForm } }
     // case 'TERMS_AGREEMENT_INIT':
     //   return {
     //     ...state,
     //     formValidity: { ...state.formValidity, signUpForm: false }
     //   }
+
+    /* STATE OF THE NAVBAR */
     case 'CHANGE_ACTIVE_MENU_ITEM':
       return {
         ...state,
         activeMenuItem: action.activeMenuItem
       }
+
+    /* STATE OF THE TRANSACTIONS TABLE */
+    case 'TOGGLE_TRANSACTION_DESCRIPTION':
+      return {
+        ...state,
+      }
+
     default:
       return state;
   }
