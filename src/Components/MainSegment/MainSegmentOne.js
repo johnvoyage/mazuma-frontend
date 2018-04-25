@@ -6,7 +6,7 @@ import SignUpForm from '../SignUp/SignUpForm';
 import SignInForm from '../SignIn/SignInForm';
 import Transactions from '../Transactions/Transactions';
 import MazumaHomePage from '../LandingPage/MazumaHomePage';
-
+import NetWorth from '../NetWorth/NetWorth';
 import FAQ from '../FAQ/FAQ';
 
 import { loggedInMenuOptions, loggedOutMenuOptions } from '../TopMenu/MenuOptions';
@@ -25,7 +25,7 @@ const MainSegmentOne = (props) => {
       activeItem = "Spending";
       break;
     case loggedInMenuOptions[3]:
-      activeItem = "Net Worth";
+      activeItem = <NetWorth />;
       break;
     case loggedInMenuOptions[4]:
       activeItem = "Statistics";
@@ -48,7 +48,7 @@ const MainSegmentOne = (props) => {
     default:
       activeItem = "Defaaaaault in Main Seg 1"
   }
-  
+
   return(
     <Segment>
       {activeItem}
@@ -64,5 +64,6 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  null
 )(MainSegmentOne)

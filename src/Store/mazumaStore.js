@@ -22,7 +22,7 @@ const reducer = (state = initialState, action) => {
           id: action.userInfo.id,
           email: action.userInfo.email,
         },
-        activeMenuItem: action.userInfo.email
+        activeMenuItem: 'Account'
       };
     case 'LOG_USER_OUT':
       return {
@@ -47,6 +47,15 @@ const reducer = (state = initialState, action) => {
       }
 
     /* STATE OF THE TRANSACTIONS TABLE */
+    case 'CHANGE_TRANSACTION_FORM_FIELDS':
+      console.log(action)
+      return {
+        ...state,
+        transactionContainer: {
+          ...state.transactionContainer,
+          [action.whichForm]: state.transactionContainer[action.whichForm] = state.transactionContainer[action.whichForm] + action.amount
+        }
+      }
     case 'TOGGLE_TRANSACTION_DESCRIPTION':
       // console.log('here')
       return {

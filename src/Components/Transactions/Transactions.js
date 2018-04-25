@@ -1,45 +1,71 @@
 import React from 'react'
 // import { Icon, Table } from 'semantic-ui-react'
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import SelectedFilters from './SelectedFilters';
 import TransactionsTable from './TransactionsTable';
+import NewTransactionForm from './NewTransactionForm';
 
 import QuickFilters from './QuickFilters';
 
 
-class Transactions extends React.Component {
+const Transactions = (props) => {
 
-  render() {
-    return(
-      <div>
-        <SelectedFilters />
+  const renderFilter = (filterSelected) => {
+    switch (filterSelected) {
+      case 'none':
+        return null
+      case 'quick':
+        return <QuickFilters />
+      case 'custom':
+        return "Custom Filters"
+      default:
+        return "Bug in Transactions > renderFilter"
 
-        <br />
-        <br />
-        <QuickFilters />
-
-
-        <br />
-        <br />
-        <TransactionsTable />
-
-
-
-      </div>
-    )
+    }
   }
+
+  // render() {
+  return(
+    <div>
+      <SelectedFilters />
+
+      <br />
+      <br />
+      {
+        props.newTransaction ?
+        <NewTransactionForm /> :
+        null
+      }
+
+      <br />
+      <br />
+
+      {
+        renderFilter(props.filterSelected)
+      }
+
+
+      <br />
+      <br />
+      <TransactionsTable />
+
+
+
+    </div>
+  )
+  // }
 }
 
-// export default UserAccountPaccount
-//
-// const mapStateToProps = (state) => {
-//   return {
-//     // email: state.userInfo.email,
-//     // ticker: state.userInfo.tickerSymbol
-//     // agreedToTerms: state.formValidity.signUpForm
-//   };
-// };
-//
+
+const mapStateToProps = (state) => {
+  return {
+    newTransaction: state.transactionContainer.newTransaction,
+    filterSelected: state.transactionContainer.filterSelected,
+    // ticker: state.userInfo.tickerSymbol
+    // agreedToTerms: state.formValidity.signUpForm
+  };
+};
+
 // const mapDispatchToProps = (dispatch) => {
 //   return {
 //     // termsAgreementInit: () => {
@@ -56,10 +82,8 @@ class Transactions extends React.Component {
 // }
 
 export default
-// connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-//   // null
-// )(
-  Transactions
-// )
+connect(
+  mapStateToProps,
+  // mapDispatchToProps
+  null
+)(Transactions)
