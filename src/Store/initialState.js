@@ -8,6 +8,7 @@ const initialState = {
     descriptionToggle: true,
     filterSelected: 'none',
     newTransaction: false,
+    newTransactionForm: {},
     formDebitFields: 1,
     formCreditFields: 1,
   },

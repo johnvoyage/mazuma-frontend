@@ -1,63 +1,49 @@
 import React from 'react';
-import { Button, Checkbox, Grid } from 'semantic-ui-react';
+import { Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
 
 const SelectedFilters = (props) => {
 
+
   return(
-    <div>
-      <Grid>
-        <Grid.Row>
-          <Grid.Column width={2}>
-              <Checkbox
-                label='Descriptions'
-                toggle
-                checked={props.descriptionToggle}
-                onChange={props.toggleTransactionDescription}
-              />
-          </Grid.Column>
-          <Grid.Column width={8}>
-              <Button.Group attached='top' floated='left'>
-                <Button
-                  name='none'
-                  toggle
-                  active={props.filterSelected === 'none'}
-                  content='No Filters'
-                  onClick={props.toggleTransactionFilter}
-                />
-                <Button.Or/>
-                <Button
-                  name='quick'
-                  toggle
-                  active={props.filterSelected === 'quick'}
-                  content='Quick Filters'
-                  onClick={props.toggleTransactionFilter}
-                />
-                <Button.Or/>
-                <Button
-                  name='custom'
-                  toggle
-                  active={props.filterSelected === 'custom'}
-                  content='Custom Filters'
-                  onClick={props.toggleTransactionFilter}
-                />
-              </Button.Group>
-          </Grid.Column>
-          <Grid.Column width={6}>
-              <Button.Group attached='top' floated='right'>
-                <Button
-                  toggle
-                  active={props.newTransaction}
-                  onClick={props.toggleNewTransaction}
-                  content='New Transaction'
-                />
-              </Button.Group>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
-    </div>
+    <Button.Group attached='top'>
+      <Button
+        toggle
+        active={props.descriptionToggle}
+        onClick={props.toggleTransactionDescription}
+        content="Descriptions"
+      />
+      <Button
+        toggle
+        name='none'
+        active={props.filterSelected === 'none'}
+        content='No Filters'
+        onClick={props.toggleTransactionFilter}
+      />
+      <Button
+        toggle
+        name='quick'
+        active={props.filterSelected === 'quick'}
+        content='Quick Filters'
+        onClick={props.toggleTransactionFilter}
+      />
+      <Button
+        toggle
+        name='custom'
+        active={props.filterSelected === 'custom'}
+        content='Custom Filters'
+        onClick={props.toggleTransactionFilter}
+      />
+      <Button
+        toggle
+        active={props.newTransaction}
+        onClick={props.toggleNewTransaction}
+        content='New Transaction'
+      />
+    </Button.Group>
   )
+
 
 };
 
