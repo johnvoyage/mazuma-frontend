@@ -57,7 +57,6 @@ const reducer = (state = initialState, action) => {
         }
       }
     case 'TOGGLE_TRANSACTION_DESCRIPTION':
-      // console.log('here')
       return {
         ...state,
         transactionContainer: {
@@ -81,6 +80,26 @@ const reducer = (state = initialState, action) => {
             newTransaction: !state.transactionContainer.newTransaction
           }
         }
+      case 'TOGGLE_NEW_ACCOUNT':
+        return {
+          ...state,
+          transactionContainer: {
+            ...state.transactionContainer,
+            newAccount: !state.transactionContainer.newAccount
+          }
+        }
+      // case 'ADD_NEW_ACCOUNT_ON':
+      //   return {
+      //     ...state,
+      //     transactionContainer: {
+      //       ...state.transactionContainer,
+      //       newAccount: true
+      //     }
+      //   }
+      // case 'CHANGE_TRANSACTION_FORM_INPUT':
+      //   return {
+      //     ...state
+      //   }
 
     /* DONE */
     default:

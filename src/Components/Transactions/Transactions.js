@@ -4,8 +4,11 @@ import { connect } from 'react-redux';
 import SelectedFilters from './SelectedFilters';
 import TransactionsTable from './TransactionsTable';
 import NewTransactionForm from './NewTransactionForm';
+import NewAccountForm from './NewAccountForm';
 
 import QuickFilters from './QuickFilters';
+import CustomFilters from './CustomFilters';
+
 
 
 const Transactions = (props) => {
@@ -17,7 +20,7 @@ const Transactions = (props) => {
       case 'quick':
         return <QuickFilters />
       case 'custom':
-        return "Custom Filters"
+        return <CustomFilters />
       default:
         return "Bug in Transactions > renderFilter"
 
@@ -31,6 +34,11 @@ const Transactions = (props) => {
 
       <br />
       <br />
+      {
+        props.newAccount ?
+        <NewAccountForm /> :
+        null
+      }
       {
         props.newTransaction ?
         <NewTransactionForm /> :
@@ -60,6 +68,8 @@ const Transactions = (props) => {
 const mapStateToProps = (state) => {
   return {
     newTransaction: state.transactionContainer.newTransaction,
+    newAccount: state.transactionContainer.newAccount,
+
     filterSelected: state.transactionContainer.filterSelected,
     // ticker: state.userInfo.tickerSymbol
     // agreedToTerms: state.formValidity.signUpForm

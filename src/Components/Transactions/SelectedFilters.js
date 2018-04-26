@@ -41,6 +41,12 @@ const SelectedFilters = (props) => {
         onClick={props.toggleNewTransaction}
         content='New Transaction'
       />
+      <Button
+        toggle
+        active={props.newAccount}
+        onClick={props.toggleNewAccount}
+        content='New Account'
+      />
     </Button.Group>
   )
 
@@ -51,6 +57,7 @@ const mapStateToProps = (state) => {
   return {
     descriptionToggle: state.transactionContainer.descriptionToggle,
     newTransaction: state.transactionContainer.newTransaction,
+    newAccount: state.transactionContainer.newAccount,
     filterSelected: state.transactionContainer.filterSelected,
   };
 };
@@ -65,6 +72,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     toggleNewTransaction: () => {
       dispatch({ type: 'TOGGLE_NEW_TRANSACTION' })
+    },
+    toggleNewAccount: () => {
+      dispatch({ type: 'TOGGLE_NEW_ACCOUNT' })
     }
   };
 };
