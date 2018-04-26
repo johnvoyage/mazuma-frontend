@@ -1,7 +1,7 @@
 import React from 'react'
 import {Input, Select, Form, TextArea, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux';
-import { newTransactionSubmitted, updateDebitBalance, updateCreditBalance, calcDebitBalance, calcCreditBalance } from './NewTransactionSubmitted'
+import { newTransactionSubmitted, updateDebitBalance, updateCreditBalance, removeAmount, calcDebitBalance, calcCreditBalance } from './NewTransactionSubmitted'
 import './csstransaction.css';
 // import TransactionBalanceCheck from './TransactionBalanceCheck'
 
@@ -18,7 +18,7 @@ const NewTransactionForm = (props) => {
           <Form.Field
             name={`${fieldName}${i+1}`}
             type='number'
-            // value={}
+            required={i === 0}
             label='Amount'
             onChange={
               (event) => {
@@ -31,6 +31,8 @@ const NewTransactionForm = (props) => {
           />
           <Form.Field
             label='Account'
+            required={i === 0}
+
             control={Select}
             options={options}
             placeholder='Account'
@@ -38,8 +40,20 @@ const NewTransactionForm = (props) => {
           />
           { i === numOfFields - 1 ?
             (<div>
-              <Button disabled={numOfFields === 1} onClick={() => props.changeFormFields(formType, -1)} icon='minus circle' />
-              <Button onClick={() => props.changeFormFields(formType, 1)} icon='add circle' />
+              <Button
+                id={`${fieldName}${i+1}`}
+
+                disabled={numOfFields === 1}
+                onClick={
+                  (event) => {
+                    removeAmount(event)
+                    props.changeFormFields(formType, -1)}
+                  }
+                icon='minus circle'
+              />
+              <Button onClick={() => props.changeFormFields(formType, 1)}
+              icon='add circle'
+              />
             </div>)
           : null }
         </Form.Group>
@@ -87,19 +101,19 @@ const NewTransactionForm = (props) => {
       <h3>Subtotal: {calcCreditBalance()}</h3>
       {
         props.transactionBalance !== 0 ?
-        <h4 id='out-of-bal'>Currently out of balance by: {props.transactionBalance} </h4> :
+        <h4 id='out-of-bal'>Currently out of balance by: {Math.abs(props.transactionBalance)} </h4> :
         null
       }
 
       <Form.Field
         name='description'
         control={TextArea}
-        label={`Description (ex:)`}
+        label='Description'
         // onChange={handleChange}
 
         placeholder='Made a grocery trip to Rite Aid, split 50/25/25 between household supplies, food, and medicine'
       />
-      <Form.Field control={Button}>Submit</Form.Field>
+      <Form.Field disabled={props.transactionBalance !== 0} control={Button}>Submit</Form.Field>
     </Form>
   )
 

@@ -1,5 +1,3 @@
-
-
 const currentDebits = {}
 const currentCredits = {}
 
@@ -22,8 +20,7 @@ const updateDebitBalance = (event) => {
   const currentVal = parseFloat(parseFloat(event.target.value).toFixed(2))
   currentDebits[currentKey] = currentVal
   console.log('debits: ', currentDebits)
-
-  console.log('db balance: ', calcDebitBalance())
+  // console.log('db balance: ', calcDebitBalance())
   return calcDebitBalance()
 }
 
@@ -31,13 +28,29 @@ const updateCreditBalance = (event) => {
   const currentKey = event.target.name
   const currentVal = parseFloat(parseFloat(event.target.value).toFixed(2))
   currentCredits[currentKey] = currentVal
-  console.log('credits: ', currentCredits)
-  console.log('cr balance: ', calcCreditBalance())
-
+  // console.log('credits: ', currentCredits)
+  // console.log('cr balance: ', calcCreditBalance())
   return calcCreditBalance()
-
-
 }
+
+const removeAmount = (event) => {
+  // debugger
+  // console.log(currentDebits)
+  const keyToDelete = event.target.parentNode.parentNode.parentNode.children[0].children[1].children[0].name
+  // console.log(event.target.id)
+  delete currentDebits[keyToDelete]
+  delete currentCredits[keyToDelete]
+
+  // console.log(currentDebits)
+
+  // debugger
+}
+
+
+// const removeCreditBalance = (event) => {
+//   debugger
+//
+// }
 
 const newTransactionSubmitted = (event) => {
   event.preventDefault()
@@ -47,13 +60,15 @@ const newTransactionSubmitted = (event) => {
     // debugger
     if (event.target.children[i].innerText[0] !== "W" || "S") {
 
-      console.log(event.target.children[i].children[0].children[1].children[0].value)
-      console.log(event.target.children[i].children[1].children[1].innerText)
+      // console.log(event.target.children[i].children[0].children[1].children[0].value)
+      // console.log(event.target.children[i].children[1].children[1].innerText)
     }
   }
   const description = event.target.children[descriptionIndex].children[1].value
   console.log('date: ', YYYYMMDD)
   console.log('description: ', description)
+  console.log(currentDebits)
+  console.log(currentCredits);
   // debugger
 }
 
@@ -61,6 +76,8 @@ export {
   newTransactionSubmitted,
   updateDebitBalance,
   updateCreditBalance,
+  removeAmount,
+  // removeCreditBalance,
   calcDebitBalance,
-  calcCreditBalance
+  calcCreditBalance,
 }
