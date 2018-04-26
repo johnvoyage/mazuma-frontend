@@ -51,7 +51,7 @@ const newTransactionSubmitted = (event, userId) => {
       // debugger
       const amount = event.target.children[i].children[0].children[1].children[0].value
       const account = event.target.children[i].children[1].children[1].innerText
-      // debugger
+      transactions.push([amount, account])
       // api.transaction
     }
   }
@@ -69,9 +69,23 @@ const createEntry = (date, description, userId) => {
       if (json.error) {
         console.log("ERROR")
       } else {
-        console.log(json)
+        getEntryIds(json.id)
+        // createTransactions(json.id)
       }
     })
+}
+
+const getEntryIds = (entryId) => {
+
+}
+
+const createTransactions = (entryId) => {
+  for (let transaction of transactions) {
+    const amount = parseFloat(transaction[0])
+    const account = transaction[1]
+    console.log(transaction)
+    // api.transaction.createTransaction()
+  }
 }
 
 export {
