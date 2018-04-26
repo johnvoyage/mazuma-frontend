@@ -62,11 +62,18 @@ const NewTransactionForm = (props) => {
     return formFields
   }
 
-  const options = [
-    { key: 'm', text: 'Cash', value: 'male' },
-    { key: 'f', text: 'Car', value: 'female' },
-    { key: 'a', text: 'Add new...', value: '--addnewperuser--' },
-  ]
+  const options = props.accounts.map((account, index) => {
+    return {
+      key: index,
+      text: account,
+      value: account,
+    }
+  })
+  // [
+  //   { key: 'm', text: 'Cash', value: 'male' },
+  //   { key: 'f', text: 'Car', value: 'female' },
+  //   { key: 'a', text: 'Add new...', value: '--addnewperuser--' },
+  // ]
 
   return(
     <Form onSubmit={(event) => newTransactionSubmitted(event, props.userId)}>
@@ -108,6 +115,7 @@ const mapStateToProps = (state) => {
     formDebitFields: state.transactionContainer.formDebitFields,
     formCreditFields: state.transactionContainer.formCreditFields,
     transactionBalance: state.transactionContainer.transactionBalance,
+    accounts: state.userInfo.accounts,
   };
 };
 

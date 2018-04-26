@@ -71,6 +71,11 @@ const createEntry = (date, description, userId) => {
   }).then(response => response.json())
 }
 
+const allUsersAccounts = (userId) => {
+  return fetch(`${API_ROOT}/users/${userId}/accounts/`)
+    .then(response => response.json())
+    // .then(json => console.log(json))
+}
 
 export default {
   auth: {
@@ -80,7 +85,10 @@ export default {
     deleteUserAccount,
     // editUserAccount
   },
-  entry: {
+  accounts: {
+    allUsersAccounts,
+  },
+  entries: {
     createEntry,
     // readEntry,
     // updateEntry,

@@ -13,7 +13,7 @@ const reducer = (state = initialState, action) => {
           id: action.userInfo.id,
           email: action.userInfo.email,
         },
-        activeMenuItem: action.userInfo.email
+        activeMenuItem: 'Account'
       }
     case 'LOG_USER_IN':
       return {
@@ -37,7 +37,22 @@ const reducer = (state = initialState, action) => {
       return {
         ...state
       }
-
+    case 'SET_USERS_ACCOUNTS':
+      return {
+        ...state,
+        userInfo: {
+          ...state.userInfo,
+          accounts: action.accounts
+        }
+      }
+    case 'SET_USERS_ENTRIES':
+      return {
+        ...state
+      }
+    case 'SET_USERS_TRANSACTIONS':
+      return {
+        ...state
+      }
 
     /* STATE OF THE NAVBAR */
     case 'CHANGE_ACTIVE_MENU_ITEM':
@@ -48,7 +63,7 @@ const reducer = (state = initialState, action) => {
 
     /* STATE OF THE TRANSACTIONS TABLE */
     case 'CHANGE_TRANSACTION_FORM_FIELDS':
-      console.log(action)
+      // console.log(action)
       return {
         ...state,
         transactionContainer: {

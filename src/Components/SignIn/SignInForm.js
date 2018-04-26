@@ -2,6 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Button, Form } from 'semantic-ui-react'
 import api from '../API/api';
+// import fetchUsersInformation from '../UserAccount/FetchUsersData';
+
 
 const SignInForm = (props) => {
 
@@ -15,6 +17,10 @@ const SignInForm = (props) => {
         if (json.error) {
           console.log("ERROR")
         } else {
+          // console.log('...')
+
+          // fetchUsersInformation(json.id)
+
           props.logUserIn(json)
         }
       })
@@ -63,6 +69,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    // fetchUsersInformation: (userId) => {
+    //   dispatch({ type: 'FETCH_USERS_INFORMATION', userId })
+    // },
     logUserIn: (userInfo) => {
       localStorage.setItem('token', userInfo.jwt)
       dispatch({ type: 'LOG_USER_IN', userInfo})

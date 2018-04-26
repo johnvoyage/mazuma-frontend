@@ -3,6 +3,9 @@ const initialState = {
   userInfo: {
     id: null,
     email: null,
+    entries: null,
+    accounts: null,
+    transactions: null,
   },
   // formInput: {
   //   signUpForm: {},
@@ -21,6 +24,7 @@ const initialState = {
   spendingContainer: {
 
   },
+  // accounts: null,
   // netWorthContainer: {
   //   assets: {
   //     showSubCategories: {

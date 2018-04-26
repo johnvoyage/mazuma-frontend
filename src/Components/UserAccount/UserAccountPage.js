@@ -3,64 +3,76 @@ import { connect } from 'react-redux';
 import { Button, Popup } from 'semantic-ui-react'
 import api from '../API/api';
 import UserHomeStats from './UserHomeStats';
+// import fetchUsersInformation from '../UserAccount/FetchUsersData';
 
 
+class UserAccountPage extends React.Component {
 
+  // console.log(this.props)
+  componentDidMount = () => {
+    api.accounts.allUsersAccounts(this.props.id)
+      .then(json => this.props.setUsersAccounts(this.mapAccountNames(json)))
+    // fetchUsersInformation(this.props.id)
+  }
 
-const UserAccountPage = (props) => {
+  mapAccountNames = (accounts) => {
+    return accounts.map((account) => account.name)
+  }
 
-  // console.log(props)
-
-  const handleDelete = (event) => {
+  handleDelete = (event) => {
     api.auth
-    .deleteUserAccount(props.id)
+    .deleteUserAccount(this.props.id)
     .then(json => {
       if (json.error) {
         console.log("ERROR")
       } else {
         // console.log('here')
-        props.deleteAccount()
+        this.props.deleteAccount()
       }
     })
   }
 
-  const handleEdit = (event) => {
+  handleEdit = (event) => {
     api.auth
-    .editUserAccount(props.id)
+    .editUserAccount(this.props.id)
     .then(json => {
       if (json.error) {
         console.log("ERROR")
       } else {
         // console.log('here')
-        // props.deleteAccount()
+        // this.props.deleteAccount()
       }
     })
   }
 
-  return(
-    <div>
-      <h3>Email address: { props.email }</h3>
-      <h3>Your numbers:</h3>
-      <UserHomeStats />
+  render() {
+    return(
+      <div>
+        <h3>Email address: { this.props.email }</h3>
+        <h3>Your numbers:</h3>
+        <UserHomeStats />
 
-      <Button.Group attached='bottom'>
-        <Button onClick={ handleEdit }>Edit Account</Button>
-        <Popup
-          trigger={<Button color='red' content='Delete Account' />}
-          content={<Button
-            onClick={
-              handleDelete
-            }
-            color='red'
-            content='Click to Confirm'
-          />}
-          on='click'
-          position='top center'
-        />
-      </Button.Group>
-    </div>
-  )
-
+        <Button.Group attached='bottom'>
+          <Button onClick={ () => {
+            // this.handleEdit
+            console.log('edit!')}
+          }>Edit Account</Button>
+          <Popup
+            trigger={<Button color='red' content='Delete Account' />}
+            content={<Button
+              onClick={
+                this.handleDelete
+              }
+              color='red'
+              content='Click to Confirm'
+            />}
+            on='click'
+            position='top center'
+          />
+        </Button.Group>
+      </div>
+    )
+  }
   // export default UserAccountPage
 }
 
@@ -69,6 +81,8 @@ const mapStateToProps = (state) => {
   return {
     id: state.userInfo.id,
     email: state.userInfo.email,
+    // userId: state.userInfo.id
+
     // ticker: state.userInfo.tickerSymbol
     // agreedToTerms: state.formValidity.signUpForm
   };
@@ -79,6 +93,9 @@ const mapDispatchToProps = (dispatch) => {
     deleteAccount: () => {
       dispatch({ type: 'LOG_USER_OUT' })
     },
+    setUsersAccounts: (accounts) => {
+      dispatch({ type: 'SET_USERS_ACCOUNTS', accounts })
+    }
   }
 }
 

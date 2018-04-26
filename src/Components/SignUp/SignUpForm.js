@@ -3,6 +3,7 @@ import api from '../API/api';
 import { connect } from 'react-redux'
 import { Accordion, Button, Checkbox, Form } from 'semantic-ui-react';
 import panels from './InitialEntry'
+// import fetchUsersInformation from '../UserAccount/FetchUsersData';
 
 const SignUpForm = (props) => {
 
@@ -16,6 +17,8 @@ const SignUpForm = (props) => {
         if (json.error) {
           console.log("ERROR")
         } else {
+          // console.log('...')
+          // fetchUsersInformation(json.id)
           props.signUserUp(json)
         }
       })
@@ -56,15 +59,7 @@ const SignUpForm = (props) => {
           onChange={ handleChange }
         />
       </Form.Field>
-      <Form.Field>
-        <label>Ticker Symbol</label>
-        <input
-          name='ticker symbol'
-          placeholder='ticker symbol'
-          value={ formInput.password }
-          onChange={ handleChange }
-        />
-      </Form.Field>
+
 
       <Accordion as={Form.Field} panels={panels} />
       <Form.Field required>
@@ -95,11 +90,11 @@ const mapDispatchToProps = (dispatch) => {
     // termsAgreementInit: () => {
     //   dispatch({ type: 'TERMS_AGREEMENT_INIT' })
     // },
-    toggleTermsAgreement: () => {
-      dispatch({ type: 'TOGGLE_TERMS_AGREEMENT' })
-    },
+    // fetchUsersInformation: (userId) => {
+    //   dispatch({ type: 'FETCH_USERS_INFORMATION', userId })
+    // },
     signUserUp: (userInfo) => {
-      console.log(userInfo)
+      // console.log(userInfo)
       dispatch({ type: 'SIGN_USER_UP', userInfo })
     }
   }

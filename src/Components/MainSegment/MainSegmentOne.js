@@ -45,6 +45,9 @@ const MainSegmentOne = (props) => {
     case loggedOutMenuOptions[4]:
       activeItem = <SignInForm />;
       break;
+    // case null:
+    //   activeItem = <MazumaHomePage />
+    //   break;
     default:
       activeItem = "Defaaaaault in Main Seg 1"
   }

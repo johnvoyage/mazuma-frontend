@@ -9,11 +9,17 @@ import NewAccountForm from './NewAccountForm';
 import QuickFilters from './QuickFilters';
 import CustomFilters from './CustomFilters';
 
+// import api from '../API/api';
 
 
-const Transactions = (props) => {
+class Transactions extends React.Component {
 
-  const renderFilter = (filterSelected) => {
+
+  // componentDidMount = () => {
+  //   api.accounts.allUsersAccounts(this.props.userId)
+  // }
+
+  renderFilter = (filterSelected) => {
     switch (filterSelected) {
       case 'none':
         return null
@@ -27,41 +33,41 @@ const Transactions = (props) => {
     }
   }
 
-  // render() {
-  return(
-    <div>
-      <SelectedFilters />
+  render() {
+    return(
+      <div>
+        <SelectedFilters />
 
-      <br />
-      <br />
-      {
-        props.newAccount ?
-        <NewAccountForm /> :
-        null
-      }
-      {
-        props.newTransaction ?
-        <NewTransactionForm /> :
-        null
-      }
+        <br />
+        <br />
+        {
+          this.props.newAccount ?
+          <NewAccountForm /> :
+          null
+        }
+        {
+          this.props.newTransaction ?
+          <NewTransactionForm /> :
+          null
+        }
 
-      <br />
-      <br />
+        <br />
+        <br />
 
-      {
-        renderFilter(props.filterSelected)
-      }
-
-
-      <br />
-      <br />
-      <TransactionsTable />
+        {
+          this.renderFilter(this.props.filterSelected)
+        }
 
 
+        <br />
+        <br />
+        <TransactionsTable />
 
-    </div>
-  )
-  // }
+
+
+      </div>
+    )
+  }
 }
 
 
@@ -71,6 +77,7 @@ const mapStateToProps = (state) => {
     newAccount: state.transactionContainer.newAccount,
 
     filterSelected: state.transactionContainer.filterSelected,
+    // userId: state.userInfo.id
     // ticker: state.userInfo.tickerSymbol
     // agreedToTerms: state.formValidity.signUpForm
   };
