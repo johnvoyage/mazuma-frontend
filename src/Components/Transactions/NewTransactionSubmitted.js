@@ -1,15 +1,35 @@
-const debitBalance = 0
-const creditBalance = 0
+
 
 const currentDebits = {}
 const currentCredits = {}
 
+const calcDebitBalance = () => {
+  return Object.keys(currentDebits).reduce((aggr, key) => {
+    return aggr + currentDebits[key]
+  }, 0)
+}
+
+const calcCreditBalance = () => {
+  return Object.keys(currentCredits).reduce((aggr, key) => {
+    return aggr + currentCredits[key]
+  }, 0)
+}
+
 const updateDebitBalance = (event) => {
-  debugger
+  const currentKey = event.target.name
+  const currentVal = parseFloat(parseFloat(event.target.value).toFixed(2))
+  currentDebits[currentKey] = currentVal
+  // return calcDebitBalance())
 }
 
 const updateCreditBalance = (event) => {
-  console.log('inside cr')
+  const currentKey = event.target.name
+  const currentVal = parseFloat(parseFloat(event.target.value).toFixed(2))
+  currentCredits[currentKey] = currentVal
+  // console.log(currentCredits)
+  // return calcCreditBalance()
+
+
 }
 
 const newTransactionSubmitted = (event) => {
@@ -18,7 +38,7 @@ const newTransactionSubmitted = (event) => {
   const descriptionIndex = event.target.children.length - 2
   for (let i = 2; i < descriptionIndex; i++) {
     // debugger
-    if (event.target.children[i].innerText[0] !== "W") {
+    if (event.target.children[i].innerText[0] !== "W" || "S") {
 
       console.log(event.target.children[i].children[0].children[1].children[0].value)
       console.log(event.target.children[i].children[1].children[1].innerText)
@@ -33,5 +53,7 @@ const newTransactionSubmitted = (event) => {
 export {
   newTransactionSubmitted,
   updateDebitBalance,
-  updateCreditBalance
+  updateCreditBalance,
+  calcDebitBalance,
+  calcCreditBalance
 }

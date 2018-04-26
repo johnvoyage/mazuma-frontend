@@ -1,7 +1,7 @@
 import React from 'react'
 import {Input, Select, Form, TextArea, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux';
-import { newTransactionSubmitted, updateDebitBalance, updateCreditBalance } from './NewTransactionSubmitted'
+import { newTransactionSubmitted, updateDebitBalance, updateCreditBalance, calcDebitBalance, calcCreditBalance } from './NewTransactionSubmitted'
 import './csstransaction.css';
 
 
@@ -15,7 +15,7 @@ const NewTransactionForm = (props) => {
       formFields.push(
         <Form.Group inline key={i}>
           <Form.Field
-            name={`${fieldName}:amt:${i+1}`}
+            name={`${fieldName}${i+1}`}
             type='number'
             // value={}
             label='Amount'
@@ -75,8 +75,11 @@ const NewTransactionForm = (props) => {
       />
       <h3 id='transdebits'>What you received...</h3>
         { renderFields(props.formDebitFields, 'formDebitFields') }
+      <h3>Subtotal: {calcDebitBalance()}</h3>
       <h3 id='transcredits'>What you gave (enter as a positive number)...</h3>
         { renderFields(props.formCreditFields, 'formCreditFields') }
+      <h3>Subtotal: {calcCreditBalance()}</h3>
+      <h4>Currently out of balance by: </h4>
       <Form.Field
         name='description'
         control={TextArea}
