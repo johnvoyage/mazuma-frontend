@@ -87,14 +87,14 @@ const NewTransactionForm = (props) => {
       <h3>Subtotal: {calcCreditBalance()}</h3>
       {
         props.transactionBalance !== 0 ?
-        <h4>Currently out of balance by: {props.transactionBalance} </h4> :
+        <h4 id='out-of-bal'>Currently out of balance by: {props.transactionBalance} </h4> :
         null
       }
 
       <Form.Field
         name='description'
         control={TextArea}
-        label='Description'
+        label={`Description (ex:)`}
         // onChange={handleChange}
 
         placeholder='Made a grocery trip to Rite Aid, split 50/25/25 between household supplies, food, and medicine'

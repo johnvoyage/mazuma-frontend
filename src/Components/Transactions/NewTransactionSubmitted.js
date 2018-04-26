@@ -5,13 +5,15 @@ const currentCredits = {}
 
 const calcDebitBalance = () => {
   return Object.keys(currentDebits).reduce((aggr, key) => {
-    return aggr + currentDebits[key]
+    const currentVal = isNaN(currentDebits[key]) ? 0 : currentDebits[key]
+    return aggr + currentVal
   }, 0)
 }
 
 const calcCreditBalance = () => {
   return Object.keys(currentCredits).reduce((aggr, key) => {
-    return aggr + currentCredits[key]
+    const currentVal = isNaN(currentCredits[key]) ? 0 : currentCredits[key]
+    return aggr + currentVal
   }, 0)
 }
 
