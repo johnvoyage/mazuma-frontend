@@ -48,13 +48,25 @@ const deleteUserAccount = (accountId) => {
   }).then(response => response.json())
 }
 
-const editUserAccount = (accountId) => {
-  return fetch(`${API_ROOT}/users/${accountId}`, {
-    method: 'PATCH',
+// const editUserAccount = (accountId) => {
+//   return fetch(`${API_ROOT}/users/${accountId}`, {
+//     method: 'PATCH',
+//     headers: headers,
+//     body: JSON.stringify({
+//       // email,
+//       // password,
+//     })
+//   }).then(response => response.json())
+// }
+
+const createEntry = (date, description, userId) => {
+  return fetch(`${API_ROOT}/entries/`, {
+    method: 'POST',
     headers: headers,
     body: JSON.stringify({
-      // email,
-      // password,
+      date: date,
+      description: description,
+      user_id: userId,
     })
   }).then(response => response.json())
 }
@@ -66,8 +78,14 @@ export default {
     getCurrentUser,
     signUserUp,
     deleteUserAccount,
-    editUserAccount
+    // editUserAccount
   },
+  entry: {
+    createEntry,
+    // readEntry,
+    // updateEntry,
+    // destroyEntry,
+  }
   // transactions: {
   //   getTransactions
   // }

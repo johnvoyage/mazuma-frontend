@@ -69,7 +69,7 @@ const NewTransactionForm = (props) => {
   ]
 
   return(
-    <Form onSubmit={newTransactionSubmitted}>
+    <Form onSubmit={(event) => newTransactionSubmitted(event, props.userId)}>
       <Form.Field
         required
         name='date'
@@ -104,6 +104,7 @@ const NewTransactionForm = (props) => {
 
 const mapStateToProps = (state) => {
   return {
+    userId: state.userInfo.id,
     formDebitFields: state.transactionContainer.formDebitFields,
     formCreditFields: state.transactionContainer.formCreditFields,
     transactionBalance: state.transactionContainer.transactionBalance,

@@ -1,5 +1,8 @@
+import api from '../API/api';
+
 const currentDebits = {}
 const currentCredits = {}
+const transactions = []
 
 const calcDebitBalance = () => {
   return Object.keys(currentDebits).reduce((aggr, key) => {
@@ -37,24 +40,38 @@ const removeAmount = (event) => {
 }
 
 
-const newTransactionSubmitted = (event) => {
+const newTransactionSubmitted = (event, userId) => {
   event.preventDefault()
-  const YYYYMMDD = event.target.children[0].children[1].children[0].value
+  const date = event.target.children[0].children[1].children[0].value
   const descriptionIndex = event.target.children.length - 2
+  const description = event.target.children[descriptionIndex].children[1].value
   for (let i = 2; i < descriptionIndex; i++) {
     const fieldCheck = event.target.children[i].innerText[0]
     if (fieldCheck !== "W" && fieldCheck !== "S") {
       // debugger
-      console.log(event.target.children[i].children[0].children[1].children[0].value)
-      console.log(event.target.children[i].children[1].children[1].innerText)
+      const amount = event.target.children[i].children[0].children[1].children[0].value
+      const account = event.target.children[i].children[1].children[1].innerText
       // debugger
+      // api.transaction
     }
   }
-  const description = event.target.children[descriptionIndex].children[1].value
-  console.log('date: ', YYYYMMDD)
-  console.log('description: ', description)
-  console.log(currentDebits)
-  console.log(currentCredits);
+  console.log(transactions)
+  createEntry(date, description, userId)
+  // console.log('date: ', date)
+  // console.log('description: ', description)
+  // console.log(currentDebits)
+  // console.log(currentCredits);
+}
+
+const createEntry = (date, description, userId) => {
+  api.entry.createEntry(date, description, userId)
+    .then(json => {
+      if (json.error) {
+        console.log("ERROR")
+      } else {
+        console.log(json)
+      }
+    })
 }
 
 export {
