@@ -3,7 +3,6 @@ import {Input, Select, Form, TextArea, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux';
 import { newTransactionSubmitted, updateDebitBalance, updateCreditBalance, removeAmount, calcDebitBalance, calcCreditBalance } from './NewTransactionSubmitted'
 import './csstransaction.css';
-// import TransactionBalanceCheck from './TransactionBalanceCheck'
 
 
 const NewTransactionForm = (props) => {
@@ -18,6 +17,7 @@ const NewTransactionForm = (props) => {
           <Form.Field
             name={`${fieldName}${i+1}`}
             type='number'
+            step='0.01'
             required={i === 0}
             label='Amount'
             onChange={
@@ -32,11 +32,9 @@ const NewTransactionForm = (props) => {
           <Form.Field
             label='Account'
             required={i === 0}
-
             control={Select}
             options={options}
             placeholder='Account'
-            // onChange={handleChange}
           />
           { i === numOfFields - 1 ?
             (<div>
@@ -47,6 +45,8 @@ const NewTransactionForm = (props) => {
                 onClick={
                   (event) => {
                     removeAmount(event)
+                    props.updateTransactionBalance(calcCreditBalance() - calcDebitBalance())
+
                     props.changeFormFields(formType, -1)}
                   }
                 icon='minus circle'
@@ -66,22 +66,7 @@ const NewTransactionForm = (props) => {
     { key: 'm', text: 'Cash', value: 'male' },
     { key: 'f', text: 'Car', value: 'female' },
     { key: 'a', text: 'Add new...', value: '--addnewperuser--' },
-
   ]
-
-  // const handleSubmit = (event) => {
-  //   'SUBMITTED'
-  // }
-
-  // const handleChange = (event) => {
-    // formInput = {
-    //   ...formInput,
-    //   [event.target.name]: event.target.value
-    // }
-    // event.target.innerText === 'Add new...' ? props.addNewAccountOn() : null
-    // console.log('name: ', event.target.name)
-    // console.log('innerT: ', event.target.innerText)
-  // }
 
   return(
     <Form onSubmit={newTransactionSubmitted}>
@@ -95,13 +80,13 @@ const NewTransactionForm = (props) => {
       />
       <h3 id='transdebits'>What you received...</h3>
         { renderFields(props.formDebitFields, 'formDebitFields') }
-      <h3>Subtotal: {calcDebitBalance()}</h3>
+      <h3>Subtotal: &emsp; $ {calcDebitBalance().toFixed(2)}</h3>
       <h3 id='transcredits'>What you gave (enter as a positive number)...</h3>
         { renderFields(props.formCreditFields, 'formCreditFields') }
-      <h3>Subtotal: {calcCreditBalance()}</h3>
+      <h3>Subtotal: &emsp; $ {calcCreditBalance().toFixed(2)}</h3>
       {
         props.transactionBalance !== 0 ?
-        <h4 id='out-of-bal'>Currently out of balance by: {Math.abs(props.transactionBalance)} </h4> :
+        <h4 id='out-of-bal'>Currently out of balance by: &emsp; $ {Math.abs(props.transactionBalance).toFixed(2)} </h4> :
         null
       }
 
@@ -109,8 +94,6 @@ const NewTransactionForm = (props) => {
         name='description'
         control={TextArea}
         label='Description'
-        // onChange={handleChange}
-
         placeholder='Made a grocery trip to Rite Aid, split 50/25/25 between household supplies, food, and medicine'
       />
       <Form.Field disabled={props.transactionBalance !== 0} control={Button}>Submit</Form.Field>

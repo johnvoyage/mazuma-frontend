@@ -20,7 +20,6 @@ const updateDebitBalance = (event) => {
   const currentVal = parseFloat(parseFloat(event.target.value).toFixed(2))
   currentDebits[currentKey] = currentVal
   console.log('debits: ', currentDebits)
-  // console.log('db balance: ', calcDebitBalance())
   return calcDebitBalance()
 }
 
@@ -28,40 +27,27 @@ const updateCreditBalance = (event) => {
   const currentKey = event.target.name
   const currentVal = parseFloat(parseFloat(event.target.value).toFixed(2))
   currentCredits[currentKey] = currentVal
-  // console.log('credits: ', currentCredits)
-  // console.log('cr balance: ', calcCreditBalance())
   return calcCreditBalance()
 }
 
 const removeAmount = (event) => {
-  // debugger
-  // console.log(currentDebits)
   const keyToDelete = event.target.parentNode.parentNode.parentNode.children[0].children[1].children[0].name
-  // console.log(event.target.id)
   delete currentDebits[keyToDelete]
   delete currentCredits[keyToDelete]
-
-  // console.log(currentDebits)
-
-  // debugger
 }
 
-
-// const removeCreditBalance = (event) => {
-//   debugger
-//
-// }
 
 const newTransactionSubmitted = (event) => {
   event.preventDefault()
   const YYYYMMDD = event.target.children[0].children[1].children[0].value
   const descriptionIndex = event.target.children.length - 2
   for (let i = 2; i < descriptionIndex; i++) {
-    // debugger
-    if (event.target.children[i].innerText[0] !== "W" || "S") {
-
-      // console.log(event.target.children[i].children[0].children[1].children[0].value)
-      // console.log(event.target.children[i].children[1].children[1].innerText)
+    const fieldCheck = event.target.children[i].innerText[0]
+    if (fieldCheck !== "W" && fieldCheck !== "S") {
+      // debugger
+      console.log(event.target.children[i].children[0].children[1].children[0].value)
+      console.log(event.target.children[i].children[1].children[1].innerText)
+      // debugger
     }
   }
   const description = event.target.children[descriptionIndex].children[1].value
@@ -69,7 +55,6 @@ const newTransactionSubmitted = (event) => {
   console.log('description: ', description)
   console.log(currentDebits)
   console.log(currentCredits);
-  // debugger
 }
 
 export {

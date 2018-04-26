@@ -9,7 +9,6 @@ const CustomFilters = (props) => {
   return(
     <div>
       Custom Filters:
-
     </div>
   )
 
