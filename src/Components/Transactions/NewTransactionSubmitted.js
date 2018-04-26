@@ -19,15 +19,20 @@ const updateDebitBalance = (event) => {
   const currentKey = event.target.name
   const currentVal = parseFloat(parseFloat(event.target.value).toFixed(2))
   currentDebits[currentKey] = currentVal
-  // return calcDebitBalance())
+  console.log('debits: ', currentDebits)
+
+  console.log('db balance: ', calcDebitBalance())
+  return calcDebitBalance()
 }
 
 const updateCreditBalance = (event) => {
   const currentKey = event.target.name
   const currentVal = parseFloat(parseFloat(event.target.value).toFixed(2))
   currentCredits[currentKey] = currentVal
-  // console.log(currentCredits)
-  // return calcCreditBalance()
+  console.log('credits: ', currentCredits)
+  console.log('cr balance: ', calcCreditBalance())
+
+  return calcCreditBalance()
 
 
 }

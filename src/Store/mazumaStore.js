@@ -88,6 +88,14 @@ const reducer = (state = initialState, action) => {
             newAccount: !state.transactionContainer.newAccount
           }
         }
+      case 'UPDATE_TRANSACTION_BALANCE':
+        return{
+          ...state,
+          transactionContainer: {
+            ...state.transactionContainer,
+            transactionBalance: action.transactionBalance
+          }
+        }
       // case 'ADD_NEW_ACCOUNT_ON':
       //   return {
       //     ...state,

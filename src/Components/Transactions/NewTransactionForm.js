@@ -3,6 +3,7 @@ import {Input, Select, Form, TextArea, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux';
 import { newTransactionSubmitted, updateDebitBalance, updateCreditBalance, calcDebitBalance, calcCreditBalance } from './NewTransactionSubmitted'
 import './csstransaction.css';
+// import TransactionBalanceCheck from './TransactionBalanceCheck'
 
 
 const NewTransactionForm = (props) => {
@@ -19,7 +20,12 @@ const NewTransactionForm = (props) => {
             type='number'
             // value={}
             label='Amount'
-            onChange={ fieldName === 'db' ? updateDebitBalance : updateCreditBalance }
+            onChange={
+              (event) => {
+                fieldName === 'db' ? updateDebitBalance(event) : updateCreditBalance(event)
+                props.updateTransactionBalance(calcCreditBalance() - calcDebitBalance())
+              }
+            }
             control={Input}
             placeholder='Amount'
           />
@@ -79,7 +85,12 @@ const NewTransactionForm = (props) => {
       <h3 id='transcredits'>What you gave (enter as a positive number)...</h3>
         { renderFields(props.formCreditFields, 'formCreditFields') }
       <h3>Subtotal: {calcCreditBalance()}</h3>
-      <h4>Currently out of balance by: </h4>
+      {
+        props.transactionBalance !== 0 ?
+        <h4>Currently out of balance by: {props.transactionBalance} </h4> :
+        null
+      }
+
       <Form.Field
         name='description'
         control={TextArea}
@@ -98,7 +109,7 @@ const mapStateToProps = (state) => {
   return {
     formDebitFields: state.transactionContainer.formDebitFields,
     formCreditFields: state.transactionContainer.formCreditFields,
-    // formInput: state.formInput.newTransaction,
+    transactionBalance: state.transactionContainer.transactionBalance,
   };
 };
 
@@ -106,6 +117,11 @@ const mapDispatchToProps = (dispatch) => {
   return {
     changeFormFields: (whichForm, amount) => {
       dispatch({ type: 'CHANGE_TRANSACTION_FORM_FIELDS', whichForm, amount })
+    },
+    updateTransactionBalance: (transactionBalance) => {
+      // debugger
+      console.log(transactionBalance)
+      dispatch({ type: 'UPDATE_TRANSACTION_BALANCE', transactionBalance })
     },
     // changeFormInput: () => {
     //   dispatch({ type: 'CHANGE_TRANSACTION_FORM_INPUT' })

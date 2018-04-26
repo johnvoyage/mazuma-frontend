@@ -16,6 +16,7 @@ const initialState = {
     newAccount: false,
     formDebitFields: 1,
     formCreditFields: 1,
+    transactionBalance: 0,
   },
   spendingContainer: {
 
