@@ -1,7 +1,7 @@
 import React from 'react'
 import {Input, Select, Form, TextArea, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux';
-import newTransactionSubmitted from './NewTransactionSubmitted'
+import { newTransactionSubmitted, updateDebitBalance, updateCreditBalance } from './NewTransactionSubmitted'
 import './csstransaction.css';
 
 
@@ -19,7 +19,7 @@ const NewTransactionForm = (props) => {
             type='number'
             // value={}
             label='Amount'
-            // onChange={handleChange}
+            onChange={ fieldName === 'db' ? updateDebitBalance : updateCreditBalance }
             control={Input}
             placeholder='Amount'
           />
