@@ -123,7 +123,7 @@ const mapDispatchToProps = (dispatch) => {
     },
     updateTransactionBalance: (transactionBalance) => {
       // debugger
-      console.log(transactionBalance)
+      // console.log(transactionBalance)
       dispatch({ type: 'UPDATE_TRANSACTION_BALANCE', transactionBalance })
     },
     // changeFormInput: () => {

@@ -76,7 +76,7 @@ const TransactionsTable = (props) => {
       description: entry.description,
     }
 
-  })
+  }).reverse()
   // [
   //   {
   //     number: 1,
@@ -134,7 +134,7 @@ const TransactionsTable = (props) => {
     let keyCounter = 1
     let tableRows = []
     entries.forEach((entry, index) => {
-
+      // debugger
       tableRows.push(
         <Table.Row key={`${keyCounter++}`}>
           <Table.Cell rowSpan={entry.transactions.length}>
@@ -142,6 +142,7 @@ const TransactionsTable = (props) => {
             <br />
             Date:   {entry.date}
           </Table.Cell>
+
           <Table.Cell>{entry.transactions[0].account}</Table.Cell>
           <Table.Cell>{entry.transactions[0].amount}</Table.Cell>
           <Table.Cell onClick={() => console.log('edit entry!')} rowSpan={entry.transactions.length} selectable textAlign='center'>

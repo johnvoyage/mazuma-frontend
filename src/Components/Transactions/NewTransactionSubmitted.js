@@ -22,7 +22,6 @@ const updateDebitBalance = (event) => {
   const currentKey = event.target.name
   const currentVal = parseFloat(parseFloat(event.target.value).toFixed(2))
   currentDebits[currentKey] = currentVal
-  console.log('debits: ', currentDebits)
   return calcDebitBalance()
 }
 
@@ -55,7 +54,7 @@ const newTransactionSubmitted = (event, userId) => {
       // api.transaction
     }
   }
-  console.log(transactions)
+  // console.log(transactions)
   createEntry(date, description, userId)
   // console.log('date: ', date)
   // console.log('description: ', description)
@@ -69,7 +68,7 @@ const createEntry = (date, description, userId) => {
       if (json.error) {
         console.log("ERROR")
       } else {
-        console.log(json)
+        // console.log(json)
         // getEntryIds(json.id)
         // createTransactions(json.id)
         getAccountNumbers(json.id)
@@ -78,12 +77,16 @@ const createEntry = (date, description, userId) => {
 }
 
 const getAccountNumbers = (entryId) => {
+  console.log(transactions)
   transactions.forEach((transaction) => {
     const amount = transaction[0]
     const accountName = transaction[1]
-    api.account.getAccountNumber(accountName)
+    // debugger
+    console.log('amt: ', amount)
+    console.log('acct ', accountName)
+    api.accounts.getAccountId(accountName)
       .then(account => {
-        api.transaction.createTransaction(amount, account.id, entryId)
+        api.transactions.createTransaction(amount, account.id, entryId)
 
         // createTransaction(transaction[0], entryId, account.id)
       })

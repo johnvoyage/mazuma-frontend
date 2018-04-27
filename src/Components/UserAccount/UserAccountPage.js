@@ -73,7 +73,7 @@ class UserAccountPage extends React.Component {
         console.log("ERROR")
       } else {
         // console.log('here')
-        this.props.deleteAccount()
+        this.props.logOutAccount()
       }
     })
   }
@@ -86,7 +86,7 @@ class UserAccountPage extends React.Component {
         console.log("ERROR")
       } else {
         console.log('edit!')
-        // this.props.deleteAccount()
+        // this.props.logOutAccount()
       }
     })
   }
@@ -137,7 +137,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    deleteAccount: () => {
+    logOutAccount: () => {
       dispatch({ type: 'LOG_USER_OUT' })
     },
     setUsersAccounts: (accounts) => {
