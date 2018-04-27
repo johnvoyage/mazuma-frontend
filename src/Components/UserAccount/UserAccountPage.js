@@ -13,8 +13,8 @@ class UserAccountPage extends React.Component {
     api.accounts.allUsersAccounts(this.props.id)
       .then(json => this.props.setUsersAccounts(this.mapAccountNames(json)))
     // fetchUsersInformation(this.props.id)
-    api.accounts.allUsersEntries(this.props.id)
-      .then(json => console.log(json))
+    api.entries.allUsersEntries(this.props.id)
+      .then(json => this.props.setUsersEntries(json))
   }
 
   mapAccountNames = (accounts) => {
@@ -97,7 +97,10 @@ const mapDispatchToProps = (dispatch) => {
     },
     setUsersAccounts: (accounts) => {
       dispatch({ type: 'SET_USERS_ACCOUNTS', accounts })
-    }
+    },
+    setUsersEntries: (entries) => {
+      dispatch({ type: 'SET_USERS_ENTRIES', entries })
+    },
   }
 }
 

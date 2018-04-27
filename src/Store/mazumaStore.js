@@ -48,7 +48,11 @@ const reducer = (state = initialState, action) => {
       }
     case 'SET_USERS_ENTRIES':
       return {
-        ...state
+        ...state,
+        userInfo: {
+          ...state.userInfo,
+          entries: action.entries
+        }
       }
     case 'SET_USERS_TRANSACTIONS':
       return {

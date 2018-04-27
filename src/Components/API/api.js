@@ -59,17 +59,17 @@ const deleteUserAccount = (accountId) => {
 //   }).then(response => response.json())
 // }
 
-const createEntry = (date, description, userId) => {
-  return fetch(`${API_ROOT}/entries/`, {
-    method: 'POST',
-    headers: headers,
-    body: JSON.stringify({
-      date: date,
-      description: description,
-      user_id: userId,
-    })
-  }).then(response => response.json())
-}
+// const createEntry = (date, description, userId) => {
+//   return fetch(`${API_ROOT}/entries/`, {
+//     method: 'POST',
+//     headers: headers,
+//     body: JSON.stringify({
+//       date: date,
+//       description: description,
+//       user_id: userId,
+//     })
+//   }).then(response => response.json())
+// }
 
 const allUsersAccounts = (userId) => {
   return fetch(`${API_ROOT}/users/${userId}/accounts/`)
@@ -98,7 +98,8 @@ export default {
     allUsersAccounts,
   },
   entries: {
-    createEntry,
+    allUsersEntries,
+    // createEntry,
     // readEntry,
     // updateEntry,
     // destroyEntry,
