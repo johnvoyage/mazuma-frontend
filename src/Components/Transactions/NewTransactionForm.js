@@ -19,7 +19,7 @@ const NewTransactionForm = (props) => {
             type='number'
             step='0.01'
             min='0.01'
-            required={i === 0}
+            required
             label='Value'
             onChange={
               (event) => {
@@ -32,7 +32,7 @@ const NewTransactionForm = (props) => {
           />
           <Form.Field
             label='Account'
-            required={i === 0}
+            required
             control={Select}
             options={options}
             placeholder='Select one'

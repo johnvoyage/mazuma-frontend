@@ -59,6 +59,8 @@ const newTransactionSubmitted = (event, userId) => {
   // console.log('date: ', date)
   // console.log('description: ', description)
   // console.log(currentDebits)
+  // delete currentDebits
+  // delete currentCredits
   // console.log(currentCredits);
 }
 
