@@ -8,6 +8,7 @@ import Transactions from '../Transactions/Transactions';
 import MazumaHomePage from '../LandingPage/MazumaHomePage';
 import NetWorth from '../NetWorth/NetWorth';
 import Statistics from '../Statistics/Statistics';
+import IncomeStatement from '../IncomeStatement/IncomeStatement';
 
 import FAQ from '../FAQ/FAQ';
 
@@ -24,7 +25,7 @@ const MainSegmentOne = (props) => {
       activeItem = <Transactions />;
       break;
     case loggedInMenuOptions[2]:
-      activeItem = "Spending";
+      activeItem = <IncomeStatement />;
       break;
     case loggedInMenuOptions[3]:
       activeItem = <NetWorth />;
