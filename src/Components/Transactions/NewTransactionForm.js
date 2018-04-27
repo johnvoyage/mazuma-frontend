@@ -18,8 +18,9 @@ const NewTransactionForm = (props) => {
             name={`${fieldName}${i+1}`}
             type='number'
             step='0.01'
+            min='0'
             required={i === 0}
-            label='Amount'
+            label='Value'
             onChange={
               (event) => {
                 fieldName === 'db' ? updateDebitBalance(event) : updateCreditBalance(event)
@@ -27,14 +28,14 @@ const NewTransactionForm = (props) => {
               }
             }
             control={Input}
-            placeholder='Amount'
+            placeholder='$ amount'
           />
           <Form.Field
             label='Account'
             required={i === 0}
             control={Select}
             options={options}
-            placeholder='Account'
+            placeholder='Select one'
           />
           { i === numOfFields - 1 ?
             (<div>
@@ -84,7 +85,7 @@ const NewTransactionForm = (props) => {
       <h3 id='transdebits'>What you received...</h3>
         { renderFields(props.formDebitFields, 'formDebitFields') }
       <h3>Subtotal: &emsp; $ {calcDebitBalance().toFixed(2)}</h3>
-      <h3 id='transcredits'>What you gave (enter as a positive number)...</h3>
+      <h3 id='transcredits'>What you gave...</h3>
         { renderFields(props.formCreditFields, 'formCreditFields') }
       <h3>Subtotal: &emsp; $ {calcCreditBalance().toFixed(2)}</h3>
       {
