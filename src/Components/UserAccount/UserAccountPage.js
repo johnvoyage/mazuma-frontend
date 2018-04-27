@@ -95,6 +95,7 @@ class UserAccountPage extends React.Component {
     return(
       <div>
         <h3>Email address: { this.props.email }</h3>
+        <h3>Goals: </h3>
         <h3>Your numbers:</h3>
         <UserHomeStats />
 

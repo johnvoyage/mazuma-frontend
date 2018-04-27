@@ -7,6 +7,8 @@ import SignInForm from '../SignIn/SignInForm';
 import Transactions from '../Transactions/Transactions';
 import MazumaHomePage from '../LandingPage/MazumaHomePage';
 import NetWorth from '../NetWorth/NetWorth';
+import Statistics from '../Statistics/Statistics';
+
 import FAQ from '../FAQ/FAQ';
 
 import { loggedInMenuOptions, loggedOutMenuOptions } from '../TopMenu/MenuOptions';
@@ -28,7 +30,7 @@ const MainSegmentOne = (props) => {
       activeItem = <NetWorth />;
       break;
     case loggedInMenuOptions[4]:
-      activeItem = "Statistics";
+      activeItem = <Statistics />;
       break;
     case loggedOutMenuOptions[0]:
       activeItem = <MazumaHomePage />;
