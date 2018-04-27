@@ -62,6 +62,13 @@ import { connect } from 'react-redux';
 const TransactionsTable = (props) => {
 
   const entries =
+  // props.entries.map((entry, index) => {
+  //   return {
+  //     number: index + 1,
+  //     date: entry.date,
+  //     transactions: entry.transactions
+  //   }
+  // })
   [
     {
       number: 1,
