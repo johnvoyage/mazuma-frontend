@@ -12,7 +12,8 @@ class UserAccountPage extends React.Component {
   // console.log(this.props)
   componentDidMount = () => {
     api.accounts.allUsersAccounts(this.props.id)
-      .then(json => this.props.setUsersAccounts(this.mapAccountNames(json)))
+      .then(json => this.props.setUsersAccounts(json))
+        // this.mapAccountNames(json)))
     // fetchUsersInformation(this.props.id)
     api.entries.allUsersEntries(this.props.id)
       .then(json => {
@@ -24,31 +25,45 @@ class UserAccountPage extends React.Component {
     // api.transactions.allEntriesTransactions
   }
 
-  mapAccountNames = (accounts) => {
-    return accounts.map((account) => account.name)
-  }
+  // mapAccountNames = (accounts) => {
+  //   return accounts.map((account) => account.name)
+  // }
 
   getAllTransactions = (entries) => {
     entries.forEach((entry, index) => {
       // console.log(entry)
       api.transactions.allEntrysTransactions(entry.id)
-        .then(json => {
+        .then(transactions => {
           // console.log(entry)
-          // console.log(json)
-          this.assignTransactionsToEntry(json, entry, index)
+          console.log(transactions)
+          transactions.forEach((transaction) => {
+            this.props.accounts.forEach((account) => {
+              if (account.id === transaction.account_id) {
+                transaction.accountName = account.name
+              }
+            })
+          })
+          // this.assignTransactionsToEntry(transactions, entry, index)
+          this.props.assignTransactionsToEntry(transactions, index)
+
         })
       // return entry
     })
   }
 
-  assignTransactionsToEntry = (transactionsArray, entry, index) => {
+  // getTransactionAccountName = (accountId) => {
+  //   api.accounts.readAccount(accountId)
+  //     .then()
+  // }
+
+  // assignTransactionsToEntry = (transactionsArray, entry, index) => {
     // console.log('leggooo')
     // console.log(transactionsArray)
     // console.log(entry)
     // entry.transactions = transactionsArray
     // console.log(entry)
-    this.props.assignTransactionsToEntry(transactionsArray, index)
-  }
+    // this.props.assignTransactionsToEntry(transactionsArray, index)
+  // }
 
   handleDelete = (event) => {
     api.auth
@@ -70,7 +85,7 @@ class UserAccountPage extends React.Component {
       if (json.error) {
         console.log("ERROR")
       } else {
-        // console.log('here')
+        console.log('edit!')
         // this.props.deleteAccount()
       }
     })
@@ -113,7 +128,8 @@ const mapStateToProps = (state) => {
     id: state.userInfo.id,
     email: state.userInfo.email,
     // userId: state.userInfo.id
-    entries: state.userInfo.entries
+    accounts: state.userInfo.accounts,
+    entries: state.userInfo.entries,
     // ticker: state.userInfo.tickerSymbol
     // agreedToTerms: state.formValidity.signUpForm
   };

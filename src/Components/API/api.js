@@ -86,6 +86,11 @@ const allEntrysTransactions = (entryId) => {
     .then(response => response.json())
 }
 
+const readAccount = (accountId) => {
+  return fetch(`${API_ROOT}/accounts/${accountId}/`)
+    .then(response => response.json())
+}
+
 export default {
   auth: {
     login,
@@ -96,6 +101,7 @@ export default {
   },
   accounts: {
     allUsersAccounts,
+    readAccount,
   },
   entries: {
     allUsersEntries,
