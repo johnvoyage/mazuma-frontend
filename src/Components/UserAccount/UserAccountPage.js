@@ -35,7 +35,7 @@ class UserAccountPage extends React.Component {
       api.transactions.allEntrysTransactions(entry.id)
         .then(transactions => {
           // console.log(entry)
-          console.log(transactions)
+          // console.log(transactions)
           transactions.forEach((transaction) => {
             this.props.accounts.forEach((account) => {
               if (account.id === transaction.account_id) {

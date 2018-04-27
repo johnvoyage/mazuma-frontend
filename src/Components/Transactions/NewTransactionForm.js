@@ -18,7 +18,7 @@ const NewTransactionForm = (props) => {
             name={`${fieldName}${i+1}`}
             type='number'
             step='0.01'
-            min='0'
+            min='0.01'
             required={i === 0}
             label='Value'
             onChange={
@@ -66,8 +66,8 @@ const NewTransactionForm = (props) => {
   const options = props.accounts.map((account, index) => {
     return {
       key: index,
-      text: account,
-      value: account,
+      text: account.name,
+      value: account.name,
     }
   }).concat({ key: props.accounts.length, text: 'Add new...', value: 'Add new...'})
 
