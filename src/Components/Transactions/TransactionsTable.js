@@ -179,7 +179,7 @@ const TransactionsTable = (props) => {
 
 
   // render() {
-    console.log()
+    // console.log()
     return(
       <Table celled structured>
         <Table.Header>

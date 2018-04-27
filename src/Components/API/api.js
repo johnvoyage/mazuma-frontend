@@ -59,17 +59,17 @@ const deleteUserAccount = (accountId) => {
 //   }).then(response => response.json())
 // }
 
-// const createEntry = (date, description, userId) => {
-//   return fetch(`${API_ROOT}/entries/`, {
-//     method: 'POST',
-//     headers: headers,
-//     body: JSON.stringify({
-//       date: date,
-//       description: description,
-//       user_id: userId,
-//     })
-//   }).then(response => response.json())
-// }
+const createEntry = (date, description, userId) => {
+  return fetch(`${API_ROOT}/entries/`, {
+    method: 'POST',
+    headers: headers,
+    body: JSON.stringify({
+      date: date,
+      description: description,
+      user_id: userId,
+    })
+  }).then(response => response.json())
+}
 
 const allUsersAccounts = (userId) => {
   return fetch(`${API_ROOT}/users/${userId}/accounts/`)
@@ -91,6 +91,25 @@ const readAccount = (accountId) => {
     .then(response => response.json())
 }
 
+const getAccountId = (accountName) => {
+  return fetch(`${API_ROOT}/accountname/${accountName}/`)
+    .then(response => response.json())
+}
+
+const createTransaction = (amount, accountId, entryId) => {
+  return fetch(`${API_ROOT}/transactions/`, {
+    method: 'POST',
+    headers: headers,
+    body: JSON.stringify({
+      amount,
+      account_id: accountId,
+      entry_id: entryId,
+    })
+  }).then(response => response.json())
+}
+
+// api.transaction.createTransaction(amount, account.id, entryId)
+
 export default {
   auth: {
     login,
@@ -102,15 +121,17 @@ export default {
   accounts: {
     allUsersAccounts,
     readAccount,
+    getAccountId,
   },
   entries: {
     allUsersEntries,
-    // createEntry,
+    createEntry,
     // readEntry,
     // updateEntry,
     // destroyEntry,
   },
   transactions: {
-    allEntrysTransactions
+    allEntrysTransactions,
+    createTransaction,
   }
 };

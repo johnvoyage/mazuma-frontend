@@ -69,24 +69,37 @@ const createEntry = (date, description, userId) => {
       if (json.error) {
         console.log("ERROR")
       } else {
-        getEntryIds(json.id)
+        console.log(json)
+        // getEntryIds(json.id)
         // createTransactions(json.id)
+        getAccountNumbers(json.id)
       }
     })
 }
 
-const getEntryIds = (entryId) => {
+const getAccountNumbers = (entryId) => {
+  transactions.forEach((transaction) => {
+    const amount = transaction[0]
+    const accountName = transaction[1]
+    api.account.getAccountNumber(accountName)
+      .then(account => {
+        api.transaction.createTransaction(amount, account.id, entryId)
 
+        // createTransaction(transaction[0], entryId, account.id)
+      })
+  })
 }
 
-const createTransactions = (entryId) => {
-  for (let transaction of transactions) {
-    const amount = parseFloat(transaction[0])
-    const account = transaction[1]
-    console.log(transaction)
-    // api.transaction.createTransaction()
-  }
-}
+// const getEntryIds = (entryId) => {
+//
+// }
+
+// const createTransaction = (amount, entryId, accountId) => {
+  // for (let transaction of transactions) {
+  //   const amount = parseFloat(transaction[0])
+  //   const account = transaction[1]
+  //   console.log(transaction)
+// }
 
 export {
   newTransactionSubmitted,
