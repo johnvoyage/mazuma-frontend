@@ -1,5 +1,5 @@
 const initialState = {
-  activeMenuItem: null,
+  activeMenuItem: 'Mazuma',
   userInfo: {
     id: null,
     email: null,

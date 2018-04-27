@@ -64,7 +64,7 @@ const newTransactionSubmitted = (event, userId) => {
 }
 
 const createEntry = (date, description, userId) => {
-  api.entry.createEntry(date, description, userId)
+  api.entries.createEntry(date, description, userId)
     .then(json => {
       if (json.error) {
         console.log("ERROR")

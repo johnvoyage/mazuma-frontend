@@ -68,12 +68,8 @@ const NewTransactionForm = (props) => {
       text: account,
       value: account,
     }
-  })
-  // [
-  //   { key: 'm', text: 'Cash', value: 'male' },
-  //   { key: 'f', text: 'Car', value: 'female' },
-  //   { key: 'a', text: 'Add new...', value: '--addnewperuser--' },
-  // ]
+  }).concat({ key: props.accounts.length, text: 'Add new...', value: 'Add new...'})
+
 
   return(
     <Form onSubmit={(event) => newTransactionSubmitted(event, props.userId)}>

@@ -74,8 +74,17 @@ const createEntry = (date, description, userId) => {
 const allUsersAccounts = (userId) => {
   return fetch(`${API_ROOT}/users/${userId}/accounts/`)
     .then(response => response.json())
-    // .then(json => console.log(json))
 }
+
+const allUsersEntries = (userId) => {
+  return fetch(`${API_ROOT}/users/${userId}/entries/`)
+    .then(response => response.json())
+}
+
+// const allEntriesTransactions = (entryId) => {
+//   return fetch(`${API_ROOT}/entries/${entryId}/transactions/`)
+//     .then(response => response.json())
+// }
 
 export default {
   auth: {

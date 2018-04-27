@@ -32,6 +32,7 @@ const reducer = (state = initialState, action) => {
           email: null,
         },
         activeMenuItem: 'Mazuma'
+        // initialState
       };
     case 'EDIT_USER_ACCOUNT':
       return {

@@ -13,6 +13,8 @@ class UserAccountPage extends React.Component {
     api.accounts.allUsersAccounts(this.props.id)
       .then(json => this.props.setUsersAccounts(this.mapAccountNames(json)))
     // fetchUsersInformation(this.props.id)
+    api.accounts.allUsersEntries(this.props.id)
+      .then(json => console.log(json))
   }
 
   mapAccountNames = (accounts) => {
