@@ -81,10 +81,10 @@ const allUsersEntries = (userId) => {
     .then(response => response.json())
 }
 
-// const allEntriesTransactions = (entryId) => {
-//   return fetch(`${API_ROOT}/entries/${entryId}/transactions/`)
-//     .then(response => response.json())
-// }
+const allEntrysTransactions = (entryId) => {
+  return fetch(`${API_ROOT}/entries/${entryId}/transactions/`)
+    .then(response => response.json())
+}
 
 export default {
   auth: {
@@ -103,8 +103,8 @@ export default {
     // readEntry,
     // updateEntry,
     // destroyEntry,
+  },
+  transactions: {
+    allEntrysTransactions
   }
-  // transactions: {
-  //   getTransactions
-  // }
 };

@@ -54,10 +54,11 @@ const reducer = (state = initialState, action) => {
           entries: action.entries
         }
       }
-    case 'SET_USERS_TRANSACTIONS':
-      return {
-        ...state
-      }
+    case 'ASSIGN_TRANSACTIONS_TO_ENTRY':
+    // , transactions, index:
+      const updatedState = {...state}
+      updatedState.userInfo.entries[action.index].transactions = action.transactions
+      return updatedState
 
     /* STATE OF THE NAVBAR */
     case 'CHANGE_ACTIVE_MENU_ITEM':

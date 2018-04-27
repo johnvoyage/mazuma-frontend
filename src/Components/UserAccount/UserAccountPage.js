@@ -8,18 +8,46 @@ import UserHomeStats from './UserHomeStats';
 
 class UserAccountPage extends React.Component {
 
+  // let entries
   // console.log(this.props)
   componentDidMount = () => {
     api.accounts.allUsersAccounts(this.props.id)
       .then(json => this.props.setUsersAccounts(this.mapAccountNames(json)))
     // fetchUsersInformation(this.props.id)
     api.entries.allUsersEntries(this.props.id)
-      .then(json => this.props.setUsersEntries(json))
+      .then(json => {
+        this.props.setUsersEntries(json)
+        // entries = this.props.entries
+        // console.log(this.props.entries)
+        this.getAllTransactions(this.props.entries)
+      })
     // api.transactions.allEntriesTransactions
   }
 
   mapAccountNames = (accounts) => {
     return accounts.map((account) => account.name)
+  }
+
+  getAllTransactions = (entries) => {
+    entries.forEach((entry, index) => {
+      // console.log(entry)
+      api.transactions.allEntrysTransactions(entry.id)
+        .then(json => {
+          // console.log(entry)
+          // console.log(json)
+          this.assignTransactionsToEntry(json, entry, index)
+        })
+      // return entry
+    })
+  }
+
+  assignTransactionsToEntry = (transactionsArray, entry, index) => {
+    // console.log('leggooo')
+    // console.log(transactionsArray)
+    // console.log(entry)
+    // entry.transactions = transactionsArray
+    // console.log(entry)
+    this.props.assignTransactionsToEntry(transactionsArray, index)
   }
 
   handleDelete = (event) => {
@@ -85,7 +113,7 @@ const mapStateToProps = (state) => {
     id: state.userInfo.id,
     email: state.userInfo.email,
     // userId: state.userInfo.id
-
+    entries: state.userInfo.entries
     // ticker: state.userInfo.tickerSymbol
     // agreedToTerms: state.formValidity.signUpForm
   };
@@ -101,6 +129,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     setUsersEntries: (entries) => {
       dispatch({ type: 'SET_USERS_ENTRIES', entries })
+    },
+    assignTransactionsToEntry: (transactions, index) => {
+      dispatch({ type: 'ASSIGN_TRANSACTIONS_TO_ENTRY', transactions, index })
     },
   }
 }

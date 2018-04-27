@@ -5,63 +5,117 @@ import { connect } from 'react-redux';
 // import SelectedFilters from '.TransactionsTable';
 
 // import QuickFilters from './QuickFilters';
-const entries = [
-  {
-    number: 1,
-    date: '1/1/15',
-    transactions: [
-      {
-        account: 1001,
-        amount: 750
-      },{
-        account: 1002,
-        amount: -750
-      }
-    ],
-    description: 'this is description uno'
-  },
-  {
-    number: 2,
-    date: '1/1/17',
-    transactions: [
-      {
-        account: 1003,
-        amount: 1000
-      },{
-        account: 1004,
-        amount: -850
-      },{
-        account: 1005,
-        amount: -150
-      }
-    ],
-    description: 'this is description dos'
-  }, {
-    number: 3,
-    date: '2/2/17',
-    transactions: [
-      {
-        account: 1003,
-        amount: 250
-      },{
-        account: 1007,
-        amount: 350
-      },{
-        account: 1004,
-        amount: -200
-      },{
-        account: 1005,
-        amount: -400
-      }
-    ],
-    description: 'this is description tres'
-  }
-]
+// const entries =
+// [
+//   {
+//     number: 1,
+//     date: '1/1/15',
+//     transactions: [
+//       {
+//         account: 1001,
+//         amount: 750
+//       },{
+//         account: 1002,
+//         amount: -750
+//       }
+//     ],
+//     description: 'this is description uno'
+//   },
+//   {
+//     number: 2,
+//     date: '1/1/17',
+//     transactions: [
+//       {
+//         account: 1003,
+//         amount: 1000
+//       },{
+//         account: 1004,
+//         amount: -850
+//       },{
+//         account: 1005,
+//         amount: -150
+//       }
+//     ],
+//     description: 'this is description dos'
+//   }, {
+//     number: 3,
+//     date: '2/2/17',
+//     transactions: [
+//       {
+//         account: 1003,
+//         amount: 250
+//       },{
+//         account: 1007,
+//         amount: 350
+//       },{
+//         account: 1004,
+//         amount: -200
+//       },{
+//         account: 1005,
+//         amount: -400
+//       }
+//     ],
+//     description: 'this is description tres'
+//   }
+// ]
 
-class TransactionsTable extends React.Component {
+const TransactionsTable = (props) => {
 
+  const entries =
+  [
+    {
+      number: 1,
+      date: '1/1/15',
+      transactions: [
+        {
+          account: 1001,
+          amount: 750
+        },{
+          account: 1002,
+          amount: -750
+        }
+      ],
+      description: 'this is description uno'
+    },
+    {
+      number: 2,
+      date: '1/1/17',
+      transactions: [
+        {
+          account: 1003,
+          amount: 1000
+        },{
+          account: 1004,
+          amount: -850
+        },{
+          account: 1005,
+          amount: -150
+        }
+      ],
+      description: 'this is description dos'
+    }, {
+      number: 3,
+      date: '2/2/17',
+      transactions: [
+        {
+          account: 1003,
+          amount: 250
+        },{
+          account: 1007,
+          amount: 350
+        },{
+          account: 1004,
+          amount: -200
+        },{
+          account: 1005,
+          amount: -400
+        }
+      ],
+      description: 'this is description tres'
+    }
+  ]
 
-  renderTransactions = () => {
+  const renderTransactions = () => {
     let keyCounter = 1
     let tableRows = []
     entries.forEach((entry, index) => {
@@ -95,7 +149,7 @@ class TransactionsTable extends React.Component {
         }
       })
 
-      if (this.props.descriptionToggle) {
+      if (props.descriptionToggle) {
         tableRows.push(
           <Table.Row key={`${keyCounter++}`}>
             <Table.Cell colSpan={5}>
@@ -109,7 +163,7 @@ class TransactionsTable extends React.Component {
   }
 
 
-  render() {
+  // render() {
     console.log()
     return(
       <Table celled structured>
@@ -123,16 +177,17 @@ class TransactionsTable extends React.Component {
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {this.renderTransactions()}
+          {renderTransactions()}
         </Table.Body>
       </Table>
     )
-  }
+  // }
 }
 
 const mapStateToProps = (state) => {
   return {
     descriptionToggle: state.transactionContainer.descriptionToggle,
+    entries: state.userInfo.entries
     // ticker: state.userInfo.tickerSymbol
     // agreedToTerms: state.formValidity.signUpForm
   };
