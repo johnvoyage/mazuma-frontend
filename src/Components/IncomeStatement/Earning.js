@@ -9,6 +9,11 @@ const Earning = (props) => {
     <Grid columns='equal'>
       <Grid.Row>
         <Grid.Column textAlign='center'>
+          Net Income
+        </Grid.Column>
+      </Grid.Row>
+      <Grid.Row>
+        <Grid.Column textAlign='center'>
           <Segment>Earning</Segment>
         </Grid.Column>
       </Grid.Row>

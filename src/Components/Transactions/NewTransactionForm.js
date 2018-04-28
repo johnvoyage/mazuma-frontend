@@ -7,6 +7,7 @@ import './csstransaction.css';
 
 const NewTransactionForm = (props) => {
 
+
   const renderFields = (numOfFields, formType) => {
     let fieldName
     formType === 'formCreditFields' ? (fieldName = 'cr') : (fieldName ='db')
@@ -75,7 +76,10 @@ const NewTransactionForm = (props) => {
   return(
     <Form
       onSubmit={
-        (event) => newTransactionSubmitted(event, props.userId)
+        (event) => {
+          newTransactionSubmitted(event, props.userId)
+          props.transactionSubmitted()
+        }
       }
     >
       <Form.Field
@@ -130,9 +134,9 @@ const mapDispatchToProps = (dispatch) => {
       // console.log(transactionBalance)
       dispatch({ type: 'UPDATE_TRANSACTION_BALANCE', transactionBalance })
     },
-    // changeFormInput: () => {
-    //   dispatch({ type: 'CHANGE_TRANSACTION_FORM_INPUT' })
-    // }
+    transactionSubmitted: () => {
+      dispatch({ type: 'TOGGLE_NEW_TRANSACTION' })
+    }
     // addNewAccountOn: () => {
     //   dispatch({ type: 'ADD_NEW_ACCOUNT_ON' })
     // },

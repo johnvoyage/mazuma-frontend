@@ -48,6 +48,11 @@ const reducer = (state = initialState, action) => {
         }
       }
     case 'SET_USERS_ENTRIES':
+
+      // const updatedState = {...state}
+      // updatedState.userInfo.entries = action.entries
+      // return updatedState
+
       return {
         ...state,
         userInfo: {
@@ -102,12 +107,13 @@ const reducer = (state = initialState, action) => {
             newTransaction: !state.transactionContainer.newTransaction
           }
         }
-      // case 'TOGGLE_NEW_TRANSACTION':
+      // case 'TRANSACTION_SUBMITTED':
+      //
       //   return {
       //     ...state,
       //     transactionContainer: {
       //       ...state.transactionContainer,
-      //       newTransaction: !state.transactionContainer.newTransaction
+      //       newTransaction: false
       //     }
       //   }
       case 'TOGGLE_NEW_ACCOUNT':

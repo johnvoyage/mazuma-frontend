@@ -21,7 +21,7 @@ const UserHomeStats = (props) => {
   return (
     <Statistic.Group widths='four'>
     <Statistic>
-    <Statistic.Value>{numOfTransactions()}</Statistic.Value>
+    <Statistic.Value>5</Statistic.Value>
     <Statistic.Label>Transactions</Statistic.Label>
     </Statistic>
 

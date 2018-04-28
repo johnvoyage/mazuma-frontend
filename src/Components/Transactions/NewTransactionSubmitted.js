@@ -66,7 +66,7 @@ const newTransactionSubmitted = (event, userId) => {
   event.target.reset()
   resetTransactions(currentDebits)
   resetTransactions(currentCredits)
-  transactions.length = 0
+  // transactions.length = 0
 }
 
 const resetTransactions = (debitOrCredit) => {
@@ -84,13 +84,14 @@ const createEntry = (date, description, userId) => {
         // console.log(json)
         // getEntryIds(json.id)
         // createTransactions(json.id)
-        getAccountNumbers(json.id)
+        getAccountNumbers(json.id, userId)
       }
     })
 }
 
-const getAccountNumbers = (entryId) => {
-  console.log(transactions)
+const getAccountNumbers = (entryId, userId) => {
+  // console.log(transactions)
+  // debugger
   transactions.forEach((transaction) => {
     const amount = transaction[0]
     const accountName = transaction[1]
@@ -104,7 +105,10 @@ const getAccountNumbers = (entryId) => {
         // createTransaction(transaction[0], entryId, account.id)
       })
   })
+  transactions.length = 0
 }
+
+
 
 // const getEntryIds = (entryId) => {
 //
