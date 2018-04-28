@@ -73,7 +73,11 @@ const NewTransactionForm = (props) => {
 
 
   return(
-    <Form onSubmit={(event) => newTransactionSubmitted(event, props.userId)}>
+    <Form
+      onSubmit={
+        (event) => newTransactionSubmitted(event, props.userId)
+      }
+    >
       <Form.Field
         required
         name='date'

@@ -53,8 +53,8 @@ const newTransactionSubmitted = (event, userId) => {
       transactions.push([amount, account])
       // api.transaction
     }
-  event.target.reset()
   }
+
   // console.log(transactions)
   createEntry(date, description, userId)
   // console.log('date: ', date)
@@ -63,6 +63,16 @@ const newTransactionSubmitted = (event, userId) => {
   // delete currentDebits
   // delete currentCredits
   // console.log(currentCredits);
+  event.target.reset()
+  resetTransactions(currentDebits)
+  resetTransactions(currentCredits)
+  transactions.length = 0
+}
+
+const resetTransactions = (debitOrCredit) => {
+  for (const key in debitOrCredit) {
+    delete debitOrCredit[key]
+  }
 }
 
 const createEntry = (date, description, userId) => {

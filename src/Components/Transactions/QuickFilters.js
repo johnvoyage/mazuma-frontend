@@ -1,5 +1,5 @@
 import React from 'react';
-// import { Header, Button, Popup, Grid } from 'semantic-ui-react';
+import { Segment } from 'semantic-ui-react';
 // import { connect } from 'react-redux';
 
 
@@ -7,10 +7,10 @@ const QuickFilters = (props) => {
 
 
   return(
-    <div>
-      Quick Filters:
+    <Segment>
+      Quick Filters
 
-    </div>
+    </Segment>
   )
 
 }
