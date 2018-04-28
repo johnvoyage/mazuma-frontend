@@ -7,15 +7,21 @@ const UserHomeStats = (props) => {
   console.log(props)
   const numOfTransactions = () => {
     // debugger
-    return props.numOfEntries.reduce((aggr, entry) => {
-      return aggr += entry.transactions.length
-    }, 0)
+    if (!!props.numOfEntries && !!props.numOfEntries[0].transactions) {
+      return props.numOfEntries.reduce((aggr, entry) => {
+        // debugger
+        // console.log(entry)
+        return aggr += entry.transactions.length
+      }, 0)
+    } else  {
+      return 'Loading...'
+    }
   }
 
   return (
     <Statistic.Group widths='four'>
     <Statistic>
-    <Statistic.Value>5</Statistic.Value>
+    <Statistic.Value>{numOfTransactions()}</Statistic.Value>
     <Statistic.Label>Transactions</Statistic.Label>
     </Statistic>
 

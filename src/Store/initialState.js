@@ -6,6 +6,7 @@ const initialState = {
     entries: null,
     accounts: null,
     transactions: null,
+    dateCreated: null,
   },
   // formInput: {
   //   signUpForm: {},

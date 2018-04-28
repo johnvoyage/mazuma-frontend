@@ -16,6 +16,7 @@ const reducer = (state = initialState, action) => {
         activeMenuItem: 'Account'
       }
     case 'LOG_USER_IN':
+      // debugger
       return {
         ...state,
         userInfo: {
@@ -91,6 +92,14 @@ const reducer = (state = initialState, action) => {
           transactionContainer: {
             ...state.transactionContainer,
             filterSelected: action.filterSelected
+          }
+        }
+      case 'TOGGLE_NEW_TRANSACTION':
+        return {
+          ...state,
+          transactionContainer: {
+            ...state.transactionContainer,
+            newTransaction: !state.transactionContainer.newTransaction
           }
         }
       case 'TOGGLE_NEW_TRANSACTION':

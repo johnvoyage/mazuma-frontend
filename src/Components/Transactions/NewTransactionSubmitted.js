@@ -53,6 +53,7 @@ const newTransactionSubmitted = (event, userId) => {
       transactions.push([amount, account])
       // api.transaction
     }
+  event.target.reset()
   }
   // console.log(transactions)
   createEntry(date, description, userId)

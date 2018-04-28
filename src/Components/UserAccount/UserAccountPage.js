@@ -97,6 +97,7 @@ class UserAccountPage extends React.Component {
         <h3>Email address: { this.props.email }</h3>
         <h3>Goals: </h3>
         <h3>Your numbers:</h3>
+        <h3>Member since: </h3>
         <UserHomeStats />
 
         <Button.Group attached='bottom'>
