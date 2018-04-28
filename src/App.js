@@ -33,7 +33,6 @@ class App extends Component {
       <div>
         <TopMenu />
         <MainSegmentOne />
-        <MainSegmentTwo />
       </div>
     );
   }
