@@ -6,6 +6,8 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import 'semantic-ui-css/semantic.min.css'; // ../ deleted
 import { BrowserRouter as Router } from 'react-router-dom';
+import reduxThunk from 'redux-thunk';
+
 import reducer from './Store/mazumaStore';
 //// COME BACK TO
 // import whatever from './Reducers/manageState';
@@ -16,8 +18,14 @@ import reducer from './Store/mazumaStore';
 //   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 // }
 
+
+// const configureStore = () => {
+//   return createStore(rootReducer, applyMiddleware(reduxThunk));
+// }
+
 const store = createStore(
   reducer,
+  applyMiddleware(reduxThunk),
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
