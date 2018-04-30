@@ -8,7 +8,7 @@ import { loggedInMenuOptions, loggedOutMenuOptions } from './MenuOptions';
 
 const TopMenu = (props) => {
 
-  console.log(props)
+  // console.log(props)
   const loggedIn = !!props.userInfo.email
 
   // loggedIn ? loggedInMenuOptions[0] = props.userInfo.email : null

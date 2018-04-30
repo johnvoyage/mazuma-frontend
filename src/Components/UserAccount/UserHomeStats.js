@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 
 const UserHomeStats = (props) => {
-  console.log(props)
+  // console.log(props)
   const numOfTransactions = () => {
     // debugger
     if (!!props.numOfEntries && !!props.numOfEntries[0].transactions) {
