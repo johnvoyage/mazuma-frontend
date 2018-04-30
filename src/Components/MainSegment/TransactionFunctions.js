@@ -1,13 +1,12 @@
-const totalNetIncome = (entries, accounts) => {
+const totalForSubcategory = (entries, accounts, subcategoryId) => {
   return entries.reduce((aggr, entry) => {
-    console.log(aggr)
-    return aggr + netIncomeOfTransaction(entry.transactions, accounts)
+    return aggr + netIncomeOfTransaction(entry.transactions, accounts, subcategoryId)
   }, 0)
 }
 
-const netIncomeOfTransaction = (arrayOfTransactions, arrayOfAccounts) => {
+const netIncomeOfTransaction = (arrayOfTransactions, arrayOfAccounts, subcategoryId) => {
   return arrayOfTransactions.reduce((aggr, transaction) => {
-    if (trueIfIncomeAccount(transaction.account_id, arrayOfAccounts) && trueIfInTimeframe()) {
+    if (trueIfSubcategoryMatch(transaction.account_id, arrayOfAccounts, subcategoryId) && trueIfInTimeframe()) {
       return aggr + parseFloat(transaction.amount)
     } else {
       return aggr
@@ -15,9 +14,9 @@ const netIncomeOfTransaction = (arrayOfTransactions, arrayOfAccounts) => {
   }, 0)
 }
 
-const trueIfIncomeAccount = (accountId, arrayOfAccounts) => {
+const trueIfSubcategoryMatch = (accountId, arrayOfAccounts, subcategoryId) => {
   for (const account of arrayOfAccounts) {
-    if (account.id === accountId && account.subcategory_id >= 8) {
+    if (account.id === accountId && account.subcategory_id === subcategoryId) {
       return true
     }
   }
@@ -28,6 +27,11 @@ const trueIfInTimeframe = () => {
   return true
 }
 
+const filterAccountsOfSubcategoryId = (arrayOfAccounts, subcategoryId) => {
+  return arrayOfAccounts.filter(account => account.subcategory_id === 8)
+}
+
 export {
-  totalNetIncome
+  totalForSubcategory,
+  filterAccountsOfSubcategoryId
 }
