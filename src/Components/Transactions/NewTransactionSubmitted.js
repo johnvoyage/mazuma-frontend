@@ -100,8 +100,8 @@ const getAccountNumbers = (entryId, userId) => {
     const amount = transaction[0]
     const accountName = transaction[1]
     // debugger
-    console.log('amt: ', amount)
-    console.log('acct ', accountName)
+    // console.log('amt: ', amount)
+    // console.log('acct ', accountName)
     api.accounts.getAccountId(accountName)
       .then(account => {
         api.transactions.createTransaction(amount, account.id, entryId)

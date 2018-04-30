@@ -1,39 +1,42 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
+import { totalNetIncome } from '../MainSegment/TransactionFunctions'
 import { Grid } from 'semantic-ui-react'
 
 
 const Earning = (props) => {
 
-  const totalNetIncome = (entries) => {
-    return entries.reduce((aggr, entry) => {
-      return netIncomeOfTransaction(entry.transactions)
-    }, 0)
-  }
+  // const totalNetIncome = (entries) => {
+  //   return entries.reduce((aggr, entry) => {
+  //     return netIncomeOfTransaction(entry.transactions)
+  //   }, 0)
+  // }
+  //
+  // const netIncomeOfTransaction = (arrayOfTransactions) => {
+  //   return arrayOfTransactions.reduce((aggr, transaction) => {
+  //     if (trueIfIncomeAccount(transaction.account_id) && trueIfInTimeframe()) {
+  //       return aggr + parseFloat(transaction.amount)
+  //     } else {
+  //       return aggr
+  //     }
+  //   }, 0)
+  // }
+  //
+  // const trueIfIncomeAccount = (accountId) => {
+  //   for (const account of props.accounts) {
+  //     if (account.id === accountId && account.subcategory_id >= 8) {
+  //       return true
+  //     }
+  //   }
+  //   return false
+  // }
+  //
+  // const trueIfInTimeframe = () => {
+  //   return true
+  // }
 
-  const netIncomeOfTransaction = (arrayOfTransactions) => {
-    return arrayOfTransactions.reduce((aggr, transaction) => {
-      if (trueIfIncomeAccount(transaction.account_id) && trueIfInTimeframe()) {
-        return aggr + parseFloat(transaction.amount)
-      } else {
-        return aggr
-      }
-    }, 0)
-  }
 
-  const trueIfIncomeAccount = (accountId) => {
-    for (const account of props.accounts) {
-      if (account.id === accountId && account.subcategory_id >= 8) {
-        return true
-      }
-    }
-    return false
-  }
 
-  const trueIfInTimeframe = () => {
-    return true
-  }
   // debugger
 
   // const netIncome = () => {
@@ -46,7 +49,7 @@ const Earning = (props) => {
     <Grid columns='equal'>
       <Grid.Row>
         <Grid.Column textAlign='center'>
-          <h1>Net Income: $ { totalNetIncome(props.entries) }</h1>
+          <h1>Net Income: $ { totalNetIncome(props.entries, props.accounts) }</h1>
         </Grid.Column>
       </Grid.Row>
       <Grid.Row>
