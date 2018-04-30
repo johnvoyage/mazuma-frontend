@@ -1,31 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import './index.css';
 import App from './App';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import 'semantic-ui-css/semantic.min.css'; // ../ deleted
 import { BrowserRouter as Router } from 'react-router-dom';
-import reduxThunk from 'redux-thunk';
-
 import reducer from './Store/mazumaStore';
-//// COME BACK TO
-// import whatever from './Reducers/manageState';
-// import registerServiceWorker from './registerServiceWorker';
+// import { applyMiddleware } from 'redux';
+// import reduxThunk from 'redux-thunk';
 
-// export const configureStore = () => {
-//   return createStore(whatever,
-//   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
-// }
-
-
-// const configureStore = () => {
-//   return createStore(rootReducer, applyMiddleware(reduxThunk));
-// }
 
 const store = createStore(
   reducer,
-  applyMiddleware(reduxThunk),
+  // applyMiddleware(reduxThunk),
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
