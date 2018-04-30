@@ -1,29 +1,101 @@
 import React from 'react'
-import { Grid } from 'semantic-ui-react'
+import { connect } from 'react-redux'
+import { subcategoryIdToName, totalForSubcategory, filterAccountsOfSubcategoryId, totalGivenAccountId, numberOfEntriesGivenAccountId } from '../MainSegment/TransactionFunctions'
+import { Table } from 'semantic-ui-react'
 
 
-const Liabilities = (props) => {
+const Liability = (props) => {
+
+  const renderRows = (subcategoryId) => {
+    const arrayOfRows = filterAccountsOfSubcategoryId(props.accounts, subcategoryId).map((account, index) => {
+      return (
+        <Table.Row key={index}>
+          <Table.Cell>
+            {account.name}
+          </Table.Cell>
+          <Table.Cell>
+            {numberOfEntriesGivenAccountId(props.entries, account.id)}
+          </Table.Cell>
+          <Table.Cell>
+            {totalGivenAccountId(props.entries, account.id)}
+          </Table.Cell>
+        </Table.Row>
+      )
+    })
+    arrayOfRows.unshift(
+      <Table.Row key={-1}>
+        <Table.Cell textAlign='center' colSpan='3'>
+          {subcategoryIdToName(subcategoryId)}
+        </Table.Cell>
+      </Table.Row>
+    )
+    arrayOfRows.push(
+
+      <Table.Row key={-2}>
+        <Table.Cell textAlign='right' colSpan='2'>Subtotal:</Table.Cell>
+        <Table.Cell>
+          {totalForSubcategory(props.entries, props.accounts, [subcategoryId])}
+        </Table.Cell>
+      </Table.Row>
+
+    )
+    return arrayOfRows
+  }
+
+
+
   return(
-    <Grid columns='equal'>
-      <Grid.Row>
-        <Grid.Column textAlign='center'>
-          <h3>Liabilities</h3>
-        </Grid.Column>
-      </Grid.Row>
-      <Grid.Row>
-        <Grid.Column>
-          Short-term liabilities
-        </Grid.Column>
-      </Grid.Row>
-      <Grid.Row>
-        <Grid.Column>
-          Long-term liabilities
-        </Grid.Column>
+    <Table celled structured>
+      <Table.Header>
+        <Table.Row>
+          <Table.HeaderCell textAlign='center' colSpan='3'>Liability</Table.HeaderCell>
+        </Table.Row>
+        <Table.Row>
+          <Table.HeaderCell textAlign='center'>Account</Table.HeaderCell>
+          <Table.HeaderCell textAlign='center'>Number of Entries</Table.HeaderCell>
+          <Table.HeaderCell textAlign='center'>Amount</Table.HeaderCell>
+        </Table.Row>
 
-      </Grid.Row>
+      </Table.Header>
+      <Table.Body>
+        { renderRows(5) }
+        { renderRows(6) }
 
-    </Grid>
+      </Table.Body>
+      <Table.Footer fullWidth>
+        <Table.Row>
+          <Table.HeaderCell textAlign='right' colSpan='2'>Subtotal:</Table.HeaderCell>
+          <Table.HeaderCell>{totalForSubcategory(props.entries, props.accounts, [8])}</Table.HeaderCell>
+        </Table.Row>
+      </Table.Footer>
+    </Table>
   )
 }
 
-export default Liabilities
+const mapStateToProps = (state) => {
+  return {
+    // showLiquid
+    accounts: state.userInfo.accounts,
+    entries: state.userInfo.entries
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    // termsAgreementInit: () => {
+    //   dispatch({ type: 'TERMS_AGREEMENT_INIT' })
+  //   // },
+  //   toggleTermsAgreement: () => {
+  //     dispatch({ type: 'TOGGLE_TERMS_AGREEMENT' })
+  //   },
+  //   signUserUp: (userInfo) => {
+  //     console.log(userInfo)
+  //     dispatch({ type: 'SIGN_USER_UP', userInfo })
+  //   }
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Liability)

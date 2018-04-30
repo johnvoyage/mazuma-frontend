@@ -63,9 +63,33 @@ const numberOfTimesAccountUsedInEntry = (arrayOfTransactions, accountId) => {
   }, 0)
 }
 
+const subcategoryIdToName = (subcategoryId) => {
+  switch (subcategoryId) {
+    case 1:
+      return 'Liquid Assets'
+    case 2:
+      return 'Tangible Assets'
+    case 3:
+      return 'Intangible Assets'
+    case 4:
+      return 'Long-Term Assets'
+    case 5:
+      return 'Short-Term Liability'
+    case 6:
+      return 'Long-Term Liability'
+    case 8:
+      return 'Earning'
+    case 9:
+      return 'Spending'
+    default:
+      return 'Category not named'
+  }
+}
+
 export {
   totalForSubcategory,
   filterAccountsOfSubcategoryId,
   totalGivenAccountId,
-  numberOfEntriesGivenAccountId
+  numberOfEntriesGivenAccountId,
+  subcategoryIdToName
 }

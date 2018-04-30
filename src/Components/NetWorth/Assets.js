@@ -1,53 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { totalForSubcategory, filterAccountsOfSubcategoryId, totalGivenAccountId, numberOfEntriesGivenAccountId } from '../MainSegment/TransactionFunctions'
+import { subcategoryIdToName, totalForSubcategory, filterAccountsOfSubcategoryId, totalGivenAccountId, numberOfEntriesGivenAccountId } from '../MainSegment/TransactionFunctions'
 import { Table } from 'semantic-ui-react'
 
 
 const Asset = (props) => {
 
-  // const totalNetIncome = (entries) => {
-  //   return entries.reduce((aggr, entry) => {
-  //     return netIncomeOfTransaction(entry.transactions)
-  //   }, 0)
-  // }
-  //
-  // const netIncomeOfTransaction = (arrayOfTransactions) => {
-  //   return arrayOfTransactions.reduce((aggr, transaction) => {
-  //     if (trueIfIncomeAccount(transaction.account_id) && trueIfInTimeframe()) {
-  //       return aggr + parseFloat(transaction.amount)
-  //     } else {
-  //       return aggr
-  //     }
-  //   }, 0)
-  // }
-  //
-  // const trueIfIncomeAccount = (accountId) => {
-  //   for (const account of props.accounts) {
-  //     if (account.id === accountId && account.subcategory_id >= 8) {
-  //       return true
-  //     }
-  //   }
-  //   return false
-  // }
-  //
-  // const trueIfInTimeframe = () => {
-  //   return true
-  // }
-
-
-
-  // debugger
-
-  // const netIncome = () => {
-  //   props.entries.reduce((aggr, entry) => {
-  //
-  //   })
-  // }
-
-
   const renderRows = (subcategoryId) => {
-    return filterAccountsOfSubcategoryId(props.accounts, subcategoryId).map((account, index) => {
+    const arrayOfRows = filterAccountsOfSubcategoryId(props.accounts, subcategoryId).map((account, index) => {
       return (
         <Table.Row key={index}>
           <Table.Cell>
@@ -62,7 +22,27 @@ const Asset = (props) => {
         </Table.Row>
       )
     })
+    arrayOfRows.unshift(
+      <Table.Row key={-1}>
+        <Table.Cell textAlign='center' colSpan='3'>
+          {subcategoryIdToName(subcategoryId)}
+        </Table.Cell>
+      </Table.Row>
+    )
+    arrayOfRows.push(
+
+      <Table.Row key={-2}>
+        <Table.Cell textAlign='right' colSpan='2'>Subtotal:</Table.Cell>
+        <Table.Cell>
+          {totalForSubcategory(props.entries, props.accounts, [subcategoryId])}
+        </Table.Cell>
+      </Table.Row>
+
+    )
+    return arrayOfRows
   }
+
+
 
   return(
     <Table celled structured>
@@ -78,10 +58,11 @@ const Asset = (props) => {
 
       </Table.Header>
       <Table.Body>
-      <Table.Row>
-        <Table.HeaderCell textAlign='center' colSpan='3'>Liquid Assets</Table.HeaderCell>
-      </Table.Row>
         { renderRows(1) }
+        { renderRows(2) }
+        { renderRows(3) }
+        { renderRows(4) }
+
       </Table.Body>
       <Table.Footer fullWidth>
         <Table.Row>
