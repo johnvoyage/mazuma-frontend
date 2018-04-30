@@ -2,6 +2,8 @@ import React from 'react';
 import { Line } from 'react-chartjs-2';
 import GraphOptions from './GraphOptions';
 import data from './Data'
+import { connect } from 'react-redux';
+
 
 const Statistics = (props) => {
 
@@ -26,4 +28,16 @@ const Statistics = (props) => {
   )
 }
 
-export default Statistics
+const mapStateToProps = (state) => {
+  return {
+    entries: state.userInfo.entries,
+    accounts: state.userInfo.accounts,
+
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  // mapDispatchToProps
+  null
+)(Statistics)

@@ -19,13 +19,15 @@ const NewTransactionForm = (props) => {
             name={`${fieldName}${i+1}`}
             type='number'
             step='0.01'
-            min='0.01'
+
+            min={fieldName === 'cr' ? null : '0.01'}
+            max={fieldName === 'cr' ? '-0.01' : null}
             required
             label='Value'
             onChange={
               (event) => {
                 fieldName === 'db' ? updateDebitBalance(event) : updateCreditBalance(event)
-                props.updateTransactionBalance(calcCreditBalance() - calcDebitBalance())
+                props.updateTransactionBalance(calcCreditBalance() + calcDebitBalance())
               }
             }
             control={Input}

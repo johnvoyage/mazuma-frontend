@@ -9,7 +9,7 @@ const Earning = (props) => {
     <Grid columns='equal'>
       <Grid.Row>
         <Grid.Column textAlign='center'>
-          Net Income
+          Net Income: {5}
         </Grid.Column>
       </Grid.Row>
       <Grid.Row>
