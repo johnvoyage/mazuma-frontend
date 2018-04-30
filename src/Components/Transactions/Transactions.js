@@ -5,6 +5,7 @@ import SelectedFilters from './SelectedFilters';
 import TransactionsTable from './TransactionsTable';
 import NewTransactionForm from './NewTransactionForm';
 import NewAccountForm from './NewAccountForm';
+// import api from '../API/api';
 
 import QuickFilters from './QuickFilters';
 import CustomFilters from './CustomFilters';
@@ -16,7 +17,44 @@ class Transactions extends React.Component {
 
 
   // componentDidMount = () => {
-  //   api.accounts.allUsersAccounts(this.props.userId)
+  //   api.accounts.allUsersAccounts(this.props.id)
+  //     .then(json => this.props.setUsersAccounts(json))
+  //       // this.mapAccountNames(json)))
+  //   // fetchUsersInformation(this.props.id)
+  //   api.entries.allUsersEntries(this.props.id)
+  //     .then(json => {
+  //       this.props.setUsersEntries(json)
+  //       // entries = this.props.entries
+  //       // console.log(this.props.entries)
+  //       this.getAllTransactions(this.props.entries)
+  //     })
+  //   // api.transactions.allEntriesTransactions
+  // }
+  //
+  // // mapAccountNames = (accounts) => {
+  // //   return accounts.map((account) => account.name)
+  // // }
+  //
+  // getAllTransactions = (entries) => {
+  //   entries.forEach((entry, index) => {
+  //     // console.log(entry)
+  //     api.transactions.allEntrysTransactions(entry.id)
+  //       .then(transactions => {
+  //         // console.log(entry)
+  //         // console.log(transactions)
+  //         transactions.forEach((transaction) => {
+  //           this.props.accounts.forEach((account) => {
+  //             if (account.id === transaction.account_id) {
+  //               transaction.accountName = account.name
+  //             }
+  //           })
+  //         })
+  //         // this.assignTransactionsToEntry(transactions, entry, index)
+  //         this.props.assignTransactionsToEntry(transactions, index)
+  //
+  //       })
+  //     // return entry
+  //   })
   // }
 
   renderFilter = (filterSelected) => {
@@ -77,24 +115,28 @@ const mapStateToProps = (state) => {
     newAccount: state.transactionContainer.newAccount,
 
     filterSelected: state.transactionContainer.filterSelected,
-    // userId: state.userInfo.id
-    // ticker: state.userInfo.tickerSymbol
-    // agreedToTerms: state.formValidity.signUpForm
+    // id: state.userInfo.id,
+    // email: state.userInfo.email,
+    // // userId: state.userInfo.id
+    // accounts: state.userInfo.accounts,
+    // entries: state.userInfo.entries,
   };
 };
 
 // const mapDispatchToProps = (dispatch) => {
 //   return {
-//     // termsAgreementInit: () => {
-//     //   dispatch({ type: 'TERMS_AGREEMENT_INIT' })
+//     // logOutAccount: () => {
+//     //   dispatch({ type: 'LOG_USER_OUT' })
 //     // },
-//     toggleTransactionDescription: () => {
-//       dispatch({ type: 'TOGGLE_TRANSACTION_DESCRIPTION' })
+//     setUsersAccounts: (accounts) => {
+//       dispatch({ type: 'SET_USERS_ACCOUNTS', accounts })
 //     },
-//     // signUserUp: (userInfo) => {
-//     //   console.log(userInfo)
-//     //   dispatch({ type: 'SIGN_USER_UP', userInfo })
-//     // }
+//     setUsersEntries: (entries) => {
+//       dispatch({ type: 'SET_USERS_ENTRIES', entries })
+//     },
+//     assignTransactionsToEntry: (transactions, index) => {
+//       dispatch({ type: 'ASSIGN_TRANSACTIONS_TO_ENTRY', transactions, index })
+//     },
 //   }
 // }
 

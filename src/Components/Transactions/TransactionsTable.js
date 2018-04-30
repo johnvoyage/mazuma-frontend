@@ -1,69 +1,15 @@
 import React from 'react'
 import { Icon, Table } from 'semantic-ui-react'
 import { connect } from 'react-redux';
-// import SelectedFilters from './SelectedFilters';
-// import SelectedFilters from '.TransactionsTable';
-
-// import QuickFilters from './QuickFilters';
-// const entries =
-// [
-//   {
-//     number: 1,
-//     date: '1/1/15',
-//     transactions: [
-//       {
-//         account: 1001,
-//         amount: 750
-//       },{
-//         account: 1002,
-//         amount: -750
-//       }
-//     ],
-//     description: 'this is description uno'
-//   },
-//   {
-//     number: 2,
-//     date: '1/1/17',
-//     transactions: [
-//       {
-//         account: 1003,
-//         amount: 1000
-//       },{
-//         account: 1004,
-//         amount: -850
-//       },{
-//         account: 1005,
-//         amount: -150
-//       }
-//     ],
-//     description: 'this is description dos'
-//   }, {
-//     number: 3,
-//     date: '2/2/17',
-//     transactions: [
-//       {
-//         account: 1003,
-//         amount: 250
-//       },{
-//         account: 1007,
-//         amount: 350
-//       },{
-//         account: 1004,
-//         amount: -200
-//       },{
-//         account: 1005,
-//         amount: -400
-//       }
-//     ],
-//     description: 'this is description tres'
-//   }
-// ]
 
 const TransactionsTable = (props) => {
+
+  // console.log(props)
 
   const entries =
   props.entries.map((entry, index) => {
     // debugger
+    console.log(entry)
     return {
       number: index + 1,
       date: entry.date.slice(5, 10) + "-" + entry.date.slice(0, 4),
