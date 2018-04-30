@@ -64,14 +64,18 @@ const newTransactionSubmitted = (event, userId) => {
   // delete currentCredits
   // console.log(currentCredits);
   event.target.reset()
-  resetTransactions(currentDebits)
-  resetTransactions(currentCredits)
+  resetTransactions()
+  // resetTransactions(currentDebits)
+  // resetTransactions(currentCredits)
   // transactions.length = 0
 }
 
-const resetTransactions = (debitOrCredit) => {
-  for (const key in debitOrCredit) {
-    delete debitOrCredit[key]
+const resetTransactions = () => {
+  for (const key in currentDebits) {
+    delete currentDebits[key]
+  }
+  for (const key in currentCredits) {
+    delete currentCredits[key]
   }
 }
 
@@ -129,4 +133,5 @@ export {
   // removeCreditBalance,
   calcDebitBalance,
   calcCreditBalance,
+  resetTransactions,
 }

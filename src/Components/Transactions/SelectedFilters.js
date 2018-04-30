@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
+import {resetTransactions} from './NewTransactionSubmitted';
 
 
 const SelectedFilters = (props) => {
@@ -38,7 +39,12 @@ const SelectedFilters = (props) => {
       <Button
         toggle
         active={props.newTransaction}
-        onClick={props.toggleNewTransaction}
+        onClick={
+          (event) => {
+            props.toggleNewTransaction()
+            props.updateTransactionBalance(0)
+            resetTransactions()
+        }}
         content='New Transaction'
       />
       <Button
@@ -75,7 +81,13 @@ const mapDispatchToProps = (dispatch) => {
     },
     toggleNewAccount: () => {
       dispatch({ type: 'TOGGLE_NEW_ACCOUNT' })
-    }
+    },
+
+    updateTransactionBalance: (transactionBalance) => {
+      // debugger
+      // console.log(transactionBalance)
+      dispatch({ type: 'UPDATE_TRANSACTION_BALANCE', transactionBalance })
+    },
   };
 };
 

@@ -7,7 +7,7 @@ const loggedOutMenuOptions = [
 ]
 
 const loggedInMenuOptions = [
-  'Account', // Shouldn't actually show up...
+  'Account', 
   'Transactions',
   'Spending',
   'Net worth',

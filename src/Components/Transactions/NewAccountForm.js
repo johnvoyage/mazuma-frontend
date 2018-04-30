@@ -1,10 +1,12 @@
 import React from 'react';
+import { Segment } from 'semantic-ui-react';
+
 
 const NewAccountForm = (props) => {
   return(
-    <div>
-      New account form!
-    </div>
+    <Segment>
+      New account form
+    </Segment>
   )
 }
 

@@ -107,15 +107,21 @@ const reducer = (state = initialState, action) => {
             newTransaction: !state.transactionContainer.newTransaction
           }
         }
-      // case 'TRANSACTION_SUBMITTED':
-      //
-      //   return {
-      //     ...state,
-      //     transactionContainer: {
-      //       ...state.transactionContainer,
-      //       newTransaction: false
-      //     }
-      //   }
+      case 'TRANSACTION_SUBMITTED':
+        return {
+          ...state,
+          // userInfo: {
+          //   ...state.userInfo,
+          //   userInfo.accounts: {
+          //     ...state.userInfo.accounts,
+          //     []
+          //   }
+          // },
+          transactionContainer: {
+            ...state.transactionContainer,
+            newTransaction: false
+          }
+        }
       case 'TOGGLE_NEW_ACCOUNT':
         return {
           ...state,
