@@ -1,45 +1,103 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { totalForSubcategory, filterAccountsOfSubcategoryId, totalGivenAccountId, numberOfEntriesGivenAccountId } from '../MainSegment/TransactionFunctions'
+import { Table } from 'semantic-ui-react'
 
-import { Grid } from 'semantic-ui-react'
+
+const Asset = (props) => {
+
+  // const totalNetIncome = (entries) => {
+  //   return entries.reduce((aggr, entry) => {
+  //     return netIncomeOfTransaction(entry.transactions)
+  //   }, 0)
+  // }
+  //
+  // const netIncomeOfTransaction = (arrayOfTransactions) => {
+  //   return arrayOfTransactions.reduce((aggr, transaction) => {
+  //     if (trueIfIncomeAccount(transaction.account_id) && trueIfInTimeframe()) {
+  //       return aggr + parseFloat(transaction.amount)
+  //     } else {
+  //       return aggr
+  //     }
+  //   }, 0)
+  // }
+  //
+  // const trueIfIncomeAccount = (accountId) => {
+  //   for (const account of props.accounts) {
+  //     if (account.id === accountId && account.subcategory_id >= 8) {
+  //       return true
+  //     }
+  //   }
+  //   return false
+  // }
+  //
+  // const trueIfInTimeframe = () => {
+  //   return true
+  // }
 
 
-const Assets = (props) => {
+
+  // debugger
+
+  // const netIncome = () => {
+  //   props.entries.reduce((aggr, entry) => {
+  //
+  //   })
+  // }
+
+
+  const renderRows = (subcategoryId) => {
+    return filterAccountsOfSubcategoryId(props.accounts, subcategoryId).map((account, index) => {
+      return (
+        <Table.Row key={index}>
+          <Table.Cell>
+            {account.name}
+          </Table.Cell>
+          <Table.Cell>
+            {numberOfEntriesGivenAccountId(props.entries, account.id)}
+          </Table.Cell>
+          <Table.Cell>
+            {totalGivenAccountId(props.entries, account.id)}
+          </Table.Cell>
+        </Table.Row>
+      )
+    })
+  }
+
   return(
-    <Grid columns='equal'>
-      <Grid.Row>
-        <Grid.Column textAlign='center'>
-          <h3>Assets</h3>
-        </Grid.Column>
-      </Grid.Row>
-      <Grid.Row>
-        <Grid.Column>
-          Liquid Assets
-        </Grid.Column>
-      </Grid.Row>
-      <Grid.Row>
-        <Grid.Column>
-          Tangible Assets
-        </Grid.Column>
-      </Grid.Row>
-      <Grid.Row>
-        <Grid.Column>
-          Intangible Assets
-        </Grid.Column>
-      </Grid.Row>
-      <Grid.Row>
-        <Grid.Column>
-          Long-term assets
-        </Grid.Column>
-      </Grid.Row>
-    </Grid>
+    <Table celled structured>
+      <Table.Header>
+        <Table.Row>
+          <Table.HeaderCell textAlign='center' colSpan='3'>Asset</Table.HeaderCell>
+        </Table.Row>
+        <Table.Row>
+          <Table.HeaderCell textAlign='center'>Account</Table.HeaderCell>
+          <Table.HeaderCell textAlign='center'>Number of Entries</Table.HeaderCell>
+          <Table.HeaderCell textAlign='center'>Amount</Table.HeaderCell>
+        </Table.Row>
+
+      </Table.Header>
+      <Table.Body>
+      <Table.Row>
+        <Table.HeaderCell textAlign='center' colSpan='3'>Liquid Assets</Table.HeaderCell>
+      </Table.Row>
+        { renderRows(1) }
+      </Table.Body>
+      <Table.Footer fullWidth>
+        <Table.Row>
+          <Table.HeaderCell textAlign='right' colSpan='2'>Subtotal:</Table.HeaderCell>
+          <Table.HeaderCell>{totalForSubcategory(props.entries, props.accounts, [8])}</Table.HeaderCell>
+        </Table.Row>
+      </Table.Footer>
+    </Table>
   )
 }
 
 const mapStateToProps = (state) => {
   return {
     // showLiquid
-
+    accounts: state.userInfo.accounts,
+    entries: state.userInfo.entries
   };
 };
 
@@ -47,18 +105,18 @@ const mapDispatchToProps = (dispatch) => {
   return {
     // termsAgreementInit: () => {
     //   dispatch({ type: 'TERMS_AGREEMENT_INIT' })
-    // },
-    toggleTermsAgreement: () => {
-      dispatch({ type: 'TOGGLE_TERMS_AGREEMENT' })
-    },
-    signUserUp: (userInfo) => {
-      console.log(userInfo)
-      dispatch({ type: 'SIGN_USER_UP', userInfo })
-    }
+  //   // },
+  //   toggleTermsAgreement: () => {
+  //     dispatch({ type: 'TOGGLE_TERMS_AGREEMENT' })
+  //   },
+  //   signUserUp: (userInfo) => {
+  //     console.log(userInfo)
+  //     dispatch({ type: 'SIGN_USER_UP', userInfo })
+  //   }
   }
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Assets)
+)(Asset)
