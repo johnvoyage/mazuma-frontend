@@ -3,6 +3,8 @@ import Assets from './Assets'
 import Liabilities from './Liabilities'
 import Equity from './Equity'
 import TimingFilter from './TimingFilter'
+import { Segment } from 'semantic-ui-react';
+
 
 
 
@@ -11,9 +13,11 @@ const NetWorth = (props) => {
   return(
     <div>
       <TimingFilter />
-      <Equity />
-      <Assets />
-      <Liabilities />
+      <Segment>
+        <Equity />
+        <Assets />
+        <Liabilities />
+      </Segment>
     </div>
 
   )

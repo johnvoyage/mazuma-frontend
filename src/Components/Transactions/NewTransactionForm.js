@@ -1,5 +1,5 @@
 import React from 'react'
-import {Input, Select, Form, TextArea, Button } from 'semantic-ui-react'
+import {Input, Select, Form, TextArea, Button, Segment } from 'semantic-ui-react'
 import { connect } from 'react-redux';
 import { newTransactionSubmitted, updateDebitBalance, updateCreditBalance, removeAmount, calcDebitBalance, calcCreditBalance } from './NewTransactionSubmitted'
 import './csstransaction.css';
@@ -76,42 +76,46 @@ const NewTransactionForm = (props) => {
 
 
   return(
-    <Form
-      onSubmit={
-        (event) => {
-          newTransactionSubmitted(event, props.userId)
-          props.transactionSubmitted()
+    <Segment>
+      <h1>New Transaction</h1>
+      <Form
+        onSubmit={
+          (event) => {
+            newTransactionSubmitted(event, props.userId)
+            props.transactionSubmitted()
+          }
         }
-      }
-    >
-      <Form.Field
-        required
-        name='date'
-        type='date'
-        control={Input}
-        label='Date'
-        // onChange={handleChange}
-      />
-      <h3 id='transdebits'>What you received...</h3>
-        { renderFields(props.formDebitFields, 'formDebitFields') }
-      <h3>Subtotal: &emsp; $ {calcDebitBalance().toFixed(2)}</h3>
-      <h3 id='transcredits'>What you gave...</h3>
-        { renderFields(props.formCreditFields, 'formCreditFields') }
-      <h3>Subtotal: &emsp; $ {calcCreditBalance().toFixed(2)}</h3>
-      {
-        props.transactionBalance !== 0 ?
-        <h4 id='out-of-bal'>Currently out of balance by: &emsp; $ {Math.abs(props.transactionBalance).toFixed(2)} </h4> :
-        null
-      }
+      >
+        <Form.Field
+          required
+          name='date'
+          type='date'
+          control={Input}
+          label='Date'
+          width={5}
+          // onChange={handleChange}
+        />
+        <h3 id='transdebits'>What you received...</h3>
+          { renderFields(props.formDebitFields, 'formDebitFields') }
+        <h3>Subtotal: &emsp; $ {calcDebitBalance().toFixed(2)}</h3>
+        <h3 id='transcredits'>What you gave...</h3>
+          { renderFields(props.formCreditFields, 'formCreditFields') }
+        <h3>Subtotal: &emsp; $ {calcCreditBalance().toFixed(2)}</h3>
+        {
+          props.transactionBalance !== 0 ?
+          <h4 id='out-of-bal'>Currently out of balance by: &emsp; $ {Math.abs(props.transactionBalance).toFixed(2)} </h4> :
+          null
+        }
 
-      <Form.Field
-        name='description'
-        control={TextArea}
-        label='Description'
-        placeholder='Made a grocery trip to Rite Aid, split 50/25/25 between household supplies, food, and medicine'
-      />
-      <Form.Field disabled={props.transactionBalance !== 0} control={Button}>Submit</Form.Field>
-    </Form>
+        <Form.Field
+          name='description'
+          control={TextArea}
+          label='Description'
+          placeholder='Made a grocery trip to Rite Aid, split 50/25/25 between household supplies, food, and medicine'
+        />
+        <Form.Field disabled={props.transactionBalance !== 0} control={Button}>Submit</Form.Field>
+      </Form>
+    </Segment>
   )
 
 }

@@ -7,7 +7,7 @@ const Liabilities = (props) => {
     <Grid columns='equal'>
       <Grid.Row>
         <Grid.Column textAlign='center'>
-          <Segment>Liabilities</Segment>
+          <h3>Liabilities</h3>
         </Grid.Column>
       </Grid.Row>
       <Grid.Row>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import TopMenu from './Components/TopMenu/TopMenu';
 import MainSegmentOne from './Components/MainSegment/MainSegmentOne';
-import MainSegmentTwo from './Components/MainSegment/MainSegmentTwo';
 
 import api from './Components/API/api';
 import { connect } from 'react-redux'
@@ -34,7 +33,6 @@ class App extends Component {
       <div>
         <TopMenu />
         <MainSegmentOne />
-        <MainSegmentTwo />
       </div>
     );
   }

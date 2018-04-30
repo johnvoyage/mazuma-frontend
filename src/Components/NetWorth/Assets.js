@@ -9,7 +9,7 @@ const Assets = (props) => {
     <Grid columns='equal'>
       <Grid.Row>
         <Grid.Column textAlign='center'>
-          <Segment>Assets</Segment>
+          <h3>Assets</h3>
         </Grid.Column>
       </Grid.Row>
       <Grid.Row>

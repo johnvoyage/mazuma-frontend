@@ -1,13 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { Grid, Segment } from 'semantic-ui-react'
+import { Grid } from 'semantic-ui-react'
 
 
 const Earning = (props) => {
-
-  console.log(props)
-  // debugger
 
   const totalNetIncome = (entries) => {
     return entries.reduce((aggr, entry) => {
@@ -17,7 +14,7 @@ const Earning = (props) => {
 
   const netIncomeOfTransaction = (arrayOfTransactions) => {
     return arrayOfTransactions.reduce((aggr, transaction) => {
-      if (trueIfIncomeAccount(transaction.account_id)) {
+      if (trueIfIncomeAccount(transaction.account_id) && trueIfInTimeframe()) {
         return aggr + parseFloat(transaction.amount)
       } else {
         return aggr
@@ -26,13 +23,16 @@ const Earning = (props) => {
   }
 
   const trueIfIncomeAccount = (accountId) => {
-    // props.accounts.forEach
     for (const account of props.accounts) {
       if (account.id === accountId && account.subcategory_id >= 8) {
         return true
       }
     }
     return false
+  }
+
+  const trueIfInTimeframe = () => {
+    return true
   }
   // debugger
 
@@ -51,7 +51,7 @@ const Earning = (props) => {
       </Grid.Row>
       <Grid.Row>
         <Grid.Column textAlign='center'>
-          <Segment>Earning</Segment>
+          <h3>Earning</h3>
         </Grid.Column>
       </Grid.Row>
 

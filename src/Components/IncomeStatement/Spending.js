@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { Grid, Segment } from 'semantic-ui-react'
+import { Grid } from 'semantic-ui-react'
 
 
 const Spending = (props) => {
@@ -9,7 +9,7 @@ const Spending = (props) => {
     <Grid columns='equal'>
       <Grid.Row>
         <Grid.Column textAlign='center'>
-          <Segment>Spending</Segment>
+          <h3>Spending</h3>
         </Grid.Column>
       </Grid.Row>
     </Grid>
