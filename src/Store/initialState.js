@@ -1,3 +1,5 @@
+// const today = new Date();
+
 const initialState = {
   activeMenuItem: 'Mazuma',
   userInfo: {
@@ -22,8 +24,9 @@ const initialState = {
     formCreditFields: 1,
     transactionBalance: 0,
   },
-  spendingContainer: {
-
+  incomeStatementContainer: {
+    beginDate: null,
+    endDate: new Date(),
   },
   // accounts: null,
   // netWorthContainer: {

@@ -46,7 +46,7 @@ const Earning = (props) => {
     <Grid columns='equal'>
       <Grid.Row>
         <Grid.Column textAlign='center'>
-          Net Income: { totalNetIncome(props.entries) }
+          <h1>Net Income: $ { totalNetIncome(props.entries) }</h1>
         </Grid.Column>
       </Grid.Row>
       <Grid.Row>
