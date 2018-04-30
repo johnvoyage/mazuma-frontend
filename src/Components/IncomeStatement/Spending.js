@@ -12,26 +12,6 @@ const Spending = (props) => {
           <Segment>Spending</Segment>
         </Grid.Column>
       </Grid.Row>
-      <Grid.Row>
-        <Grid.Column>
-          Liquid Spending
-        </Grid.Column>
-      </Grid.Row>
-      <Grid.Row>
-        <Grid.Column>
-          Tangible Spending
-        </Grid.Column>
-      </Grid.Row>
-      <Grid.Row>
-        <Grid.Column>
-          Intangible Spending
-        </Grid.Column>
-      </Grid.Row>
-      <Grid.Row>
-        <Grid.Column>
-          Long-term assets
-        </Grid.Column>
-      </Grid.Row>
     </Grid>
   )
 }

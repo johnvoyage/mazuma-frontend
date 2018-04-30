@@ -7,7 +7,7 @@ const Equity = (props) => {
     <Grid columns='equal'>
       <Grid.Row>
         <Grid.Column textAlign='center'>
-          Net Worth: $100
+          <h1>Net Worth: $ 599 </h1>
         </Grid.Column>
       </Grid.Row>
     </Grid>

@@ -9,7 +9,7 @@ const TransactionsTable = (props) => {
   const entries =
   props.entries.map((entry, index) => {
     // debugger
-    console.log(entry)
+    // console.log(entry)
     return {
       number: index + 1,
       date: entry.date.slice(5, 10) + "-" + entry.date.slice(0, 4),

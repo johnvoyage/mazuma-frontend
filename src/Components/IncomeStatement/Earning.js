@@ -54,26 +54,7 @@ const Earning = (props) => {
           <Segment>Earning</Segment>
         </Grid.Column>
       </Grid.Row>
-      <Grid.Row>
-        <Grid.Column>
-          Liquid Earning
-        </Grid.Column>
-      </Grid.Row>
-      <Grid.Row>
-        <Grid.Column>
-          Tangible Earning
-        </Grid.Column>
-      </Grid.Row>
-      <Grid.Row>
-        <Grid.Column>
-          Intangible Earning
-        </Grid.Column>
-      </Grid.Row>
-      <Grid.Row>
-        <Grid.Column>
-          Long-term assets
-        </Grid.Column>
-      </Grid.Row>
+
     </Grid>
   )
 }

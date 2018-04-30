@@ -12,9 +12,9 @@ const TimingFilter = (props) => {
       <Form.Group widths='equal'>
         <Form.Input
           type='hidden'
-          width={3}
+          width={6}
         />
-        <label>Beginning...</label>
+        <label>As of...</label>
         <Form.Input
           fluid
           // label='First name'
@@ -24,20 +24,7 @@ const TimingFilter = (props) => {
         />
         <Form.Input
           type='hidden'
-          width={2}
-        />
-        <label>Ending...</label>
-        <Form.Input
-          fluid
-          // label='Last name'
-          // placeholder='Last name'
-          type='date'
-          width={4}
-
-        />
-        <Form.Input
-          type='hidden'
-          width={3}
+          width={6}
         />
       </Form.Group>
     </Form>
