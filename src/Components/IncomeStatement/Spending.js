@@ -1,13 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { filterAccountsOfSubcategoryId } from '../MainSegment/TransactionFunctions'
-
+import { totalForSubcategory, filterAccountsOfSubcategoryId, totalGivenAccountId, numberOfEntriesGivenAccountId } from '../MainSegment/TransactionFunctions'
 import { Table } from 'semantic-ui-react'
 
 
-
-
 const Spending = (props) => {
+
+
 
   const renderSpendingRows = () => {
     return filterAccountsOfSubcategoryId(props.accounts, 9).map((account, index) => {
@@ -17,10 +16,10 @@ const Spending = (props) => {
             {account.name}
           </Table.Cell>
           <Table.Cell>
-            'test'
+            {numberOfEntriesGivenAccountId(props.entries, account.id)}
           </Table.Cell>
           <Table.Cell>
-            'sup'
+            {totalGivenAccountId(props.entries, account.id)}
           </Table.Cell>
         </Table.Row>
       )
@@ -41,10 +40,14 @@ const Spending = (props) => {
       </Table.Header>
       <Table.Body>
         { renderSpendingRows() }
-        {/* renderSubtotalRow() */}
       </Table.Body>
+      <Table.Footer fullWidth>
+        <Table.Row>
+          <Table.HeaderCell textAlign='right' colSpan='2'>Subtotal:</Table.HeaderCell>
+          <Table.HeaderCell>{totalForSubcategory(props.entries, props.accounts, [9])}</Table.HeaderCell>
+        </Table.Row>
+      </Table.Footer>
     </Table>
-
   )
 }
 
@@ -58,7 +61,16 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-
+    // termsAgreementInit: () => {
+    //   dispatch({ type: 'TERMS_AGREEMENT_INIT' })
+  //   // },
+  //   toggleTermsAgreement: () => {
+  //     dispatch({ type: 'TOGGLE_TERMS_AGREEMENT' })
+  //   },
+  //   signUserUp: (userInfo) => {
+  //     console.log(userInfo)
+  //     dispatch({ type: 'SIGN_USER_UP', userInfo })
+  //   }
   }
 }
 

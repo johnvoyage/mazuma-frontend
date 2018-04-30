@@ -16,8 +16,10 @@ const IncomeStatement = (props) => {
     <div>
       <TimingFilter />
       <h1>Net Income: $ {
-        totalForSubcategory(props.entries, props.accounts, 8) +
-        totalForSubcategory(props.entries, props.accounts, 9)
+        // totalForSubcategory(props.entries, props.accounts, 8) +
+        // totalForSubcategory(props.entries, props.accounts, 9)
+        totalForSubcategory(props.entries, props.accounts, [8, 9])
+
       }</h1>
       <Segment>
         <Earning />

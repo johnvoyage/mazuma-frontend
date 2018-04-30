@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { filterAccountsOfSubcategoryId } from '../MainSegment/TransactionFunctions'
+import { totalForSubcategory, filterAccountsOfSubcategoryId, totalGivenAccountId, numberOfEntriesGivenAccountId } from '../MainSegment/TransactionFunctions'
 import { Table } from 'semantic-ui-react'
 
 
@@ -54,10 +54,10 @@ const Earning = (props) => {
             {account.name}
           </Table.Cell>
           <Table.Cell>
-            'test'
+            {numberOfEntriesGivenAccountId(props.entries, account.id)}
           </Table.Cell>
           <Table.Cell>
-            'sup'
+            {totalGivenAccountId(props.entries, account.id)}
           </Table.Cell>
         </Table.Row>
       )
@@ -79,6 +79,12 @@ const Earning = (props) => {
       <Table.Body>
         { renderEarningRows() }
       </Table.Body>
+      <Table.Footer fullWidth>
+        <Table.Row>
+          <Table.HeaderCell textAlign='right' colSpan='2'>Subtotal:</Table.HeaderCell>
+          <Table.HeaderCell>{totalForSubcategory(props.entries, props.accounts, [8])}</Table.HeaderCell>
+        </Table.Row>
+      </Table.Footer>
     </Table>
   )
 }
