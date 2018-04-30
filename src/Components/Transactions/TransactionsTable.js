@@ -19,7 +19,7 @@ const TransactionsTable = (props) => {
           amount: transaction.amount,
         }
       }),
-      description: entry.description,
+      description: entry.description ? entry.description : "No description",
     }
 
   }).reverse()

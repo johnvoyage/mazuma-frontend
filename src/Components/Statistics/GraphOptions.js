@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 const GraphOptions = (props) => {
 
 
+
   return(
     <Button.Group attached='top'>
       <Button

@@ -5,8 +5,8 @@ const initialState = {
     email: null,
     entries: null,
     accounts: null,
-    transactions: null,
     dateCreated: null,
+    firsTimeLoaded: false,
   },
   // formInput: {
   //   signUpForm: {},

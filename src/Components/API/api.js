@@ -9,7 +9,6 @@ const headers = {
 };
 
 const login = (email, password) => {
-  // debugger
   return fetch(`${API_ROOT}/auth/`, {
     method: 'POST',
     headers: headers,
@@ -27,21 +26,17 @@ const getCurrentUser = () => {
 };
 
 const signUserUp = (email, password /*, tickerSymbol*/) => {
-  // debugger
   return fetch(`${API_ROOT}/users/`, {
     method: 'POST',
     headers: headers,
     body: JSON.stringify({
       email,
       password,
-      // tickerSymbol
     })
   }).then(response => response.json())
 };
 
 const deleteUserAccount = (accountId) => {
-  // console.log('in api del user acct')
-  // const userId = 2
   return fetch(`${API_ROOT}/users/${accountId}`, {
     method: 'DELETE',
     headers: headers,

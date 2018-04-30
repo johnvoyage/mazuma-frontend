@@ -135,7 +135,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({ type: 'UPDATE_TRANSACTION_BALANCE', transactionBalance })
     },
     transactionSubmitted: () => {
-      dispatch({ type: 'TOGGLE_NEW_TRANSACTION' })
+      dispatch({ type: 'TRANSACTION_SUBMITTED' })
     }
     // addNewAccountOn: () => {
     //   dispatch({ type: 'ADD_NEW_ACCOUNT_ON' })

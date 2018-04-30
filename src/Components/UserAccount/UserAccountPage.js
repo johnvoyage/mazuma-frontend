@@ -11,18 +11,22 @@ class UserAccountPage extends React.Component {
   // let entries
   // console.log(this.props)
   componentDidMount = () => {
-    api.accounts.allUsersAccounts(this.props.id)
-      .then(json => this.props.setUsersAccounts(json))
-        // this.mapAccountNames(json)))
-    // fetchUsersInformation(this.props.id)
-    api.entries.allUsersEntries(this.props.id)
-      .then(json => {
-        this.props.setUsersEntries(json)
-        // entries = this.props.entries
-        // console.log(this.props.entries)
-        this.getAllTransactions(this.props.entries)
-      })
+    if (!this.props.firsTimeLoaded) {
+      api.accounts.allUsersAccounts(this.props.id)
+        .then(json => this.props.setUsersAccounts(json))
+          // this.mapAccountNames(json)))
+      // fetchUsersInformation(this.props.id)
+      api.entries.allUsersEntries(this.props.id)
+        .then(json => {
+          this.props.setUsersEntries(json)
+          // entries = this.props.entries
+          // console.log(this.props.entries)
+          this.getAllTransactions(this.props.entries)
+        })
+      this.props.firstTimeLoadedTrue()
+
     // api.transactions.allEntriesTransactions
+    }
   }
 
   // mapAccountNames = (accounts) => {
@@ -47,7 +51,6 @@ class UserAccountPage extends React.Component {
           this.props.assignTransactionsToEntry(transactions, index)
 
         })
-      // return entry
     })
   }
 
@@ -129,7 +132,7 @@ const mapStateToProps = (state) => {
   return {
     id: state.userInfo.id,
     email: state.userInfo.email,
-    // userId: state.userInfo.id
+    firstTimeLoaded: state.userInfo.firstTimeLoaded,
     accounts: state.userInfo.accounts,
     entries: state.userInfo.entries,
     // ticker: state.userInfo.tickerSymbol
@@ -150,6 +153,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     assignTransactionsToEntry: (transactions, index) => {
       dispatch({ type: 'ASSIGN_TRANSACTIONS_TO_ENTRY', transactions, index })
+    },
+    firstTimeLoadedTrue: () => {
+      dispatch({ type: 'FIRST_TIME_LOADED_TRUE' })
     },
   }
 }

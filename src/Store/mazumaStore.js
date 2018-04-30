@@ -6,10 +6,19 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
 
     /* USER ACCOUNT INFO */
+    case 'FIRST_TIME_LOADED_TRUE':
+      return {
+        ...state,
+        userInfo: {
+          ...state.userInfo,
+          firsTimeLoaded: true
+        }
+      }
     case 'SIGN_USER_UP':
       return {
         ...state,
         userInfo: {
+          ...state.userInfo,
           id: action.userInfo.id,
           email: action.userInfo.email,
         },
@@ -20,6 +29,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         userInfo: {
+          ...state.userInfo,
           id: action.userInfo.id,
           email: action.userInfo.email,
         },
@@ -104,7 +114,8 @@ const reducer = (state = initialState, action) => {
           ...state,
           transactionContainer: {
             ...state.transactionContainer,
-            newTransaction: !state.transactionContainer.newTransaction
+            newTransaction: !state.transactionContainer.newTransaction,
+            newAccount: false,
           }
         }
       case 'TRANSACTION_SUBMITTED':
@@ -127,7 +138,8 @@ const reducer = (state = initialState, action) => {
           ...state,
           transactionContainer: {
             ...state.transactionContainer,
-            newAccount: !state.transactionContainer.newAccount
+            newAccount: !state.transactionContainer.newAccount,
+            newTransaction: false,
           }
         }
       case 'UPDATE_TRANSACTION_BALANCE':
