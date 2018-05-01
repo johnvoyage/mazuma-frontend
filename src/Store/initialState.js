@@ -1,5 +1,5 @@
 const initialState = {
-  loading: false,
+  loading: true,
   activeMenuItem: "Mazuma",
   userInfo: {
     id: null,
@@ -7,7 +7,7 @@ const initialState = {
     entries: null,
     accounts: null,
     dateCreated: null,
-    firsTimeLoaded: false
+    firstTimeLoaded: false
   },
   // formInput: {
   //   signUpForm: {},

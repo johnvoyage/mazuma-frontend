@@ -9,6 +9,7 @@ import rootReducer from "./Store/mazumaStore";
 // import { applyMiddleware } from "redux";
 import reduxThunk from "redux-thunk";
 // import configureStore from "./Store/configureStore";
+import "./index.css";
 
 const store = createStore(
   rootReducer,

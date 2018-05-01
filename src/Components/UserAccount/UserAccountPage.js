@@ -1,58 +1,55 @@
-import React from 'react'
-import { connect } from 'react-redux';
-import { Button, Popup, Checkbox } from 'semantic-ui-react'
-import api from '../API/api';
-import UserHomeStats from './UserHomeStats';
+import React from "react";
+import { connect } from "react-redux";
+import { Button, Popup, Checkbox } from "semantic-ui-react";
+import api from "../API/api";
+import UserHomeStats from "./UserHomeStats";
 // import fetchUsersInformation from '../UserAccount/FetchUsersData';
 
-
 class UserAccountPage extends React.Component {
-
   // let entries
-  // console.log(this.props)
   componentDidMount = () => {
-    if (!this.props.firsTimeLoaded) {
-      api.accounts.allUsersAccounts(this.props.id)
-        .then(json => this.props.setUsersAccounts(json))
-          // this.mapAccountNames(json)))
+    // console.log(this.props.firstTimeLoaded);
+    if (!this.props.firstTimeLoaded) {
+      console.log(this.props.firstTimeLoaded);
+      api.accounts
+        .allUsersAccounts(this.props.id)
+        .then(json => this.props.setUsersAccounts(json));
+      // this.mapAccountNames(json)))
       // fetchUsersInformation(this.props.id)
-      api.entries.allUsersEntries(this.props.id)
-        .then(json => {
-          this.props.setUsersEntries(json)
-          // entries = this.props.entries
-          // console.log(this.props.entries)
-          this.getAllTransactions(this.props.entries)
-        })
-      this.props.firstTimeLoadedTrue()
+      api.entries.allUsersEntries(this.props.id).then(json => {
+        this.props.setUsersEntries(json);
+        // entries = this.props.entries
+        // console.log(this.props.entries)
+        this.getAllTransactions(this.props.entries);
+      });
+      this.props.firstTimeLoadedTrue();
 
-    // api.transactions.allEntriesTransactions
+      // api.transactions.allEntriesTransactions
     }
-  }
+  };
 
   // mapAccountNames = (accounts) => {
   //   return accounts.map((account) => account.name)
   // }
 
-  getAllTransactions = (entries) => {
+  getAllTransactions = entries => {
     entries.forEach((entry, index) => {
       // console.log(entry)
-      api.transactions.allEntrysTransactions(entry.id)
-        .then(transactions => {
-          // console.log(entry)
-          // console.log(transactions)
-          transactions.forEach((transaction) => {
-            this.props.accounts.forEach((account) => {
-              if (account.id === transaction.account_id) {
-                transaction.accountName = account.name
-              }
-            })
-          })
-          // this.assignTransactionsToEntry(transactions, entry, index)
-          this.props.assignTransactionsToEntry(transactions, index)
-
-        })
-    })
-  }
+      api.transactions.allEntrysTransactions(entry.id).then(transactions => {
+        // console.log(entry)
+        // console.log(transactions)
+        transactions.forEach(transaction => {
+          this.props.accounts.forEach(account => {
+            if (account.id === transaction.account_id) {
+              transaction.accountName = account.name;
+            }
+          });
+        });
+        // this.assignTransactionsToEntry(transactions, entry, index)
+        this.props.assignTransactionsToEntry(transactions, index);
+      });
+    });
+  };
 
   // getTransactionAccountName = (accountId) => {
   //   api.accounts.readAccount(accountId)
@@ -60,108 +57,108 @@ class UserAccountPage extends React.Component {
   // }
 
   // assignTransactionsToEntry = (transactionsArray, entry, index) => {
-    // console.log('leggooo')
-    // console.log(transactionsArray)
-    // console.log(entry)
-    // entry.transactions = transactionsArray
-    // console.log(entry)
-    // this.props.assignTransactionsToEntry(transactionsArray, index)
+  // console.log('leggooo')
+  // console.log(transactionsArray)
+  // console.log(entry)
+  // entry.transactions = transactionsArray
+  // console.log(entry)
+  // this.props.assignTransactionsToEntry(transactionsArray, index)
   // }
 
-  handleDelete = (event) => {
-    api.auth
-    .deleteUserAccount(this.props.id)
-    .then(json => {
+  handleDelete = event => {
+    api.auth.deleteUserAccount(this.props.id).then(json => {
       if (json.error) {
-        console.log("ERROR")
+        console.log("ERROR");
       } else {
         // console.log('here')
-        this.props.logOutAccount()
+        this.props.logOutAccount();
       }
-    })
-  }
+    });
+  };
 
-  handleEdit = (event) => {
-    api.auth
-    .editUserAccount(this.props.id)
-    .then(json => {
+  handleEdit = event => {
+    api.auth.editUserAccount(this.props.id).then(json => {
       if (json.error) {
-        console.log("ERROR")
+        console.log("ERROR");
       } else {
-        console.log('edit!')
+        console.log("edit!");
         // this.props.logOutAccount()
       }
-    })
-  }
+    });
+  };
 
   render() {
-    return(
+    return (
       <div>
         <UserHomeStats />
-        <h3>Email address: { this.props.email }</h3>
+        <h3>Email address: {this.props.email}</h3>
         <h3>Goals: </h3>
-        <h3>View/edit accounts:  <Checkbox toggle /></h3>
+        <h3>
+          View/edit accounts: <Checkbox toggle />
+        </h3>
 
-
-        <Button.Group attached='bottom'>
-          <Button onClick={ () => {
-            // this.handleEdit
-            console.log('edit!')}
-          }>Edit Account</Button>
+        <Button.Group attached="bottom">
+          <Button
+            onClick={() => {
+              // this.handleEdit
+              console.log("edit!");
+            }}
+          >
+            Edit Account
+          </Button>
           <Popup
-            trigger={<Button color='red' content='Delete Account' />}
-            content={<Button
-              onClick={
-                this.handleDelete
-              }
-              color='red'
-              content='Click to Confirm'
-            />}
-            on='click'
-            position='top center'
+            trigger={<Button color="red" content="Delete Account" />}
+            content={
+              <Button
+                onClick={this.handleDelete}
+                color="red"
+                content="Click to Confirm"
+              />
+            }
+            on="click"
+            position="top center"
           />
         </Button.Group>
       </div>
-    )
+    );
   }
   // export default UserAccountPage
 }
 
-
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     id: state.userInfo.id,
     email: state.userInfo.email,
     firstTimeLoaded: state.userInfo.firstTimeLoaded,
     accounts: state.userInfo.accounts,
-    entries: state.userInfo.entries,
+    entries: state.userInfo.entries
     // ticker: state.userInfo.tickerSymbol
     // agreedToTerms: state.formValidity.signUpForm
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     logOutAccount: () => {
-      dispatch({ type: 'LOG_USER_OUT' })
+      dispatch({ type: "LOG_USER_OUT" });
     },
-    setUsersAccounts: (accounts) => {
-      dispatch({ type: 'SET_USERS_ACCOUNTS', accounts })
+    setUsersAccounts: accounts => {
+      dispatch({ type: "SET_USERS_ACCOUNTS", accounts });
     },
-    setUsersEntries: (entries) => {
-      dispatch({ type: 'SET_USERS_ENTRIES', entries })
+    setUsersEntries: entries => {
+      dispatch({ type: "SET_USERS_ENTRIES", entries });
     },
     assignTransactionsToEntry: (transactions, index) => {
-      dispatch({ type: 'ASSIGN_TRANSACTIONS_TO_ENTRY', transactions, index })
+      dispatch({ type: "ASSIGN_TRANSACTIONS_TO_ENTRY", transactions, index });
     },
     firstTimeLoadedTrue: () => {
-      dispatch({ type: 'FIRST_TIME_LOADED_TRUE' })
-    },
-  }
-}
+      dispatch({ type: "FIRST_TIME_LOADED_TRUE" });
+    }
+  };
+};
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
   // null
-)(UserAccountPage)
+)(UserAccountPage);

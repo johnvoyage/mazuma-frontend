@@ -16,7 +16,6 @@ import {
   calcDebitBalance,
   calcCreditBalance
 } from "./NewTransactionSubmitted";
-import "./csstransaction.css";
 
 const NewTransactionForm = props => {
   const renderFields = (numOfFields, formType) => {
@@ -79,19 +78,13 @@ const NewTransactionForm = props => {
     return formFields;
   };
 
-  const options = props.accounts
-    .map((account, index) => {
-      return {
-        key: index,
-        text: account.name,
-        value: account.name
-      };
-    })
-    .concat({
-      key: props.accounts.length,
-      text: "Add new...",
-      value: "Add new..."
-    });
+  const options = props.accounts.map((account, index) => {
+    return {
+      key: index,
+      text: account.name,
+      value: account.name
+    };
+  });
 
   return (
     <Segment>
@@ -111,10 +104,10 @@ const NewTransactionForm = props => {
           width={5}
           // onChange={handleChange}
         />
-        <h3 id="transdebits">What you received...</h3>
+        <h3 id="transdebits">What you received:</h3>
         {renderFields(props.formDebitFields, "formDebitFields")}
         <h3>Subtotal: &emsp; $ {calcDebitBalance().toFixed(2)}</h3>
-        <h3 id="transcredits">What you gave...</h3>
+        <h3 id="transcredits">What you gave (enter as a negative):</h3>
         {renderFields(props.formCreditFields, "formCreditFields")}
         <h3>Subtotal: &emsp; $ {calcCreditBalance().toFixed(2)}</h3>
         {props.transactionBalance !== 0 ? (

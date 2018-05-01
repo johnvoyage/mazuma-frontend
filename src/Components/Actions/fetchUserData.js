@@ -1,10 +1,13 @@
+import api from "../API/api";
+
 export const fetchUsers = () => {
   return dispatch => {
-    dispatch({ type: "LOADING" });
+    dispatch({ type: "ASYNC_START" });
     return fetch("")
       .then(response => response.json())
       .then(json => {
-        dispatch({ type: "DATA_LOADED", json });
+        console.log(json);
+        // dispatch({ type: "DATA_LOADED", json });
       });
   };
 };

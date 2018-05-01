@@ -10,7 +10,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         userInfo: {
           ...state.userInfo,
-          firsTimeLoaded: true
+          firstTimeLoaded: true
         }
       };
     case "SIGN_USER_UP":
