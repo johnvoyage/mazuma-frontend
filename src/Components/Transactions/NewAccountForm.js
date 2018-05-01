@@ -2,9 +2,10 @@ import React from "react";
 import { Segment, Form, Select, TextArea } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { fetchAccounts } from "../../Actions/fetchAccounts";
+import { fetchUserData } from "../../Actions/fetchUserData";
 import { accountSubcategoryOptions } from "../../StaticOptions/subcategories";
 import { createAccount } from "../API/accounts";
+
 const NewAccountForm = props => {
   const handleChange = event => {
     // debugger;
@@ -27,8 +28,12 @@ const NewAccountForm = props => {
     const subcategoryName = props.formInput.newAccountFormSubcategoryName;
     const subcategoryId = subcategoryNameToId(subcategoryName);
     createAccount(accountName, description, subcategoryId, props.userId);
-    console.log("here");
-
+    // props.accountSubmitted(
+    //   accountName,
+    //   description,
+    //   subcategoryId,
+    //   props.userId
+    // );
     // props.clearFormInput()
   };
 
@@ -36,7 +41,8 @@ const NewAccountForm = props => {
     return parseInt(
       accountSubcategoryOptions.filter(subcategory => {
         return subcategory.text === subcategoryName;
-      })[0].key
+      })[0].key,
+      10
     );
   };
 
@@ -96,7 +102,9 @@ const mapDispatchToProps = dispatch => {
       dispatch({ type: "UPDATE_FORM", formKey, formValue });
     },
 
-    accountSubmitted: bindActionCreators(fetchAccounts(), dispatch)
+    fetchUserData: userId => {
+      // bindActionCreators(fetchUserData, dispatch);
+    }
   };
 };
 

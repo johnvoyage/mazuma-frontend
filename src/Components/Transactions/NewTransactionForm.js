@@ -16,8 +16,8 @@ import {
   calcDebitBalance,
   calcCreditBalance
 } from "./NewTransactionSubmitted";
-import { bindActionCreators } from "redux";
-import { fetchTransactions } from "../../Actions/fetchTransactions";
+// import { bindActionCreators } from "redux";
+// import { fetchTransactions } from "../../Actions/fetchTransactions";
 
 const NewTransactionForm = props => {
   const renderFields = (numOfFields, formType) => {

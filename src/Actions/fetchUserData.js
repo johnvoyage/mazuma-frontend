@@ -1,10 +1,22 @@
+import api from './Components/API/api'
+
 // get all of the user's accounts
 
 // get all of the user's entries
 
 // get each entry's transactions
 
-componentDidMount = () => {
+export const fetchUserData = (userId) => {
+  return (dispatch) => {
+    dispatch({ type: "ASYNC_START" });
+    api.accounts.allUsersAccounts(userId)
+    .then(accounts => {
+      console.log(accounts)
+      dispatch({ type: "SET_USERS_ACCOUNTS", accounts });
+    })
+    api.entries
+  }
+}
   // console.log(this.props.firstTimeLoaded);
   if (!this.props.firstTimeLoaded) {
     console.log(this.props.firstTimeLoaded);
