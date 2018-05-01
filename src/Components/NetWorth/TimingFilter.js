@@ -1,39 +1,31 @@
-import React from 'react';
-import { Form } from 'semantic-ui-react';
-import { connect } from 'react-redux';
+import React from "react";
+import { Form } from "semantic-ui-react";
+import { connect } from "react-redux";
 
+const TimingFilter = props => {
+  const handleChange = event => {
+    console.log(event.target.value);
+  };
 
-const TimingFilter = (props) => {
-
-
-
-  return(
+  return (
     <Form>
-      <Form.Group widths='equal'>
-        <Form.Input
-          type='hidden'
-          width={6}
-        />
+      <Form.Group widths="equal">
+        <Form.Input type="hidden" width={6} />
         <label>As of...</label>
         <Form.Input
           fluid
-          // onChange={}
+          // onChange={handleChange}
           value={props.asOfDate}
-          type='date'
+          type="date"
           width={4}
         />
-        <Form.Input
-          type='hidden'
-          width={6}
-        />
+        <Form.Input type="hidden" width={6} />
       </Form.Group>
     </Form>
-  )
-
-
+  );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     // showLiquid
     // accounts: state.userInfo.accounts,
@@ -42,22 +34,19 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     // termsAgreementInit: () => {
     //   dispatch({ type: 'TERMS_AGREEMENT_INIT' })
-  //   // },
-  //   toggleTermsAgreement: () => {
-  //     dispatch({ type: 'TOGGLE_TERMS_AGREEMENT' })
-  //   },
-  //   signUserUp: (userInfo) => {
-  //     console.log(userInfo)
-  //     dispatch({ type: 'SIGN_USER_UP', userInfo })
-  //   }
-  }
-}
+    //   // },
+    //   toggleTermsAgreement: () => {
+    //     dispatch({ type: 'TOGGLE_TERMS_AGREEMENT' })
+    //   },
+    //   signUserUp: (userInfo) => {
+    //     console.log(userInfo)
+    //     dispatch({ type: 'SIGN_USER_UP', userInfo })
+    //   }
+  };
+};
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TimingFilter)
+export default connect(mapStateToProps, mapDispatchToProps)(TimingFilter);

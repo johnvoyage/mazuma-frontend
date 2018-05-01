@@ -95,7 +95,7 @@ const NewTransactionForm = props => {
         onSubmit={event => {
           newTransactionSubmitted(event, props.userId);
           props.transactionSubmitted();
-          props.getTransactions(props.userId);
+          // props.getTransactions(props.userId);
         }}
       >
         <Form.Field

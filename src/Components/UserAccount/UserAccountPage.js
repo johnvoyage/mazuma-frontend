@@ -9,23 +9,23 @@ class UserAccountPage extends React.Component {
   // let entries
   componentDidMount = () => {
     // console.log(this.props.firstTimeLoaded);
-    if (!this.props.firstTimeLoaded) {
-      console.log(this.props.firstTimeLoaded);
-      api.accounts
-        .allUsersAccounts(this.props.id)
-        .then(json => this.props.setUsersAccounts(json));
-      // this.mapAccountNames(json)))
-      // fetchUsersInformation(this.props.id)
-      api.entries.allUsersEntries(this.props.id).then(json => {
-        this.props.setUsersEntries(json);
-        // entries = this.props.entries
-        // console.log(this.props.entries)
-        this.getAllTransactions(this.props.entries);
-      });
-      this.props.firstTimeLoadedTrue();
+    // if (!this.props.firstTimeLoaded) {
+    console.log(this.props.firstTimeLoaded);
+    api.accounts
+      .allUsersAccounts(this.props.id)
+      .then(json => this.props.setUsersAccounts(json));
+    // this.mapAccountNames(json)))
+    // fetchUsersInformation(this.props.id)
+    api.entries.allUsersEntries(this.props.id).then(json => {
+      this.props.setUsersEntries(json);
+      // entries = this.props.entries
+      // console.log(this.props.entries)
+      this.getAllTransactions(this.props.entries);
+    });
+    this.props.firstTimeLoadedTrue();
 
-      // api.transactions.allEntriesTransactions
-    }
+    // api.transactions.allEntriesTransactions
+    // }
   };
 
   // mapAccountNames = (accounts) => {
