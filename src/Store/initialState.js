@@ -28,6 +28,9 @@ const initialState = {
     beginDate: null,
     endDate: new Date(),
   },
+  netWorthContainer: {
+    asOfDate: new Date(),
+  }
   // accounts: null,
   // netWorthContainer: {
   //   assets: {
