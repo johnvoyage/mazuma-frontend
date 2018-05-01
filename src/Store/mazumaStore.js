@@ -173,10 +173,13 @@ const rootReducer = (state = initialState, action) => {
       // let updatedState = { ...state };
       // updatedState.netWorthContainer.asOfDate = action.newDate;
       // return updatedState;
+      // console.log(action.newDate);
+
       return {
         ...state,
-        netWorthContainer: {
-          asOfDate: action.newDate ? action.newDate : todayFormatted
+        [action.container]: {
+          ...state[action.container],
+          [action.whichDate]: action.newDate ? action.newDate : todayFormatted
         }
       };
 

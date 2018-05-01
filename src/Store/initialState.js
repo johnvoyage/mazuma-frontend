@@ -36,8 +36,8 @@ const initialState = {
     formCreditFields: 1,
     transactionBalance: 0
   },
-  incomeStatementContainer: {
-    beginDate: null,
+  netIncomeContainer: {
+    beginDate: "2000-01-01",
     endDate: today
   },
   netWorthContainer: {

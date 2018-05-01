@@ -9,7 +9,7 @@ export const loggedOutMenuOptions = [
 export const loggedInMenuOptions = [
   "Account",
   "Transactions",
-  "Net Earnings",
+  "Net Income",
   "Net worth",
   "Charts",
   "Sign Out"

@@ -1,27 +1,30 @@
 import React from "react";
-import { Form } from "semantic-ui-react";
+import { Form, Header } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { todayInEnglish } from "../../StaticOptions/currentDate";
 
 const TimingFilter = props => {
   const handleChange = event => {
-    props.updateAsOfDate(event.target.value);
+    props.updateAsOfDate("netWorthContainer", "asOfDate", event.target.value);
   };
 
   return (
     <Form>
       <Form.Group widths="equal">
         <Form.Input type="hidden" width={6} />
+        <label>As of...</label>
         <Form.Input
           fluid
           onChange={handleChange}
           value={props.asOfDate}
           type="date"
-          label={`As of... (hit 'x' to reset to today: ${todayInEnglish})`}
           width={4}
         />
         <Form.Input type="hidden" width={6} />
       </Form.Group>
+      <Header as="h5" textAlign="center">
+        Note: hit 'x' to reset to today: ({todayInEnglish})
+      </Header>
     </Form>
   );
 };
@@ -37,8 +40,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateAsOfDate: newDate => {
-      dispatch({ type: "UPDATE_DATE", newDate });
+    updateAsOfDate: (container, whichDate, newDate) => {
+      dispatch({ type: "UPDATE_DATE", container, whichDate, newDate });
     }
     // termsAgreementInit: () => {
     //   dispatch({ type: 'TERMS_AGREEMENT_INIT' })
