@@ -2,17 +2,20 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import "semantic-ui-css/semantic.min.css"; // ../ deleted
 import { BrowserRouter as Router } from "react-router-dom";
-import reducer from "./Store/mazumaStore";
+import rootReducer from "./Store/mazumaStore";
 // import { applyMiddleware } from "redux";
-// import reduxThunk from "redux-thunk";
+import reduxThunk from "redux-thunk";
+// import configureStore from "./Store/configureStore";
 
 const store = createStore(
-  reducer,
-  // applyMiddleware(reduxThunk),
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  rootReducer,
+  compose(
+    applyMiddleware(reduxThunk),
+    window.devToolsExtension ? window.devToolsExtension() : f => f
+  )
 );
 
 store.subscribe(() => {

@@ -1,6 +1,6 @@
 import initialState from "./initialState";
 
-const reducer = (state = initialState, action) => {
+const rootReducer = (state = initialState, action) => {
   // console.log('current state: ', state);
   // console.log('action: ', action);
   switch (action.type) {
@@ -169,4 +169,4 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-export default reducer;
+export default rootReducer;

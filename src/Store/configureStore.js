@@ -1,10 +1,16 @@
-import { createStore } from "redux";
-// import rootReducer from './reducers';
-import { applyMiddleware } from "redux";
+import { createStore, applyMiddleware } from "redux";
+import rootReducer from "./mazumaStore";
+// import { applyMiddleware } from "redux";
 import reduxThunk from "redux-thunk";
 
 const configureStore = () => {
-  return createStore(rootReducer, applyMiddleware(reduxThunk));
+  return createStore(
+    rootReducer,
+    compose(
+      applyMiddleware(thunk),
+      window.devToolsExtension ? window.devToolsExtension() : f => f
+    )
+  );
 };
 
 store.subscribe(() => {

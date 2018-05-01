@@ -1,14 +1,13 @@
-// const today = new Date();
-
 const initialState = {
-  activeMenuItem: 'Mazuma',
+  loading: false,
+  activeMenuItem: "Mazuma",
   userInfo: {
     id: null,
     email: null,
     entries: null,
     accounts: null,
     dateCreated: null,
-    firsTimeLoaded: false,
+    firsTimeLoaded: false
   },
   // formInput: {
   //   signUpForm: {},
@@ -17,19 +16,19 @@ const initialState = {
   // },
   transactionContainer: {
     descriptionToggle: true,
-    filterSelected: 'none',
+    filterSelected: "none",
     newTransaction: false,
     newAccount: false,
     formDebitFields: 1,
     formCreditFields: 1,
-    transactionBalance: 0,
+    transactionBalance: 0
   },
   incomeStatementContainer: {
     beginDate: null,
-    endDate: new Date(),
+    endDate: new Date()
   },
   netWorthContainer: {
-    asOfDate: new Date(),
+    asOfDate: new Date()
   }
   // accounts: null,
   // netWorthContainer: {
@@ -53,7 +52,6 @@ const initialState = {
   //   },
   //
   // },
-
 };
 
 export default initialState;
