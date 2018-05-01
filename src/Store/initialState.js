@@ -1,5 +1,5 @@
 const initialState = {
-  loading: true,
+  loading: false,
   activeMenuItem: "Mazuma",
   userInfo: {
     id: null,
@@ -14,6 +14,7 @@ const initialState = {
   //   signInForm: {},
   //   newTransactionForm: {},
   // },
+  formInput: {},
   transactionContainer: {
     descriptionToggle: true,
     filterSelected: "none",

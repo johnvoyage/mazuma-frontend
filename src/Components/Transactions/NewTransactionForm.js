@@ -16,6 +16,8 @@ import {
   calcDebitBalance,
   calcCreditBalance
 } from "./NewTransactionSubmitted";
+import { bindActionCreators } from "redux";
+import { fetchTransactions } from "../../Actions/fetchTransactions";
 
 const NewTransactionForm = props => {
   const renderFields = (numOfFields, formType) => {
@@ -93,6 +95,7 @@ const NewTransactionForm = props => {
         onSubmit={event => {
           newTransactionSubmitted(event, props.userId);
           props.transactionSubmitted();
+          props.getTransactions(props.userId);
         }}
       >
         <Form.Field
@@ -104,10 +107,10 @@ const NewTransactionForm = props => {
           width={5}
           // onChange={handleChange}
         />
-        <h3 id="transdebits">What you received:</h3>
+        <h3>What you received:</h3>
         {renderFields(props.formDebitFields, "formDebitFields")}
         <h3>Subtotal: &emsp; $ {calcDebitBalance().toFixed(2)}</h3>
-        <h3 id="transcredits">What you gave (enter as a negative):</h3>
+        <h3>What you gave (enter as a negative):</h3>
         {renderFields(props.formCreditFields, "formCreditFields")}
         <h3>Subtotal: &emsp; $ {calcCreditBalance().toFixed(2)}</h3>
         {props.transactionBalance !== 0 ? (
@@ -147,13 +150,12 @@ const mapDispatchToProps = dispatch => {
       dispatch({ type: "CHANGE_TRANSACTION_FORM_FIELDS", whichForm, amount });
     },
     updateTransactionBalance: transactionBalance => {
-      // debugger
-      // console.log(transactionBalance)
       dispatch({ type: "UPDATE_TRANSACTION_BALANCE", transactionBalance });
     },
     transactionSubmitted: () => {
       dispatch({ type: "TRANSACTION_SUBMITTED" });
     }
+    // getTransactions: bindActionCreators(fetchTransactions, dispatch)
     // addNewAccountOn: () => {
     //   dispatch({ type: 'ADD_NEW_ACCOUNT_ON' })
     // },

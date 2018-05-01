@@ -4,6 +4,9 @@ const rootReducer = (state = initialState, action) => {
   // console.log('current state: ', state);
   // console.log('action: ', action);
   switch (action.type) {
+    /* ASYNC_START */
+    case "ASYNC_START":
+      return { ...state, loading: true };
     /* USER ACCOUNT INFO */
     case "FIRST_TIME_LOADED_TRUE":
       return {
@@ -163,7 +166,18 @@ const rootReducer = (state = initialState, action) => {
     //     ...state
     //   }
 
+    /* GENERIC FORM UPDATE */
+    case "UPDATE_FORM":
+      return {
+        ...state,
+        formInput: {
+          ...state.formInput,
+          [action.formKey]: action.formValue
+        }
+      };
+
     /* DONE */
+
     default:
       return state;
   }

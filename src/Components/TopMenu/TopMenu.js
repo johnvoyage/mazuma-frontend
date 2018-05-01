@@ -33,13 +33,14 @@ const TopMenu = props => {
 
   return (
     <Menu pointing secondary fluid widths={menuOptions.length}>
-      {renderMenuItems()}
+      {!props.loading ? renderMenuItems() : null}
     </Menu>
   );
 };
 
 const mapStateToProps = state => {
   return {
+    loading: state.loading,
     userInfo: state.userInfo,
     activeMenuItem: state.activeMenuItem
   };
