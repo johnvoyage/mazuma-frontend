@@ -19,10 +19,14 @@ const Asset = props => {
         <Table.Row key={index}>
           <Table.Cell textAlign="center">{account.name}</Table.Cell>
           <Table.Cell textAlign="center">
-            {numberOfEntriesGivenAccountId(props.entries, account.id)}
+            {numberOfEntriesGivenAccountId(
+              props.entries,
+              account.id,
+              props.asOfDate
+            )}
           </Table.Cell>
           <Table.Cell textAlign="center">
-            {totalGivenAccountId(props.entries, account.id)}
+            {totalGivenAccountId(props.entries, account.id, props.asOfDate)}
           </Table.Cell>
         </Table.Row>
       );
@@ -40,7 +44,12 @@ const Asset = props => {
           Subtotal:
         </Table.Cell>
         <Table.Cell>
-          {totalForSubcategory(props.entries, props.accounts, [subcategoryId])}
+          {totalForSubcategory(
+            props.entries,
+            props.accounts,
+            [subcategoryId],
+            props.asOfDate
+          )}
         </Table.Cell>
       </Table.Row>
     );

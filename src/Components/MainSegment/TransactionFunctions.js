@@ -1,11 +1,19 @@
-const totalForSubcategory = (entries, accounts, arrayOfSubcategories) => {
+const totalForSubcategory = (
+  entries,
+  accounts,
+  arrayOfSubcategories,
+  endDate
+) => {
+  console.log(endDate);
   return entries.reduce((aggr, entry) => {
     return (
       aggr +
       netIncomeOfTransactionGivenSubcategoryId(
         entry.transactions,
         accounts,
-        arrayOfSubcategories
+        arrayOfSubcategories,
+        endDate,
+        entry.date
       )
     );
   }, 0);
@@ -14,8 +22,12 @@ const totalForSubcategory = (entries, accounts, arrayOfSubcategories) => {
 const netIncomeOfTransactionGivenSubcategoryId = (
   arrayOfTransactions,
   arrayOfAccounts,
-  arrayOfSubcategories
+  arrayOfSubcategories,
+  endDate,
+  entryDate
 ) => {
+  console.log(endDate);
+
   return arrayOfTransactions.reduce((aggr, transaction) => {
     if (
       trueIfSubcategoryMatch(
@@ -23,7 +35,7 @@ const netIncomeOfTransactionGivenSubcategoryId = (
         arrayOfAccounts,
         arrayOfSubcategories
       ) &&
-      trueIfInTimeframe()
+      trueIfInTimeframe(endDate, entryDate)
     ) {
       return aggr + parseFloat(transaction.amount);
     } else {
@@ -48,7 +60,13 @@ const trueIfSubcategoryMatch = (
   return false;
 };
 
-const trueIfInTimeframe = () => {
+const trueIfInTimeframe = (endDate, entryDate) => {
+  if (endDate) {
+    // debugger;
+    entryDate.slice(0, 10) <= endDate;
+  }
+  console.log(endDate);
+
   return true;
 };
 
@@ -58,7 +76,7 @@ const filterAccountsOfSubcategoryId = (arrayOfAccounts, subcategoryId) => {
   );
 };
 
-const totalGivenAccountId = (arrayOfEntries, accountId) => {
+const totalGivenAccountId = (arrayOfEntries, accountId, endDate) => {
   return arrayOfEntries.reduce((aggr, entry) => {
     return (
       aggr + netIncomeOfTransactionGivenAccountId(entry.transactions, accountId)
@@ -79,7 +97,7 @@ const netIncomeOfTransactionGivenAccountId = (
   }, 0);
 };
 
-const numberOfEntriesGivenAccountId = (arrayOfEntries, accountId) => {
+const numberOfEntriesGivenAccountId = (arrayOfEntries, accountId, endDate) => {
   return arrayOfEntries.reduce((aggr, entry) => {
     return (
       aggr + numberOfTimesAccountUsedInEntry(entry.transactions, accountId)
