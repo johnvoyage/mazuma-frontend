@@ -1,4 +1,5 @@
 import initialState from "./initialState";
+import { todayFormatted } from "../StaticOptions/currentDate";
 
 const rootReducer = (state = initialState, action) => {
   // console.log('current state: ', state);
@@ -73,7 +74,7 @@ const rootReducer = (state = initialState, action) => {
       };
     case "ASSIGN_TRANSACTIONS_TO_ENTRY":
       // , transactions, index:
-      const updatedState = { ...state };
+      let updatedState = { ...state };
       updatedState.userInfo.entries[action.index].transactions =
         action.transactions;
       return updatedState;
@@ -167,12 +168,15 @@ const rootReducer = (state = initialState, action) => {
     //   }
 
     /* GENERIC FORM UPDATE */
-    case "UPDATE_FORM":
+    case "UPDATE_DATE":
+      // debugger;
+      // let updatedState = { ...state };
+      // updatedState.netWorthContainer.asOfDate = action.newDate;
+      // return updatedState;
       return {
         ...state,
-        formInput: {
-          ...state.formInput,
-          [action.formKey]: action.formValue
+        netWorthContainer: {
+          asOfDate: action.newDate ? action.newDate : todayFormatted
         }
       };
 
