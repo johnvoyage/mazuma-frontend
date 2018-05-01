@@ -7,11 +7,11 @@ const loggedOutMenuOptions = [
 ]
 
 const loggedInMenuOptions = [
-  'Account', 
+  'Account',
   'Transactions',
-  'Spending',
+  'Net Earnings',
   'Net worth',
-  'Statistics',
+  'Charts',
   'Sign Out'
 ]
 

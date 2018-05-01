@@ -1,5 +1,5 @@
 import React from 'react'
-import { Statistic, Image, Icon } from 'semantic-ui-react'
+import { Statistic, Icon } from 'semantic-ui-react'
 import { connect } from 'react-redux';
 
 
@@ -19,34 +19,30 @@ const UserHomeStats = (props) => {
   }
 
   return (
-    <Statistic.Group widths='four'>
-    <Statistic>
-    <Statistic.Value>5</Statistic.Value>
-    <Statistic.Label>Transactions</Statistic.Label>
-    </Statistic>
+    <Statistic.Group widths='three'>
+
 
     <Statistic>
     <Statistic.Value text>
-    Three
-    <br />Thousand
+      500
     </Statistic.Value>
-    <Statistic.Label>Signups</Statistic.Label>
+    <Statistic.Label>TRANSACTIONS</Statistic.Label>
     </Statistic>
 
     <Statistic>
     <Statistic.Value>
-    <Icon name='money' />
-      $5555
+    <Icon name='dollar' />
+
+      5555
     </Statistic.Value>
-    <Statistic.Label>Net Worth</Statistic.Label>
+    <Statistic.Label>NET WORTH</Statistic.Label>
     </Statistic>
 
     <Statistic>
     <Statistic.Value>
-    <Image src='/assets/images/avatar/small/joe.jpg' className='circular inline' />
-    42
+      4/12/45
     </Statistic.Value>
-    <Statistic.Label>Team Members</Statistic.Label>
+    <Statistic.Label>Member Since</Statistic.Label>
     </Statistic>
     </Statistic.Group>
   )

@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { Button, Popup } from 'semantic-ui-react'
+import { Button, Popup, Checkbox } from 'semantic-ui-react'
 import api from '../API/api';
 import UserHomeStats from './UserHomeStats';
 // import fetchUsersInformation from '../UserAccount/FetchUsersData';
@@ -97,11 +97,11 @@ class UserAccountPage extends React.Component {
   render() {
     return(
       <div>
+        <UserHomeStats />
         <h3>Email address: { this.props.email }</h3>
         <h3>Goals: </h3>
-        <h3>Your numbers:</h3>
-        <h3>Member since: </h3>
-        <UserHomeStats />
+        <h3>View/edit accounts:  <Checkbox toggle /></h3>
+
 
         <Button.Group attached='bottom'>
           <Button onClick={ () => {

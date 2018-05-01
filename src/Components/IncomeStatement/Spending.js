@@ -12,13 +12,13 @@ const Spending = (props) => {
     return filterAccountsOfSubcategoryId(props.accounts, 9).map((account, index) => {
       return (
         <Table.Row key={index}>
-          <Table.Cell>
+          <Table.Cell textAlign='center'>
             {account.name}
           </Table.Cell>
-          <Table.Cell>
+          <Table.Cell textAlign='center'>
             {numberOfEntriesGivenAccountId(props.entries, account.id)}
           </Table.Cell>
-          <Table.Cell>
+          <Table.Cell textAlign='center'>
             {totalGivenAccountId(props.entries, account.id)}
           </Table.Cell>
         </Table.Row>

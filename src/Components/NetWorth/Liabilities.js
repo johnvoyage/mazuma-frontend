@@ -10,13 +10,13 @@ const Liability = (props) => {
     const arrayOfRows = filterAccountsOfSubcategoryId(props.accounts, subcategoryId).map((account, index) => {
       return (
         <Table.Row key={index}>
-          <Table.Cell>
+          <Table.Cell textAlign='center'>
             {account.name}
           </Table.Cell>
-          <Table.Cell>
+          <Table.Cell textAlign='center'>
             {numberOfEntriesGivenAccountId(props.entries, account.id)}
           </Table.Cell>
-          <Table.Cell>
+          <Table.Cell textAlign='center'>
             {totalGivenAccountId(props.entries, account.id)}
           </Table.Cell>
         </Table.Row>
