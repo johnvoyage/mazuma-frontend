@@ -4,7 +4,7 @@ const totalForSubcategory = (
   arrayOfSubcategories,
   endDate
 ) => {
-  console.log(endDate);
+  // console.log(endDate);
   return entries.reduce((aggr, entry) => {
     return (
       aggr +
@@ -26,7 +26,7 @@ const netIncomeOfTransactionGivenSubcategoryId = (
   endDate,
   entryDate
 ) => {
-  console.log(endDate);
+  // console.log(endDate);
 
   return arrayOfTransactions.reduce((aggr, transaction) => {
     if (
@@ -63,17 +63,23 @@ const trueIfSubcategoryMatch = (
 const trueIfInTimeframe = (endDate, entryDate) => {
   if (endDate) {
     // debugger;
-    entryDate.slice(0, 10) <= endDate;
+    console.log(entryDate.slice(0, 10) <= endDate);
+    return entryDate.slice(0, 10) <= endDate;
   }
   console.log(endDate);
 
   return true;
 };
 
-const filterAccountsOfSubcategoryId = (arrayOfAccounts, subcategoryId) => {
-  return arrayOfAccounts.filter(
-    account => account.subcategory_id === subcategoryId
-  );
+const filterAccountsOfSubcategoryId = (
+  arrayOfAccounts,
+  subcategoryId
+  // endDate,
+  // entryDate
+) => {
+  return arrayOfAccounts.filter(account => {
+    return account.subcategory_id === subcategoryId;
+  });
 };
 
 const totalGivenAccountId = (arrayOfEntries, accountId, endDate) => {
@@ -97,7 +103,7 @@ const netIncomeOfTransactionGivenAccountId = (
   }, 0);
 };
 
-const numberOfEntriesGivenAccountId = (arrayOfEntries, accountId, endDate) => {
+const numberOfEntriesGivenAccountId = (arrayOfEntries, accountId) => {
   return arrayOfEntries.reduce((aggr, entry) => {
     return (
       aggr + numberOfTimesAccountUsedInEntry(entry.transactions, accountId)

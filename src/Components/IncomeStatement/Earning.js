@@ -1,11 +1,14 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { totalForSubcategory, filterAccountsOfSubcategoryId, totalGivenAccountId, numberOfEntriesGivenAccountId } from '../MainSegment/TransactionFunctions'
-import { Table } from 'semantic-ui-react'
+import React from "react";
+import { connect } from "react-redux";
+import {
+  totalForSubcategory,
+  filterAccountsOfSubcategoryId,
+  totalGivenAccountId,
+  numberOfEntriesGivenAccountId
+} from "../MainSegment/TransactionFunctions";
+import { Table } from "semantic-ui-react";
 
-
-const Earning = (props) => {
-
+const Earning = props => {
   // const totalNetIncome = (entries) => {
   //   return entries.reduce((aggr, entry) => {
   //     return netIncomeOfTransaction(entry.transactions)
@@ -35,8 +38,6 @@ const Earning = (props) => {
   //   return true
   // }
 
-
-
   // debugger
 
   // const netIncome = () => {
@@ -45,51 +46,56 @@ const Earning = (props) => {
   //   })
   // }
 
-
   const renderEarningRows = () => {
-    return filterAccountsOfSubcategoryId(props.accounts, 8).map((account, index) => {
-      return (
-        <Table.Row key={index}>
-          <Table.Cell textAlign='center'>
-            {account.name}
-          </Table.Cell>
-          <Table.Cell textAlign='center'>
-            {numberOfEntriesGivenAccountId(props.entries, account.id)}
-          </Table.Cell>
-          <Table.Cell textAlign='center'>
-            {totalGivenAccountId(props.entries, account.id)}
-          </Table.Cell>
-        </Table.Row>
-      )
-    })
-  }
+    return filterAccountsOfSubcategoryId(props.accounts, 8).map(
+      (account, index) => {
+        return (
+          <Table.Row key={index}>
+            <Table.Cell textAlign="center">{account.name}</Table.Cell>
+            <Table.Cell textAlign="center">
+              {numberOfEntriesGivenAccountId(props.entries, account.id)}
+            </Table.Cell>
+            <Table.Cell textAlign="center">
+              {-totalGivenAccountId(props.entries, account.id)}
+            </Table.Cell>
+          </Table.Row>
+        );
+      }
+    );
+  };
 
-  return(
+  return (
     <Table celled structured>
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell textAlign='center' colSpan='3'>Earning</Table.HeaderCell>
+          <Table.HeaderCell textAlign="center" colSpan="3">
+            Earning
+          </Table.HeaderCell>
         </Table.Row>
         <Table.Row>
-          <Table.HeaderCell textAlign='center'>Account</Table.HeaderCell>
-          <Table.HeaderCell textAlign='center'>Number of Entries</Table.HeaderCell>
-          <Table.HeaderCell textAlign='center'>Amount</Table.HeaderCell>
+          <Table.HeaderCell textAlign="center">Account</Table.HeaderCell>
+          <Table.HeaderCell textAlign="center">
+            Number of Entries
+          </Table.HeaderCell>
+          <Table.HeaderCell textAlign="center">Amount</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
-      <Table.Body>
-        { renderEarningRows() }
-      </Table.Body>
+      <Table.Body>{renderEarningRows()}</Table.Body>
       <Table.Footer fullWidth>
         <Table.Row>
-          <Table.HeaderCell textAlign='right' colSpan='2'>Subtotal:</Table.HeaderCell>
-          <Table.HeaderCell>{totalForSubcategory(props.entries, props.accounts, [8])}</Table.HeaderCell>
+          <Table.HeaderCell textAlign="right" colSpan="2">
+            Subtotal:
+          </Table.HeaderCell>
+          <Table.HeaderCell>
+            {-totalForSubcategory(props.entries, props.accounts, [8])}
+          </Table.HeaderCell>
         </Table.Row>
       </Table.Footer>
     </Table>
-  )
-}
+  );
+};
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     // showLiquid
     accounts: state.userInfo.accounts,
@@ -97,22 +103,19 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     // termsAgreementInit: () => {
     //   dispatch({ type: 'TERMS_AGREEMENT_INIT' })
-  //   // },
-  //   toggleTermsAgreement: () => {
-  //     dispatch({ type: 'TOGGLE_TERMS_AGREEMENT' })
-  //   },
-  //   signUserUp: (userInfo) => {
-  //     console.log(userInfo)
-  //     dispatch({ type: 'SIGN_USER_UP', userInfo })
-  //   }
-  }
-}
+    //   // },
+    //   toggleTermsAgreement: () => {
+    //     dispatch({ type: 'TOGGLE_TERMS_AGREEMENT' })
+    //   },
+    //   signUserUp: (userInfo) => {
+    //     console.log(userInfo)
+    //     dispatch({ type: 'SIGN_USER_UP', userInfo })
+    //   }
+  };
+};
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Earning)
+export default connect(mapStateToProps, mapDispatchToProps)(Earning);

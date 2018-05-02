@@ -82,7 +82,7 @@ const Liability = props => {
             Subtotal:
           </Table.HeaderCell>
           <Table.HeaderCell>
-            {totalForSubcategory(props.entries, props.accounts, [8])}
+            {totalForSubcategory(props.entries, props.accounts, [5, 6])}
           </Table.HeaderCell>
         </Table.Row>
       </Table.Footer>

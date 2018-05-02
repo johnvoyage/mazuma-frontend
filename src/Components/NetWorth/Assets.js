@@ -84,7 +84,7 @@ const Asset = props => {
             Subtotal:
           </Table.HeaderCell>
           <Table.HeaderCell>
-            {totalForSubcategory(props.entries, props.accounts, [8])}
+            {totalForSubcategory(props.entries, props.accounts, [1, 2, 3, 4])}
           </Table.HeaderCell>
         </Table.Row>
       </Table.Footer>

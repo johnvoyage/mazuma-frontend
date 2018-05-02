@@ -10,7 +10,7 @@ class UserAccountPage extends React.Component {
   componentDidMount = () => {
     // console.log(this.props.firstTimeLoaded);
     // if (!this.props.firstTimeLoaded) {
-    console.log(this.props.firstTimeLoaded);
+    // console.log(this.props.firstTimeLoaded);
     api.accounts
       .allUsersAccounts(this.props.id)
       .then(json => this.props.setUsersAccounts(json));

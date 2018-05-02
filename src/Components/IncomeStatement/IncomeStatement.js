@@ -12,7 +12,7 @@ const IncomeStatement = props => {
       <TimingFilter />
       <Header size="huge" textAlign="center">
         Net Income: ${" "}
-        {totalForSubcategory(props.entries, props.accounts, [8, 9])}
+        {-totalForSubcategory(props.entries, props.accounts, [8, 9])}
       </Header>
       <Segment>
         <Earning />
