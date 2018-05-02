@@ -43,27 +43,47 @@ const filterAccountsOfSubcategoryId = (subcategoryId, arrayOfAccounts) => {
   );
 };
 
-const subcategoryIdToName = subcategoryId => {
-  switch (subcategoryId) {
-    case 1:
-      return "Liquid Assets";
-    case 2:
-      return "Tangible Assets";
-    case 3:
-      return "Intangible Assets";
-    case 4:
-      return "Long-Term Assets";
-    case 5:
-      return "Short-Term Liability";
-    case 6:
-      return "Long-Term Liability";
-    case 8:
-      return "Earning";
-    case 9:
-      return "Spending";
-    default:
-      return "Category not named";
-  }
+const mapTransactionsOfEntries = arrayOfEntries => {
+  return arrayOfEntries.map(entry => entry.transactions);
+};
+
+const reduceNestedArrayOfTransactionsToNumber = (
+  accountId,
+  nestedArrayOfTransactions
+) => {
+  return nestedArrayOfTransactions.reduce((aggr, arrayOfTransactions) => {
+    arrayOfTransactions.forEach(
+      transaction => (transaction.account_id === accountId ? aggr++ : null)
+    );
+    return aggr;
+  }, 0);
+};
+
+const reduceNestedArrayOfTransactionsToAmount = (
+  accountId,
+  nestedArrayOfTransactions
+) => {
+  return nestedArrayOfTransactions.reduce((aggr, arrayOfTransactions) => {
+    arrayOfTransactions.forEach(
+      transaction =>
+        transaction.account_id === accountId
+          ? (aggr += parseFloat(transaction.amount))
+          : null
+    );
+    return aggr;
+  }, 0);
+};
+
+const filterAccountsOfSubcategories = (
+  arrayOfSubcategoryIds,
+  arrayOfAccounts
+) => {
+  console.log(arrayOfSubcategoryIds);
+  console.log(arrayOfAccounts);
+  arrayOfAccounts.filter(
+    account =>
+      arrayOfSubcategoryIds.indexOfaccount.subcategory_id === subcategoryId
+  );
 };
 
 export default {
@@ -72,5 +92,8 @@ export default {
   reduceNestedArrayOfAccountIds,
   mapArrayOfAccountIdsToAccountObjects,
   filterAccountsOfSubcategoryId,
-  subcategoryIdToName
+  mapTransactionsOfEntries,
+  reduceNestedArrayOfTransactionsToNumber,
+  reduceNestedArrayOfTransactionsToAmount,
+  filterAccountsOfSubcategories
 };

@@ -1,25 +1,47 @@
 import React from "react";
 import { connect } from "react-redux";
 import {
-  subcategoryIdToName,
-  totalForSubcategory,
-  filterAccountsOfSubcategoryId,
-  totalGivenAccountId,
-  numberOfEntriesGivenAccountId
+  //   // subcategoryIdToName,
+  totalForSubcategory
+  //   filterAccountsOfSubcategoryId,
+  //   totalGivenAccountId,
+  //   numberOfEntriesGivenAccountId
 } from "../MainSegment/TransactionFunctions";
+import { subcategoryIdToName } from "../../StaticOptions/subcategories";
 import entriesFilter from "../../HelperFunctions/entriesFilter";
 import { Table } from "semantic-ui-react";
 
 const Asset = props => {
+  const filterEntriesWithinDateRange = () => {
+    return entriesFilter.filterEntriesWithinDateRange(
+      props.entries,
+      props.beginDate,
+      props.endDate
+    );
+  };
   const subtotalHeader = subcategoryId => {
     return (
       <Table.Row key={-1}>
         <Table.Cell textAlign="center" colSpan="3">
-          {entriesFilter.subcategoryIdToName(subcategoryId)}
+          {subcategoryIdToName(subcategoryId)}
         </Table.Cell>
       </Table.Row>
     );
   };
+
+  const subtotalFooter = subcategoryId => {
+    return (
+      <Table.Row key={-2}>
+        <Table.Cell textAlign="right" colSpan="2">
+          Subtotal:
+        </Table.Cell>
+        <Table.Cell>
+          {amountOfEntriesGivenSubcategories([subcategoryId], props.accounts)}
+        </Table.Cell>
+      </Table.Row>
+    );
+  };
+
   const accountsToDisplay = subcategoryId => {
     // console.log(
     return entriesFilter.filterAccountsOfSubcategoryId(
@@ -27,11 +49,7 @@ const Asset = props => {
       entriesFilter.mapArrayOfAccountIdsToAccountObjects(
         entriesFilter.reduceNestedArrayOfAccountIds(
           entriesFilter.mapAccountIdsUsedInEntries(
-            entriesFilter.filterEntriesWithinDateRange(
-              props.entries,
-              props.beginDate,
-              props.endDate
-            )
+            filterEntriesWithinDateRange()
           )
         ),
         props.accounts
@@ -39,25 +57,54 @@ const Asset = props => {
     );
     // );
   };
+
+  const amountOfEntriesGivenSubcategories = (
+    arrayOfSubcategoryIds,
+    arrayOfAccounts
+  ) => {
+    entriesFilter.filterAccountsOfSubcategories(
+      arrayOfSubcategoryIds,
+      arrayOfAccounts
+    );
+    // console.log(
+    //   entriesFilter.mapTransactionsOfEntries(filterEntriesWithinDateRange())
+    // );
+  };
+
+  const amountOfEntriesGivenAccount = accountId => {
+    // console.log(
+    return entriesFilter.reduceNestedArrayOfTransactionsToAmount(
+      accountId,
+      entriesFilter.mapTransactionsOfEntries(filterEntriesWithinDateRange())
+    );
+    // );
+  };
+
+  const numberOfEntriesGivenAccount = accountId => {
+    // console.log(
+    return entriesFilter.reduceNestedArrayOfTransactionsToNumber(
+      accountId,
+      entriesFilter.mapTransactionsOfEntries(filterEntriesWithinDateRange())
+    );
+    // );
+  };
+
   const renderRows = subcategoryId => {
     const arrayOfRows = accountsToDisplay(subcategoryId).map(
       (account, index) => {
         return (
           <Table.Row key={index}>
             <Table.Cell textAlign="center">{account.name}</Table.Cell>
-            <Table.Cell />
-            <Table.Cell />
+            <Table.Cell textAlign="center">
+              {numberOfEntriesGivenAccount(account.id)}
+            </Table.Cell>
+            <Table.Cell>{amountOfEntriesGivenAccount(account.id)}</Table.Cell>
           </Table.Row>
         );
       }
     );
-    arrayOfRows.unshift(
-      <Table.Row key={-1}>
-        <Table.Cell textAlign="center" colSpan="3">
-          {subcategoryIdToName(subcategoryId)}
-        </Table.Cell>
-      </Table.Row>
-    );
+    arrayOfRows.unshift(subtotalHeader(subcategoryId));
+    arrayOfRows.push(subtotalFooter(subcategoryId));
     return arrayOfRows;
     // arrayOfSubcategoryIds.forEach(subcategoryId => {
     // console.log(

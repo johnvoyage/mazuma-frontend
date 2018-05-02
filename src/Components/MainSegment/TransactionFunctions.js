@@ -63,10 +63,10 @@ const trueIfSubcategoryMatch = (
 const trueIfInTimeframe = (endDate, entryDate) => {
   if (endDate) {
     // debugger;
-    console.log(entryDate.slice(0, 10) <= endDate);
+    // console.log(entryDate.slice(0, 10) <= endDate);
     return entryDate.slice(0, 10) <= endDate;
   }
-  console.log(endDate);
+  // console.log(endDate);
 
   return true;
 };
