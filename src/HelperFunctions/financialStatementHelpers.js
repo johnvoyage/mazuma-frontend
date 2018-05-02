@@ -74,16 +74,17 @@ const reduceNestedArrayOfTransactionsToAmount = (
   }, 0);
 };
 
-const filterAccountsOfSubcategories = (
+const filterAccountIdsOfSubcategories = (
   arrayOfSubcategoryIds,
   arrayOfAccounts
 ) => {
-  console.log(arrayOfSubcategoryIds);
-  console.log(arrayOfAccounts);
-  arrayOfAccounts.filter(
-    account =>
-      arrayOfSubcategoryIds.indexOfaccount.subcategory_id === subcategoryId
-  );
+  // console.log(arrayOfSubcategoryIds);
+  // console.log(arrayOfAccounts);
+  return arrayOfAccounts
+    .filter(
+      account => arrayOfSubcategoryIds.indexOf(account.subcategory_id) > -1
+    )
+    .map(account => account.id);
 };
 
 export default {
@@ -95,5 +96,5 @@ export default {
   mapTransactionsOfEntries,
   reduceNestedArrayOfTransactionsToNumber,
   reduceNestedArrayOfTransactionsToAmount,
-  filterAccountsOfSubcategories
+  filterAccountIdsOfSubcategories
 };

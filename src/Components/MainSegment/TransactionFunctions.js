@@ -4,7 +4,6 @@ const totalForSubcategory = (
   arrayOfSubcategories,
   endDate
 ) => {
-  // console.log(endDate);
   return entries.reduce((aggr, entry) => {
     return (
       aggr +
@@ -18,7 +17,7 @@ const totalForSubcategory = (
     );
   }, 0);
 };
-// numberOfEntriesGivenAccountId
+
 const netIncomeOfTransactionGivenSubcategoryId = (
   arrayOfTransactions,
   arrayOfAccounts,
@@ -26,8 +25,6 @@ const netIncomeOfTransactionGivenSubcategoryId = (
   endDate,
   entryDate
 ) => {
-  // console.log(endDate);
-
   return arrayOfTransactions.reduce((aggr, transaction) => {
     if (
       trueIfSubcategoryMatch(
@@ -62,12 +59,8 @@ const trueIfSubcategoryMatch = (
 
 const trueIfInTimeframe = (endDate, entryDate) => {
   if (endDate) {
-    // debugger;
-    // console.log(entryDate.slice(0, 10) <= endDate);
     return entryDate.slice(0, 10) <= endDate;
   }
-  // console.log(endDate);
-
   return true;
 };
 
@@ -105,7 +98,7 @@ const netIncomeOfTransactionGivenAccountId = (
 
 const numberOfEntriesGivenAccountId = (arrayOfEntries, accountId, endDate) => {
   return arrayOfEntries.reduce((aggr, entry) => {
-    trueIfInTimeframe(endDate, entry.date)
+    return trueIfInTimeframe(endDate, entry.date)
       ? aggr + numberOfTimesAccountUsedInEntry(entry.transactions, accountId)
       : aggr;
     // return (
