@@ -78,8 +78,6 @@ const filterAccountIdsOfSubcategories = (
   arrayOfSubcategoryIds,
   arrayOfAccounts
 ) => {
-  // console.log(arrayOfSubcategoryIds);
-  // console.log(arrayOfAccounts);
   return arrayOfAccounts
     .filter(
       account => arrayOfSubcategoryIds.indexOf(account.subcategory_id) > -1
