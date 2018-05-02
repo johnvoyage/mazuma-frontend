@@ -10,13 +10,11 @@ import NetWorth from "../NetWorth/NetWorth";
 import Statistics from "../Statistics/Statistics";
 import IncomeStatement from "../IncomeStatement/IncomeStatement";
 import LoadingScreen from "./LoadingScreen";
-
 import FAQ from "../FAQ/FAQ";
-
 import {
   loggedInMenuOptions,
   loggedOutMenuOptions
-} from "../TopMenu/MenuOptions";
+} from "../../StaticOptions/menuOptions";
 
 const MainSegmentOne = props => {
   let activeItem;

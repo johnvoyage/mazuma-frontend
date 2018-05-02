@@ -3,6 +3,11 @@ import { connect } from "react-redux";
 import { subcategoryIdToName } from "../../StaticOptions/subcategories";
 import financialStatementHelpers from "../../HelperFunctions/financialStatementHelpers";
 import { Table } from "semantic-ui-react";
+import formatNumber from "../../HelperFunctions/formatNumber";
+
+const tableHeader = "Assets";
+
+const subcategories = [1, 2, 3, 4];
 
 const Asset = props => {
   const filterEntriesWithinDateRange = () => {
@@ -29,7 +34,7 @@ const Asset = props => {
           Subtotal:
         </Table.Cell>
         <Table.Cell>
-          {amountOfEntriesGivenSubcategories([subcategoryId], props.accounts)}
+          {amountOfEntriesGivenSubcategories([subcategoryId])}
         </Table.Cell>
       </Table.Row>
     );
@@ -49,26 +54,25 @@ const Asset = props => {
     );
   };
 
-  const amountOfEntriesGivenSubcategories = (
-    arrayOfSubcategoryIds,
-    arrayOfAccounts
-  ) => {
+  const amountOfEntriesGivenSubcategories = arrayOfSubcategoryIds => {
     const accountIdsOfSubcategoriesArray = financialStatementHelpers.filterAccountIdsOfSubcategories(
       arrayOfSubcategoryIds,
-      arrayOfAccounts
+      props.accounts
     );
-    return financialStatementHelpers
-      .mapTransactionsOfEntries(filterEntriesWithinDateRange())
-      .reduce((aggr, arrayOfTransactions) => {
-        arrayOfTransactions.forEach(transaction => {
-          return accountIdsOfSubcategoriesArray.indexOf(
-            transaction.account_id
-          ) > -1
-            ? (aggr += parseFloat(transaction.amount))
-            : null;
-        });
-        return aggr;
-      }, 0);
+    return formatNumber.standard(
+      financialStatementHelpers
+        .mapTransactionsOfEntries(filterEntriesWithinDateRange())
+        .reduce((aggr, arrayOfTransactions) => {
+          arrayOfTransactions.forEach(transaction => {
+            return accountIdsOfSubcategoriesArray.indexOf(
+              transaction.account_id
+            ) > -1
+              ? (aggr += parseFloat(transaction.amount))
+              : null;
+          });
+          return aggr;
+        }, 0)
+    );
   };
 
   const amountOfEntriesGivenAccount = accountId => {
@@ -96,9 +100,13 @@ const Asset = props => {
           <Table.Row key={index}>
             <Table.Cell textAlign="center">{account.name}</Table.Cell>
             <Table.Cell textAlign="center">
-              {numberOfEntriesGivenAccount(account.id)}
+              {formatNumber.withoutCents(
+                numberOfEntriesGivenAccount(account.id)
+              )}
             </Table.Cell>
-            <Table.Cell>{amountOfEntriesGivenAccount(account.id)}</Table.Cell>
+            <Table.Cell textAlign="center">
+              {formatNumber.standard(amountOfEntriesGivenAccount(account.id))}
+            </Table.Cell>
           </Table.Row>
         );
       }
@@ -113,20 +121,23 @@ const Asset = props => {
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell textAlign="center" colSpan="3">
-            Asset
+            {tableHeader}
           </Table.HeaderCell>
         </Table.Row>
         <Table.Row>
-          <Table.HeaderCell textAlign="center">Account</Table.HeaderCell>
-          <Table.HeaderCell textAlign="center"># of Entries</Table.HeaderCell>
-          <Table.HeaderCell textAlign="center">Amount</Table.HeaderCell>
+          <Table.HeaderCell width={6} textAlign="center">
+            Account
+          </Table.HeaderCell>
+          <Table.HeaderCell width={5} textAlign="center">
+            # of Entries
+          </Table.HeaderCell>
+          <Table.HeaderCell width={5} textAlign="center">
+            Amount
+          </Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {renderRows(1)}
-        {renderRows(2)}
-        {renderRows(3)}
-        {renderRows(4)}
+        {subcategories.map(subcategory => renderRows(subcategory))}
       </Table.Body>
       <Table.Footer fullWidth>
         <Table.Row>
@@ -134,7 +145,7 @@ const Asset = props => {
             Subtotal:
           </Table.HeaderCell>
           <Table.HeaderCell>
-            {amountOfEntriesGivenSubcategories([1, 2, 3, 4], props.accounts)}
+            {amountOfEntriesGivenSubcategories(subcategories, props.accounts)}
           </Table.HeaderCell>
         </Table.Row>
       </Table.Footer>

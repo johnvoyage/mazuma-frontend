@@ -1,80 +1,165 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { totalForSubcategory, filterAccountsOfSubcategoryId, totalGivenAccountId, numberOfEntriesGivenAccountId } from '../MainSegment/TransactionFunctions'
-import { Table } from 'semantic-ui-react'
+import React from "react";
+import { connect } from "react-redux";
+import { subcategoryIdToName } from "../../StaticOptions/subcategories";
+import financialStatementHelpers from "../../HelperFunctions/financialStatementHelpers";
+import { Table } from "semantic-ui-react";
+import formatNumber from "../../HelperFunctions/formatNumber";
 
+const tableHeader = "Spending";
 
-const Spending = (props) => {
+const subcategories = [9];
 
+const Asset = props => {
+  const filterEntriesWithinDateRange = () => {
+    return financialStatementHelpers.filterEntriesWithinDateRange(
+      props.entries,
+      props.beginDate,
+      props.endDate
+    );
+  };
+  const subtotalHeader = subcategoryId => {
+    return (
+      <Table.Row key={-1}>
+        <Table.Cell textAlign="center" colSpan="3">
+          {subcategoryIdToName(subcategoryId)}
+        </Table.Cell>
+      </Table.Row>
+    );
+  };
 
+  const subtotalFooter = subcategoryId => {
+    return (
+      <Table.Row key={-2}>
+        <Table.Cell textAlign="right" colSpan="2">
+          Subtotal:
+        </Table.Cell>
+        <Table.Cell>
+          {amountOfEntriesGivenSubcategories([subcategoryId])}
+        </Table.Cell>
+      </Table.Row>
+    );
+  };
 
-  const renderSpendingRows = () => {
-    return filterAccountsOfSubcategoryId(props.accounts, 9).map((account, index) => {
-      return (
-        <Table.Row key={index}>
-          <Table.Cell textAlign='center'>
-            {account.name}
-          </Table.Cell>
-          <Table.Cell textAlign='center'>
-            {numberOfEntriesGivenAccountId(props.entries, account.id)}
-          </Table.Cell>
-          <Table.Cell textAlign='center'>
-            {totalGivenAccountId(props.entries, account.id)}
-          </Table.Cell>
-        </Table.Row>
+  const accountsToDisplay = subcategoryId => {
+    return financialStatementHelpers.filterAccountsOfSubcategoryId(
+      subcategoryId,
+      financialStatementHelpers.mapArrayOfAccountIdsToAccountObjects(
+        financialStatementHelpers.reduceNestedArrayOfAccountIds(
+          financialStatementHelpers.mapAccountIdsUsedInEntries(
+            filterEntriesWithinDateRange()
+          )
+        ),
+        props.accounts
       )
-    })
-  }
+    );
+  };
 
-  return(
+  const amountOfEntriesGivenSubcategories = arrayOfSubcategoryIds => {
+    const accountIdsOfSubcategoriesArray = financialStatementHelpers.filterAccountIdsOfSubcategories(
+      arrayOfSubcategoryIds,
+      props.accounts
+    );
+    return formatNumber.standard(
+      financialStatementHelpers
+        .mapTransactionsOfEntries(filterEntriesWithinDateRange())
+        .reduce((aggr, arrayOfTransactions) => {
+          arrayOfTransactions.forEach(transaction => {
+            return accountIdsOfSubcategoriesArray.indexOf(
+              transaction.account_id
+            ) > -1
+              ? (aggr += parseFloat(transaction.amount))
+              : null;
+          });
+          return aggr;
+        }, 0)
+    );
+  };
+
+  const amountOfEntriesGivenAccount = accountId => {
+    return financialStatementHelpers.reduceNestedArrayOfTransactionsToAmount(
+      accountId,
+      financialStatementHelpers.mapTransactionsOfEntries(
+        filterEntriesWithinDateRange()
+      )
+    );
+  };
+
+  const numberOfEntriesGivenAccount = accountId => {
+    return financialStatementHelpers.reduceNestedArrayOfTransactionsToNumber(
+      accountId,
+      financialStatementHelpers.mapTransactionsOfEntries(
+        filterEntriesWithinDateRange()
+      )
+    );
+  };
+
+  const renderRows = subcategoryId => {
+    const arrayOfRows = accountsToDisplay(subcategoryId).map(
+      (account, index) => {
+        return (
+          <Table.Row key={index}>
+            <Table.Cell textAlign="center">{account.name}</Table.Cell>
+            <Table.Cell textAlign="center">
+              {formatNumber.withoutCents(
+                numberOfEntriesGivenAccount(account.id)
+              )}
+            </Table.Cell>
+            <Table.Cell textAlign="center">
+              {formatNumber.standard(amountOfEntriesGivenAccount(account.id))}
+            </Table.Cell>
+          </Table.Row>
+        );
+      }
+    );
+    arrayOfRows.unshift(subtotalHeader(subcategoryId));
+    arrayOfRows.push(subtotalFooter(subcategoryId));
+    return arrayOfRows;
+  };
+
+  return (
     <Table celled structured>
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell textAlign='center' colSpan='3'>Spending</Table.HeaderCell>
+          <Table.HeaderCell textAlign="center" colSpan="3">
+            {tableHeader}
+          </Table.HeaderCell>
         </Table.Row>
         <Table.Row>
-          <Table.HeaderCell textAlign='center'>Account</Table.HeaderCell>
-          <Table.HeaderCell textAlign='center'>Number of Entries</Table.HeaderCell>
-          <Table.HeaderCell textAlign='center'>Amount</Table.HeaderCell>
+          <Table.HeaderCell width={6} textAlign="center">
+            Account
+          </Table.HeaderCell>
+          <Table.HeaderCell width={5} textAlign="center">
+            # of Entries
+          </Table.HeaderCell>
+          <Table.HeaderCell width={5} textAlign="center">
+            Amount
+          </Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        { renderSpendingRows() }
+        {subcategories.map(subcategory => renderRows(subcategory))}
       </Table.Body>
       <Table.Footer fullWidth>
         <Table.Row>
-          <Table.HeaderCell textAlign='right' colSpan='2'>Subtotal:</Table.HeaderCell>
-          <Table.HeaderCell>{totalForSubcategory(props.entries, props.accounts, [9])}</Table.HeaderCell>
+          <Table.HeaderCell textAlign="right" colSpan="2">
+            Subtotal:
+          </Table.HeaderCell>
+          <Table.HeaderCell>
+            {amountOfEntriesGivenSubcategories(subcategories, props.accounts)}
+          </Table.HeaderCell>
         </Table.Row>
       </Table.Footer>
     </Table>
-  )
-}
+  );
+};
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    // showLiquid
     accounts: state.userInfo.accounts,
-    entries: state.userInfo.entries
+    entries: state.userInfo.entries,
+    beginDate: 0,
+    endDate: state.netWorthContainer.asOfDate
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    // termsAgreementInit: () => {
-    //   dispatch({ type: 'TERMS_AGREEMENT_INIT' })
-  //   // },
-  //   toggleTermsAgreement: () => {
-  //     dispatch({ type: 'TOGGLE_TERMS_AGREEMENT' })
-  //   },
-  //   signUserUp: (userInfo) => {
-  //     console.log(userInfo)
-  //     dispatch({ type: 'SIGN_USER_UP', userInfo })
-  //   }
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Spending)
+export default connect(mapStateToProps, null)(Asset);

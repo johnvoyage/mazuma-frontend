@@ -2,7 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 import { Menu } from "semantic-ui-react";
 // import DropdownMenu from './DropdownMenu';
-import { loggedInMenuOptions, loggedOutMenuOptions } from "./MenuOptions";
+import {
+  loggedInMenuOptions,
+  loggedOutMenuOptions
+} from "../../StaticOptions/menuOptions";
 
 const TopMenu = props => {
   // console.log(props)
