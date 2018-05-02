@@ -18,7 +18,7 @@ const totalForSubcategory = (
     );
   }, 0);
 };
-
+// numberOfEntriesGivenAccountId
 const netIncomeOfTransactionGivenSubcategoryId = (
   arrayOfTransactions,
   arrayOfAccounts,
@@ -103,11 +103,14 @@ const netIncomeOfTransactionGivenAccountId = (
   }, 0);
 };
 
-const numberOfEntriesGivenAccountId = (arrayOfEntries, accountId) => {
+const numberOfEntriesGivenAccountId = (arrayOfEntries, accountId, endDate) => {
   return arrayOfEntries.reduce((aggr, entry) => {
-    return (
-      aggr + numberOfTimesAccountUsedInEntry(entry.transactions, accountId)
-    );
+    trueIfInTimeframe(endDate, entry.date)
+      ? aggr + numberOfTimesAccountUsedInEntry(entry.transactions, accountId)
+      : aggr;
+    // return (
+    //   aggr + numberOfTimesAccountUsedInEntry(entry.transactions, accountId)
+    // );
   }, 0);
 };
 

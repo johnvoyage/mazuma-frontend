@@ -13,7 +13,8 @@ const Asset = props => {
   const renderRows = subcategoryId => {
     const arrayOfRows = filterAccountsOfSubcategoryId(
       props.accounts,
-      subcategoryId
+      subcategoryId,
+      props.asOfDate
     ).map((account, index) => {
       return (
         <Table.Row key={index}>

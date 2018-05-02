@@ -1,128 +1,127 @@
-import api from '../API/api';
+import api from "../API/api";
 
-const currentDebits = {}
-const currentCredits = {}
-const transactions = []
+const currentDebits = {};
+const currentCredits = {};
+const transactions = [];
 
 const calcDebitBalance = () => {
   return Object.keys(currentDebits).reduce((aggr, key) => {
-    const currentVal = isNaN(currentDebits[key]) ? 0 : currentDebits[key]
-    return aggr + currentVal
-  }, 0)
-}
+    const currentVal = isNaN(currentDebits[key]) ? 0 : currentDebits[key];
+    return aggr + currentVal;
+  }, 0);
+};
 
 const calcCreditBalance = () => {
   return Object.keys(currentCredits).reduce((aggr, key) => {
-    const currentVal = isNaN(currentCredits[key]) ? 0 : currentCredits[key]
-    return aggr + currentVal
-  }, 0)
-}
+    const currentVal = isNaN(currentCredits[key]) ? 0 : currentCredits[key];
+    return aggr + currentVal;
+  }, 0);
+};
 
-const updateDebitBalance = (event) => {
-  const currentKey = event.target.name
-  const currentVal = parseFloat(parseFloat(event.target.value).toFixed(2))
-  currentDebits[currentKey] = currentVal
-  return calcDebitBalance()
-}
+const updateDebitBalance = event => {
+  const currentKey = event.target.name;
+  const currentVal = parseFloat(parseFloat(event.target.value).toFixed(2));
+  currentDebits[currentKey] = currentVal;
+  return calcDebitBalance();
+};
 
-const updateCreditBalance = (event) => {
-  const currentKey = event.target.name
-  const currentVal = parseFloat(parseFloat(event.target.value).toFixed(2))
-  currentCredits[currentKey] = currentVal
-  return calcCreditBalance()
-}
+const updateCreditBalance = event => {
+  const currentKey = event.target.name;
+  const currentVal = parseFloat(parseFloat(event.target.value).toFixed(2));
+  currentCredits[currentKey] = currentVal;
+  return calcCreditBalance();
+};
 
-const removeAmount = (event) => {
-  const keyToDelete = event.target.parentNode.parentNode.parentNode.children[0].children[1].children[0].name
-  delete currentDebits[keyToDelete]
-  delete currentCredits[keyToDelete]
-}
-
+const removeAmount = event => {
+  const keyToDelete =
+    event.target.parentNode.parentNode.parentNode.children[0].children[1]
+      .children[0].name;
+  delete currentDebits[keyToDelete];
+  delete currentCredits[keyToDelete];
+};
 
 const newTransactionSubmitted = (event, userId) => {
-  event.preventDefault()
-  const date = event.target.children[0].children[1].children[0].value
-  const descriptionIndex = event.target.children.length - 2
-  const description = event.target.children[descriptionIndex].children[1].value
+  event.preventDefault();
+  const date = event.target.children[0].children[1].children[0].value;
+  const descriptionIndex = event.target.children.length - 2;
+  const description = event.target.children[descriptionIndex].children[1].value;
   for (let i = 2; i < descriptionIndex; i++) {
-    const fieldCheck = event.target.children[i].innerText[0]
+    const fieldCheck = event.target.children[i].innerText[0];
     if (fieldCheck !== "W" && fieldCheck !== "S") {
       // debugger
-      const amount = event.target.children[i].children[0].children[1].children[0].value
-      const account = event.target.children[i].children[1].children[1].innerText
-      transactions.push([amount, account])
+      const amount =
+        event.target.children[i].children[0].children[1].children[0].value;
+      const account =
+        event.target.children[i].children[1].children[1].innerText;
+      transactions.push([amount, account]);
       // api.transaction
     }
   }
 
   // console.log(transactions)
-  createEntry(date, description, userId)
+  createEntry(date, description, userId);
   // console.log('date: ', date)
   // console.log('description: ', description)
   // console.log(currentDebits)
   // delete currentDebits
   // delete currentCredits
   // console.log(currentCredits);
-  event.target.reset()
-  resetTransactions()
+  event.target.reset();
+  resetTransactions();
   // resetTransactions(currentDebits)
   // resetTransactions(currentCredits)
   // transactions.length = 0
-}
+};
 
 const resetTransactions = () => {
   for (const key in currentDebits) {
-    delete currentDebits[key]
+    delete currentDebits[key];
   }
   for (const key in currentCredits) {
-    delete currentCredits[key]
+    delete currentCredits[key];
   }
-}
+};
 
 const createEntry = (date, description, userId) => {
-  api.entries.createEntry(date, description, userId)
-    .then(json => {
-      if (json.error) {
-        console.log("ERROR")
-      } else {
-        // console.log(json)
-        // getEntryIds(json.id)
-        // createTransactions(json.id)
-        getAccountNumbers(json.id, userId)
-      }
-    })
-}
+  api.entries.createEntry(date, description, userId).then(json => {
+    if (json.error) {
+      console.log("ERROR");
+    } else {
+      // console.log(json)
+      // getEntryIds(json.id)
+      // createTransactions(json.id)
+      getAccountNumbers(json.id, userId);
+    }
+  });
+};
 
 const getAccountNumbers = (entryId, userId) => {
   // console.log(transactions)
   // debugger
-  transactions.forEach((transaction) => {
-    const amount = transaction[0]
-    const accountName = transaction[1]
+  transactions.forEach(transaction => {
+    const amount = transaction[0];
+    const accountName = transaction[1];
     // debugger
     // console.log('amt: ', amount)
     // console.log('acct ', accountName)
-    api.accounts.getAccountId(accountName)
-      .then(account => {
-        api.transactions.createTransaction(amount, account.id, entryId)
+    api.accounts.getAccountId(accountName, userId).then(account => {
+      api.transactions.createTransaction(amount, account.id, entryId);
 
-        // createTransaction(transaction[0], entryId, account.id)
-      })
-  })
-  transactions.length = 0
-}
-
-
+      // createTransaction(transaction[0], entryId, account.id)
+    });
+  });
+  transactions.length = 0;
+};
 
 // const getEntryIds = (entryId) => {
 //
 // }
 
 // const createTransaction = (amount, entryId, accountId) => {
-  // for (let transaction of transactions) {
-  //   const amount = parseFloat(transaction[0])
-  //   const account = transaction[1]
-  //   console.log(transaction)
+// for (let transaction of transactions) {
+//   const amount = parseFloat(transaction[0])
+//   const account = transaction[1]
+//   console.log(transaction)
 // }
 
 export {
@@ -133,5 +132,5 @@ export {
   // removeCreditBalance,
   calcDebitBalance,
   calcCreditBalance,
-  resetTransactions,
-}
+  resetTransactions
+};

@@ -27,7 +27,7 @@ const NewAccountForm = props => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    debugger;
+    // debugger;
     const accountName =
       event.target.children[0].children[0].children[1].children[0].value;
     const description = event.target.children[1].children[1].value;

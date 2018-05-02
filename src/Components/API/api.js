@@ -90,9 +90,9 @@ const readAccount = accountId => {
   );
 };
 
-const getAccountId = accountName => {
-  return fetch(`${API_ROOT}/accountname/${accountName}/`).then(response =>
-    response.json()
+const getAccountId = (accountName, userId) => {
+  return fetch(`${API_ROOT}/accountname/${accountName}/${userId}`).then(
+    response => response.json()
   );
 };
 
