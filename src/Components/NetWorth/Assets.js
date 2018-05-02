@@ -9,7 +9,7 @@ const tableHeader = "Assets";
 
 const subcategories = [1, 2, 3, 4];
 
-const Asset = props => {
+const Assets = props => {
   const filterEntriesWithinDateRange = () => {
     return financialStatementHelpers.filterEntriesWithinDateRange(
       props.entries,
@@ -162,4 +162,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, null)(Asset);
+export default connect(mapStateToProps, null)(Assets);

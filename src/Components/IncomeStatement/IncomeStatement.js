@@ -3,7 +3,6 @@ import Spending from "./Spending";
 import Earning from "./Earning";
 import TimingFilter from "./TimingFilter";
 import { Segment, Header } from "semantic-ui-react";
-import { totalForSubcategory } from "../MainSegment/TransactionFunctions";
 import { connect } from "react-redux";
 import formatNumber from "../../HelperFunctions/formatNumber";
 import financialStatementHelpers from "../../HelperFunctions/financialStatementHelpers";

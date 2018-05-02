@@ -27,7 +27,7 @@ const updateDebitBalance = event => {
 
 const updateCreditBalance = event => {
   const currentKey = event.target.name;
-  const currentVal = parseFloat(parseFloat(event.target.value).toFixed(2));
+  const currentVal = -parseFloat(parseFloat(event.target.value).toFixed(2));
   currentCredits[currentKey] = currentVal;
   return calcCreditBalance();
 };

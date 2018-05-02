@@ -9,7 +9,7 @@ const tableHeader = "Income";
 
 const subcategories = [8];
 
-const Asset = props => {
+const Earning = props => {
   const filterEntriesWithinDateRange = () => {
     return financialStatementHelpers.filterEntriesWithinDateRange(
       props.entries,
@@ -157,9 +157,9 @@ const mapStateToProps = state => {
   return {
     accounts: state.userInfo.accounts,
     entries: state.userInfo.entries,
-    beginDate: 0,
-    endDate: state.netWorthContainer.asOfDate
+    beginDate: state.netIncomeContainer.beginDate,
+    endDate: state.netIncomeContainer.endDate
   };
 };
 
-export default connect(mapStateToProps, null)(Asset);
+export default connect(mapStateToProps, null)(Earning);

@@ -43,6 +43,8 @@ const NewAccountForm = props => {
         // response.json();
       }
     );
+    event.target.reset();
+
     // props.accountSubmitted(
     //   accountName,
     //   description,
