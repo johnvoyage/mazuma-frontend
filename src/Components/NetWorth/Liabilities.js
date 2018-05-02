@@ -61,14 +61,12 @@ const Liability = props => {
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell textAlign="center" colSpan="3">
-            Liability
+            Liabilities
           </Table.HeaderCell>
         </Table.Row>
         <Table.Row>
           <Table.HeaderCell textAlign="center">Account</Table.HeaderCell>
-          <Table.HeaderCell textAlign="center">
-            Number of Entries
-          </Table.HeaderCell>
+          <Table.HeaderCell textAlign="center"># of Entries</Table.HeaderCell>
           <Table.HeaderCell textAlign="center">Amount</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
