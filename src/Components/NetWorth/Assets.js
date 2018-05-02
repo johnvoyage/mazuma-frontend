@@ -11,21 +11,84 @@ import entriesFilter from "../../HelperFunctions/entriesFilter";
 import { Table } from "semantic-ui-react";
 
 const Asset = props => {
-  const renderRows = (
-    subcategoryId,
-    usersAccounts,
-    usersEntries,
-    beginDate,
-    endDate
-  ) => {
-    console.log(
-      entriesFilter.filterEntriesWithinDateRange(
-        usersEntries,
-        beginDate,
-        endDate
-      )
+  const subtotalHeader = subcategoryId => {
+    return (
+      <Table.Row key={-1}>
+        <Table.Cell textAlign="center" colSpan="3">
+          {entriesFilter.subcategoryIdToName(subcategoryId)}
+        </Table.Cell>
+      </Table.Row>
     );
   };
+  const accountsToDisplay = subcategoryId => {
+    // console.log(
+    return entriesFilter.filterAccountsOfSubcategoryId(
+      subcategoryId,
+      entriesFilter.mapArrayOfAccountIdsToAccountObjects(
+        entriesFilter.reduceNestedArrayOfAccountIds(
+          entriesFilter.mapAccountIdsUsedInEntries(
+            entriesFilter.filterEntriesWithinDateRange(
+              props.entries,
+              props.beginDate,
+              props.endDate
+            )
+          )
+        ),
+        props.accounts
+      )
+    );
+    // );
+  };
+  const renderRows = subcategoryId => {
+    const arrayOfRows = accountsToDisplay(subcategoryId).map(
+      (account, index) => {
+        return (
+          <Table.Row key={index}>
+            <Table.Cell textAlign="center">{account.name}</Table.Cell>
+            <Table.Cell />
+            <Table.Cell />
+          </Table.Row>
+        );
+      }
+    );
+    arrayOfRows.unshift(
+      <Table.Row key={-1}>
+        <Table.Cell textAlign="center" colSpan="3">
+          {subcategoryIdToName(subcategoryId)}
+        </Table.Cell>
+      </Table.Row>
+    );
+    return arrayOfRows;
+    // arrayOfSubcategoryIds.forEach(subcategoryId => {
+    // console.log(
+    //   entriesFilter.filterAccountsOfSubcategoryId(
+    //     1,
+    //     entriesFilter.mapArrayOfAccountIdsToAccountObjects(
+    //       entriesFilter.reduceNestedArrayOfAccountIds(
+    //         entriesFilter.mapAccountIdsUsedInEntries(
+    //           entriesFilter.filterEntriesWithinDateRange(
+    //             usersEntries,
+    //             beginDate,
+    //             endDate
+    //           )
+    //         )
+    //       ),
+    //       usersAccounts
+    //     )
+    //   )
+    // );
+    // // });
+    // return;
+  };
+
+  // const filterEntriesWithinDateRange = (usersEntries, beginDate, endDate) => {
+  //   return entriesFilter.filterEntriesWithinDateRange(
+  //     usersEntries,
+  //     beginDate,
+  //     endDate
+  //   );
+  // };
+
   return (
     <Table celled structured>
       <Table.Header>
@@ -41,13 +104,10 @@ const Asset = props => {
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {renderRows(
-          1,
-          props.accounts,
-          props.entries,
-          props.beginDate,
-          props.endDate
-        )}
+        {renderRows(1)}
+        {renderRows(2)}
+        {renderRows(3)}
+        {renderRows(4)}
       </Table.Body>
       <Table.Footer fullWidth>
         <Table.Row>
