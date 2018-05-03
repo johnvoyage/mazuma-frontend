@@ -49,7 +49,7 @@ const TransactionsFilter = props => {
         <Form.Group>
           <Form.Input type="hidden" width={4} />
           <Form.Input
-            label="$ Amount  ≥ ... (enter as positive)"
+            label="$ Amount  ≥ ... "
             type="number"
             min="0.01"
             step="0.01"

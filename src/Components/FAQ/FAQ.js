@@ -1,8 +1,8 @@
 // import faker from 'faker'
 // import _ from 'lodash'
-import React from 'react'
-import { Accordion } from 'semantic-ui-react'
-import panels from './TitleAndContent'
+import React from "react";
+import { Accordion } from "semantic-ui-react";
+import panels from "./TitleAndContent";
 
 // const panels = _.times(3, () => ({
 //   title: 'this is a title',
@@ -12,12 +12,7 @@ import panels from './TitleAndContent'
 // console.log(panels)
 
 const FAQ = () => (
-  <Accordion
-    defaultActiveIndex={[0]}
-    panels={ panels }
-    exclusive={false}
-    fluid
-  />
-)
+  <Accordion defaultActiveIndex={[0]} panels={panels} exclusive={false} fluid />
+);
 
-export default FAQ
+export default FAQ;

@@ -47,7 +47,7 @@ const newTransactionSubmitted = (event, userId) => {
   const description = event.target.children[descriptionIndex].children[1].value;
   for (let i = 2; i < descriptionIndex; i++) {
     const fieldCheck = event.target.children[i].innerText[0];
-    if (fieldCheck !== "W" && fieldCheck !== "S") {
+    if (fieldCheck !== "W" && fieldCheck !== "S" && fieldCheck !== "I") {
       // debugger
       const amount =
         event.target.children[i].children[0].children[1].children[0].value;

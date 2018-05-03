@@ -3,6 +3,10 @@ import { connect } from "react-redux";
 import { Button, Popup, Checkbox } from "semantic-ui-react";
 import api from "../API/api";
 import UserHomeStats from "./UserHomeStats";
+import UserInfo from "./UserInfo";
+
+import Goals from "./Goals";
+
 // import fetchUsersInformation from '../UserAccount/FetchUsersData';
 
 class UserAccountPage extends React.Component {
@@ -91,21 +95,14 @@ class UserAccountPage extends React.Component {
     return (
       <div>
         <UserHomeStats />
-        <h3>Email address: {this.props.email}</h3>
-        <h3>Goals: </h3>
+        <UserInfo />
+
+        <Goals />
         <h3>
           View/edit accounts: <Checkbox toggle />
         </h3>
 
         <Button.Group attached="bottom">
-          <Button
-            onClick={() => {
-              // this.handleEdit
-              console.log("edit!");
-            }}
-          >
-            Edit Account
-          </Button>
           <Popup
             trigger={<Button color="red" content="Delete Account" />}
             content={
@@ -116,7 +113,7 @@ class UserAccountPage extends React.Component {
               />
             }
             on="click"
-            position="top center"
+            position="bottom center"
           />
         </Button.Group>
       </div>
@@ -124,6 +121,15 @@ class UserAccountPage extends React.Component {
   }
   // export default UserAccountPage
 }
+
+// <Button
+//   onClick={() => {
+//     // this.handleEdit
+//     console.log("edit!");
+//   }}
+// >
+//   Edit Account
+// </Button>
 
 const mapStateToProps = state => {
   return {

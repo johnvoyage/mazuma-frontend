@@ -109,12 +109,18 @@ const NewTransactionForm = props => {
           // onChange={handleChange}
         />
         <h3>What you received:</h3>
+        <h4>
+          Increases assets and expenses. Decreases liabilities and earnings.
+        </h4>
         {renderFields(props.formDebitFields, "formDebitFields")}
         <h3>
           Subtotal: &emsp;
           {formatNumber.standard(calcDebitBalance().toFixed(2), " $ ")}
         </h3>
         <h3>What you gave:</h3>
+        <h4>
+          Increases liabilities and earnings. Decreases assets and expenses.
+        </h4>
         {renderFields(props.formCreditFields, "formCreditFields")}
         <h3>
           Subtotal: &emsp;
@@ -126,7 +132,6 @@ const NewTransactionForm = props => {
             {Math.abs(props.transactionBalance).toFixed(2)}{" "}
           </h4>
         ) : null}
-
         <Form.Field
           name="description"
           control={TextArea}
