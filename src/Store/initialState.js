@@ -1,14 +1,4 @@
-let today = new Date();
-let dd = today.getDate();
-let mm = today.getMonth() + 1;
-let yyyy = today.getFullYear();
-if (dd < 10) {
-  dd = "0" + dd;
-}
-if (mm < 10) {
-  mm = "0" + mm;
-}
-today = `${yyyy}-${mm}-${dd}`;
+import { todayFormatted } from "../StaticOptions/currentDate";
 
 const initialState = {
   loading: false,
@@ -30,18 +20,20 @@ const initialState = {
   transactionContainer: {
     descriptionToggle: true,
     filterSelected: "none",
-    newTransaction: false,
-    newAccount: false,
+    // viewTransactions: true,
+    // newTransaction: false,
+    // newAccount: false,
+    topRow: "view transactions",
     formDebitFields: 1,
     formCreditFields: 1,
     transactionBalance: 0
   },
   netIncomeContainer: {
     beginDate: "2000-01-01",
-    endDate: today
+    endDate: todayFormatted
   },
   netWorthContainer: {
-    asOfDate: today
+    asOfDate: todayFormatted
   }
   // accounts: null,
   // netWorthContainer: {

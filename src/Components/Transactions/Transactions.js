@@ -1,21 +1,18 @@
-import React from 'react'
+import React from "react";
 // import { Icon, Table } from 'semantic-ui-react'
-import { connect } from 'react-redux';
-import SelectedFilters from './SelectedFilters';
-import TransactionsTable from './TransactionsTable';
-import NewTransactionForm from './NewTransactionForm';
-import NewAccountForm from './NewAccountForm';
+import { connect } from "react-redux";
+import TransactionsTopRow from "./TransactionsTopRow";
+import TransactionsTable from "./TransactionsTable";
+import NewTransactionForm from "./NewTransactionForm";
+import NewAccountForm from "./NewAccountForm";
 // import api from '../API/api';
 
-import QuickFilters from './QuickFilters';
-import CustomFilters from './CustomFilters';
+// import QuickFilters from "./QuickFilters";
+// import CustomFilters from "./CustomFilters";
 
 // import api from '../API/api';
 
-
-class Transactions extends React.Component {
-
-
+const Transactions = props => {
   // componentDidMount = () => {
   //   api.accounts.allUsersAccounts(this.props.id)
   //     .then(json => this.props.setUsersAccounts(json))
@@ -57,69 +54,48 @@ class Transactions extends React.Component {
   //   })
   // }
 
-  renderFilter = (filterSelected) => {
+  const renderFilter = filterSelected => {
     switch (filterSelected) {
-      case 'none':
-        return null
-      case 'quick':
-        return <QuickFilters />
-      case 'custom':
-        return <CustomFilters />
+      case "view transactions":
+        return (
+          <div>
+            <TransactionsFilter />
+            <TransactionsTable />
+          </div>
+        );
+
+      case "new transaction":
+        return <NewTransactionForm />;
+      case "new account":
+        return <NewAccountForm />;
       default:
-        return "Bug in Transactions > renderFilter"
-
+        return "Bug in Transactions > renderFilter";
     }
-  }
+  };
 
-  render() {
-    return(
-      <div>
-        <SelectedFilters />
+  // render() {
+  return (
+    <div>
+      <TransactionsTopRow />
+      <br />
+      {renderFilter(props.topRow)}
+    </div>
+  );
+  // }
+};
 
-        <br />
-        <br />
-        {
-          this.props.newAccount ?
-          <NewAccountForm /> :
-          null
-        }
-        {
-          this.props.newTransaction ?
-          <NewTransactionForm /> :
-          null
-        }
-
-        <br />
-        <br />
-
-        {
-          this.renderFilter(this.props.filterSelected)
-        }
-
-
-        <br />
-        <br />
-        <TransactionsTable />
-
-
-
-      </div>
-    )
-  }
-}
-
-
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    newTransaction: state.transactionContainer.newTransaction,
-    newAccount: state.transactionContainer.newAccount,
-
-    filterSelected: state.transactionContainer.filterSelected,
+    // newTransaction: state.transactionContainer.newTransaction,
+    // newAccount: state.transactionContainer.newAccount,
+    //
+    // filterSelected: state.transactionContainer.filterSelected,
     // id: state.userInfo.id,
     // email: state.userInfo.email,
     // // userId: state.userInfo.id
     // accounts: state.userInfo.accounts,
     // entries: state.userInfo.entries,
+    topRow: state.transactionContainer.topRow
   };
 };
 
@@ -140,9 +116,8 @@ const mapStateToProps = (state) => {
 //   }
 // }
 
-export default
-connect(
+export default connect(
   mapStateToProps,
   // mapDispatchToProps
   null
-)(Transactions)
+)(Transactions);

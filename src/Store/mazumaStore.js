@@ -105,23 +105,23 @@ const rootReducer = (state = initialState, action) => {
           descriptionToggle: !state.transactionContainer.descriptionToggle
         }
       };
-    case "TOGGLE_TRANSACTION_FILTER":
-      return {
-        ...state,
-        transactionContainer: {
-          ...state.transactionContainer,
-          filterSelected: action.filterSelected
-        }
-      };
-    case "TOGGLE_NEW_TRANSACTION":
-      return {
-        ...state,
-        transactionContainer: {
-          ...state.transactionContainer,
-          newTransaction: !state.transactionContainer.newTransaction,
-          newAccount: false
-        }
-      };
+    // case "TOGGLE_TRANSACTION_FILTER":
+    //   return {
+    //     ...state,
+    //     transactionContainer: {
+    //       ...state.transactionContainer,
+    //       filterSelected: action.filterSelected
+    //     }
+    //   };
+    // case "TOGGLE_NEW_TRANSACTION":
+    //   return {
+    //     ...state,
+    //     transactionContainer: {
+    //       ...state.transactionContainer,
+    //       newTransaction: !state.transactionContainer.newTransaction,
+    //       newAccount: false
+    //     }
+    //   };
     case "TRANSACTION_SUBMITTED":
       return {
         ...state,
@@ -137,15 +137,15 @@ const rootReducer = (state = initialState, action) => {
           newTransaction: false
         }
       };
-    case "TOGGLE_NEW_ACCOUNT":
-      return {
-        ...state,
-        transactionContainer: {
-          ...state.transactionContainer,
-          newAccount: !state.transactionContainer.newAccount,
-          newTransaction: false
-        }
-      };
+    // case "TOGGLE_NEW_ACCOUNT":
+    //   return {
+    //     ...state,
+    //     transactionContainer: {
+    //       ...state.transactionContainer,
+    //       newAccount: !state.transactionContainer.newAccount,
+    //       newTransaction: false
+    //     }
+    //   };
     case "UPDATE_TRANSACTION_BALANCE":
       return {
         ...state,
@@ -166,6 +166,14 @@ const rootReducer = (state = initialState, action) => {
     //   return {
     //     ...state
     //   }
+    case "TOGGLE_TRANSACTION_TOP_ROW":
+      return {
+        ...state,
+        transactionContainer: {
+          ...state.transactionContainer,
+          topRow: action.topRow
+        }
+      };
 
     /* GENERIC FORM UPDATE */
     case "UPDATE_DATE":
