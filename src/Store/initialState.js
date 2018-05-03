@@ -8,8 +8,8 @@ const initialState = {
     email: null,
     entries: null,
     accounts: null,
-    dateCreated: null,
-    firstTimeLoaded: false
+    dateCreated: null
+    // firstTimeLoaded: false
   },
   // formInput: {
   //   signUpForm: {},

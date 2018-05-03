@@ -5,25 +5,18 @@ const rootReducer = (state = initialState, action) => {
   // console.log('current state: ', state);
   // console.log('action: ', action);
   switch (action.type) {
-    /* ASYNC_START */
     case "ASYNC_START":
-      // console.log("here!!!!?");
-
       return { ...state, loading: true };
     case "ASYNC_STOP":
-      // console.log("here!!!!?");
-
       return { ...state, loading: false };
-    /* USER ACCOUNT INFO */
-    /* USER ACCOUNT INFO */
-    case "FIRST_TIME_LOADED_TRUE":
-      return {
-        ...state,
-        userInfo: {
-          ...state.userInfo,
-          firstTimeLoaded: true
-        }
-      };
+    // case "FIRST_TIME_LOADED_TRUE":
+    //   return {
+    //     ...state,
+    //     userInfo: {
+    //       ...state.userInfo,
+    //       firstTimeLoaded: true
+    //     }
+    //   };
     case "SIGN_USER_UP":
       return {
         ...state,
