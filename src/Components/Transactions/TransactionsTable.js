@@ -89,11 +89,17 @@ const TransactionsTable = props => {
     <Table celled structured>
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell textAlign="center">Transaction</Table.HeaderCell>
-          <Table.HeaderCell textAlign="center">Account</Table.HeaderCell>
-          <Table.HeaderCell textAlign="center">Amount</Table.HeaderCell>
-          <Table.HeaderCell />
-          <Table.HeaderCell />
+          <Table.HeaderCell width={3} textAlign="center">
+            Transaction
+          </Table.HeaderCell>
+          <Table.HeaderCell width={8} textAlign="center">
+            Account
+          </Table.HeaderCell>
+          <Table.HeaderCell width={3} textAlign="center">
+            Amount
+          </Table.HeaderCell>
+          <Table.HeaderCell width={1} />
+          <Table.HeaderCell width={1} />
         </Table.Row>
       </Table.Header>
       <Table.Body>{renderTransactions()}</Table.Body>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Segment, Form, Select, TextArea } from "semantic-ui-react";
+import { Segment, Form, Select, TextArea, Header } from "semantic-ui-react";
 import { connect } from "react-redux";
 // import { bindActionCreators } from "redux";
 // import { fetchUserData } from "../../Actions/fetchUserData";
@@ -67,7 +67,8 @@ const NewAccountForm = props => {
 
   return (
     <Segment>
-      <h1>New Account</h1>
+      <Header as="h1" textAlign="center" content="New Account" />
+
       <Form onSubmit={handleSubmit}>
         <Form.Group widths="equal">
           <Form.Input

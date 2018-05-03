@@ -5,7 +5,8 @@ import {
   Form,
   TextArea,
   Button,
-  Segment
+  Segment,
+  Header
 } from "semantic-ui-react";
 import { connect } from "react-redux";
 import {
@@ -89,8 +90,8 @@ const NewTransactionForm = props => {
   });
 
   return (
-    <Segment compact>
-      <h1>New Transaction</h1>
+    <Segment>
+      <Header as="h1" textAlign="center" content="New Transaction" />
       <Form
         onSubmit={event => {
           newTransactionSubmitted(event, props.userId);
