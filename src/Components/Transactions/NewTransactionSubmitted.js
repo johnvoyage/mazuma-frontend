@@ -4,6 +4,14 @@ const currentDebits = {};
 const currentCredits = {};
 const transactions = [];
 
+// const calcCreditOrDebitBalance = creditOrDebit => {
+//   const balanceCheck = creditOrDebit === "cr" ? currentCredits : currentDebits;
+//   return Object.keys(balanceCheck).reduce((aggr, key) => {
+//     const currentVal = isNaN(balanceCheck[key]) ? 0 : balanceCheck[key];
+//     return aggr + currentVal;
+//   }, 0);
+// };
+
 const calcDebitBalance = () => {
   return Object.keys(currentDebits).reduce((aggr, key) => {
     const currentVal = isNaN(currentDebits[key]) ? 0 : currentDebits[key];

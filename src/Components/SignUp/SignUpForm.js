@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Accordion, Button, Checkbox, Form } from "semantic-ui-react";
 import panels from "./InitialEntry";
 // import fetchUsersInformation from '../UserAccount/FetchUsersData';
+import { fetchUserData } from "../../Actions/fetchUserData";
 
 const SignUpForm = props => {
   let formInput = {};
@@ -15,13 +16,15 @@ const SignUpForm = props => {
         formInput.email,
         formInput.password /*, formInput.tickerSymbol */
       )
-      .then(json => {
-        if (json.error) {
+      .then(user => {
+        if (user.error) {
           console.log("ERROR");
         } else {
           // console.log('...')
-          // fetchUsersInformation(json.id)
-          props.signUserUp(json);
+          // fetchUsersInformation(user.id)
+          // props.fetchUserData(user.id);
+
+          props.signUserIn(user);
         }
       });
   };
@@ -31,7 +34,7 @@ const SignUpForm = props => {
       ...formInput,
       [event.target.name]: event.target.value
     };
-    console.log(formInput);
+    // console.log(formInput);
   };
 
   return (
@@ -81,15 +84,18 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    fetchUserData: userId => {
+      dispatch(fetchUserData(userId));
+    },
     // termsAgreementInit: () => {
     //   dispatch({ type: 'TERMS_AGREEMENT_INIT' })
     // },
     // fetchUsersInformation: (userId) => {
     //   dispatch({ type: 'FETCH_USERS_INFORMATION', userId })
     // },
-    signUserUp: userInfo => {
+    signUserIn: userInfo => {
       // console.log(userInfo);
-      dispatch({ type: "SIGN_USER_UP", userInfo });
+      dispatch({ type: "SIGN_USER_IN", userInfo });
     }
   };
 };

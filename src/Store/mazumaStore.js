@@ -1,7 +1,7 @@
 import initialState from "./initialState";
 import { todayFormatted } from "../StaticOptions/currentDate";
 
-const rootReducer = (state = initialState, action) => {
+const rootReducer = (state = initialState.whole, action) => {
   // console.log('current state: ', state);
   // console.log('action: ', action);
   switch (action.type) {
@@ -9,35 +9,28 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, loading: true };
     case "ASYNC_STOP":
       return { ...state, loading: false };
-    // case "FIRST_TIME_LOADED_TRUE":
+    case "SIGN_USER_IN":
+      return {
+        ...state,
+        userInfo: {
+          ...state.userInfo,
+          id: action.userInfo.id,
+          email: action.userInfo.email,
+          dateCreated: action.userInfo.created_at
+        },
+        activeMenuItem: "Account"
+      };
+    // case "LOG_USER_IN":
+    //   // debugger
     //   return {
     //     ...state,
     //     userInfo: {
     //       ...state.userInfo,
-    //       firstTimeLoaded: true
-    //     }
+    //       id: action.userInfo.id,
+    //       email: action.userInfo.email
+    //     },
+    //     activeMenuItem: "Account"
     //   };
-    case "SIGN_USER_UP":
-      return {
-        ...state,
-        userInfo: {
-          ...state.userInfo,
-          id: action.userInfo.id,
-          email: action.userInfo.email
-        },
-        activeMenuItem: "Account"
-      };
-    case "LOG_USER_IN":
-      // debugger
-      return {
-        ...state,
-        userInfo: {
-          ...state.userInfo,
-          id: action.userInfo.id,
-          email: action.userInfo.email
-        },
-        activeMenuItem: "Account"
-      };
     case "LOG_USER_OUT":
       return {
         ...state,
