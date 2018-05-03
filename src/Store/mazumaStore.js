@@ -10,6 +10,11 @@ const rootReducer = (state = initialState, action) => {
       // console.log("here!!!!?");
 
       return { ...state, loading: true };
+    case "ASYNC_STOP":
+      // console.log("here!!!!?");
+
+      return { ...state, loading: false };
+    /* USER ACCOUNT INFO */
     /* USER ACCOUNT INFO */
     case "FIRST_TIME_LOADED_TRUE":
       return {
