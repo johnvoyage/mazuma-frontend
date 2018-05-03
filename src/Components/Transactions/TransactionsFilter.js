@@ -73,13 +73,15 @@ const TransactionsFilter = props => {
 
         <Form.Group>
           <Form.Input type="hidden" width={4} />
-          <Dropdown
-            placeholder="Skills"
-            fluid
-            multiple
-            selection
-            options={options}
-          />
+          <Form.Input label="Includes account(s)..." type="hidden" width={8}>
+            <Dropdown
+              placeholder="Skills"
+              fluid
+              multiple
+              selection
+              options={options}
+            />
+          </Form.Input>
           <Form.Input type="hidden" width={4} />
         </Form.Group>
         <Form.Group>

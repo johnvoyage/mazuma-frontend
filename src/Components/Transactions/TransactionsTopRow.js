@@ -79,7 +79,7 @@ const SelectedFilters = props => {
           <Checkbox
             name="showFilters"
             label="Show filters"
-            checked={!props.showFilters}
+            checked={props.showFilters}
             onChange={handleChange}
           />
           {"  "}
