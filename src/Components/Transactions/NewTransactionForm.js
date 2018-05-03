@@ -18,6 +18,7 @@ import {
 } from "./NewTransactionSubmitted";
 // import { bindActionCreators } from "redux";
 // import { fetchTransactions } from "../../Actions/fetchTransactions";
+import formatNumber from "../../HelperFunctions/formatNumber";
 
 const NewTransactionForm = props => {
   const renderFields = (numOfFields, formType) => {
@@ -108,10 +109,16 @@ const NewTransactionForm = props => {
         />
         <h3>What you received:</h3>
         {renderFields(props.formDebitFields, "formDebitFields")}
-        <h3>Subtotal: &emsp; $ {calcDebitBalance().toFixed(2)}</h3>
+        <h3>
+          Subtotal: &emsp;
+          {formatNumber.standard(calcDebitBalance().toFixed(2), " $ ")}
+        </h3>
         <h3>What you gave:</h3>
         {renderFields(props.formCreditFields, "formCreditFields")}
-        <h3>Subtotal: &emsp; $ {-calcCreditBalance().toFixed(2)}</h3>
+        <h3>
+          Subtotal: &emsp;
+          {formatNumber.standard(-calcCreditBalance().toFixed(2), " $ ")}
+        </h3>
         {props.transactionBalance !== 0 ? (
           <h4 id="out-of-bal">
             Currently out of balance by: &emsp; ${" "}

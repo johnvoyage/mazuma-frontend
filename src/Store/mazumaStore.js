@@ -169,12 +169,6 @@ const rootReducer = (state = initialState, action) => {
 
     /* GENERIC FORM UPDATE */
     case "UPDATE_DATE":
-      // debugger;
-      // let updatedState = { ...state };
-      // updatedState.netWorthContainer.asOfDate = action.newDate;
-      // return updatedState;
-      // console.log(action.newDate);
-
       return {
         ...state,
         [action.container]: {

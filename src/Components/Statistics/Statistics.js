@@ -1,21 +1,32 @@
-import React from 'react';
-import { Line } from 'react-chartjs-2';
-import GraphOptions from './GraphOptions';
-import data from './Data'
-import { connect } from 'react-redux';
+import React from "react";
+import { Line } from "react-chartjs-2";
+import GraphOptions from "./GraphOptions";
+import TimingFilter from "./TimingFilter";
 
+import data from "./Data";
+import { connect } from "react-redux";
 
-const Statistics = (props) => {
-
+const Statistics = props => {
   // data: [65, 59, 80, 81, 56, 55, 40]
   // labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
 
-  data.datasets[0].data = [65, 59, 80, 81, 56, 55, 40]
-  data.labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July']
+  data.datasets[0].data = [65, 59, 80, 81, 56, 55, 40];
+  data.labels = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July"
+  ];
 
-  return(
+  return (
     <div>
       <GraphOptions />
+      <br />
+      <TimingFilter />
+      <br />
       <Line
         data={data}
         // width={100}
@@ -25,14 +36,13 @@ const Statistics = (props) => {
         // }}
       />
     </div>
-  )
-}
+  );
+};
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     entries: state.userInfo.entries,
-    accounts: state.userInfo.accounts,
-
+    accounts: state.userInfo.accounts
   };
 };
 
@@ -40,4 +50,4 @@ export default connect(
   mapStateToProps,
   // mapDispatchToProps
   null
-)(Statistics)
+)(Statistics);
