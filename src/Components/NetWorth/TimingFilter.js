@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Header } from "semantic-ui-react";
+import { Form, Input, Header } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { todayInEnglish } from "../../StaticOptions/currentDate";
 
@@ -11,16 +11,17 @@ const TimingFilter = props => {
   return (
     <Form>
       <Form.Group widths="equal">
-        <Form.Input type="hidden" width={6} />
-        <label>As of...</label>
-        <Form.Input
-          fluid
-          onChange={handleChange}
-          value={props.asOfDate}
-          type="date"
-          width={4}
-        />
-        <Form.Input type="hidden" width={6} />
+        <Form.Field width={6} />
+        <Form.Field width={4} inline>
+          <label>As of...</label>
+          <Input
+            onChange={handleChange}
+            name="asOfDate"
+            value={props.asOfDate}
+            type="date"
+          />
+        </Form.Field>
+        <Form.Field width={6} />
       </Form.Group>
       <Header as="h5" textAlign="center">
         Note: hit 'x' to reset to today: ({todayInEnglish})

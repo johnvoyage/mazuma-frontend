@@ -16,7 +16,7 @@ const NetWorth = props => {
       arrayOfSubcategoryIds,
       props.accounts
     );
-    return formatNumber.standard(
+    return formatNumber.withoutCents(
       financialStatementHelpers
         .mapTransactionsOfEntries(
           financialStatementHelpers.filterEntriesWithinDateRange(
