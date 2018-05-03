@@ -42,7 +42,6 @@ const CurrentGoals = () => {
 
         <Table.Footer fullWidth>
           <Table.Row>
-            <Table.HeaderCell />
             <Table.HeaderCell colSpan="4">
               <Button
                 floated="right"
@@ -53,9 +52,11 @@ const CurrentGoals = () => {
               >
                 <Icon name="user" /> Add User
               </Button>
-              <Button size="small">Approve</Button>
+              <Button size="small">Chart All</Button>
+              <Button size="small">Chart None</Button>
+
               <Button disabled size="small">
-                Approve All
+                Save Charting
               </Button>
             </Table.HeaderCell>
           </Table.Row>

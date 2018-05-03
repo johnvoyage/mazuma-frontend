@@ -37,11 +37,17 @@ const NewAccountForm = props => {
       subcategoryName
       // accountSubcategoryOptions
     );
-    createAccount(accountName, description, subcategoryId, props.userId).then(
-      json => {
-        console.log(json);
-        // response.json();
-      }
+    // createAccount(accountName, description, subcategoryId, props.userId).then(
+    //   json => {
+    //     console.log(json);
+    //     // response.json();
+    //   }
+    // );
+    props.newAccountSubmitted(
+      accountName,
+      description,
+      subcategoryId,
+      props.userId
     );
     event.target.reset();
 
@@ -121,9 +127,11 @@ const mapDispatchToProps = dispatch => {
     // updateForm: (formKey, formValue) => {
     //   dispatch({ type: "UPDATE_FORM", formKey, formValue });
     // }
-    // updateUserData: userId => {
-    //   bindActionCreators(fetchUserData(userId), dispatch);
-    // }
+    newAccountSubmitted: (accountName, description, subcategoryId, userId) => {
+      // console.log("inside mapdisp");
+
+      dispatch(createAccount(accountName, description, subcategoryId, userId));
+    }
   };
 };
 

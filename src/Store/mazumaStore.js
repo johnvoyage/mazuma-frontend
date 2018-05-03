@@ -7,6 +7,8 @@ const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     /* ASYNC_START */
     case "ASYNC_START":
+      // console.log("here!!!!?");
+
       return { ...state, loading: true };
     /* USER ACCOUNT INFO */
     case "FIRST_TIME_LOADED_TRUE":
@@ -122,6 +124,9 @@ const rootReducer = (state = initialState, action) => {
     //       newAccount: false
     //     }
     //   };
+    case "NEW_ACCOUNT":
+      debugger;
+      return { ...state };
     case "TRANSACTION_SUBMITTED":
       return {
         ...state,

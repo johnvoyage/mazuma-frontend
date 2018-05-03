@@ -44,15 +44,16 @@ const NewGoal = () => {
   return (
     <Segment>
       <h3>New Goal:</h3>
-      <Input>
+      <Input fluid>
         <Select compact options={firstOptions} defaultValue="increase" />
 
         <Select compact options={increaseOptions} defaultValue="net worth" />
         <Input label="by" type="hidden" />
-        <Input type="number" min="0.01" step="0.01" />
-        <Select compact options={percentOrAmount} defaultValue="$" />
+        <Input type="number" min="0.01" step="0.01" defaultValue="5" />
+
+        <Select compact options={percentOrAmount} defaultValue="%" />
         <Input label="every" type="hidden" />
-        <Select compact options={timeframe} defaultValue="month" />
+        <Select compact options={timeframe} defaultValue="six months" />
 
         <Button type="submit">Add Goal</Button>
       </Input>

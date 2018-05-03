@@ -2,6 +2,7 @@ import React from "react";
 import { Line } from "react-chartjs-2";
 import GraphOptions from "./GraphOptions";
 import TimingFilter from "./TimingFilter";
+import { Segment } from "semantic-ui-react";
 
 import data from "./Data";
 import { connect } from "react-redux";
@@ -27,14 +28,16 @@ const Statistics = props => {
       <br />
       <TimingFilter />
       <br />
-      <Line
-        data={data}
-        // width={100}
-        // height={50}
-        // options={{
-        //   maintainAspectRatio: false
-        // }}
-      />
+      <Segment>
+        <Line
+          data={data}
+          // width={100}
+          // height={50}
+          // options={{
+          //   maintainAspectRatio: false
+          // }}
+        />
+      </Segment>
     </div>
   );
 };
