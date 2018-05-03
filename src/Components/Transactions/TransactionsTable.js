@@ -72,7 +72,7 @@ const TransactionsTable = props => {
         }
       });
 
-      if (props.descriptionToggle) {
+      if (props.showDescriptions) {
         tableRows.push(
           <Table.Row key={`${keyCounter++}`}>
             <Table.Cell colSpan={5}>{entry.description}</Table.Cell>
@@ -104,7 +104,7 @@ const TransactionsTable = props => {
 
 const mapStateToProps = state => {
   return {
-    descriptionToggle: state.transactionContainer.descriptionToggle,
+    showDescriptions: state.transactionContainer.showDescriptions,
     entries: state.userInfo.entries
     // ticker: state.userInfo.tickerSymbol
     // agreedToTerms: state.formValidity.signUpForm

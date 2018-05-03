@@ -18,12 +18,24 @@ const initialState = {
   // },
   formInput: {},
   transactionContainer: {
-    descriptionToggle: true,
-    filterSelected: "none",
+    // descriptionToggle: true,
+    // filterSelected: "none",
     // viewTransactions: true,
     // newTransaction: false,
     // newAccount: false,
     topRow: "view transactions",
+    showFilters: false,
+    showDescriptions: false,
+    transactionFilters: {
+      numMin: null,
+      numMax: null,
+      amountMin: null,
+      amountMax: null,
+      dateMin: null,
+      dateMax: null,
+      accountsIncluded: [],
+      descriptionFilter: null
+    },
     formDebitFields: 1,
     formCreditFields: 1,
     transactionBalance: 0

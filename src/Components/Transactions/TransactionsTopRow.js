@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "semantic-ui-react";
+import { Button, Checkbox } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { resetTransactions } from "./NewTransactionSubmitted";
 
@@ -33,39 +33,69 @@ const SelectedFilters = props => {
   //   />
 
   const handleClick = event => {
-    props.toggleTransactionTopRow(event.target.name);
+    const eventName = event.target.name;
+    props.toggleTransactionPrimaryRow(eventName);
     // console.log(event.target.name);
   };
 
+  const handleChange = event => {
+    const eventName = event.target.parentElement.children[0].name;
+    props.toggleTransactionSecondaryRow(eventName);
+  };
+
   return (
-    <Button.Group attached="top">
-      <Button
-        name="view transactions"
-        toggle
-        active={props.topRow === "view transactions"}
-        onClick={handleClick}
-        content="View Transactions"
-      />
-      <Button
-        name="new transaction"
-        toggle
-        active={props.topRow === "new transaction"}
-        onClick={event => {
-          handleClick(event);
-          // props.toggleNewTransaction();
-          // props.updateTransactionBalance(0);
-          resetTransactions();
-        }}
-        content="New Transaction"
-      />
-      <Button
-        name="new account"
-        toggle
-        active={props.topRow === "new account"}
-        onClick={handleClick}
-        content="New Account"
-      />
-    </Button.Group>
+    <div>
+      <Button.Group attached="top">
+        <Button
+          name="view transactions"
+          toggle
+          active={props.topRow === "view transactions"}
+          onClick={handleClick}
+          content="View Transactions"
+        />
+        <Button
+          name="new transaction"
+          toggle
+          active={props.topRow === "new transaction"}
+          onClick={event => {
+            handleClick(event);
+            // props.toggleNewTransaction();
+            // props.updateTransactionBalance(0);
+            resetTransactions();
+          }}
+          content="New Transaction"
+        />
+        <Button
+          name="new account"
+          toggle
+          active={props.topRow === "new account"}
+          onClick={handleClick}
+          content="New Account"
+        />
+      </Button.Group>
+      {props.topRow === "view transactions" ? (
+        <div>
+          <br />
+          <Checkbox
+            name="showFilters"
+            label="Show filters"
+            checked={!props.showFilters}
+            onChange={handleChange}
+          />
+          {"  "}
+          <Checkbox
+            name="showDescriptions"
+            label="Show descriptions"
+            checked={props.showDescriptions}
+            onChange={handleChange}
+          />
+          {"  "}
+          <Button size="mini" content="Clear filters" />
+          <br />
+          <br />
+        </div>
+      ) : null}
+    </div>
   );
 };
 
@@ -75,14 +105,20 @@ const mapStateToProps = state => {
     // newTransaction: state.transactionContainer.newTransaction,
     // newAccount: state.transactionContainer.newAccount,
     // filterSelected: state.transactionContainer.filterSelected
-    topRow: state.transactionContainer.topRow
+    topRow: state.transactionContainer.topRow,
+    showFilters: state.transactionContainer.showFilters,
+    showDescriptions: state.transactionContainer.showDescriptions
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    toggleTransactionDescription: () => {
-      dispatch({ type: "TOGGLE_TRANSACTION_DESCRIPTION" });
+    // toggleTransactionDescription: () => {
+    //   dispatch({ type: "TOGGLE_TRANSACTION_DESCRIPTION" });
+    // },
+
+    toggleTransactionSecondaryRow: checkBox => {
+      dispatch({ type: "TOGGLE_TRANSACTION_SECONDARY_ROW", checkBox });
     },
     // toggleTransactionFilter: event => {
     //   dispatch({
@@ -96,8 +132,8 @@ const mapDispatchToProps = dispatch => {
     // toggleNewAccount: () => {
     //   dispatch({ type: "TOGGLE_NEW_ACCOUNT" });
     // },
-    toggleTransactionTopRow: topRow => {
-      dispatch({ type: "TOGGLE_TRANSACTION_TOP_ROW", topRow });
+    toggleTransactionPrimaryRow: topRow => {
+      dispatch({ type: "TOGGLE_TRANSACTION_PRIMARY_ROW", topRow });
     },
 
     updateTransactionBalance: transactionBalance => {

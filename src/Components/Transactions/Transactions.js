@@ -3,6 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 import TransactionsTopRow from "./TransactionsTopRow";
 import TransactionsTable from "./TransactionsTable";
+import TransactionsFilter from "./TransactionsFilter";
 import NewTransactionForm from "./NewTransactionForm";
 import NewAccountForm from "./NewAccountForm";
 // import api from '../API/api';
@@ -59,7 +60,7 @@ const Transactions = props => {
       case "view transactions":
         return (
           <div>
-            <TransactionsFilter />
+            {props.showFilters ? <TransactionsFilter /> : null}
             <TransactionsTable />
           </div>
         );
@@ -77,7 +78,6 @@ const Transactions = props => {
   return (
     <div>
       <TransactionsTopRow />
-      <br />
       {renderFilter(props.topRow)}
     </div>
   );
@@ -95,6 +95,7 @@ const mapStateToProps = state => {
     // // userId: state.userInfo.id
     // accounts: state.userInfo.accounts,
     // entries: state.userInfo.entries,
+    showFilters: state.transactionContainer.showFilters,
     topRow: state.transactionContainer.topRow
   };
 };

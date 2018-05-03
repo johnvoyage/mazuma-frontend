@@ -166,7 +166,7 @@ const rootReducer = (state = initialState, action) => {
     //   return {
     //     ...state
     //   }
-    case "TOGGLE_TRANSACTION_TOP_ROW":
+    case "TOGGLE_TRANSACTION_PRIMARY_ROW":
       return {
         ...state,
         transactionContainer: {
@@ -174,7 +174,15 @@ const rootReducer = (state = initialState, action) => {
           topRow: action.topRow
         }
       };
-
+    case "TOGGLE_TRANSACTION_SECONDARY_ROW":
+      console.log(action);
+      return {
+        ...state,
+        transactionContainer: {
+          ...state.transactionContainer,
+          [action.checkBox]: !state.transactionContainer[action.checkBox]
+        }
+      };
     /* GENERIC FORM UPDATE */
     case "UPDATE_DATE":
       return {

@@ -89,7 +89,7 @@ const NewTransactionForm = props => {
   });
 
   return (
-    <Segment>
+    <Segment compact>
       <h1>New Transaction</h1>
       <Form
         onSubmit={event => {
