@@ -1,11 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Button, Popup, Checkbox } from "semantic-ui-react";
+import { Button, Popup, Segment } from "semantic-ui-react";
 import api from "../API/api";
 import UserHomeStats from "./UserHomeStats";
 import UserInfo from "./UserInfo";
+import UserAccounts from "./UserAccounts";
+import CurrentGoals from "./CurrentGoals";
 
-import Goals from "./Goals";
+import NewGoal from "./NewGoal";
 
 // import fetchUsersInformation from '../UserAccount/FetchUsersData';
 
@@ -96,11 +98,11 @@ class UserAccountPage extends React.Component {
       <div>
         <UserHomeStats />
         <UserInfo />
-
-        <Goals />
-        <h3>
-          View/edit accounts: <Checkbox toggle />
-        </h3>
+        <Segment>
+          <NewGoal />
+          <CurrentGoals />
+        </Segment>
+        <UserAccounts />
 
         <Button.Group attached="bottom">
           <Popup

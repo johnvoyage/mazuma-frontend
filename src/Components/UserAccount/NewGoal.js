@@ -21,10 +21,10 @@ const increaseOptions = [
   { key: "assets", text: "assets", value: "assets" }
 ];
 
-const decreaseOptions = [
-  { key: "liabilities", text: "liabilities", value: "liabilities" },
-  { key: "spending", text: "spending", value: "spending" }
-];
+// const decreaseOptions = [
+//   { key: "liabilities", text: "liabilities", value: "liabilities" },
+//   { key: "spending", text: "spending", value: "spending" }
+// ];
 
 const percentOrAmount = [
   { key: "%", text: "%", value: "%" },
@@ -40,11 +40,11 @@ const timeframe = [
   { key: "year", text: "year", value: "year" }
 ];
 
-const Goals = () => {
+const NewGoal = () => {
   return (
     <Segment>
-      <h3>Goals:</h3>
-      <Input centered>
+      <h3>New Goal:</h3>
+      <Input>
         <Select compact options={firstOptions} defaultValue="increase" />
 
         <Select compact options={increaseOptions} defaultValue="net worth" />
@@ -60,4 +60,4 @@ const Goals = () => {
   );
 };
 
-export default Goals;
+export default NewGoal;
