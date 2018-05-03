@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TopMenu from "./Components/TopMenu/TopMenu";
 import MainSegmentOne from "./Components/MainSegment/MainSegmentOne";
+import { fetchUserData } from "./Actions/fetchUserData";
 
 import api from "./Components/API/api";
 import { connect } from "react-redux";
@@ -15,7 +16,8 @@ class App extends Component {
         if (json.error) {
           console.log("ERROR");
         } else {
-          this.props.logUserIn(json);
+          this.props.fetchUserData(json.id);
+          this.props.signUserIn(json);
         }
       });
     }
@@ -44,11 +46,13 @@ const mapDispatchToProps = dispatch => {
     // changeLogInStatus: () => {
     //   dispatch({ type: 'CHANGE_LOG_IN_STATUS'})
     // },
-
-    logUserIn: userInfo => {
+    fetchUserData: userId => {
+      dispatch(fetchUserData(userId));
+    },
+    signUserIn: userInfo => {
       // console.log(userInfo)
       // localStorage.setItem('token', userInfo.id)
-      dispatch({ type: "LOG_USER_IN", userInfo });
+      dispatch({ type: "SIGN_USER_IN", userInfo });
     }
   };
 };

@@ -30,33 +30,39 @@ const TransactionsTable = props => {
       // debugger
       tableRows.push(
         <Table.Row key={`${keyCounter++}`}>
-          <Table.Cell textAlign="center" rowSpan={entry.transactions.length}>
+          <Table.Cell
+            textAlign="center"
+            colSpan={2}
+            rowSpan={entry.transactions.length - 1}
+          >
             Transaction: {entry.number}
             <br />
             Date: {entry.date}
           </Table.Cell>
+          {index === entries.length - 1 ? (
+            <div>
+              <Table.Cell
+                onClick={() => console.log("edit entry!")}
+                selectable
+                textAlign="center"
+              >
+                <Icon name="pencil" />
+              </Table.Cell>
+              <Table.Cell
+                onClick={() => console.log("delete entry!")}
+                selectable
+                textAlign="center"
+              >
+                <Icon name="remove" />
+              </Table.Cell>
+            </div>
+          ) : null}
 
           <Table.Cell textAlign="center">
             {entry.transactions[0].account}
           </Table.Cell>
           <Table.Cell textAlign="center">
             {entry.transactions[0].amount}
-          </Table.Cell>
-          <Table.Cell
-            onClick={() => console.log("edit entry!")}
-            rowSpan={entry.transactions.length}
-            selectable
-            textAlign="center"
-          >
-            <Icon name="pencil" />
-          </Table.Cell>
-          <Table.Cell
-            onClick={() => console.log("delete entry!")}
-            rowSpan={entry.transactions.length}
-            selectable
-            textAlign="center"
-          >
-            <Icon name="remove" />
           </Table.Cell>
         </Table.Row>
       );
@@ -89,17 +95,17 @@ const TransactionsTable = props => {
     <Table celled structured>
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell width={3} textAlign="center">
+          <Table.Header width={2} />
+          <Table.Header width={2} />
+          <Table.Header width={9} />
+          <Table.Header width={3} />
+        </Table.Row>
+        <Table.Row>
+          <Table.HeaderCell colSpan={2} textAlign="center">
             Transaction
           </Table.HeaderCell>
-          <Table.HeaderCell width={8} textAlign="center">
-            Account
-          </Table.HeaderCell>
-          <Table.HeaderCell width={3} textAlign="center">
-            Amount
-          </Table.HeaderCell>
-          <Table.HeaderCell width={1} />
-          <Table.HeaderCell width={1} />
+          <Table.HeaderCell textAlign="center">Account</Table.HeaderCell>
+          <Table.HeaderCell textAlign="center">Amount</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>{renderTransactions()}</Table.Body>
@@ -108,6 +114,8 @@ const TransactionsTable = props => {
   // }
 };
 
+// <Table.HeaderCell width={1} />
+// <Table.HeaderCell width={1} />
 const mapStateToProps = state => {
   return {
     showDescriptions: state.transactionContainer.showDescriptions,

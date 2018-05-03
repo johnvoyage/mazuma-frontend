@@ -13,7 +13,7 @@ import NewGoal from "./NewGoal";
 
 class UserAccountPage extends React.Component {
   // let entries
-  /*  
+  /*
   componentDidMount = () => {
     // console.log(this.props.firstTimeLoaded);
     if (!this.props.firstTimeLoaded) {
@@ -30,15 +30,15 @@ class UserAccountPage extends React.Component {
         this.getAllTransactions(this.props.entries);
       });
       this.props.firstTimeLoadedTrue();
-  
+
       // api.transactions.allEntriesTransactions
     }
   };
-  
+
   // mapAccountNames = (accounts) => {
   //   return accounts.map((account) => account.name)
   // }
-  
+
   getAllTransactions = entries => {
     entries.forEach((entry, index) => {
       // console.log(entry)
@@ -117,7 +117,7 @@ class UserAccountPage extends React.Component {
               />
             }
             on="click"
-            position="bottom center"
+            position="top left"
           />
         </Button.Group>
       </div>
