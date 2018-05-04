@@ -1,4 +1,4 @@
-import { todayFormatted } from "../StaticOptions/currentDate";
+import formatDate from "../HelperFunctions/formatDate";
 
 const userInfo = {
   id: null,
@@ -30,7 +30,7 @@ const transactionContainer = {
 
 const chartContainer = {
   beginDate: "2000-01-01",
-  endDate: todayFormatted
+  endDate: formatDate.formatDateJavaScript(new Date())
 };
 
 const whole = {
@@ -41,10 +41,10 @@ const whole = {
   transactionContainer,
   netIncomeContainer: {
     beginDate: "2000-01-01",
-    endDate: todayFormatted
+    endDate: formatDate.formatDateJavaScript(new Date())
   },
   netWorthContainer: {
-    asOfDate: todayFormatted
+    asOfDate: formatDate.formatDateJavaScript(new Date())
   },
   chartContainer
 };

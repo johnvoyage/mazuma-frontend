@@ -1,5 +1,5 @@
 import initialState from "./initialState";
-import { todayFormatted } from "../StaticOptions/currentDate";
+import formatDate from "../HelperFunctions/formatDate";
 
 const rootReducer = (state = initialState.whole, action) => {
   // console.log('current state: ', state);
@@ -185,7 +185,9 @@ const rootReducer = (state = initialState.whole, action) => {
         ...state,
         [action.container]: {
           ...state[action.container],
-          [action.whichDate]: action.newDate ? action.newDate : todayFormatted
+          [action.whichDate]: action.newDate
+            ? action.newDate
+            : formatDate.formatDateJavaScript(new Date())
         }
       };
 

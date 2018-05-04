@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Input, Header } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { todayInEnglish } from "../../StaticOptions/currentDate";
+import formatDate from "../../HelperFunctions/formatDate";
 
 const TimingFilter = props => {
   const handleChange = event => {
@@ -24,7 +24,9 @@ const TimingFilter = props => {
         <Form.Field width={6} />
       </Form.Group>
       <Header as="h5" textAlign="center">
-        Note: hit 'x' to reset to today: ({todayInEnglish})
+        Note: hit 'x' to reset to today: ({formatDate.formatDateEnglish(
+          new Date()
+        )})
       </Header>
     </Form>
   );
