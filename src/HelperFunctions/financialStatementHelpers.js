@@ -1,7 +1,14 @@
 const filterEntriesWithinDateRange = (arrayOfEntries, beginDate, endDate) => {
+  // console.log(endDate);
+  // debugger;
   return arrayOfEntries.filter(entry => {
     const entryDate = entry.date.slice(0, 10);
-    return entryDate >= beginDate.toString() && entryDate <= endDate;
+    return (
+      entryDate >= beginDate.toString() &&
+      new Date(entryDate) <= new Date(endDate)
+    );
+    // new Date(currentDate) < new Date(endDate)
+    // entryDate <= endDate;
   });
 };
 
@@ -23,7 +30,6 @@ const reduceNestedArrayOfAccountIds = nestedArrayOfAccountIds => {
     return aggr;
   }, []);
 };
-
 const mapArrayOfAccountIdsToAccountObjects = (
   arrayOfAccountIds,
   arrayOfAccounts
@@ -85,6 +91,57 @@ const filterAccountIdsOfSubcategories = (
     .map(account => account.id);
 };
 
+// const amountOfEntriesGivenSubcategories = arrayOfSubcategoryIds => {
+//   const accountIdsOfSubcategoriesArray = financialStatementHelpers.filterAccountIdsOfSubcategories(
+//     arrayOfSubcategoryIds,
+//     props.accounts
+//   );
+//   return formatNumber.withoutCents(
+//     financialStatementHelpers
+//       .mapTransactionsOfEntries(
+//         financialStatementHelpers.filterEntriesWithinDateRange(
+//           props.entries,
+//           props.beginDate,
+//           props.endDate
+//         )
+//       )
+//       .reduce((aggr, arrayOfTransactions) => {
+//         arrayOfTransactions.forEach(transaction => {
+//           return accountIdsOfSubcategoriesArray.indexOf(
+//             transaction.account_id
+//           ) > -1
+//             ? (aggr += parseFloat(transaction.amount))
+//             : null;
+//         });
+//         return aggr;
+//       }, 0),
+//     " $ "
+//   );
+// };
+const amountOfEntriesGivenSubcategories = (
+  arrayOfSubcategoryIds,
+  arrayOfAccounts,
+  entries,
+  beginDate,
+  endDate
+) => {
+  const accountIdsOfSubcategoriesArray = filterAccountIdsOfSubcategories(
+    arrayOfSubcategoryIds,
+    arrayOfAccounts
+  );
+
+  return mapTransactionsOfEntries(
+    filterEntriesWithinDateRange(entries, beginDate, endDate)
+  ).reduce((aggr, arrayOfTransactions) => {
+    arrayOfTransactions.forEach(transaction => {
+      return accountIdsOfSubcategoriesArray.indexOf(transaction.account_id) > -1
+        ? (aggr += parseFloat(transaction.amount))
+        : null;
+    });
+    return aggr;
+  }, 0);
+};
+
 export default {
   filterEntriesWithinDateRange,
   mapAccountIdsUsedInEntries,
@@ -94,5 +151,6 @@ export default {
   mapTransactionsOfEntries,
   reduceNestedArrayOfTransactionsToNumber,
   reduceNestedArrayOfTransactionsToAmount,
-  filterAccountIdsOfSubcategories
+  filterAccountIdsOfSubcategories,
+  amountOfEntriesGivenSubcategories
 };

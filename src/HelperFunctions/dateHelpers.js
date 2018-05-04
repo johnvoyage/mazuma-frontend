@@ -35,11 +35,11 @@ const tomorrow = date => {
   return `${yyyy}/${mm}/${dd}`;
 };
 
-const arrayOfEntryDates = entries => {
-  return entries.map(entry => {
-    return dateSymbolReplace(entry.date.slice(0, 10), "-", "/");
-  });
-};
+// const arrayOfEntryDates = entries => {
+//   return entries.map(entry => {
+//     return dateSymbolReplace(entry.date.slice(0, 10), "-", "/");
+//   });
+// };
 //
 // const arrayOfDatesWithEntries = (beginDate, endDate, entries) => {
 //   const arrayOfDates = [];
@@ -57,6 +57,7 @@ const arrayOfEntryDates = entries => {
 export default {
   dateSymbolReplace,
   dateHelpersJavaScript,
-  dateHelpersEnglish
+  dateHelpersEnglish,
+  tomorrow
   // arrayOfDatesWithEntries
 };

@@ -11,40 +11,57 @@ import financialStatementHelpers from "../../HelperFunctions/financialStatementH
 const subcategories = [1, 2, 3, 4, 5, 6];
 
 const NetWorth = props => {
-  const amountOfEntriesGivenSubcategories = arrayOfSubcategoryIds => {
-    const accountIdsOfSubcategoriesArray = financialStatementHelpers.filterAccountIdsOfSubcategories(
-      arrayOfSubcategoryIds,
-      props.accounts
-    );
-    return formatNumber.withoutCents(
-      financialStatementHelpers
-        .mapTransactionsOfEntries(
-          financialStatementHelpers.filterEntriesWithinDateRange(
-            props.entries,
-            props.beginDate,
-            props.endDate
-          )
-        )
-        .reduce((aggr, arrayOfTransactions) => {
-          arrayOfTransactions.forEach(transaction => {
-            return accountIdsOfSubcategoriesArray.indexOf(
-              transaction.account_id
-            ) > -1
-              ? (aggr += parseFloat(transaction.amount))
-              : null;
-          });
-          return aggr;
-        }, 0),
-      " $ "
-    );
-  };
+  // const amountOfEntriesGivenSubcategories = arrayOfSubcategoryIds => {
+  //   const accountIdsOfSubcategoriesArray = financialStatementHelpers.filterAccountIdsOfSubcategories(
+  //     arrayOfSubcategoryIds,
+  //     props.accounts
+  //   );
+  //   return formatNumber.withoutCents(
+  //     financialStatementHelpers
+  //       .mapTransactionsOfEntries(
+  //         financialStatementHelpers.filterEntriesWithinDateRange(
+  //           props.entries,
+  //           props.beginDate,
+  //           props.endDate
+  //         )
+  //       )
+  //       .reduce((aggr, arrayOfTransactions) => {
+  //         arrayOfTransactions.forEach(transaction => {
+  //           return accountIdsOfSubcategoriesArray.indexOf(
+  //             transaction.account_id
+  //           ) > -1
+  //             ? (aggr += parseFloat(transaction.amount))
+  //             : null;
+  //         });
+  //         return aggr;
+  //       }, 0),
+  //     " $ "
+  //   );
+  // };
+
+  // const amountOfEntriesGivenSubcategories = (
+  //   arrayOfSubcategoryIds,
+  //   arrayOfAccounts,
+  //   entries,
+  //   beginDate,
+  //   endDate
+  // ) => {
 
   return (
     <div>
       <TimingFilter />
       <Header size="huge" textAlign="center">
         Net Worth:
-        {amountOfEntriesGivenSubcategories(subcategories)}
+        {formatNumber.withoutCents(
+          financialStatementHelpers.amountOfEntriesGivenSubcategories(
+            subcategories,
+            props.accounts,
+            props.entries,
+            props.beginDate,
+            props.endDate
+          ),
+          " $ "
+        )}
       </Header>
       <Segment>
         <Assets />

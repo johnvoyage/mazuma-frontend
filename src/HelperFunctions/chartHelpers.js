@@ -20,6 +20,30 @@ const arrayOfDatesWithEntries = (beginDate, endDate, entries) => {
   return arrayOfDates;
 };
 
+// const amountOfEntriesGivenSubcategories = arrayOfSubcategoryIds => {
+//   const accountIdsOfSubcategoriesArray = financialStatementHelpers.filterAccountIdsOfSubcategories(
+//     arrayOfSubcategoryIds,
+//     props.accounts
+//   );
+//   return financialStatementHelpers
+//     .mapTransactionsOfEntries(
+//       financialStatementHelpers.filterEntriesWithinDateRange(
+//         props.entries,
+//         props.beginDate,
+//         props.endDate
+//       )
+//     )
+//     .reduce((aggr, arrayOfTransactions) => {
+//       arrayOfTransactions.forEach(transaction => {
+//         return accountIdsOfSubcategoriesArray.indexOf(transaction.account_id) >
+//           -1
+//           ? (aggr += parseFloat(transaction.amount))
+//           : null;
+//       });
+//       return aggr;
+//     }, 0);
+// };
+
 // const netWorth = (beginDate, endDate, entries, accounts) => {
 //   return dateHelpers
 //     .arrayOfDatesWithEntries(beginDate, endDate, entries)
@@ -54,4 +78,5 @@ const arrayOfDatesWithEntries = (beginDate, endDate, entries) => {
 
 export default {
   // netWorth
+  arrayOfDatesWithEntries
 };
