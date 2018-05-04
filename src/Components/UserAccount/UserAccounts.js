@@ -1,7 +1,5 @@
-// import faker from 'faker'
-// import _ from 'lodash'
 import React from "react";
-import { Segment, Table, Menu, Icon, Label } from "semantic-ui-react";
+import { Segment, Table, Menu, Icon } from "semantic-ui-react";
 
 const UserAccounts = () => {
   return (
@@ -10,35 +8,83 @@ const UserAccounts = () => {
       <Table celled>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell>Account Name</Table.HeaderCell>
-            <Table.HeaderCell>Subcategory</Table.HeaderCell>
-            <Table.HeaderCell>Description</Table.HeaderCell>
+            <Table.HeaderCell width={4} textAlign="center">
+              Account Name
+            </Table.HeaderCell>
+            <Table.HeaderCell width={4} textAlign="center">
+              Subcategory
+            </Table.HeaderCell>
+            <Table.HeaderCell width={6} textAlign="center">
+              Description
+            </Table.HeaderCell>
+            <Table.HeaderCell width={1} />
+            <Table.HeaderCell width={1} />
           </Table.Row>
         </Table.Header>
 
         <Table.Body>
           <Table.Row>
-            <Table.Cell>
-              <Label ribbon>First</Label>
+            <Table.Cell>Cell</Table.Cell>
+            <Table.Cell>Cell</Table.Cell>
+            <Table.Cell>Cell</Table.Cell>
+            <Table.Cell
+              onClick={() => console.log("edit account!")}
+              selectable
+              textAlign="center"
+            >
+              <Icon name="pencil" />
             </Table.Cell>
-            <Table.Cell>Cell</Table.Cell>
-            <Table.Cell>Cell</Table.Cell>
+            <Table.Cell
+              onClick={() => console.log("delete account!")}
+              selectable
+              textAlign="center"
+            >
+              <Icon name="remove" />
+            </Table.Cell>
           </Table.Row>
           <Table.Row>
             <Table.Cell>Cell</Table.Cell>
             <Table.Cell>Cell</Table.Cell>
             <Table.Cell>Cell</Table.Cell>
+            <Table.Cell
+              onClick={() => console.log("edit account!")}
+              selectable
+              textAlign="center"
+            >
+              <Icon name="pencil" />
+            </Table.Cell>
+            <Table.Cell
+              onClick={() => console.log("delete account!")}
+              selectable
+              textAlign="center"
+            >
+              <Icon name="remove" />
+            </Table.Cell>
           </Table.Row>
           <Table.Row>
             <Table.Cell>Cell</Table.Cell>
             <Table.Cell>Cell</Table.Cell>
             <Table.Cell>Cell</Table.Cell>
+            <Table.Cell
+              onClick={() => console.log("edit account!")}
+              selectable
+              textAlign="center"
+            >
+              <Icon name="pencil" />
+            </Table.Cell>
+            <Table.Cell
+              onClick={() => console.log("delete account!")}
+              selectable
+              textAlign="center"
+            >
+              <Icon name="remove" />
+            </Table.Cell>
           </Table.Row>
         </Table.Body>
 
         <Table.Footer>
           <Table.Row>
-            <Table.HeaderCell colSpan="3">
+            <Table.HeaderCell colSpan="5">
               <Menu floated="right" pagination>
                 <Menu.Item as="a" icon>
                   <Icon name="chevron left" />

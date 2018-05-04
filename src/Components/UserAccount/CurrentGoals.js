@@ -11,8 +11,10 @@ const CurrentGoals = () => {
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell width={1}>Chart</Table.HeaderCell>
-            <Table.HeaderCell width={13}>Goal</Table.HeaderCell>
+            <Table.HeaderCell width={12}>Goal</Table.HeaderCell>
             <Table.HeaderCell width={1}>Hit?</Table.HeaderCell>
+            <Table.HeaderCell width={1} />
+            <Table.HeaderCell width={1} />
           </Table.Row>
         </Table.Header>
 
@@ -23,6 +25,20 @@ const CurrentGoals = () => {
             </Table.Cell>
             <Table.Cell>John Lilki</Table.Cell>
             <Table.Cell>September 14, 2013</Table.Cell>
+            <Table.Cell
+              onClick={() => console.log("edit goal!")}
+              selectable
+              textAlign="center"
+            >
+              <Icon name="pencil" />
+            </Table.Cell>
+            <Table.Cell
+              onClick={() => console.log("delete goal!")}
+              selectable
+              textAlign="center"
+            >
+              <Icon name="remove" />
+            </Table.Cell>
           </Table.Row>
           <Table.Row>
             <Table.Cell collapsing>
@@ -30,6 +46,20 @@ const CurrentGoals = () => {
             </Table.Cell>
             <Table.Cell>Jamie Harington</Table.Cell>
             <Table.Cell>January 11, 2014</Table.Cell>
+            <Table.Cell
+              onClick={() => console.log("edit goal!")}
+              selectable
+              textAlign="center"
+            >
+              <Icon name="pencil" />
+            </Table.Cell>
+            <Table.Cell
+              onClick={() => console.log("delete goal!")}
+              selectable
+              textAlign="center"
+            >
+              <Icon name="remove" />
+            </Table.Cell>
           </Table.Row>
           <Table.Row>
             <Table.Cell collapsing>
@@ -37,12 +67,26 @@ const CurrentGoals = () => {
             </Table.Cell>
             <Table.Cell>Jill Lewis</Table.Cell>
             <Table.Cell>May 11, 2014</Table.Cell>
+            <Table.Cell
+              onClick={() => console.log("edit goal!")}
+              selectable
+              textAlign="center"
+            >
+              <Icon name="pencil" />
+            </Table.Cell>
+            <Table.Cell
+              onClick={() => console.log("delete goal!")}
+              selectable
+              textAlign="center"
+            >
+              <Icon name="remove" />
+            </Table.Cell>
           </Table.Row>
         </Table.Body>
 
         <Table.Footer fullWidth>
           <Table.Row>
-            <Table.HeaderCell colSpan="4">
+            <Table.HeaderCell colSpan="5">
               <Button
                 floated="right"
                 icon
