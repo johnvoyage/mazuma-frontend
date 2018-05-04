@@ -44,7 +44,7 @@ const NetWorth = props => {
       <TimingFilter />
       <Header size="huge" textAlign="center">
         Net Worth:
-        {amountOfEntriesGivenSubcategories(subcategories, props.accounts)}
+        {amountOfEntriesGivenSubcategories(subcategories)}
       </Header>
       <Segment>
         <Assets />
@@ -56,7 +56,6 @@ const NetWorth = props => {
 
 const mapStateToProps = state => {
   return {
-    // showLiquid
     accounts: state.userInfo.accounts,
     entries: state.userInfo.entries,
     beginDate: 0,
@@ -65,18 +64,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return {
-    // termsAgreementInit: () => {
-    //   dispatch({ type: 'TERMS_AGREEMENT_INIT' })
-    //   // },
-    //   toggleTermsAgreement: () => {
-    //     dispatch({ type: 'TOGGLE_TERMS_AGREEMENT' })
-    //   },
-    //   signUserUp: (userInfo) => {
-    //     console.log(userInfo)
-    //     dispatch({ type: 'SIGN_USER_UP', userInfo })
-    //   }
-  };
+  return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(NetWorth);
+export default connect(mapStateToProps, null)(NetWorth);

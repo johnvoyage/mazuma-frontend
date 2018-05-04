@@ -7,7 +7,7 @@ const TimingFilter = props => {
   const handleChange = event => {
     // debugger;
     props.updateAsOfDate(
-      "netIncomeContainer",
+      "chartContainer",
       event.target.name,
       event.target.value
     );
@@ -53,8 +53,8 @@ const mapStateToProps = state => {
     // showLiquid
     // accounts: state.userInfo.accounts,
     // entries: state.userInfo.entries
-    endDate: state.netIncomeContainer.endDate,
-    beginDate: state.netIncomeContainer.beginDate
+    endDate: state.chartContainer.endDate,
+    beginDate: state.chartContainer.beginDate
   };
 };
 

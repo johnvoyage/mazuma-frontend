@@ -28,6 +28,11 @@ const transactionContainer = {
   transactionBalance: 0
 };
 
+const chartContainer = {
+  beginDate: "2000-01-01",
+  endDate: todayFormatted
+};
+
 const whole = {
   loading: false,
   activeMenuItem: "Mazuma",
@@ -40,7 +45,8 @@ const whole = {
   },
   netWorthContainer: {
     asOfDate: todayFormatted
-  }
+  },
+  chartContainer
 };
 
 export default {

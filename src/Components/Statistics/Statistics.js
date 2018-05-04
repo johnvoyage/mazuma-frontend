@@ -3,16 +3,24 @@ import { Line } from "react-chartjs-2";
 import GraphOptions from "./GraphOptions";
 import TimingFilter from "./TimingFilter";
 import { Segment } from "semantic-ui-react";
+import chartData from "../../HelperFunctions/chartData";
 
-import data from "../../StaticOptions/chartAesthetics";
+import chartAesthetics from "../../StaticOptions/chartAesthetics";
 import { connect } from "react-redux";
 
 const Statistics = props => {
   // data: [65, 59, 80, 81, 56, 55, 40]
   // labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
 
-  data.standard.datasets[0].data = [65, 59, 80, 81, 56, 55, 40];
-  data.standard.labels = [
+  const netWorthData = chartData.netWorth(
+    props.beginDate,
+    props.endDate,
+    props.entries,
+    props.accounts
+  );
+
+  chartAesthetics.standard.datasets[0].data = netWorthData;
+  chartAesthetics.standard.labels = [
     "January",
     "February",
     "March",
@@ -30,7 +38,7 @@ const Statistics = props => {
       <br />
       <Segment>
         <Line
-          data={data.standard}
+          data={chartAesthetics.standard}
           // width={100}
           // height={50}
           // options={{
@@ -45,7 +53,9 @@ const Statistics = props => {
 const mapStateToProps = state => {
   return {
     entries: state.userInfo.entries,
-    accounts: state.userInfo.accounts
+    accounts: state.userInfo.accounts,
+    beginDate: state.chartContainer.beginDate,
+    endDate: state.chartContainer.endDate
   };
 };
 
