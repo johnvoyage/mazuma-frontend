@@ -11,7 +11,7 @@ const userInfo = {
 const transactionContainer = {
   topRow: "view transactions",
   showFilters: false,
-  showDescriptions: false,
+  showDescriptions: true,
   transactionFilters: {
     numMin: null,
     numMax: null,

@@ -25,7 +25,14 @@ const withoutCents = (number, prefix = "") => {
   return standard(number, prefix).slice(0, -3);
 };
 
+const accounting = number => {
+  return standard(number)[0] === "-"
+    ? `(${standard(number).slice(2)})`
+    : standard(number);
+};
+
 export default {
   standard,
-  withoutCents
+  withoutCents,
+  accounting
 };

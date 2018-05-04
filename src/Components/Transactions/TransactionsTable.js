@@ -1,7 +1,8 @@
 import React from "react";
 import { Icon, Table } from "semantic-ui-react";
 import { connect } from "react-redux";
-
+import formatNumber from "../../HelperFunctions/formatNumber";
+import formatDate from "../../HelperFunctions/formatDate";
 const TransactionsTable = props => {
   // console.log(props)
 
@@ -15,7 +16,7 @@ const TransactionsTable = props => {
         transactions: entry.transactions.map(transaction => {
           return {
             account: transaction.accountName,
-            amount: transaction.amount
+            amount: formatNumber.accounting(transaction.amount)
           };
         }),
         description: entry.description ? entry.description : "No description"
@@ -37,26 +38,8 @@ const TransactionsTable = props => {
           >
             Transaction: {entry.number}
             <br />
-            Date: {entry.date}
+            Date: {formatDate.hyphensToSlashes(entry.date)}
           </Table.Cell>
-          {index === entries.length - 1 ? (
-            <div>
-              <Table.Cell
-                onClick={() => console.log("edit entry!")}
-                selectable
-                textAlign="center"
-              >
-                <Icon name="pencil" />
-              </Table.Cell>
-              <Table.Cell
-                onClick={() => console.log("delete entry!")}
-                selectable
-                textAlign="center"
-              >
-                <Icon name="remove" />
-              </Table.Cell>
-            </div>
-          ) : null}
 
           <Table.Cell textAlign="center">
             {entry.transactions[0].account}
@@ -71,6 +54,24 @@ const TransactionsTable = props => {
         if (index !== 0) {
           tableRows.push(
             <Table.Row key={`${keyCounter++}`}>
+              {index === entry.transactions.length - 1 ? (
+                <Table.Cell
+                  onClick={() => console.log("edit entry!")}
+                  selectable
+                  textAlign="center"
+                >
+                  <Icon name="pencil" />
+                </Table.Cell>
+              ) : null}
+              {index === entry.transactions.length - 1 ? (
+                <Table.Cell
+                  onClick={() => console.log("delete entry!")}
+                  selectable
+                  textAlign="center"
+                >
+                  <Icon name="remove" />
+                </Table.Cell>
+              ) : null}
               <Table.Cell textAlign="center">{transaction.account}</Table.Cell>
               <Table.Cell textAlign="center">{transaction.amount}</Table.Cell>
             </Table.Row>
@@ -95,17 +96,20 @@ const TransactionsTable = props => {
     <Table celled structured>
       <Table.Header>
         <Table.Row>
-          <Table.Header width={2} />
-          <Table.Header width={2} />
-          <Table.Header width={9} />
-          <Table.Header width={3} />
-        </Table.Row>
-        <Table.Row>
-          <Table.HeaderCell colSpan={2} textAlign="center">
+          <Table.HeaderCell
+            colSpan={2}
+            rowSpan={2}
+            width={4}
+            textAlign="center"
+          >
             Transaction
           </Table.HeaderCell>
-          <Table.HeaderCell textAlign="center">Account</Table.HeaderCell>
-          <Table.HeaderCell textAlign="center">Amount</Table.HeaderCell>
+          <Table.HeaderCell textAlign="center" rowSpan={2} width={9}>
+            Account
+          </Table.HeaderCell>
+          <Table.HeaderCell textAlign="center" rowSpan={2} width={3}>
+            Amount
+          </Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>{renderTransactions()}</Table.Body>
