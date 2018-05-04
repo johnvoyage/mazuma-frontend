@@ -19,7 +19,7 @@ const Statistics = props => {
     props.entries
   );
 
-  // console.log(dataPointsToMap);
+  console.log(dataPointsToMap);
 
   const netWorthData = dataPointsToMap.map(date => {
     // console.log(date);
@@ -50,6 +50,7 @@ const Statistics = props => {
   // const liabilityData
 
   chartAesthetics.standard.datasets[0].data = netWorthData;
+  // chartAesthetics.standard.datasets[1].data =
   chartAesthetics.standard.labels = dataPointsToMap;
 
   return (
