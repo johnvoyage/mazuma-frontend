@@ -30,7 +30,7 @@ const transactionContainer = {
 
 const chartContainer = {
   chartType: "line",
-  subcategories: ["net worth"],
+  showSubcategories: ["net worth"],
   goalComparison: true,
   beginDate: "2000-01-01",
   endDate: dateHelpers.dateHelpersJavaScript(new Date())
