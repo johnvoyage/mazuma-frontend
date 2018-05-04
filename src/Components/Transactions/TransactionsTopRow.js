@@ -90,6 +90,13 @@ const SelectedFilters = props => {
             onChange={handleChange}
           />
           {"  "}
+          <Checkbox
+            name="showEditDelete"
+            label="Show edit/delete"
+            checked={props.showEditDelete}
+            onChange={handleChange}
+          />
+          {"  "}
           <Button size="mini" content="Clear filters" />
           <br />
           <br />
@@ -107,7 +114,8 @@ const mapStateToProps = state => {
     // filterSelected: state.transactionContainer.filterSelected
     topRow: state.transactionContainer.topRow,
     showFilters: state.transactionContainer.showFilters,
-    showDescriptions: state.transactionContainer.showDescriptions
+    showDescriptions: state.transactionContainer.showDescriptions,
+    showEditDelete: state.transactionContainer.showEditDelete
   };
 };
 

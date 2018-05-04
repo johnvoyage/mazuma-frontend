@@ -34,7 +34,11 @@ const TransactionsTable = props => {
           <Table.Cell
             textAlign="center"
             colSpan={2}
-            rowSpan={entry.transactions.length - 1}
+            rowSpan={
+              props.showEditDelete
+                ? entry.transactions.length - 1
+                : entry.transactions.length
+            }
           >
             Transaction: {entry.number}
             <br />
@@ -54,7 +58,8 @@ const TransactionsTable = props => {
         if (index !== 0) {
           tableRows.push(
             <Table.Row key={`${keyCounter++}`}>
-              {index === entry.transactions.length - 1 ? (
+              {index === entry.transactions.length - 1 &&
+              props.showEditDelete ? (
                 <Table.Cell
                   onClick={() => console.log("edit entry!")}
                   selectable
@@ -63,7 +68,8 @@ const TransactionsTable = props => {
                   <Icon name="pencil" />
                 </Table.Cell>
               ) : null}
-              {index === entry.transactions.length - 1 ? (
+              {index === entry.transactions.length - 1 &&
+              props.showEditDelete ? (
                 <Table.Cell
                   onClick={() => console.log("delete entry!")}
                   selectable
@@ -123,6 +129,7 @@ const TransactionsTable = props => {
 const mapStateToProps = state => {
   return {
     showDescriptions: state.transactionContainer.showDescriptions,
+    showEditDelete: state.transactionContainer.showEditDelete,
     entries: state.userInfo.entries
     // ticker: state.userInfo.tickerSymbol
     // agreedToTerms: state.formValidity.signUpForm

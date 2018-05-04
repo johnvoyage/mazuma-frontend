@@ -12,6 +12,7 @@ const transactionContainer = {
   topRow: "view transactions",
   showFilters: false,
   showDescriptions: true,
+  showEditDelete: true,
   transactionFilters: {
     numMin: null,
     numMax: null,
