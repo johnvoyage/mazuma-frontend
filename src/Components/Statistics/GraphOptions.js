@@ -1,80 +1,81 @@
-import React from 'react';
-import { Button } from 'semantic-ui-react';
-import { connect } from 'react-redux';
+import React from "react";
+import { Button } from "semantic-ui-react";
+import { connect } from "react-redux";
 
+const GraphOptions = props => {
+  const handleChartTypeClick = event => {
+    const chartType = event.target.name;
+    props.updateChartType(chartType);
+  };
 
-const GraphOptions = (props) => {
-
-
-
-  return(
-    <Button.Group attached='top'>
-      <Button
-        toggle
-        // active={props.descriptionToggle}
-        // onClick={props.toggleTransactionDescription}
-        content="Net Worth over time"
-      />
-      <Button
-        toggle
-        // name='none'
-        // active={props.filterSelected === 'none'}
-        content='Earning over time'
-        // onClick={props.toggleTransactionFilter}
-      />
-      <Button
-        toggle
-        // name='quick'
-        // active={props.filterSelected === 'quick'}
-        content='Spending over time'
-        // onClick={props.toggleTransactionFilter}
-      />
-      <Button
-        toggle
-        // name='custom'
-        // active={props.filterSelected === 'custom'}
-        content='Spending by category'
-        // onClick={props.toggleTransactionFilter}
-      />
-      <Button
-        toggle
-        // active={props.newAccount}
-        // onClick={props.toggleNewAccount}
-        content='Turn ON Goal Comparison'
-      />
-    </Button.Group>
-  )
-
-
+  return (
+    <div>
+      <Button.Group attached="top">
+        <Button
+          onClick={handleChartTypeClick}
+          name="line"
+          positive={props.chartType === "line"}
+        >
+          Line
+        </Button>
+        <Button.Or />
+        <Button
+          onClick={handleChartTypeClick}
+          name="pie"
+          positive={props.chartType === "pie"}
+        >
+          Pie
+        </Button>
+        <Button.Or />
+        <Button
+          onClick={handleChartTypeClick}
+          name="bar"
+          positive={props.chartType === "bar"}
+        >
+          Bar
+        </Button>
+      </Button.Group>
+      {props.chartType !== "pie" ? (
+        <Button.Group attached="top">
+          <Button>Net Worth</Button>
+          <Button.Or text="and" />
+          <Button>Assets</Button>
+          <Button.Or text="and" />
+          <Button>Liabilities</Button>
+          <Button.Or text="and" />
+          <Button>Net Income</Button>
+          <Button.Or text="and" />
+          <Button>Income</Button>
+          <Button.Or text="and" />
+          <Button>Spending</Button>
+        </Button.Group>
+      ) : (
+        <Button.Group attached="top">
+          <Button>Assets</Button>
+          <Button.Or />
+          <Button>Liabilities</Button>
+          <Button.Or />
+          <Button>Earning</Button>
+          <Button.Or />
+          <Button>Spending</Button>
+        </Button.Group>
+      )}
+    </div>
+  );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    // descriptionToggle: state.transactionContainer.descriptionToggle,
-    // newTransaction: state.transactionContainer.newTransaction,
-    // newAccount: state.transactionContainer.newAccount,
-    // filterSelected: state.transactionContainer.filterSelected,
+    chartType: state.chartContainer.chartType
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    // toggleTransactionDescription: () => {
-    //   dispatch({ type: 'TOGGLE_TRANSACTION_DESCRIPTION' })
-    // },
-    // toggleTransactionFilter: (event) => {
-    //   dispatch({ type: 'TOGGLE_TRANSACTION_FILTER', filterSelected: event.target.name })
-    // },
-    // toggleNewTransaction: () => {
-    //   dispatch({ type: 'TOGGLE_NEW_TRANSACTION' })
-    // },
-    // toggleNewAccount: () => {
-    //   dispatch({ type: 'TOGGLE_NEW_ACCOUNT' })
-    // }
+    updateChartType: chartType => {
+      dispatch({ type: "UPDATE_CHART_TYPE", chartType });
+    }
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(GraphOptions);
+export default connect(mapStateToProps, mapDispatchToProps)(GraphOptions);

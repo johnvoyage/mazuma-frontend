@@ -191,6 +191,11 @@ const rootReducer = (state = initialState.whole, action) => {
         }
       };
 
+    case "UPDATE_CHART_TYPE":
+      return {
+        ...state,
+        chartContainer: { ...state.chartContainer, chartType: action.chartType }
+      };
     /* DONE */
 
     default:
