@@ -1,4 +1,4 @@
-import formatDate from "../HelperFunctions/formatDate";
+import dateHelpers from "../HelperFunctions/dateHelpers";
 
 const userInfo = {
   id: null,
@@ -30,7 +30,7 @@ const transactionContainer = {
 
 const chartContainer = {
   beginDate: "2000-01-01",
-  endDate: formatDate.formatDateJavaScript(new Date())
+  endDate: dateHelpers.dateHelpersJavaScript(new Date())
 };
 
 const whole = {
@@ -41,10 +41,10 @@ const whole = {
   transactionContainer,
   netIncomeContainer: {
     beginDate: "2000-01-01",
-    endDate: formatDate.formatDateJavaScript(new Date())
+    endDate: dateHelpers.dateHelpersJavaScript(new Date())
   },
   netWorthContainer: {
-    asOfDate: formatDate.formatDateJavaScript(new Date())
+    asOfDate: dateHelpers.dateHelpersJavaScript(new Date())
   },
   chartContainer
 };

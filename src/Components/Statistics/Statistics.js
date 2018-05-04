@@ -19,6 +19,8 @@ const Statistics = props => {
     props.accounts
   );
 
+  console.log(netWorthData);
+
   chartAesthetics.standard.datasets[0].data = netWorthData;
   chartAesthetics.standard.labels = [
     "January",

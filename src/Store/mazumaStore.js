@@ -1,5 +1,5 @@
 import initialState from "./initialState";
-import formatDate from "../HelperFunctions/formatDate";
+import dateHelpers from "../HelperFunctions/dateHelpers";
 
 const rootReducer = (state = initialState.whole, action) => {
   // console.log('current state: ', state);
@@ -171,7 +171,7 @@ const rootReducer = (state = initialState.whole, action) => {
         }
       };
     case "TOGGLE_TRANSACTION_SECONDARY_ROW":
-      console.log(action);
+      // console.log(action);
       return {
         ...state,
         transactionContainer: {
@@ -187,7 +187,7 @@ const rootReducer = (state = initialState.whole, action) => {
           ...state[action.container],
           [action.whichDate]: action.newDate
             ? action.newDate
-            : formatDate.formatDateJavaScript(new Date())
+            : dateHelpers.dateHelpersJavaScript(new Date())
         }
       };
 

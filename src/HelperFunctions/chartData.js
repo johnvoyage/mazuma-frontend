@@ -1,33 +1,36 @@
 import financialStatementHelpers from "./financialStatementHelpers";
+import dateHelpers from "./dateHelpers";
 
 const netWorth = (beginDate, endDate, entries, accounts) => {
-  const accountIdsOfSubcategoriesArray = financialStatementHelpers.filterAccountIdsOfSubcategories(
-    [1, 2, 3, 4, 5, 6],
-    accounts
-  );
-  // return
-  console.log(
-    financialStatementHelpers
-      .mapTransactionsOfEntries(
-        financialStatementHelpers.filterEntriesWithinDateRange(
-          entries,
-          beginDate,
-          endDate
-        )
-      )
-      .reduce((aggr, arrayOfTransactions) => {
-        arrayOfTransactions.forEach(transaction => {
-          return accountIdsOfSubcategoriesArray.indexOf(
-            transaction.account_id
-          ) > -1
-            ? (aggr += parseFloat(transaction.amount))
-            : null;
-        });
-        return aggr;
-      }, 0)
-  );
-
-  return [65, 59, 80, 81, 56, 55, 40];
+  return dateHelpers
+    .arrayOfDatesWithEntries(beginDate, endDate, entries)
+    .map(date => {
+      const amountOfEntriesGivenSubcategories = () => {
+        const accountIdsOfSubcategoriesArray = financialStatementHelpers.filterAccountIdsOfSubcategories(
+          [1, 2, 3, 4, 5, 6],
+          accounts
+        );
+        return financialStatementHelpers
+          .mapTransactionsOfEntries(
+            financialStatementHelpers.filterEntriesWithinDateRange(
+              entries,
+              "0",
+              date
+            )
+          )
+          .reduce((aggr, arrayOfTransactions) => {
+            arrayOfTransactions.forEach(transaction => {
+              return accountIdsOfSubcategoriesArray.indexOf(
+                transaction.account_id
+              ) > -1
+                ? (aggr += parseFloat(transaction.amount))
+                : null;
+            });
+            return aggr;
+          }, 0);
+      };
+      return amountOfEntriesGivenSubcategories();
+    });
 };
 
 // const amountOfEntriesGivenSubcategories = arrayOfSubcategoryIds => {

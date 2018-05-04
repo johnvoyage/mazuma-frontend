@@ -2,7 +2,7 @@ import React from "react";
 import { Icon, Table } from "semantic-ui-react";
 import { connect } from "react-redux";
 import formatNumber from "../../HelperFunctions/formatNumber";
-import formatDate from "../../HelperFunctions/formatDate";
+import dateHelpers from "../../HelperFunctions/dateHelpers";
 const TransactionsTable = props => {
   // console.log(props)
 
@@ -42,7 +42,7 @@ const TransactionsTable = props => {
           >
             Transaction: {entry.number}
             <br />
-            Date: {formatDate.hyphensToSlashes(entry.date)}
+            Date: {dateHelpers.dateSymbolReplace(entry.date, "-", "/")}
           </Table.Cell>
 
           <Table.Cell textAlign="center">
