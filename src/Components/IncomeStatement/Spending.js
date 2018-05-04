@@ -27,18 +27,27 @@ const Spending = props => {
     );
   };
 
-  const subtotalFooter = subcategoryId => {
-    return (
-      <Table.Row key={-2}>
-        <Table.Cell textAlign="right" colSpan="2">
-          Subtotal:
-        </Table.Cell>
-        <Table.Cell>
-          {amountOfEntriesGivenSubcategories([subcategoryId])}
-        </Table.Cell>
-      </Table.Row>
-    );
-  };
+  // const subtotalFooter = subcategoryId => {
+  //   return (
+  //     <Table.Row key={-2}>
+  //       <Table.Cell textAlign="right" colSpan="2">
+  //         Subtotal:
+  //       </Table.Cell>
+  //       <Table.Cell>
+  //         {formatNumber.standard(
+  //           -financialStatementHelpers.amountOfEntriesGivenSubcategories(
+  //             [subcategoryId],
+  //             props.accounts,
+  //             props.entries,
+  //             props.beginDate,
+  //             props.endDate
+  //           ),
+  //           " $ "
+  //         )}
+  //       </Table.Cell>
+  //     </Table.Row>
+  //   );
+  // };
 
   const accountsToDisplay = subcategoryId => {
     return financialStatementHelpers.filterAccountsOfSubcategoryId(
@@ -51,27 +60,6 @@ const Spending = props => {
         ),
         props.accounts
       )
-    );
-  };
-
-  const amountOfEntriesGivenSubcategories = arrayOfSubcategoryIds => {
-    const accountIdsOfSubcategoriesArray = financialStatementHelpers.filterAccountIdsOfSubcategories(
-      arrayOfSubcategoryIds,
-      props.accounts
-    );
-    return formatNumber.standard(
-      financialStatementHelpers
-        .mapTransactionsOfEntries(filterEntriesWithinDateRange())
-        .reduce((aggr, arrayOfTransactions) => {
-          arrayOfTransactions.forEach(transaction => {
-            return accountIdsOfSubcategoriesArray.indexOf(
-              transaction.account_id
-            ) > -1
-              ? (aggr += parseFloat(transaction.amount))
-              : null;
-          });
-          return aggr;
-        }, 0)
     );
   };
 
@@ -105,14 +93,14 @@ const Spending = props => {
               )}
             </Table.Cell>
             <Table.Cell textAlign="center">
-              {formatNumber.standard(amountOfEntriesGivenAccount(account.id))}
+              {formatNumber.standard(-amountOfEntriesGivenAccount(account.id))}
             </Table.Cell>
           </Table.Row>
         );
       }
     );
     arrayOfRows.unshift(subtotalHeader(subcategoryId));
-    arrayOfRows.push(subtotalFooter(subcategoryId));
+    // arrayOfRows.push(subtotalFooter(subcategoryId));
     return arrayOfRows;
   };
 
@@ -145,7 +133,16 @@ const Spending = props => {
             Subtotal:
           </Table.HeaderCell>
           <Table.HeaderCell>
-            {amountOfEntriesGivenSubcategories(subcategories, props.accounts)}
+            {formatNumber.standard(
+              -financialStatementHelpers.amountOfEntriesGivenSubcategories(
+                subcategories,
+                props.accounts,
+                props.entries,
+                props.beginDate,
+                props.endDate
+              ),
+              " $ "
+            )}
           </Table.HeaderCell>
         </Table.Row>
       </Table.Footer>

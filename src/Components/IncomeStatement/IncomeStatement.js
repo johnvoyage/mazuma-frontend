@@ -43,7 +43,7 @@ const IncomeStatement = props => {
       <Header size="huge" textAlign="center">
         Net Income:
         {formatNumber.withoutCents(
-          financialStatementHelpers.amountOfEntriesGivenSubcategories(
+          -financialStatementHelpers.amountOfEntriesGivenSubcategories(
             subcategories,
             props.accounts,
             props.entries,

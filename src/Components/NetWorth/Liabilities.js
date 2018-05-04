@@ -34,7 +34,16 @@ const Liabilities = props => {
           Subtotal:
         </Table.Cell>
         <Table.Cell>
-          {amountOfEntriesGivenSubcategories([subcategoryId])}
+          {formatNumber.standard(
+            financialStatementHelpers.amountOfEntriesGivenSubcategories(
+              [subcategoryId],
+              props.accounts,
+              props.entries,
+              props.beginDate,
+              props.endDate
+            ),
+            " $ "
+          )}
         </Table.Cell>
       </Table.Row>
     );
@@ -51,27 +60,6 @@ const Liabilities = props => {
         ),
         props.accounts
       )
-    );
-  };
-
-  const amountOfEntriesGivenSubcategories = arrayOfSubcategoryIds => {
-    const accountIdsOfSubcategoriesArray = financialStatementHelpers.filterAccountIdsOfSubcategories(
-      arrayOfSubcategoryIds,
-      props.accounts
-    );
-    return formatNumber.standard(
-      financialStatementHelpers
-        .mapTransactionsOfEntries(filterEntriesWithinDateRange())
-        .reduce((aggr, arrayOfTransactions) => {
-          arrayOfTransactions.forEach(transaction => {
-            return accountIdsOfSubcategoriesArray.indexOf(
-              transaction.account_id
-            ) > -1
-              ? (aggr += parseFloat(transaction.amount))
-              : null;
-          });
-          return aggr;
-        }, 0)
     );
   };
 
@@ -145,7 +133,16 @@ const Liabilities = props => {
             Subtotal:
           </Table.HeaderCell>
           <Table.HeaderCell>
-            {amountOfEntriesGivenSubcategories(subcategories, props.accounts)}
+            {formatNumber.standard(
+              financialStatementHelpers.amountOfEntriesGivenSubcategories(
+                subcategories,
+                props.accounts,
+                props.entries,
+                props.beginDate,
+                props.endDate
+              ),
+              " $ "
+            )}
           </Table.HeaderCell>
         </Table.Row>
       </Table.Footer>
