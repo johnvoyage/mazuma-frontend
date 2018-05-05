@@ -19,6 +19,8 @@ import {
 } from "./NewTransactionSubmitted";
 // import { bindActionCreators } from "redux";
 // import { fetchTransactions } from "../../Actions/fetchTransactions";
+import { fetchUserData } from "../../Actions/fetchUserData";
+
 import formatNumber from "../../HelperFunctions/formatNumber";
 
 const NewTransactionForm = props => {
@@ -94,7 +96,7 @@ const NewTransactionForm = props => {
       <Header as="h1" textAlign="center" content="New Transaction" />
       <Form
         onSubmit={event => {
-          newTransactionSubmitted(event, props.userId);
+          newTransactionSubmitted(event, props.userId, props.fetchUserData);
           props.transactionSubmitted();
           // props.getTransactions(props.userId);
         }}
@@ -166,6 +168,9 @@ const mapDispatchToProps = dispatch => {
     },
     transactionSubmitted: () => {
       dispatch({ type: "TRANSACTION_SUBMITTED" });
+    },
+    fetchUserData: userId => {
+      dispatch(fetchUserData(userId));
     }
     // getTransactions: bindActionCreators(fetchTransactions, dispatch)
     // addNewAccountOn: () => {

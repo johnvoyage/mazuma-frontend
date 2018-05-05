@@ -48,7 +48,7 @@ const removeAmount = event => {
   delete currentCredits[keyToDelete];
 };
 
-const newTransactionSubmitted = (event, userId) => {
+const newTransactionSubmitted = (event, userId, fetchUserData) => {
   event.preventDefault();
   const date = event.target.children[0].children[1].children[0].value;
   const descriptionIndex = event.target.children.length - 2;
@@ -67,7 +67,7 @@ const newTransactionSubmitted = (event, userId) => {
   }
 
   // console.log(transactions)
-  createEntry(date, description, userId);
+  createEntry(date, description, userId, fetchUserData);
   // console.log('date: ', date)
   // console.log('description: ', description)
   // console.log(currentDebits)
@@ -90,7 +90,7 @@ const resetTransactions = () => {
   }
 };
 
-const createEntry = (date, description, userId) => {
+const createEntry = (date, description, userId, fetchUserData) => {
   api.entries.createEntry(date, description, userId).then(json => {
     if (json.error) {
       console.log("ERROR");
@@ -98,22 +98,24 @@ const createEntry = (date, description, userId) => {
       // console.log(json)
       // getEntryIds(json.id)
       // createTransactions(json.id)
-      getAccountNumbers(json.id, userId);
+      getAccountNumbers(json.id, userId, fetchUserData);
     }
   });
 };
 
-const getAccountNumbers = (entryId, userId) => {
+const getAccountNumbers = (entryId, userId, fetchUserData) => {
   // console.log(transactions)
   // debugger
-  transactions.forEach(transaction => {
+  transactions.forEach((transaction, index) => {
     const amount = transaction[0];
     const accountName = transaction[1];
     // debugger
     // console.log('amt: ', amount)
     // console.log('acct ', accountName)
     api.accounts.getAccountId(accountName, userId).then(account => {
-      api.transactions.createTransaction(amount, account.id, entryId);
+      api.transactions
+        .createTransaction(amount, account.id, entryId)
+        .then(json => fetchUserData(userId));
 
       // createTransaction(transaction[0], entryId, account.id)
     });

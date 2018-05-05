@@ -32,9 +32,9 @@ const Statistics = props => {
   const lineData = {};
   lineData.netWorth = massAssignHelper([1, 2, 3, 4, 5, 6]);
   lineData.assets = massAssignHelper([1, 2, 3, 4]);
-  lineData.liabilities = massAssignHelper([5, 6]);
-  lineData.netIncome = massAssignHelper([8, 9]);
-  lineData.income = massAssignHelper([8]);
+  lineData.liabilities = massAssignHelper([5, 6]).map(num => -num);
+  lineData.netIncome = massAssignHelper([8, 9]).map(num => -num);
+  lineData.income = massAssignHelper([8]).map(num => -num);
   lineData.spending = massAssignHelper([9]);
 
   const lineGraphData = {

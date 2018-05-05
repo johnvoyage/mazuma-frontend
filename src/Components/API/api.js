@@ -105,7 +105,7 @@ const createTransaction = (amount, accountId, entryId) => {
       account_id: accountId,
       entry_id: entryId
     })
-  }).then(response => response.json());
+  });
 };
 
 // api.transaction.createTransaction(amount, account.id, entryId)
