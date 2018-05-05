@@ -23,8 +23,8 @@ const CurrentGoals = () => {
             <Table.Cell collapsing>
               <Checkbox slider />
             </Table.Cell>
-            <Table.Cell>John Lilki</Table.Cell>
-            <Table.Cell>September 14, 2013</Table.Cell>
+            <Table.Cell>GOAL SENTENCE</Table.Cell>
+            <Table.Cell>DATE? Y/N?</Table.Cell>
             <Table.Cell
               onClick={() => console.log("edit goal!")}
               selectable
@@ -44,8 +44,8 @@ const CurrentGoals = () => {
             <Table.Cell collapsing>
               <Checkbox slider />
             </Table.Cell>
-            <Table.Cell>Jamie Harington</Table.Cell>
-            <Table.Cell>January 11, 2014</Table.Cell>
+            <Table.Cell>GOAL SENTENCE</Table.Cell>
+            <Table.Cell>DATE? Y/N?</Table.Cell>
             <Table.Cell
               onClick={() => console.log("edit goal!")}
               selectable
@@ -65,8 +65,8 @@ const CurrentGoals = () => {
             <Table.Cell collapsing>
               <Checkbox slider />
             </Table.Cell>
-            <Table.Cell>Jill Lewis</Table.Cell>
-            <Table.Cell>May 11, 2014</Table.Cell>
+            <Table.Cell>GOAL SENTENCE</Table.Cell>
+            <Table.Cell>DATE? Y/N?</Table.Cell>
             <Table.Cell
               onClick={() => console.log("edit goal!")}
               selectable

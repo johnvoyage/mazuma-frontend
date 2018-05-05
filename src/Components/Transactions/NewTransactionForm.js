@@ -43,7 +43,7 @@ const NewTransactionForm = props => {
                 ? updateDebitBalance(event)
                 : updateCreditBalance(event);
               props.updateTransactionBalance(
-                calcCreditBalance() + calcDebitBalance()
+                calcCreditBalance() - calcDebitBalance()
               );
             }}
             control={Input}
@@ -126,7 +126,7 @@ const NewTransactionForm = props => {
         {renderFields(props.formCreditFields, "formCreditFields")}
         <h3>
           Subtotal: &emsp;
-          {formatNumber.standard(-calcCreditBalance().toFixed(2), " $ ")}
+          {formatNumber.standard(calcCreditBalance().toFixed(2), " $ ")}
         </h3>
         {props.transactionBalance !== 0 ? (
           <h4 id="out-of-bal">

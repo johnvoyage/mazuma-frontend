@@ -30,13 +30,15 @@ const updateDebitBalance = event => {
   const currentKey = event.target.name;
   const currentVal = parseFloat(parseFloat(event.target.value).toFixed(2));
   currentDebits[currentKey] = currentVal;
+  console.log(currentDebits);
   return calcDebitBalance();
 };
 
 const updateCreditBalance = event => {
   const currentKey = event.target.name;
-  const currentVal = -parseFloat(parseFloat(event.target.value).toFixed(2));
+  const currentVal = parseFloat(parseFloat(event.target.value).toFixed(2));
   currentCredits[currentKey] = currentVal;
+  console.log(currentCredits);
   return calcCreditBalance();
 };
 
@@ -56,9 +58,12 @@ const newTransactionSubmitted = (event, userId, fetchUserData) => {
   for (let i = 2; i < descriptionIndex; i++) {
     const fieldCheck = event.target.children[i].innerText[0];
     if (fieldCheck !== "W" && fieldCheck !== "S" && fieldCheck !== "I") {
-      // debugger
-      const amount =
-        event.target.children[i].children[0].children[1].children[0].value;
+      // debugger;
+      const amount = event.target.children[
+        i
+      ].children[0].children[1].children[0].name.includes("db")
+        ? event.target.children[i].children[0].children[1].children[0].value
+        : -event.target.children[i].children[0].children[1].children[0].value;
       const account =
         event.target.children[i].children[1].children[1].innerText;
       transactions.push([amount, account]);
@@ -111,7 +116,7 @@ const getAccountNumbers = (entryId, userId, fetchUserData) => {
     const accountName = transaction[1];
     // debugger
     // console.log('amt: ', amount)
-    // console.log('acct ', accountName)
+    console.log("acct ", accountName);
     api.accounts.getAccountId(accountName, userId).then(account => {
       api.transactions
         .createTransaction(amount, account.id, entryId)

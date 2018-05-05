@@ -91,6 +91,7 @@ const readAccount = accountId => {
 };
 
 const getAccountId = (accountName, userId) => {
+  // const urlAccountName = accountName.split(" ").join("-space-here-");
   return fetch(`${API_ROOT}/accountname/${accountName}/${userId}`).then(
     response => response.json()
   );

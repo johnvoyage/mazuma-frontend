@@ -9,7 +9,7 @@ const userInfo = {
 };
 
 const transactionContainer = {
-  topRow: "view transactions",
+  topRow: "new transaction", //view transactions
   showFilters: false,
   showDescriptions: true,
   showEditDelete: true,
@@ -32,7 +32,7 @@ const chartContainer = {
   chartType: "line",
   showSubcategories: ["net worth"],
   goalComparison: true,
-  beginDate: "2000-01-01",
+  beginDate: "2018-01-01",
   endDate: dateHelpers.dateHelpersJavaScript(new Date())
 };
 

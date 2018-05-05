@@ -24,9 +24,9 @@ const UserAccounts = () => {
 
         <Table.Body>
           <Table.Row>
-            <Table.Cell>Cell</Table.Cell>
-            <Table.Cell>Cell</Table.Cell>
-            <Table.Cell>Cell</Table.Cell>
+            <Table.Cell>TO BE COMPLETED</Table.Cell>
+            <Table.Cell>TO BE COMPLETED</Table.Cell>
+            <Table.Cell>TO BE COMPLETED</Table.Cell>
             <Table.Cell
               onClick={() => console.log("edit account!")}
               selectable
@@ -43,9 +43,9 @@ const UserAccounts = () => {
             </Table.Cell>
           </Table.Row>
           <Table.Row>
-            <Table.Cell>Cell</Table.Cell>
-            <Table.Cell>Cell</Table.Cell>
-            <Table.Cell>Cell</Table.Cell>
+            <Table.Cell>TO BE COMPLETED</Table.Cell>
+            <Table.Cell>TO BE COMPLETED</Table.Cell>
+            <Table.Cell>TO BE COMPLETED</Table.Cell>
             <Table.Cell
               onClick={() => console.log("edit account!")}
               selectable
@@ -62,9 +62,9 @@ const UserAccounts = () => {
             </Table.Cell>
           </Table.Row>
           <Table.Row>
-            <Table.Cell>Cell</Table.Cell>
-            <Table.Cell>Cell</Table.Cell>
-            <Table.Cell>Cell</Table.Cell>
+            <Table.Cell>TO BE COMPLETED</Table.Cell>
+            <Table.Cell>TO BE COMPLETED</Table.Cell>
+            <Table.Cell>TO BE COMPLETED</Table.Cell>
             <Table.Cell
               onClick={() => console.log("edit account!")}
               selectable
@@ -90,7 +90,7 @@ const UserAccounts = () => {
                   <Icon name="chevron left" />
                 </Menu.Item>
                 <Menu.Item as="a">All</Menu.Item>
-                <Menu.Item as="a">Liquid Assets</Menu.Item>
+                <Menu.Item as="a">1</Menu.Item>
                 <Menu.Item as="a">3</Menu.Item>
                 <Menu.Item as="a">4</Menu.Item>
                 <Menu.Item as="a">2</Menu.Item>

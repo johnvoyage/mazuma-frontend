@@ -28,13 +28,13 @@ const UserHomeStats = props => {
         <Statistic>
           <Statistic.Value>
             <Icon name="dollar" />
-            5555
+            924,558
           </Statistic.Value>
           <Statistic.Label>NET WORTH</Statistic.Label>
         </Statistic>
 
         <Statistic>
-          <Statistic.Value>4/12/45</Statistic.Value>
+          <Statistic.Value>01/01/18</Statistic.Value>
           <Statistic.Label>Member Since</Statistic.Label>
         </Statistic>
       </Statistic.Group>
