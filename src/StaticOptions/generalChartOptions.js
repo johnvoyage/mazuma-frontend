@@ -7,6 +7,12 @@ const standardLine = {
   }
 };
 
+const standardPie = {};
+
+const standardBar = {};
+
 export default {
-  standardLine
+  standardLine,
+  standardPie,
+  standardBar
 };

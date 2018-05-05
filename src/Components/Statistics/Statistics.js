@@ -29,31 +29,27 @@ const Statistics = props => {
     });
   };
 
-  const [
-    netWorthData,
-    assetData,
-    liabilityData,
-    netIncomeData,
-    incomeData,
-    spendingData
-  ] = [
-    massAssignHelper([1, 2, 3, 4, 5, 6]),
-    massAssignHelper([1, 2, 3, 4]),
-    massAssignHelper([5, 6]),
-    massAssignHelper([8, 9]),
-    massAssignHelper([8]),
-    massAssignHelper([9])
-  ];
+  const lineData = {};
+  lineData.netWorth = massAssignHelper([1, 2, 3, 4, 5, 6]);
+  lineData.assets = massAssignHelper([1, 2, 3, 4]);
+  lineData.liabilities = massAssignHelper([5, 6]);
+  lineData.netIncome = massAssignHelper([8, 9]);
+  lineData.income = massAssignHelper([8]);
+  lineData.spending = massAssignHelper([9]);
 
-  const data = {
+  const lineGraphData = {
     labels: dataPointsToMap,
-    datasets: [
-      {
-        ...chartAesthetics.standard,
-        label: "Net Worth",
-        data: netWorthData
-      }
-    ],
+    datasets: props.showSubcategories.map(subcategory => {
+      const grabKey =
+        subcategory === "net worth"
+          ? "netWorth"
+          : subcategory === "net income" ? "netIncome" : subcategory;
+      return {
+        ...chartAesthetics.line[grabKey],
+        label: subcategory.toUpperCase(),
+        data: lineData[grabKey]
+      };
+    }),
     options: generalChartOptions.standardLine
   };
 
@@ -66,11 +62,11 @@ const Statistics = props => {
       <br />
       <Segment>
         {props.chartType === "line" ? (
-          <Line data={data} />
+          <Line data={lineGraphData} />
         ) : props.chartType === "bar" ? (
-          <Bar data={data} />
+          <Bar data={lineGraphData} />
         ) : (
-          <Pie data={data} />
+          <Pie data={lineGraphData} />
         )}
       </Segment>
     </div>

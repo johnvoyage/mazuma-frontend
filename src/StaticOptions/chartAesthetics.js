@@ -1,6 +1,6 @@
 // import chartOptions from "./chartOptions";
 
-const standard = {
+const standardLine = {
   fill: false,
   lineTension: 0.1,
   borderColor: "red",
@@ -15,6 +15,20 @@ const standard = {
   pointHitRadius: 10
 };
 
+const netWorth = standardLine;
+const assets = standardLine;
+const liabilities = standardLine;
+const netIncome = standardLine;
+const income = standardLine;
+const spending = standardLine;
+
 export default {
-  standard
+  line: {
+    netWorth,
+    assets,
+    liabilities,
+    netIncome,
+    income,
+    spending
+  }
 };
