@@ -17,6 +17,7 @@ const Earning = props => {
       props.endDate
     );
   };
+
   const subtotalHeader = subcategoryId => {
     return (
       <Table.Row key={-1}>
