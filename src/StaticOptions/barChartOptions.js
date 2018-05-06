@@ -15,6 +15,11 @@ const standardLine = {
   pointHitRadius: 10
 };
 
+// const standardPie = {
+//   label: "Population (millions)",
+//   backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"]
+// };
+
 const netWorth = standardLine;
 const assets = standardLine;
 const liabilities = standardLine;
@@ -23,12 +28,10 @@ const income = standardLine;
 const spending = standardLine;
 
 export default {
-  line: {
-    netWorth,
-    assets,
-    liabilities,
-    netIncome,
-    income,
-    spending
-  }
+  netWorth,
+  assets,
+  liabilities,
+  netIncome,
+  income,
+  spending
 };

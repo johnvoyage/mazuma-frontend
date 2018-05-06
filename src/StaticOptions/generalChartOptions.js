@@ -7,7 +7,12 @@ const standardLine = {
   }
 };
 
-const standardPie = {};
+const standardPie = {
+  title: {
+    display: true,
+    text: "Predicted world population (millions) in 2050"
+  }
+};
 
 const standardBar = {};
 

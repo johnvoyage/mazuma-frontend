@@ -1,17 +1,16 @@
 import React from "react";
-import GraphOptions from "./GraphOptions";
-import SubcategoryOptions from "./SubcategoryOptions";
-import TimingFilter from "./TimingFilter";
-// import chartHelpers from "../../HelperFunctions/chartHelpers";
-// import financialStatementHelpers from "../../HelperFunctions/financialStatementHelpers";
-// import chartAesthetics from "../../StaticOptions/chartAesthetics";
-// import generalChartOptions from "../../StaticOptions/generalChartOptions";
+import { Pie } from "react-chartjs-2";
+// import GraphOptions from "./GraphOptions";
+// import SubcategoryOptions from "./SubcategoryOptions";
+// import TimingFilter from "./TimingFilter";
+import { Segment } from "semantic-ui-react";
+import chartHelpers from "../../HelperFunctions/chartHelpers";
+import financialStatementHelpers from "../../HelperFunctions/financialStatementHelpers";
+import pieChartOptions from "../../StaticOptions/pieChartOptions";
+import generalChartOptions from "../../StaticOptions/generalChartOptions";
 import { connect } from "react-redux";
-import LineGraph from "./LineGraph";
-import BarGraph from "./BarGraph";
-import PieGraph from "./PieGraph";
 
-const Statistics = props => {
+const PieGraph = props => {
   // const lineDataPointsToMap = chartHelpers.arrayOfDatesWithEntries(
   //   props.beginDate,
   //   props.endDate,
@@ -37,38 +36,20 @@ const Statistics = props => {
   // chartData.line.netIncome = massAssignHelper([8, 9]).map(num => -num);
   // chartData.line.income = massAssignHelper([8]).map(num => -num);
   // chartData.line.spending = massAssignHelper([9]);
-  //
-  // const lineGraphData = {
-  //   labels: lineDataPointsToMap,
-  //   datasets: props.showSubcategories.map(subcategory => {
-  //     const grabKey =
-  //       subcategory === "net worth"
-  //         ? "netWorth"
-  //         : subcategory === "net income" ? "netIncome" : subcategory;
-  //     return {
-  //       ...chartAesthetics.line[grabKey],
-  //       label: subcategory.toUpperCase(),
-  //       data: chartData.line[grabKey]
-  //     };
-  //   }),
-  //   options: generalChartOptions.standardLine
-  // };
+
+  const pieGraphData = {
+    labels: ["red", "yellow", "blue"],
+    datasets: [
+      {
+        data: [10, 20, 30]
+      }
+    ]
+  };
 
   return (
-    <div>
-      <GraphOptions />
-      <SubcategoryOptions />
-      <br />
-      <TimingFilter />
-      <br />
-      {props.chartType === "line" ? (
-        <LineGraph />
-      ) : props.chartType === "bar" ? (
-        <BarGraph />
-      ) : (
-        <PieGraph />
-      )}
-    </div>
+    <Segment>
+      <Pie data={pieGraphData} options={generalChartOptions.standardPie} />
+    </Segment>
   );
 };
 
@@ -93,4 +74,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, null)(Statistics);
+export default connect(mapStateToProps, null)(PieGraph);
