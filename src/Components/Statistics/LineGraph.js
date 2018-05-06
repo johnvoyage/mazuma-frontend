@@ -29,13 +29,13 @@ const LineGraph = props => {
     });
   };
 
-  const chartData = { line: {}, pie: {}, bar: {} };
-  chartData.line.netWorth = massAssignHelper([1, 2, 3, 4, 5, 6]);
-  chartData.line.assets = massAssignHelper([1, 2, 3, 4]);
-  chartData.line.liabilities = massAssignHelper([5, 6]).map(num => -num);
-  chartData.line.netIncome = massAssignHelper([8, 9]).map(num => -num);
-  chartData.line.income = massAssignHelper([8]).map(num => -num);
-  chartData.line.spending = massAssignHelper([9]);
+  const chartData = {};
+  chartData.netWorth = massAssignHelper([1, 2, 3, 4, 5, 6]);
+  chartData.assets = massAssignHelper([1, 2, 3, 4]);
+  chartData.liabilities = massAssignHelper([5, 6]).map(num => -num);
+  chartData.netIncome = massAssignHelper([8, 9]).map(num => -num);
+  chartData.income = massAssignHelper([8]).map(num => -num);
+  chartData.spending = massAssignHelper([9]);
 
   const lineGraphData = {
     labels: lineDataPointsToMap,
@@ -47,7 +47,7 @@ const LineGraph = props => {
       return {
         ...lineChartOptions[grabKey],
         label: subcategory.toUpperCase(),
-        data: chartData.line[grabKey]
+        data: chartData[grabKey]
       };
     })
   };

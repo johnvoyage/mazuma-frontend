@@ -91,9 +91,9 @@ const SubcategoryOptions = props => {
       </Button>
       <Button.Or />
       <Button
-        name="earning"
+        name="income"
         onClick={handlePieClick}
-        positive={props.showSubcategories.indexOf("earning") > -1}
+        positive={props.showSubcategories.indexOf("income") > -1}
       >
         Earning
       </Button>

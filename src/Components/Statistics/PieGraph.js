@@ -5,42 +5,48 @@ import { Pie } from "react-chartjs-2";
 // import TimingFilter from "./TimingFilter";
 import { Segment } from "semantic-ui-react";
 import chartHelpers from "../../HelperFunctions/chartHelpers";
-import financialStatementHelpers from "../../HelperFunctions/financialStatementHelpers";
+// import financialStatementHelpers from "../../HelperFunctions/financialStatementHelpers";
 import pieChartOptions from "../../StaticOptions/pieChartOptions";
 import generalChartOptions from "../../StaticOptions/generalChartOptions";
 import { connect } from "react-redux";
 
 const PieGraph = props => {
+  const pieDataPointsToMap = arrayOfSubcategorieIds => {
+    return chartHelpers.arrayOfAccountsBelongingToSubcategoryIds(
+      arrayOfSubcategorieIds,
+      props.accounts
+    );
+  };
+
+  // console.log(pieDataPointsToMap);
+  //
+  // const pieGraphLabels = pieDataPointsToMap.map(account => account.name);
+
   // const lineDataPointsToMap = chartHelpers.arrayOfDatesWithEntries(
   //   props.beginDate,
   //   props.endDate,
   //   props.entries
   // );
   //
-  // const massAssignHelper = arrayOfSubcategories => {
-  //   return lineDataPointsToMap.map(date => {
-  //     return financialStatementHelpers.amountOfEntriesGivenSubcategories(
-  //       arrayOfSubcategories,
-  //       props.accounts,
-  //       props.entries,
-  //       0,
-  //       date
-  //     );
-  //   });
-  // };
+  const labelsMAssignHelper = arrayOfSubcategories => {
+    return pieDataPointsToMap(arrayOfSubcategories, props.accounts).map(
+      account => account.name
+    );
+  };
   //
-  // const chartData = { line: {}, pie: {}, bar: {} };
-  // chartData.line.netWorth = massAssignHelper([1, 2, 3, 4, 5, 6]);
-  // chartData.line.assets = massAssignHelper([1, 2, 3, 4]);
-  // chartData.line.liabilities = massAssignHelper([5, 6]).map(num => -num);
-  // chartData.line.netIncome = massAssignHelper([8, 9]).map(num => -num);
-  // chartData.line.income = massAssignHelper([8]).map(num => -num);
-  // chartData.line.spending = massAssignHelper([9]);
+  const chartDataLabels = {};
+  // chartData.line.netWorth = labelsMAssignHelper([1, 2, 3, 4, 5, 6]);
+  chartDataLabels.assets = labelsMAssignHelper([1, 2, 3, 4]);
+  chartDataLabels.liabilities = labelsMAssignHelper([5, 6]);
+  // chartData.netIncome = labelsMAssignHelper([8, 9]).map(num => -num);
+  chartDataLabels.income = labelsMAssignHelper([8]);
+  chartDataLabels.spending = labelsMAssignHelper([9]);
 
   const pieGraphData = {
-    labels: ["red", "yellow", "blue"],
+    labels: chartDataLabels.pie[props.showSubcategories[0]],
     datasets: [
       {
+        ...pieChartOptions["assets"],
         data: [10, 20, 30]
       }
     ]
