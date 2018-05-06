@@ -11,7 +11,7 @@ const filterEntriesWithinDateRange = (arrayOfEntries, beginDate, endDate) => {
     // entryDate <= endDate;
   });
 };
-
+// amountOfEntriesGivenSubcategories
 const mapAccountIdsUsedInEntries = arrayOfEntries => {
   return arrayOfEntries.map(entry =>
     mapAccountIdsUsedInTransactions(entry.transactions)
@@ -118,6 +118,7 @@ const filterAccountIdsOfSubcategories = (
 //     " $ "
 //   );
 // };
+// amountOfEntriesGivenSubcategories
 const amountOfEntriesGivenSubcategories = (
   arrayOfSubcategoryIds,
   arrayOfAccounts,
@@ -129,7 +130,7 @@ const amountOfEntriesGivenSubcategories = (
     arrayOfSubcategoryIds,
     arrayOfAccounts
   );
-
+  console.log(beginDate);
   return mapTransactionsOfEntries(
     filterEntriesWithinDateRange(entries, beginDate, endDate)
   ).reduce((aggr, arrayOfTransactions) => {

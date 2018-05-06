@@ -11,7 +11,6 @@ const arrayOfDatesWithEntries = (beginDate, endDate, entries) => {
   const arrayOfDates = [];
   const arrayOfDatesWithEntries = arrayOfEntryDates(entries);
   let currentDate = beginDate;
-  console.log(endDate);
   while (new Date(currentDate) <= new Date(endDate)) {
     if (arrayOfDatesWithEntries.indexOf(currentDate) > -1) {
       arrayOfDates.push(currentDate);

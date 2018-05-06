@@ -80,30 +80,6 @@ const PieGraph = props => {
     return returnedObject;
   };
 
-  // const dataMassAssignHelper = arrayOfSubcategories => {
-  //   const returnedObject = {}
-  //   topNineSlices(arrayOfSubcategories)[0].forEach(account => {
-  //     ...returnedObject})
-  // return {
-  //   topNineSlices(arrayOfSubcategories)[0],
-  //   tenthSlice(arrayOfRows)
-  // }
-  // };
-
-  // const pieDataPointsConvertedToAmounts = arrayOfSubcategories => {
-  //   return pieDataPointsToMap(arrayOfSubcategories, props.accounts).map(
-  //     account => amountOfEntriesGivenAccount(account.id)
-  //   );
-  // };
-  //
-  // const pieDataAmountsSorted = arrayOfSubcategories => {
-  //   return pieDataPointsConvertedToAmounts(arrayOfSubcategories).sort(
-  //     (a, b) => b - a
-  //   );
-  // };
-  //
-  // console.log(pieDataAmountsSorted([1, 2, 3, 4]));
-
   // console.log(topNineSlices([1, 2, 3, 4])[0]);
   // console.log(tenthSlice([1, 2, 3, 4]));
   // console.log(finalPieChartDataObject([1, 2, 3, 4]));
@@ -116,12 +92,12 @@ const PieGraph = props => {
 
   const chartData = {};
   chartData.assets = Object.values(finalPieChartDataObject([1, 2, 3, 4]));
-  chartData.liabilities = Object.values(finalPieChartDataObject([5, 6])).map(
-    num => -num
-  );
-  chartData.income = Object.values(finalPieChartDataObject([8])).map(
-    num => -num
-  );
+  chartData.liabilities = Object.values(finalPieChartDataObject([5, 6]))
+    .map(num => -num)
+    .reverse();
+  chartData.income = Object.values(finalPieChartDataObject([8]))
+    .map(num => -num)
+    .reverse();
   chartData.spending = Object.values(finalPieChartDataObject([9]));
 
   const pieGraphData =
@@ -139,10 +115,12 @@ const PieGraph = props => {
         }
       : {};
 
-  return (
+  return props.showSubcategories.length !== 0 ? (
     <Segment>
       <Pie data={pieGraphData} options={generalChartOptions.standardPie} />
     </Segment>
+  ) : (
+    <h3>Please select a subcategory</h3>
   );
 };
 

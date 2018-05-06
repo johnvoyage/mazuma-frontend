@@ -34,22 +34,25 @@
 //   return returnedArray;
 // };
 
+const backgroundColor = [
+  "#DCEDC8",
+  "#C5E1A5",
+  "#AED581",
+  "#9CCC65",
+  "#8BC34A",
+  "#7CB342",
+  "#689F38",
+  "#558B2F",
+  "33691E",
+  "black"
+];
+
 const pieChartOptions = numberOfSlices => {
-  // console.log(numberOfSlices);
+  if (numberOfSlices < 10) {
+    backgroundColor[numberOfSlices - 1] = "black";
+  }
   return {
-    label: "Population (millions)",
-    backgroundColor: [
-      "#193300",
-      "#336600",
-      "#4C9900",
-      "#66CC00",
-      "#80FF00",
-      "#99FF33",
-      "#B2FF66",
-      "#CCFF99",
-      "#E5FFCC",
-      "GREY"
-    ]
+    backgroundColor: backgroundColor
   };
 };
 

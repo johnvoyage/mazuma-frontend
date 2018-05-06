@@ -1,44 +1,48 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
-// import GraphOptions from "./GraphOptions";
-// import SubcategoryOptions from "./SubcategoryOptions";
-// import TimingFilter from "./TimingFilter";
 import { Segment } from "semantic-ui-react";
 import chartHelpers from "../../HelperFunctions/chartHelpers";
+import dateHelpers from "../../HelperFunctions/dateHelpers";
+
 import financialStatementHelpers from "../../HelperFunctions/financialStatementHelpers";
 import barChartOptions from "../../StaticOptions/barChartOptions";
 import generalChartOptions from "../../StaticOptions/generalChartOptions";
 import { connect } from "react-redux";
 
 const BarGraph = props => {
-  const lineDataPointsToMap = chartHelpers.arrayOfDatesWithEntries(
+  const barDataPointsToMap = chartHelpers.arrayOfDatesWithEntries(
     props.beginDate,
     props.endDate,
     props.entries
   );
 
   const massAssignHelper = arrayOfSubcategories => {
-    return lineDataPointsToMap.map(date => {
+    return barDataPointsToMap.map(date => {
+      // console.log(date);
+      // console.log(dateHelpers.yesterday(date));
       return financialStatementHelpers.amountOfEntriesGivenSubcategories(
         arrayOfSubcategories,
         props.accounts,
         props.entries,
-        0,
+        dateHelpers.yesterday(date),
+        // 0,
+        // date,
         date
       );
     });
   };
+  console.log(massAssignHelper([1, 2, 3, 4, 5, 6]));
 
-  const chartData = { line: {}, pie: {}, bar: {} };
-  chartData.line.netWorth = massAssignHelper([1, 2, 3, 4, 5, 6]);
-  chartData.line.assets = massAssignHelper([1, 2, 3, 4]);
-  chartData.line.liabilities = massAssignHelper([5, 6]).map(num => -num);
-  chartData.line.netIncome = massAssignHelper([8, 9]).map(num => -num);
-  chartData.line.income = massAssignHelper([8]).map(num => -num);
-  chartData.line.spending = massAssignHelper([9]);
+  const chartData = {};
+  chartData.netWorth = massAssignHelper([1, 2, 3, 4, 5, 6]);
+  chartData.assets = massAssignHelper([1, 2, 3, 4]);
+  chartData.liabilities = massAssignHelper([5, 6]).map(num => -num);
+  chartData.netIncome = massAssignHelper([8, 9]).map(num => -num);
+  chartData.income = massAssignHelper([8]).map(num => -num);
+  chartData.spending = massAssignHelper([9]);
 
-  const lineGraphData = {
-    labels: lineDataPointsToMap,
+  const barGraphData = {
+    labels: barDataPointsToMap,
     datasets: props.showSubcategories.map(subcategory => {
       const grabKey =
         subcategory === "net worth"
@@ -47,26 +51,28 @@ const BarGraph = props => {
       return {
         ...barChartOptions[grabKey],
         label: subcategory.toUpperCase(),
-        data: chartData.line[grabKey]
+        data: chartData[grabKey]
       };
     }),
     options: generalChartOptions.standardLine
   };
 
-  return (
+  return props.showSubcategories.length !== 0 ? (
     <Segment>
-      <Bar data={lineGraphData} />
+      <Bar data={barGraphData} options={generalChartOptions.standardLine} />
     </Segment>
+  ) : (
+    <h3>Please select a subcategory</h3>
   );
 };
 
 // <Segment>
-//   {props.chartType === "line" ? (
-//     <Line data={lineGraphData} />
+//   {props.chartType === "bar" ? (
+//     <Line data={barGraphData} />
 //   ) : props.chartType === "bar" ? (
-//     <Bar data={lineGraphData} />
+//     <Bar data={barGraphData} />
 //   ) : (
-//     <Pie data={lineGraphData} />
+//     <Pie data={barGraphData} />
 //   )}
 // </Segment>
 

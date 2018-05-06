@@ -52,10 +52,12 @@ const LineGraph = props => {
     })
   };
 
-  return (
+  return props.showSubcategories.length !== 0 ? (
     <Segment>
       <Line data={lineGraphData} options={generalChartOptions.standardLine} />
     </Segment>
+  ) : (
+    <h3>Please select a subcategory</h3>
   );
 };
 

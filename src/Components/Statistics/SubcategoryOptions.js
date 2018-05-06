@@ -5,8 +5,6 @@ import { connect } from "react-redux";
 const SubcategoryOptions = props => {
   const handleClick = event => {
     const subcategory = event.target.name;
-    console.log(event.target.name);
-
     if (props.showSubcategories.indexOf(subcategory) > -1) {
       const newSubcategories = [...props.showSubcategories];
       newSubcategories.splice(newSubcategories.indexOf(subcategory), 1);
@@ -17,11 +15,12 @@ const SubcategoryOptions = props => {
       props.updateChartSubcategories(newSubcategories);
     }
   };
+
   const handlePieClick = event => {
     const subcategory = event.target.name;
     props.updateChartSubcategories([subcategory]);
-    console.log(event.target.name);
   };
+
   return props.chartType !== "pie" ? (
     <Button.Group attached="top">
       <Button

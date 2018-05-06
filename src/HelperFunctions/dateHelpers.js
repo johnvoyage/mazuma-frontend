@@ -35,6 +35,16 @@ const tomorrow = date => {
   return `${yyyy}/${mm}/${dd}`;
 };
 
+const yesterday = date => {
+  let today = new Date(date);
+  let yesterday = new Date(today);
+  yesterday.setDate(today.getDate());
+  let [dd, mm, yyyy] = pullDateDDMMYYYY(yesterday);
+  dd = dd < 10 ? "0" + dd : dd;
+  mm = mm < 10 ? "0" + mm : mm;
+  return `${yyyy}-${mm}-${dd}`;
+};
+
 // const arrayOfEntryDates = entries => {
 //   return entries.map(entry => {
 //     return dateSymbolReplace(entry.date.slice(0, 10), "-", "/");
@@ -58,6 +68,7 @@ export default {
   dateSymbolReplace,
   dateHelpersJavaScript,
   dateHelpersEnglish,
-  tomorrow
+  tomorrow,
+  yesterday
   // arrayOfDatesWithEntries
 };

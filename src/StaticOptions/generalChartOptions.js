@@ -9,7 +9,7 @@ const standardLine = {
 
 const standardPie = {
   title: {
-    display: true,
+    display: false,
     text: "TOP 9 BREAKDOWN"
   }
 };
