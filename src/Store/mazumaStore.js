@@ -36,7 +36,8 @@ const rootReducer = (state = initialState.whole, action) => {
         ...state,
         userInfo: {
           id: null,
-          email: null
+          email: null,
+          dateCreated: null
         },
         activeMenuItem: "Mazuma"
         // initialState

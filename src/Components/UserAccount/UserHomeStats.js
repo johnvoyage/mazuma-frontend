@@ -1,6 +1,9 @@
 import React from "react";
 import { Statistic, Icon, Segment } from "semantic-ui-react";
 import { connect } from "react-redux";
+import formatNumber from "../../HelperFunctions/formatNumber";
+import financialStatementHelpers from "../../HelperFunctions/financialStatementHelpers";
+import dateHelpers from "../../HelperFunctions/dateHelpers";
 
 const UserHomeStats = props => {
   // console.log(props)
@@ -16,19 +19,33 @@ const UserHomeStats = props => {
   //     return 'Loading...'
   //   }
   // }
+  const numberOfTransactions = () => {
+    return props.entries.reduce(
+      (aggr, entry) => aggr + entry.transactions.length,
+      0
+    );
+  };
 
   return (
     <Segment>
       <Statistic.Group widths="three">
         <Statistic>
-          <Statistic.Value text>500</Statistic.Value>
+          <Statistic.Value text>{numberOfTransactions()}</Statistic.Value>
           <Statistic.Label>TRANSACTIONS</Statistic.Label>
         </Statistic>
 
         <Statistic>
           <Statistic.Value>
             <Icon name="dollar" />
-            924,558
+            {formatNumber.withoutCents(
+              financialStatementHelpers.amountOfEntriesGivenSubcategories(
+                [1, 2, 3, 4, 5, 6],
+                props.accounts,
+                props.entries,
+                0,
+                dateHelpers.dateHelpersJavaScript(new Date())
+              )
+            )}
           </Statistic.Value>
           <Statistic.Label>NET WORTH</Statistic.Label>
         </Statistic>
@@ -45,8 +62,9 @@ const UserHomeStats = props => {
 const mapStateToProps = state => {
   return {
     // numOfTransactions:
-    numOfEntries: state.userInfo.entries,
-    numOfAccounts: state.userInfo.accounts
+    // dateCreated: state.userInfo.dateCreated.slice(0, 10),
+    entries: state.userInfo.entries,
+    accounts: state.userInfo.accounts
   };
 };
 

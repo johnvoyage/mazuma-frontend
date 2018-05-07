@@ -72,6 +72,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(fetchUserData(userId));
     },
     signUserIn: userInfo => {
+      console.log(userInfo);
       localStorage.setItem("token", userInfo.jwt);
       dispatch({ type: "SIGN_USER_IN", userInfo });
     }
