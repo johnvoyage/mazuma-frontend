@@ -80,9 +80,9 @@ const PieGraph = props => {
     return returnedObject;
   };
 
-  // console.log(topNineSlices([1, 2, 3, 4])[0]);
-  // console.log(tenthSlice([1, 2, 3, 4]));
-  // console.log(finalPieChartDataObject([1, 2, 3, 4]));
+  console.log(topNineSlices([1, 2, 3, 4])[0]);
+  console.log(tenthSlice([1, 2, 3, 4]));
+  console.log(finalPieChartDataObject([1, 2, 3, 4]));
 
   const chartDataLabels = {};
   chartDataLabels.assets = Object.keys(finalPieChartDataObject([1, 2, 3, 4]));

@@ -34,25 +34,26 @@
 //   return returnedArray;
 // };
 
-const backgroundColor = [
-  "#DCEDC8",
-  "#C5E1A5",
-  "#AED581",
-  "#9CCC65",
-  "#8BC34A",
-  "#7CB342",
-  "#689F38",
-  "#558B2F",
-  "33691E",
-  "black"
-];
+const tenScalingColors = numberOfSlices => {
+  const tenScalingColorsWithBlackAsLast = [
+    "#DCEDC8",
+    "#C5E1A5",
+    "#AED581",
+    "#9CCC65",
+    "#8BC34A",
+    "#7CB342",
+    "#689F38",
+    "#558B2F",
+    "#33691E",
+    "black"
+  ];
+  tenScalingColorsWithBlackAsLast[numberOfSlices - 1] = "black";
+  return tenScalingColorsWithBlackAsLast;
+};
 
 const pieChartOptions = numberOfSlices => {
-  if (numberOfSlices < 10) {
-    backgroundColor[numberOfSlices - 1] = "black";
-  }
   return {
-    backgroundColor: backgroundColor
+    backgroundColor: tenScalingColors(numberOfSlices)
   };
 };
 
