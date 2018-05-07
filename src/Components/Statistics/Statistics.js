@@ -2,6 +2,8 @@ import React from "react";
 import GraphOptions from "./GraphOptions";
 import SubcategoryOptions from "./SubcategoryOptions";
 import TimingFilter from "./TimingFilter";
+import { Checkbox } from "semantic-ui-react";
+
 // import chartHelpers from "../../HelperFunctions/chartHelpers";
 // import financialStatementHelpers from "../../HelperFunctions/financialStatementHelpers";
 // import chartAesthetics from "../../StaticOptions/chartAesthetics";
@@ -53,12 +55,21 @@ const Statistics = props => {
   //   }),
   //   options: generalChartOptions.standardLine
   // };
+  const handleChange = event => {
+    props.toggleGoals();
+  };
 
   return (
     <div>
       <GraphOptions />
       <SubcategoryOptions />
-      <br />
+      <br />{" "}
+      <Checkbox
+        slider
+        label="Show goals"
+        checked={props.goalComparison}
+        onChange={handleChange}
+      />
       <TimingFilter />
       <br />
       {props.chartType === "line" ? (
@@ -72,15 +83,13 @@ const Statistics = props => {
   );
 };
 
-// <Segment>
-//   {props.chartType === "line" ? (
-//     <Line data={lineGraphData} />
-//   ) : props.chartType === "bar" ? (
-//     <Bar data={lineGraphData} />
-//   ) : (
-//     <Pie data={lineGraphData} />
-//   )}
-// </Segment>
+const mapDispatchToProps = dispatch => {
+  return {
+    toggleGoals: () => {
+      dispatch({ type: "TOGGLE_GOALS" });
+    }
+  };
+};
 
 const mapStateToProps = state => {
   return {
@@ -89,8 +98,9 @@ const mapStateToProps = state => {
     beginDate: state.chartContainer.beginDate,
     endDate: state.chartContainer.endDate,
     showSubcategories: state.chartContainer.showSubcategories,
-    chartType: state.chartContainer.chartType
+    chartType: state.chartContainer.chartType,
+    goalComparison: state.chartContainer.goalComparison
   };
 };
 
-export default connect(mapStateToProps, null)(Statistics);
+export default connect(mapStateToProps, mapDispatchToProps)(Statistics);

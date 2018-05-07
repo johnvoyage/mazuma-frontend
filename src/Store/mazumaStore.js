@@ -209,6 +209,14 @@ const rootReducer = (state = initialState.whole, action) => {
           showSubcategories: action.arrayOfSubcategories
         }
       };
+    case "TOGGLE_GOALS":
+      return {
+        ...state,
+        chartContainer: {
+          ...state.chartContainer,
+          goalComparison: !state.chartContainer.goalComparison
+        }
+      };
     /* DONE */
 
     default:

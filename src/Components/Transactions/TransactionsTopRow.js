@@ -77,6 +77,7 @@ const SelectedFilters = props => {
         <div>
           <br />
           <Checkbox
+            slider
             name="showFilters"
             label="Show filters"
             checked={props.showFilters}
@@ -84,6 +85,7 @@ const SelectedFilters = props => {
           />
           {"  "}
           <Checkbox
+            slider
             name="showDescriptions"
             label="Show descriptions"
             checked={props.showDescriptions}
@@ -91,13 +93,14 @@ const SelectedFilters = props => {
           />
           {"  "}
           <Checkbox
+            slider
             name="showEditDelete"
             label="Show edit/delete"
             checked={props.showEditDelete}
             onChange={handleChange}
           />
           {"  "}
-          <Button size="mini" content="Clear filters" />
+          <Button size="mini" content="Clear filters" floated="right" />
           <br />
           <br />
         </div>

@@ -37,19 +37,23 @@ const LineGraph = props => {
   chartData.income = massAssignHelper([8]).map(num => -num);
   chartData.spending = massAssignHelper([9]);
 
+  const goalCharts = () => {};
+
   const lineGraphData = {
     labels: lineDataPointsToMap,
-    datasets: props.showSubcategories.map(subcategory => {
-      const grabKey =
-        subcategory === "net worth"
-          ? "netWorth"
-          : subcategory === "net income" ? "netIncome" : subcategory;
-      return {
-        ...lineChartOptions[grabKey],
-        label: subcategory.toUpperCase(),
-        data: chartData[grabKey]
-      };
-    })
+    datasets: props.showSubcategories
+      .map(subcategory => {
+        const grabKey =
+          subcategory === "net worth"
+            ? "netWorth"
+            : subcategory === "net income" ? "netIncome" : subcategory;
+        return {
+          ...lineChartOptions[grabKey],
+          label: subcategory.toUpperCase(),
+          data: chartData[grabKey]
+        };
+      })
+      .concat()
   };
 
   return props.showSubcategories.length !== 0 ? (
@@ -65,16 +69,6 @@ const LineGraph = props => {
     />
   );
 };
-
-// <Segment>
-//   {props.chartType === "line" ? (
-//     <Line data={lineGraphData} />
-//   ) : props.chartType === "bar" ? (
-//     <Bar data={lineGraphData} />
-//   ) : (
-//     <Pie data={lineGraphData} />
-//   )}
-// </Segment>
 
 const mapStateToProps = state => {
   return {
