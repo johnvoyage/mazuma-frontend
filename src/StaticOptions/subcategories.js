@@ -31,3 +31,22 @@ export const subcategoryIdToName = subcategoryId => {
       return "Category not named";
   }
 };
+
+export const subcategoryNameToArrayOfIds = subcategory => {
+  switch (subcategory) {
+    case "net worth":
+      return [1, 2, 3, 4, 5, 6];
+    case "assets":
+      return [1, 2, 3, 4];
+    case "liabilities":
+      return [5, 6];
+    case "net income":
+      return [8, 9];
+    case "income":
+      return [8];
+    case "spending":
+      return [9];
+    default:
+      return;
+  }
+};

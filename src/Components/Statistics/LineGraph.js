@@ -8,7 +8,9 @@ import chartHelpers from "../../HelperFunctions/chartHelpers";
 import financialStatementHelpers from "../../HelperFunctions/financialStatementHelpers";
 import lineChartOptions from "../../StaticOptions/lineChartOptions";
 import generalChartOptions from "../../StaticOptions/generalChartOptions";
+import { subcategoryNameToArrayOfIds } from "../../StaticOptions/subcategories";
 import { connect } from "react-redux";
+import { lineGoals } from "../../HelperFunctions/lineGoals";
 
 const LineGraph = props => {
   const lineDataPointsToMap = chartHelpers.arrayOfDatesWithEntries(
@@ -37,8 +39,6 @@ const LineGraph = props => {
   chartData.income = massAssignHelper([8]).map(num => -num);
   chartData.spending = massAssignHelper([9]);
 
-  const goalCharts = () => {};
-
   const lineGraphData = {
     labels: lineDataPointsToMap,
     datasets: props.showSubcategories
@@ -53,8 +53,60 @@ const LineGraph = props => {
           data: chartData[grabKey]
         };
       })
-      .concat()
+      .concat(
+        props.goalComparison
+          ? props.showSubcategories.map(subcategory => {
+              const grabKey =
+                subcategory === "net worth"
+                  ? "netWorth"
+                  : subcategory === "net income" ? "netIncome" : subcategory;
+              return {
+                ...lineChartOptions[`${grabKey}Goals`],
+                label: "GOALS",
+                data: lineGoals(
+                  lineDataPointsToMap.length,
+                  financialStatementHelpers.amountOfEntriesGivenSubcategories(
+                    subcategoryNameToArrayOfIds(subcategory),
+                    props.accounts,
+                    props.entries,
+                    0,
+                    lineDataPointsToMap[0]
+                  ),
+                  0.01
+                )
+              };
+            })
+          : []
+      )
   };
+
+  // if (props.goalComparison) {
+  //   // console.log("here");
+  //   lineGraphData.datasets.concat(
+  //     props.showSubcategories.map(subcategory => {
+  //       const grabKey =
+  //         subcategory === "net worth"
+  //           ? "netWorth"
+  //           : subcategory === "net income" ? "netIncome" : subcategory;
+  //       return {
+  //         ...lineChartOptions[grabKey],
+  //         label: `${subcategory.toUpperCase()} GOALS`,
+  //         data: lineGoals(
+  //           lineDataPointsToMap.length,
+  //           financialStatementHelpers.amountOfEntriesGivenSubcategories(
+  //             subcategoryNameToArrayOfIds(subcategory),
+  //             props.accounts,
+  //             props.entries,
+  //             0,
+  //             lineDataPointsToMap[0]
+  //           )
+  //         )
+  //       };
+  //     })
+  //   );
+  // }
+
+  console.log(lineGraphData.datasets);
 
   return props.showSubcategories.length !== 0 ? (
     <Segment>
@@ -77,7 +129,8 @@ const mapStateToProps = state => {
     beginDate: state.chartContainer.beginDate,
     endDate: state.chartContainer.endDate,
     showSubcategories: state.chartContainer.showSubcategories,
-    chartType: state.chartContainer.chartType
+    chartType: state.chartContainer.chartType,
+    goalComparison: state.chartContainer.goalComparison
   };
 };
 
