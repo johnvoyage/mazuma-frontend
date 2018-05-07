@@ -6,19 +6,6 @@ import financialStatementHelpers from "../../HelperFunctions/financialStatementH
 import dateHelpers from "../../HelperFunctions/dateHelpers";
 
 const UserHomeStats = props => {
-  // console.log(props)
-  // const numOfTransactions = () => {
-  //   // debugger
-  //   if (!!props.numOfEntries && !!props.numOfEntries[0].transactions) {
-  //     return props.numOfEntries.reduce((aggr, entry) => {
-  //       // debugger
-  //       // console.log(entry)
-  //       return aggr += entry.transactions.length
-  //     }, 0)
-  //   } else  {
-  //     return 'Loading...'
-  //   }
-  // }
   const numberOfTransactions = () => {
     return props.entries.reduce(
       (aggr, entry) => aggr + entry.transactions.length,
@@ -51,7 +38,7 @@ const UserHomeStats = props => {
         </Statistic>
 
         <Statistic>
-          <Statistic.Value>01/01/18</Statistic.Value>
+          <Statistic.Value>{props.dateCreated}</Statistic.Value>
           <Statistic.Label>Member Since</Statistic.Label>
         </Statistic>
       </Statistic.Group>
@@ -61,15 +48,12 @@ const UserHomeStats = props => {
 
 const mapStateToProps = state => {
   return {
-    // numOfTransactions:
-    // dateCreated: state.userInfo.dateCreated.slice(0, 10),
+    dateCreated: `${state.userInfo.dateCreated.slice(0, 10).split("-")[1]}/${
+      state.userInfo.dateCreated.slice(0, 10).split("-")[2]
+    }/${state.userInfo.dateCreated.slice(0, 10).split("-")[0]}`,
     entries: state.userInfo.entries,
     accounts: state.userInfo.accounts
   };
 };
 
-export default connect(
-  mapStateToProps,
-  // mapDispatchToProps
-  null
-)(UserHomeStats);
+export default connect(mapStateToProps, null)(UserHomeStats);
