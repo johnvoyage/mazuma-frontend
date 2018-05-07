@@ -129,7 +129,7 @@ const NewTransactionForm = props => {
           {formatNumber.standard(calcCreditBalance().toFixed(2), " $ ")}
         </h3>
         {props.transactionBalance !== 0 ? (
-          <h4 id="out-of-bal">
+          <h4 id="red-text">
             Currently out of balance by: &emsp; ${" "}
             {Math.abs(props.transactionBalance).toFixed(2)}{" "}
           </h4>

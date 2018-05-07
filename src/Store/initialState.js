@@ -30,7 +30,7 @@ const transactionContainer = {
 
 const chartContainer = {
   chartType: "line",
-  showSubcategories: ["net worth"],
+  showSubcategories: [],
   goalComparison: true,
   beginDate: "2018-01-01",
   endDate: dateHelpers.dateHelpersJavaScript(new Date())
@@ -43,7 +43,7 @@ const whole = {
   // formInput: {},
   transactionContainer,
   netIncomeContainer: {
-    beginDate: "2000-01-01",
+    beginDate: "2018-01-01",
     endDate: dateHelpers.dateHelpersJavaScript(new Date())
   },
   netWorthContainer: {

@@ -1,6 +1,6 @@
 import React from "react";
 import { Pie } from "react-chartjs-2";
-import { Segment } from "semantic-ui-react";
+import { Segment, Header } from "semantic-ui-react";
 import chartHelpers from "../../HelperFunctions/chartHelpers";
 import financialStatementHelpers from "../../HelperFunctions/financialStatementHelpers";
 import pieChartOptions from "../../StaticOptions/pieChartOptions";
@@ -24,10 +24,12 @@ const PieGraph = props => {
   };
 
   const amountOfEntriesGivenAccount = accountId => {
-    return financialStatementHelpers.reduceNestedArrayOfTransactionsToAmount(
-      accountId,
-      financialStatementHelpers.mapTransactionsOfEntries(
-        filterEntriesWithinDateRange()
+    return Math.abs(
+      financialStatementHelpers.reduceNestedArrayOfTransactionsToAmount(
+        accountId,
+        financialStatementHelpers.mapTransactionsOfEntries(
+          filterEntriesWithinDateRange()
+        )
       )
     );
   };
@@ -80,9 +82,9 @@ const PieGraph = props => {
     return returnedObject;
   };
 
-  // console.log(topNineSlices([1, 2, 3, 4])[0]);
-  // console.log(tenthSlice([1, 2, 3, 4]));
-  // console.log(finalPieChartDataObject([1, 2, 3, 4]));
+  console.log(topNineSlices([5, 6])[0]);
+  console.log(tenthSlice([5, 6]));
+  console.log(finalPieChartDataObject([5, 6]));
 
   const chartDataLabels = {};
   chartDataLabels.assets = Object.keys(
@@ -100,12 +102,14 @@ const PieGraph = props => {
 
   const chartData = {};
   chartData.assets = Object.values(finalPieChartDataObject([1, 2, 3, 4]));
-  chartData.liabilities = Object.values(finalPieChartDataObject([5, 6]))
-    .map(num => -num)
-    .reverse();
-  chartData.income = Object.values(finalPieChartDataObject([8]))
-    .map(num => -num)
-    .reverse();
+  chartData.liabilities = Object.values(finalPieChartDataObject([5, 6])).map(
+    num => -num
+  );
+  // .reverse();
+  chartData.income = Object.values(finalPieChartDataObject([8])).map(
+    num => -num
+  );
+  // .reverse();
   chartData.spending = Object.values(finalPieChartDataObject([9]));
 
   const pieGraphData =
@@ -129,7 +133,12 @@ const PieGraph = props => {
       <Pie data={pieGraphData} options={generalChartOptions.standardPie} />
     </Segment>
   ) : (
-    <h3>Please select a subcategory</h3>
+    <Header
+      as="h1"
+      textAlign="center"
+      content="Please select a subcategory"
+      id="red-text"
+    />
   );
 };
 

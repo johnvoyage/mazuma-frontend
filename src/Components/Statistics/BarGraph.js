@@ -1,6 +1,6 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
-import { Segment } from "semantic-ui-react";
+import { Segment, Header } from "semantic-ui-react";
 import chartHelpers from "../../HelperFunctions/chartHelpers";
 import dateHelpers from "../../HelperFunctions/dateHelpers";
 
@@ -62,7 +62,12 @@ const BarGraph = props => {
       <Bar data={barGraphData} options={generalChartOptions.standardLine} />
     </Segment>
   ) : (
-    <h3>Please select a subcategory</h3>
+    <Header
+      as="h1"
+      textAlign="center"
+      content="Please select a subcategory"
+      id="red-text"
+    />
   );
 };
 

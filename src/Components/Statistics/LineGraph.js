@@ -3,7 +3,7 @@ import { Line } from "react-chartjs-2";
 // import GraphOptions from "./GraphOptions";
 // import SubcategoryOptions from "./SubcategoryOptions";
 // import TimingFilter from "./TimingFilter";
-import { Segment } from "semantic-ui-react";
+import { Segment, Header } from "semantic-ui-react";
 import chartHelpers from "../../HelperFunctions/chartHelpers";
 import financialStatementHelpers from "../../HelperFunctions/financialStatementHelpers";
 import lineChartOptions from "../../StaticOptions/lineChartOptions";
@@ -57,7 +57,12 @@ const LineGraph = props => {
       <Line data={lineGraphData} options={generalChartOptions.standardLine} />
     </Segment>
   ) : (
-    <h3>Please select a subcategory</h3>
+    <Header
+      as="h1"
+      textAlign="center"
+      content="Please select a subcategory"
+      id="red-text"
+    />
   );
 };
 
