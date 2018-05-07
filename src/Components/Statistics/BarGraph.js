@@ -31,7 +31,7 @@ const BarGraph = props => {
       );
     });
   };
-  console.log(massAssignHelper([1, 2, 3, 4, 5, 6]));
+  // console.log(massAssignHelper([1, 2, 3, 4, 5, 6]));
 
   const chartData = {};
   chartData.netWorth = massAssignHelper([1, 2, 3, 4, 5, 6]);
@@ -54,7 +54,7 @@ const BarGraph = props => {
         data: chartData[grabKey]
       };
     }),
-    options: generalChartOptions.standardLine
+    options: generalChartOptions.standardBar
   };
 
   return props.showSubcategories.length !== 0 ? (

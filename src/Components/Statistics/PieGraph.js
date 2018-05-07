@@ -80,15 +80,23 @@ const PieGraph = props => {
     return returnedObject;
   };
 
-  console.log(topNineSlices([1, 2, 3, 4])[0]);
-  console.log(tenthSlice([1, 2, 3, 4]));
-  console.log(finalPieChartDataObject([1, 2, 3, 4]));
+  // console.log(topNineSlices([1, 2, 3, 4])[0]);
+  // console.log(tenthSlice([1, 2, 3, 4]));
+  // console.log(finalPieChartDataObject([1, 2, 3, 4]));
 
   const chartDataLabels = {};
-  chartDataLabels.assets = Object.keys(finalPieChartDataObject([1, 2, 3, 4]));
-  chartDataLabels.liabilities = Object.keys(finalPieChartDataObject([5, 6]));
-  chartDataLabels.income = Object.keys(finalPieChartDataObject([8]));
-  chartDataLabels.spending = Object.keys(finalPieChartDataObject([9]));
+  chartDataLabels.assets = Object.keys(
+    finalPieChartDataObject([1, 2, 3, 4])
+  ).map((acct, ind) => `${ind + 1}.) ${acct}`);
+  chartDataLabels.liabilities = Object.keys(
+    finalPieChartDataObject([5, 6])
+  ).map((acct, ind) => `${ind + 1}.) ${acct}`);
+  chartDataLabels.income = Object.keys(finalPieChartDataObject([8])).map(
+    (acct, ind) => `${ind + 1}.) ${acct}`
+  );
+  chartDataLabels.spending = Object.keys(finalPieChartDataObject([9])).map(
+    (acct, ind) => `${ind + 1}.) ${acct}`
+  );
 
   const chartData = {};
   chartData.assets = Object.values(finalPieChartDataObject([1, 2, 3, 4]));
@@ -107,7 +115,8 @@ const PieGraph = props => {
           datasets: [
             {
               ...pieChartOptions(
-                chartDataLabels[props.showSubcategories[0]].length
+                chartDataLabels[props.showSubcategories[0]].length,
+                props.showSubcategories[0]
               ),
               data: chartData[props.showSubcategories[0]]
             }

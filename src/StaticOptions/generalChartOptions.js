@@ -1,8 +1,8 @@
 const standardLine = {
   legend: {
-    display: false,
+    display: true,
     labels: {
-      fontColor: "rgb(255, 99, 132)"
+      fontColor: "grey"
     }
   }
 };
@@ -11,10 +11,20 @@ const standardPie = {
   title: {
     display: false,
     text: "TOP 9 BREAKDOWN"
+  },
+  legend: {
+    position: "left"
   }
 };
 
-const standardBar = {};
+const standardBar = {
+  legend: {
+    display: true,
+    labels: {
+      fontColor: "grey"
+    }
+  }
+};
 
 export default {
   standardLine,

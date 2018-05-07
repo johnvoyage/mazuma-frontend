@@ -130,7 +130,7 @@ const amountOfEntriesGivenSubcategories = (
     arrayOfSubcategoryIds,
     arrayOfAccounts
   );
-  console.log(beginDate);
+  // console.log(beginDate);
   return mapTransactionsOfEntries(
     filterEntriesWithinDateRange(entries, beginDate, endDate)
   ).reduce((aggr, arrayOfTransactions) => {
