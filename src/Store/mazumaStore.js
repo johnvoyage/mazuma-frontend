@@ -210,12 +210,12 @@ const rootReducer = (state = initialState.whole, action) => {
           showSubcategories: action.arrayOfSubcategories
         }
       };
-    case "TOGGLE_GOALS":
+    case "TOGGLE_CHART_CHECKBOX":
       return {
         ...state,
         chartContainer: {
           ...state.chartContainer,
-          goalComparison: !state.chartContainer.goalComparison
+          [action.checkbox]: !state.chartContainer[action.checkbox]
         }
       };
     /* DONE */

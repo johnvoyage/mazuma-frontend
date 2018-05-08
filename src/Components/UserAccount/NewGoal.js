@@ -41,6 +41,27 @@ const timeframe = [
 ];
 
 const NewGoal = () => {
+  const handleClick = event => {
+    const firstDropdown = event.target.parentElement.children[0].innerText;
+    const secondDropdown = event.target.parentElement.children[1].innerText;
+    const numberInput = parseFloat(
+      event.target.parentElement.children[3].children[0].value
+    );
+    const dollar =
+      event.target.parentElement.children[4].children[0].innerText === "$"
+        ? "$"
+        : "";
+    const percent =
+      event.target.parentElement.children[4].children[0].innerText === "%"
+        ? "%"
+        : "";
+    const timePeriod =
+      event.target.parentElement.children[6].children[0].innerText;
+    console.log(
+      `${firstDropdown} ${secondDropdown} by ${dollar}${numberInput}${percent} every ${timePeriod}`
+    );
+    // debugger;
+  };
   return (
     <Segment>
       <h3>New Goal:</h3>
@@ -55,7 +76,9 @@ const NewGoal = () => {
         <Input label="every" type="hidden" />
         <Select compact options={timeframe} defaultValue="six months" />
 
-        <Button type="submit">Add Goal</Button>
+        <Button onClick={handleClick} type="submit">
+          Add Goal
+        </Button>
       </Input>
     </Segment>
   );

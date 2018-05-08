@@ -34,9 +34,17 @@ const BarGraph = props => {
   // console.log(massAssignHelper([1, 2, 3, 4, 5, 6]));
 
   const chartData = {};
-  chartData.netWorth = massAssignHelper([1, 2, 3, 4, 5, 6]);
-  chartData.assets = massAssignHelper([1, 2, 3, 4]);
-  chartData.liabilities = massAssignHelper([5, 6]).map(num => -num);
+  chartData.netWorth = props.hideInitial
+    ? massAssignHelper([1, 2, 3, 4, 5, 6]).slice(1)
+    : massAssignHelper([1, 2, 3, 4, 5, 6]);
+  chartData.assets = props.hideInitial
+    ? massAssignHelper([1, 2, 3, 4]).slice(1)
+    : massAssignHelper([1, 2, 3, 4]);
+  chartData.liabilities = props.hideInitial
+    ? massAssignHelper([5, 6])
+        .map(num => -num)
+        .slice(1)
+    : massAssignHelper([5, 6]);
   chartData.netIncome = massAssignHelper([8, 9]).map(num => -num);
   chartData.income = massAssignHelper([8]).map(num => -num);
   chartData.spending = massAssignHelper([9]);
@@ -88,7 +96,8 @@ const mapStateToProps = state => {
     beginDate: state.chartContainer.beginDate,
     endDate: state.chartContainer.endDate,
     showSubcategories: state.chartContainer.showSubcategories,
-    chartType: state.chartContainer.chartType
+    chartType: state.chartContainer.chartType,
+    hideInitial: state.chartContainer.hideInitial
   };
 };
 

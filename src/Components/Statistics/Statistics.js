@@ -56,8 +56,13 @@ const Statistics = props => {
   //   options: generalChartOptions.standardLine
   // };
   const handleChange = event => {
-    props.toggleGoals();
+    console.log(event.target.name);
+    props.toggleChartCheckbox(event.target.parentElement.children[0].name);
   };
+
+  // const handleChange = event => {
+  //   props.toggleInitialEntry();
+  // };
 
   return (
     <div>
@@ -66,10 +71,20 @@ const Statistics = props => {
       <br />{" "}
       <Checkbox
         slider
+        name="goalComparison"
         label="Show goals"
         checked={props.goalComparison}
         onChange={handleChange}
       />
+      {props.chartType === "bar" ? (
+        <Checkbox
+          name="hideInitial"
+          slider
+          label="Hide initial entry"
+          checked={props.hideInitial}
+          onChange={handleChange}
+        />
+      ) : null}
       <TimingFilter />
       <br />
       {props.chartType === "line" ? (
@@ -85,8 +100,8 @@ const Statistics = props => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    toggleGoals: () => {
-      dispatch({ type: "TOGGLE_GOALS" });
+    toggleChartCheckbox: checkbox => {
+      dispatch({ type: "TOGGLE_CHART_CHECKBOX", checkbox });
     }
   };
 };
@@ -99,7 +114,8 @@ const mapStateToProps = state => {
     endDate: state.chartContainer.endDate,
     showSubcategories: state.chartContainer.showSubcategories,
     chartType: state.chartContainer.chartType,
-    goalComparison: state.chartContainer.goalComparison
+    goalComparison: state.chartContainer.goalComparison,
+    hideInitial: state.chartContainer.hideInitial
   };
 };
 

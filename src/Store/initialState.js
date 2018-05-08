@@ -32,6 +32,7 @@ const chartContainer = {
   chartType: "line",
   showSubcategories: [],
   goalComparison: true,
+  hideInitial: true,
   beginDate: "2018-01-01",
   endDate: dateHelpers.dateHelpersJavaScript(new Date())
 };
