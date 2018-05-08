@@ -1,7 +1,14 @@
 // import faker from 'faker'
 // import _ from 'lodash'
 import React from "react";
-import { Segment, Table, Checkbox, Button, Icon } from "semantic-ui-react";
+import {
+  Segment,
+  Table,
+  Checkbox,
+  Button,
+  Icon,
+  Input
+} from "semantic-ui-react";
 
 const CurrentGoals = () => {
   const editCell = (
@@ -50,7 +57,11 @@ const CurrentGoals = () => {
             <Table.Cell collapsing>
               <Checkbox slider />
             </Table.Cell>
-            <Table.Cell>Increase net worth by 1% every 100 days</Table.Cell>
+            <Table.Cell>
+              Increase net worth by{"   "}
+              <Input type="number" min="0.01" step="0.01" defaultValue="5" />
+              {"   "}every 100 days
+            </Table.Cell>
             <Table.Cell>DATE? Y/N?</Table.Cell>
             {editCell}
             {deleteCell}
