@@ -15,9 +15,6 @@ const SignInForm = props => {
       if (user.error) {
         console.log("ERROR");
       } else {
-        // console.log('...')
-
-        // fetchUsersInformation(user.id)
         props.fetchUserData(user.id);
         props.signUserIn(user);
       }
