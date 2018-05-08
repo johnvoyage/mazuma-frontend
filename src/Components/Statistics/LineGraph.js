@@ -72,7 +72,7 @@ const LineGraph = props => {
                     0,
                     lineDataPointsToMap[0]
                   ),
-                  0.01
+                  0.001
                 )
               };
             })
