@@ -16,7 +16,7 @@ const UserAccounts = props => {
             <Table.Cell>
               {subcategoryIdToName(account.subcategory_id).toUpperCase()}
             </Table.Cell>
-            <Table.Cell>TO BE COMPLETED</Table.Cell>
+            <Table.Cell>{account.description}</Table.Cell>
             <Table.Cell
               onClick={() => console.log("edit account!")}
               selectable
@@ -37,7 +37,40 @@ const UserAccounts = props => {
   };
 
   const handleAccountTypeClick = accountsToShow => {
+    console.log(props.accountsToShow === [1, 2, 3, 4, 5, 6, 8, 9]);
     props.changeAccountsToShow(accountsToShow);
+  };
+
+  const handleChevronClick = leftOrRight => {
+    switch (props.accountsToShow.toString()) {
+      case "1,2,3,4,5,6,8,9":
+        leftOrRight === "left"
+          ? props.changeAccountsToShow([9])
+          : props.changeAccountsToShow([1, 2, 3, 4]);
+        break;
+      case "1,2,3,4":
+        leftOrRight === "left"
+          ? props.changeAccountsToShow([1, 2, 3, 4, 5, 6, 8, 9])
+          : props.changeAccountsToShow([5, 6]);
+        break;
+      case "5,6":
+        leftOrRight === "left"
+          ? props.changeAccountsToShow([1, 2, 3, 4])
+          : props.changeAccountsToShow([8]);
+        break;
+      case "8":
+        leftOrRight === "left"
+          ? props.changeAccountsToShow([5, 6])
+          : props.changeAccountsToShow([9]);
+        break;
+      case "9":
+        leftOrRight === "left"
+          ? props.changeAccountsToShow([8])
+          : props.changeAccountsToShow([1, 2, 3, 4, 5, 6, 8, 9]);
+        break;
+      default:
+        props.changeAccountsToShow([1, 2, 3, 4, 5, 6, 8, 9]);
+    }
   };
 
   return (
@@ -66,10 +99,15 @@ const UserAccounts = props => {
           <Table.Row>
             <Table.HeaderCell colSpan="5">
               <Menu floated="right" pagination>
-                <Menu.Item as="a" icon>
+                <Menu.Item
+                  onClick={() => handleChevronClick("left")}
+                  as="a"
+                  icon
+                >
                   <Icon name="chevron left" />
                 </Menu.Item>
                 <Menu.Item
+                  active={props.accountsToShow.length === 8}
                   onClick={() =>
                     handleAccountTypeClick([1, 2, 3, 4, 5, 6, 8, 9])
                   }
@@ -78,24 +116,44 @@ const UserAccounts = props => {
                   All
                 </Menu.Item>
                 <Menu.Item
+                  active={props.accountsToShow.length === 4}
                   onClick={() => handleAccountTypeClick([1, 2, 3, 4])}
                   as="a"
                 >
                   Assets
                 </Menu.Item>
                 <Menu.Item
+                  active={props.accountsToShow.length === 2}
                   onClick={() => handleAccountTypeClick([5, 6])}
                   as="a"
                 >
                   Liabilities
                 </Menu.Item>
-                <Menu.Item onClick={() => handleAccountTypeClick([8])} as="a">
+                <Menu.Item
+                  active={
+                    props.accountsToShow.length === 1 &&
+                    props.accountsToShow[0] === 8
+                  }
+                  onClick={() => handleAccountTypeClick([8])}
+                  as="a"
+                >
                   Income
                 </Menu.Item>
-                <Menu.Item onClick={() => handleAccountTypeClick([9])} as="a">
+                <Menu.Item
+                  active={
+                    props.accountsToShow.length === 1 &&
+                    props.accountsToShow[0] === 9
+                  }
+                  onClick={() => handleAccountTypeClick([9])}
+                  as="a"
+                >
                   Spending
                 </Menu.Item>
-                <Menu.Item as="a" icon>
+                <Menu.Item
+                  onClick={() => handleChevronClick("right")}
+                  as="a"
+                  icon
+                >
                   <Icon name="chevron right" />
                 </Menu.Item>
               </Menu>
@@ -117,7 +175,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     changeAccountsToShow: accountsToShow => {
-      dispatch({ type: "CHANGE_ACCOUNTS_TO_SHOW", accountToShow });
+      dispatch({ type: "CHANGE_ACCOUNTS_TO_SHOW", accountsToShow });
     }
   };
 };

@@ -56,11 +56,19 @@ const rootReducer = (state = initialState.whole, action) => {
         }
       };
     case "ASSIGN_TRANSACTIONS_TO_ENTRY":
-      // , transactions, index:
+      // testing another phrasing below...
       let updatedState = { ...state };
       updatedState.userInfo.entries[action.index].transactions =
         action.transactions;
       return updatedState;
+    case "CHANGE_ACCOUNTS_TO_SHOW":
+      return {
+        ...state,
+        accountContainer: {
+          ...state.accountContainer,
+          accountsToShow: action.accountsToShow
+        }
+      };
 
     /* STATE OF THE NAVBAR */
     case "CHANGE_ACTIVE_MENU_ITEM":
