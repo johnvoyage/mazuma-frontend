@@ -75,7 +75,7 @@ const TransactionsFilter = props => {
             type="number"
             min="0.01"
             step="0.01"
-            value={props.transactionFilters.amountMax}
+            value={props.transactionFilters.amountMin}
             width={4}
           />
           <Form.Input

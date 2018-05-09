@@ -12,9 +12,10 @@ const transactionFilters = {
   numMin: 60,
   numMax: 100,
   amountMin: 5,
-  amountMax: 500,
+  amountMax: 1000,
   dateMin: "2018-01-01",
-  dateMax: dateHelpers.dateHelpersJavaScript(new Date()),
+  // dateMax: dateHelpers.dateHelpersJavaScript(new Date()),
+  dateMax: "2018-12-31",
   accountsIncluded: [],
   descriptionFilter: ""
 };
