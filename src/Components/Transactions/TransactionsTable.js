@@ -6,12 +6,8 @@ import dateHelpers from "../../HelperFunctions/dateHelpers";
 import filterTest from "../../HelperFunctions/transactionFilterTests";
 
 const TransactionsTable = props => {
-  // console.log(props)
-
   const entries = props.entries
     .map((entry, index) => {
-      // debugger
-      // console.log(entry)
       return {
         number: index + 1,
         date: entry.date.slice(5, 10) + "-" + entry.date.slice(0, 4),
@@ -30,7 +26,6 @@ const TransactionsTable = props => {
     let keyCounter = 1;
     let tableRows = [];
     entries.forEach((entry, index) => {
-      // console.log(entry.transactions);
       if (
         filterTest.passesTransactionFilterTests(entry, props.transactionFilters)
       ) {
@@ -104,8 +99,6 @@ const TransactionsTable = props => {
     return tableRows;
   };
 
-  // render() {
-  // console.log()
   return (
     <Table celled structured>
       <Table.Header>
@@ -129,24 +122,16 @@ const TransactionsTable = props => {
       <Table.Body>{renderTransactions()}</Table.Body>
     </Table>
   );
-  // }
 };
 
-// <Table.HeaderCell width={1} />
-// <Table.HeaderCell width={1} />
 const mapStateToProps = state => {
   return {
     showDescriptions: state.transactionContainer.showDescriptions,
     showEditDelete: state.transactionContainer.showEditDelete,
     entries: state.userInfo.entries,
-    transactionFilters: state.transactionContainer.transactionFilters
-    // ticker: state.userInfo.tickerSymbol
-    // agreedToTerms: state.formValidity.signUpForm
+    transactionFilters: state.transactionContainer.transactionFilters,
+    accounts: state.userInfo.accounts
   };
 };
 
-export default connect(
-  mapStateToProps,
-  // mapDispatchToProps
-  null
-)(TransactionsTable);
+export default connect(mapStateToProps, null)(TransactionsTable);

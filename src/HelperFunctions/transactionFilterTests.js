@@ -1,6 +1,8 @@
 const passesTransactionFilterTests = (entry, filters) => {
   const entryMax = entryMaxNum(entry);
   const entryMin = entryMinNum(entry);
+  const entrysAccounts = entrysAccountsArray(entry);
+  console.log(entrysAccounts);
   return (
     transactionMinTest(entry.number, filters.numMin) &&
     transactionMaxTest(entry.number, filters.numMax) &&
@@ -8,7 +10,7 @@ const passesTransactionFilterTests = (entry, filters) => {
     amountMaxTest(entryMax, filters.amountMax) &&
     dateMinTest(entry.date, filters.dateMin) &&
     dateMaxTest(entry.date, filters.dateMax) &&
-    // && accountsIncludedTest()
+    accountsIncludedTest(entrysAccounts, filters.accountsIncluded) &&
     descriptionTest(entry.description, filters.descriptionFilter)
   );
 };
@@ -71,6 +73,23 @@ const descriptionTest = (entryDescription, filtersDescription) => {
   return entryDescription
     .toLowerCase()
     .includes(filtersDescription.toLowerCase());
+};
+
+const entrysAccountsArray = entry => {
+  return entry.transactions.map(transaction => transaction.account);
+};
+
+const accountsIncludedTest = (entrysAccounts, filtersAccounts) => {
+  if (filtersAccounts.length === 0) {
+    return true;
+  } else {
+    filtersAccounts.forEach(account => {
+      if (entrysAccounts.includes(account)) {
+        return true;
+      }
+    });
+  }
+  return false;
 };
 
 export default {
