@@ -3,6 +3,8 @@ import { Icon, Table } from "semantic-ui-react";
 import { connect } from "react-redux";
 import formatNumber from "../../HelperFunctions/formatNumber";
 import dateHelpers from "../../HelperFunctions/dateHelpers";
+import filterTest from "../../HelperFunctions/transactionFilterTests";
+
 const TransactionsTable = props => {
   // console.log(props)
 
@@ -29,68 +31,74 @@ const TransactionsTable = props => {
     let tableRows = [];
     entries.forEach((entry, index) => {
       // console.log(entry.transactions);
-      tableRows.push(
-        <Table.Row key={`${keyCounter++}`}>
-          <Table.Cell
-            textAlign="center"
-            colSpan={2}
-            rowSpan={
-              props.showEditDelete
-                ? entry.transactions.length - 1
-                : entry.transactions.length
-            }
-          >
-            Transaction: {entry.number}
-            <br />
-            Date: {dateHelpers.dateSymbolReplace(entry.date, "-", "/")}
-          </Table.Cell>
+      if (
+        filterTest.passesTransactionFilterTests(entry, props.transactionFilters)
+      ) {
+        tableRows.push(
+          <Table.Row key={`${keyCounter++}`}>
+            <Table.Cell
+              textAlign="center"
+              colSpan={2}
+              rowSpan={
+                props.showEditDelete
+                  ? entry.transactions.length - 1
+                  : entry.transactions.length
+              }
+            >
+              Transaction: {entry.number}
+              <br />
+              Date: {dateHelpers.dateSymbolReplace(entry.date, "-", "/")}
+            </Table.Cell>
 
-          <Table.Cell textAlign="center">
-            {entry.transactions[0].account}
-          </Table.Cell>
-          <Table.Cell textAlign="center">
-            {entry.transactions[0].amount}
-          </Table.Cell>
-        </Table.Row>
-      );
+            <Table.Cell textAlign="center">
+              {entry.transactions[0].account}
+            </Table.Cell>
+            <Table.Cell textAlign="center">
+              {entry.transactions[0].amount}
+            </Table.Cell>
+          </Table.Row>
+        );
 
-      entry.transactions.forEach((transaction, index) => {
-        if (index !== 0) {
+        entry.transactions.forEach((transaction, index) => {
+          if (index !== 0) {
+            tableRows.push(
+              <Table.Row key={`${keyCounter++}`}>
+                {index === entry.transactions.length - 1 &&
+                props.showEditDelete ? (
+                  <Table.Cell
+                    onClick={() => console.log("edit entry!")}
+                    selectable
+                    textAlign="center"
+                  >
+                    <Icon name="pencil" />
+                  </Table.Cell>
+                ) : null}
+                {index === entry.transactions.length - 1 &&
+                props.showEditDelete ? (
+                  <Table.Cell
+                    onClick={() => console.log("delete entry!")}
+                    selectable
+                    textAlign="center"
+                  >
+                    <Icon name="remove" />
+                  </Table.Cell>
+                ) : null}
+                <Table.Cell textAlign="center">
+                  {transaction.account}
+                </Table.Cell>
+                <Table.Cell textAlign="center">{transaction.amount}</Table.Cell>
+              </Table.Row>
+            );
+          }
+        });
+
+        if (props.showDescriptions) {
           tableRows.push(
             <Table.Row key={`${keyCounter++}`}>
-              {index === entry.transactions.length - 1 &&
-              props.showEditDelete ? (
-                <Table.Cell
-                  onClick={() => console.log("edit entry!")}
-                  selectable
-                  textAlign="center"
-                >
-                  <Icon name="pencil" />
-                </Table.Cell>
-              ) : null}
-              {index === entry.transactions.length - 1 &&
-              props.showEditDelete ? (
-                <Table.Cell
-                  onClick={() => console.log("delete entry!")}
-                  selectable
-                  textAlign="center"
-                >
-                  <Icon name="remove" />
-                </Table.Cell>
-              ) : null}
-              <Table.Cell textAlign="center">{transaction.account}</Table.Cell>
-              <Table.Cell textAlign="center">{transaction.amount}</Table.Cell>
+              <Table.Cell colSpan={5}>{entry.description}</Table.Cell>
             </Table.Row>
           );
         }
-      });
-
-      if (props.showDescriptions) {
-        tableRows.push(
-          <Table.Row key={`${keyCounter++}`}>
-            <Table.Cell colSpan={5}>{entry.description}</Table.Cell>
-          </Table.Row>
-        );
       }
     });
     return tableRows;
@@ -130,7 +138,8 @@ const mapStateToProps = state => {
   return {
     showDescriptions: state.transactionContainer.showDescriptions,
     showEditDelete: state.transactionContainer.showEditDelete,
-    entries: state.userInfo.entries
+    entries: state.userInfo.entries,
+    transactionFilters: state.transactionContainer.transactionFilters
     // ticker: state.userInfo.tickerSymbol
     // agreedToTerms: state.formValidity.signUpForm
   };
