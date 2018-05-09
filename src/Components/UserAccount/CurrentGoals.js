@@ -1,5 +1,3 @@
-// import faker from 'faker'
-// import _ from 'lodash'
 import React from "react";
 import {
   Segment,
@@ -7,10 +5,18 @@ import {
   Checkbox,
   Button,
   Icon,
-  Input
+  Input,
+  Dropdown
 } from "semantic-ui-react";
 
 const CurrentGoals = () => {
+  const timePeriod = [
+    { key: "day(s)", text: "day(s)", value: "day(s)" },
+    { key: "week(s)", text: "week(s)", value: "week(s)" },
+    { key: "month(s)", text: "month(s)", value: "month(s)" },
+    { key: "year(s)", text: "year(s)", value: "year(s)" }
+  ];
+
   const editCell = (
     <Table.Cell
       onClick={() => console.log("edit goal!")}
@@ -41,11 +47,8 @@ const CurrentGoals = () => {
             <Table.HeaderCell textAlign="center" width={1}>
               Chart
             </Table.HeaderCell>
-            <Table.HeaderCell textAlign="center" width={12}>
+            <Table.HeaderCell textAlign="center" width={13}>
               Goal
-            </Table.HeaderCell>
-            <Table.HeaderCell textAlign="center" width={1}>
-              Hit?
             </Table.HeaderCell>
             <Table.HeaderCell width={1} />
             <Table.HeaderCell width={1} />
@@ -59,10 +62,26 @@ const CurrentGoals = () => {
             </Table.Cell>
             <Table.Cell>
               Increase net worth by{"   "}
-              <Input type="number" min="0.01" step="0.01" defaultValue="5" />
-              {"   "}every 100 days
+              <Input
+                label="%"
+                labelPosition="right"
+                type="number"
+                min="0.01"
+                step="0.01"
+                defaultValue="5"
+              />
+              {"   "}
+              every
+              {"   "}
+              <Input
+                label={<Dropdown defaultValue="day(s)" options={timePeriod} />}
+                labelPosition="right"
+                type="number"
+                min="1"
+                step="1"
+                defaultValue="100"
+              />
             </Table.Cell>
-            <Table.Cell>DATE? Y/N?</Table.Cell>
             {editCell}
             {deleteCell}
           </Table.Row>
@@ -70,8 +89,28 @@ const CurrentGoals = () => {
             <Table.Cell collapsing>
               <Checkbox slider />
             </Table.Cell>
-            <Table.Cell>Increase assets by 5% every 365 days</Table.Cell>
-            <Table.Cell>DATE? Y/N?</Table.Cell>
+            <Table.Cell>
+              Increase assets by{"   "}
+              <Input
+                label="%"
+                labelPosition="right"
+                type="number"
+                min="0.01"
+                step="0.01"
+                defaultValue="6"
+              />
+              {"   "}
+              every
+              {"   "}
+              <Input
+                label={<Dropdown defaultValue="day(s)" options={timePeriod} />}
+                labelPosition="right"
+                type="number"
+                min="1"
+                step="1"
+                defaultValue="100"
+              />
+            </Table.Cell>
             {editCell}
             {deleteCell}
           </Table.Row>
@@ -79,8 +118,113 @@ const CurrentGoals = () => {
             <Table.Cell collapsing>
               <Checkbox slider />
             </Table.Cell>
-            <Table.Cell>Increase liabilities by 2.5% every 365 days</Table.Cell>
-            <Table.Cell>DATE? Y/N?</Table.Cell>
+            <Table.Cell>
+              Increase liabilities by{"   "}
+              <Input
+                label="%"
+                labelPosition="right"
+                type="number"
+                min="0.01"
+                step="0.01"
+                defaultValue="2.5"
+              />
+              {"   "}
+              every
+              {"   "}
+              <Input
+                label={<Dropdown defaultValue="day(s)" options={timePeriod} />}
+                labelPosition="right"
+                type="number"
+                min="1"
+                step="1"
+                defaultValue="100"
+              />
+            </Table.Cell>
+            {editCell}
+            {deleteCell}
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell collapsing>
+              <Checkbox slider />
+            </Table.Cell>
+            <Table.Cell>
+              Keep net income above{"   "}
+              <Input
+                label="$"
+                labelPosition="left"
+                type="number"
+                min="1"
+                step="1"
+                defaultValue="50"
+              />
+              {"   "}
+              every
+              {"   "}
+              <Input
+                label={<Dropdown defaultValue="day(s)" options={timePeriod} />}
+                labelPosition="right"
+                type="number"
+                min="1"
+                step="1"
+                defaultValue="1"
+              />
+            </Table.Cell>
+            {editCell}
+            {deleteCell}
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell collapsing>
+              <Checkbox slider />
+            </Table.Cell>
+            <Table.Cell>
+              Keep earning above{"   "}
+              <Input
+                label="$"
+                labelPosition="left"
+                type="number"
+                step="1"
+                defaultValue="100"
+              />
+              {"   "}
+              every
+              {"   "}
+              <Input
+                label={<Dropdown defaultValue="day(s)" options={timePeriod} />}
+                labelPosition="right"
+                type="number"
+                min="1"
+                step="1"
+                defaultValue="1"
+              />
+            </Table.Cell>
+            {editCell}
+            {deleteCell}
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell collapsing>
+              <Checkbox slider />
+            </Table.Cell>
+            <Table.Cell>
+              Keep spending below{"   "}
+              <Input
+                label="$"
+                labelPosition="left"
+                type="number"
+                step="1"
+                defaultValue="35"
+              />
+              {"   "}
+              every
+              {"   "}
+              <Input
+                label={<Dropdown defaultValue="day(s)" options={timePeriod} />}
+                labelPosition="right"
+                type="number"
+                min="1"
+                step="1"
+                defaultValue="1"
+              />
+            </Table.Cell>
             {editCell}
             {deleteCell}
           </Table.Row>

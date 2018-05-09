@@ -10,11 +10,15 @@ import generalChartOptions from "../../StaticOptions/generalChartOptions";
 import { connect } from "react-redux";
 
 const BarGraph = props => {
-  const barDataPointsToMap = chartHelpers.arrayOfDatesWithEntries(
-    props.beginDate,
-    props.endDate,
-    props.entries
-  );
+  // const barDataPointsToMap = chartHelpers.arrayOfDatesWithEntries(
+  //   props.beginDate,
+  //   props.endDate,
+  //   props.entries
+  // );
+
+  const barDataPointsToMap = chartHelpers
+    .arrayOfDates(props.beginDate, props.endDate)
+    .slice(1);
 
   const massAssignHelper = arrayOfSubcategories => {
     return barDataPointsToMap.map(date => {
