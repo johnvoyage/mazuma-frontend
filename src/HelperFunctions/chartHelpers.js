@@ -1,4 +1,3 @@
-// import financialStatementHelpers from "./financialStatementHelpers";
 import dateHelpers from "./dateHelpers";
 
 const arrayOfEntryDates = entries => {
@@ -30,64 +29,19 @@ const arrayOfAccountsBelongingToSubcategoryIds = (
   );
 };
 
-// const amountOfEntriesGivenSubcategories = arrayOfSubcategoryIds => {
-//   const accountIdsOfSubcategoriesArray = financialStatementHelpers.filterAccountIdsOfSubcategories(
-//     arrayOfSubcategoryIds,
-//     props.accounts
-//   );
-//   return financialStatementHelpers
-//     .mapTransactionsOfEntries(
-//       financialStatementHelpers.filterEntriesWithinDateRange(
-//         props.entries,
-//         props.beginDate,
-//         props.endDate
-//       )
-//     )
-//     .reduce((aggr, arrayOfTransactions) => {
-//       arrayOfTransactions.forEach(transaction => {
-//         return accountIdsOfSubcategoriesArray.indexOf(transaction.account_id) >
-//           -1
-//           ? (aggr += parseFloat(transaction.amount))
-//           : null;
-//       });
-//       return aggr;
-//     }, 0);
-// };
-
-// const netWorth = (beginDate, endDate, entries, accounts) => {
-//   return dateHelpers
-//     .arrayOfDatesWithEntries(beginDate, endDate, entries)
-//     .map(date => {
-//       const amountOfEntriesGivenSubcategories = () => {
-//         const accountIdsOfSubcategoriesArray = financialStatementHelpers.filterAccountIdsOfSubcategories(
-//           [1, 2, 3, 4, 5, 6],
-//           accounts
-//         );
-//         return financialStatementHelpers
-//           .mapTransactionsOfEntries(
-//             financialStatementHelpers.filterEntriesWithinDateRange(
-//               entries,
-//               "0",
-//               date
-//             )
-//           )
-//           .reduce((aggr, arrayOfTransactions) => {
-//             arrayOfTransactions.forEach(transaction => {
-//               return accountIdsOfSubcategoriesArray.indexOf(
-//                 transaction.account_id
-//               ) > -1
-//                 ? (aggr += parseFloat(transaction.amount))
-//                 : null;
-//             });
-//             return aggr;
-//           }, 0);
-//       };
-//       return amountOfEntriesGivenSubcategories();
-//     });
-// };
+const arrayOfDates = (beginDate, endDate) => {
+  const arrayOfDates = [];
+  let currentDate = beginDate;
+  while (new Date(currentDate) <= new Date(endDate)) {
+    arrayOfDates.push(currentDate);
+    currentDate = dateHelpers.tomorrow(currentDate);
+  }
+  arrayOfDates.push(dateHelpers.dateSymbolReplace(endDate, "-", "/"));
+  return arrayOfDates;
+};
 
 export default {
-  // netWorth
   arrayOfDatesWithEntries,
+  arrayOfDates,
   arrayOfAccountsBelongingToSubcategoryIds
 };

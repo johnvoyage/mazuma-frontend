@@ -1,8 +1,5 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
-// import GraphOptions from "./GraphOptions";
-// import SubcategoryOptions from "./SubcategoryOptions";
-// import TimingFilter from "./TimingFilter";
 import { Segment, Header } from "semantic-ui-react";
 import chartHelpers from "../../HelperFunctions/chartHelpers";
 import financialStatementHelpers from "../../HelperFunctions/financialStatementHelpers";
@@ -13,10 +10,15 @@ import { connect } from "react-redux";
 import { lineGoals } from "../../HelperFunctions/lineGoals";
 
 const LineGraph = props => {
-  const lineDataPointsToMap = chartHelpers.arrayOfDatesWithEntries(
+  // const lineDataPointsToMap = chartHelpers.arrayOfDatesWithEntries(
+  //   props.beginDate,
+  //   props.endDate,
+  //   props.entries
+  // );
+
+  const lineDataPointsToMap = chartHelpers.arrayOfDates(
     props.beginDate,
-    props.endDate,
-    props.entries
+    props.endDate
   );
 
   const massAssignHelper = arrayOfSubcategories => {
@@ -79,34 +81,6 @@ const LineGraph = props => {
           : []
       )
   };
-
-  // if (props.goalComparison) {
-  //   // console.log("here");
-  //   lineGraphData.datasets.concat(
-  //     props.showSubcategories.map(subcategory => {
-  //       const grabKey =
-  //         subcategory === "net worth"
-  //           ? "netWorth"
-  //           : subcategory === "net income" ? "netIncome" : subcategory;
-  //       return {
-  //         ...lineChartOptions[grabKey],
-  //         label: `${subcategory.toUpperCase()} GOALS`,
-  //         data: lineGoals(
-  //           lineDataPointsToMap.length,
-  //           financialStatementHelpers.amountOfEntriesGivenSubcategories(
-  //             subcategoryNameToArrayOfIds(subcategory),
-  //             props.accounts,
-  //             props.entries,
-  //             0,
-  //             lineDataPointsToMap[0]
-  //           )
-  //         )
-  //       };
-  //     })
-  //   );
-  // }
-
-  console.log(lineGraphData.datasets);
 
   return props.showSubcategories.length !== 0 ? (
     <Segment>

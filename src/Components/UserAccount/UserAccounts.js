@@ -16,7 +16,11 @@ const UserAccounts = props => {
             <Table.Cell>
               {subcategoryIdToName(account.subcategory_id).toUpperCase()}
             </Table.Cell>
-            <Table.Cell>{account.description}</Table.Cell>
+            <Table.Cell>
+              {account.description
+                ? account.description.toUpperCase()
+                : "NO DESCRIPTION"}
+            </Table.Cell>
             <Table.Cell
               onClick={() => console.log("edit account!")}
               selectable
@@ -37,7 +41,6 @@ const UserAccounts = props => {
   };
 
   const handleAccountTypeClick = accountsToShow => {
-    console.log(props.accountsToShow === [1, 2, 3, 4, 5, 6, 8, 9]);
     props.changeAccountsToShow(accountsToShow);
   };
 
@@ -180,8 +183,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-  // null
-)(UserAccounts);
+export default connect(mapStateToProps, mapDispatchToProps)(UserAccounts);
