@@ -69,6 +69,48 @@ const rootReducer = (state = initialState.whole, action) => {
           accountsToShow: action.accountsToShow
         }
       };
+    case "GOAL_SLIDER_TOGGLE":
+      return {
+        ...state,
+        goalContainer: {
+          ...state.goalContainer,
+          [action.goal]: {
+            ...state.goalContainer[action.goal],
+            show: !state.goalContainer[action.goal].show
+          }
+        }
+      };
+    case "ALL_GOALS_SLIDER_TOGGLE":
+      return {
+        ...state,
+        goalContainer: {
+          // ...state.goalContainer,
+          netWorth: {
+            ...state.goalContainer.netWorth,
+            show: action.truthy
+          },
+          assets: {
+            ...state.goalContainer.assets,
+            show: action.truthy
+          },
+          liabilities: {
+            ...state.goalContainer.liabilities,
+            show: action.truthy
+          },
+          netIncome: {
+            ...state.goalContainer.netIncome,
+            show: action.truthy
+          },
+          income: {
+            ...state.goalContainer.income,
+            show: action.truthy
+          },
+          spending: {
+            ...state.goalContainer.spending,
+            show: action.truthy
+          }
+        }
+      };
 
     /* STATE OF THE NAVBAR */
     case "CHANGE_ACTIVE_MENU_ITEM":
