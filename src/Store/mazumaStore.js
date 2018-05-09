@@ -111,6 +111,18 @@ const rootReducer = (state = initialState.whole, action) => {
           }
         }
       };
+    case "CHANGE_GOAL":
+      const amountOrTimeNumber = !action.value ? 1 : parseFloat(action.value);
+      return {
+        ...state,
+        goalContainer: {
+          ...state.goalContainer,
+          [action.goal]: {
+            ...state.goalContainer[action.goal],
+            [action.amountOrTime]: amountOrTimeNumber
+          }
+        }
+      };
 
     /* STATE OF THE NAVBAR */
     case "CHANGE_ACTIVE_MENU_ITEM":

@@ -12,8 +12,11 @@ import { connect } from "react-redux";
 
 const CurrentGoals = props => {
   const handleGoalSliderChange = goalKey => {
-    console.log(goalKey);
     props.goalSliderToggle(goalKey);
+  };
+
+  const handleInputChange = (goal, amountOrTime, value) => {
+    props.changeGoal(goal, amountOrTime, value);
   };
 
   const renderRows = () => {
@@ -30,17 +33,34 @@ const CurrentGoals = props => {
           <Table.Cell>
             {goal.prefix}
             <Input
+              name="amount"
+              value={props.goalContainer[goal.key].amount}
+              onChange={event =>
+                handleInputChange(
+                  goal.key,
+                  event.target.name,
+                  event.target.value
+                )
+              }
               label={goal.label}
               labelPosition={goal.labelPosition}
               type="number"
               min={goal.min}
               step={goal.step}
-              defaultValue={goal.defaultValue}
             />
             {"   "}
             every
             {"   "}
             <Input
+              value={props.goalContainer[goal.key].time}
+              name="time"
+              onChange={event =>
+                handleInputChange(
+                  goal.key,
+                  event.target.name,
+                  event.target.value
+                )
+              }
               label={
                 <Dropdown
                   defaultValue="day(s)"
@@ -51,7 +71,6 @@ const CurrentGoals = props => {
               type="number"
               min="1"
               step="1"
-              defaultValue={goal.defaultTime}
             />
           </Table.Cell>
           {goalOptions.editCell}
@@ -116,211 +135,11 @@ const mapDispatchToProps = dispatch => {
     },
     allGoalSlidersToggle: truthy => {
       dispatch({ type: "ALL_GOALS_SLIDER_TOGGLE", truthy });
+    },
+    changeGoal: (goal, amountOrTime, value) => {
+      dispatch({ type: "CHANGE_GOAL", goal, amountOrTime, value });
     }
   };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CurrentGoals);
-
-// <Table.Row>
-//   <Table.Cell collapsing>
-//     <Checkbox slider />
-//   </Table.Cell>
-//   <Table.Cell>
-//     Increase net worth by{"   "}
-//     <Input
-//       label="%"
-//       labelPosition="right"
-//       type="number"
-//       min="0.01"
-//       step="0.01"
-//       defaultValue="5"
-//     />
-//     {"   "}
-//     every
-//     {"   "}
-//     <Input
-//       label={
-//         <Dropdown
-//           defaultValue="day(s)"
-//           options={goalOptions.timePeriod}
-//         />
-//       }
-//       labelPosition="right"
-//       type="number"
-//       min="1"
-//       step="1"
-//       defaultValue="100"
-//     />
-//   </Table.Cell>
-//   {goalOptions.editCell}
-//   {goalOptions.deleteCell}
-// </Table.Row>
-// <Table.Row>
-//   <Table.Cell collapsing>
-//     <Checkbox slider />
-//   </Table.Cell>
-//   <Table.Cell>
-//     Increase assets by{"   "}
-//     <Input
-//       label="%"
-//       labelPosition="right"
-//       type="number"
-//       min="0.01"
-//       step="0.01"
-//       defaultValue="6"
-//     />
-//     {"   "}
-//     every
-//     {"   "}
-//     <Input
-//       label={
-//         <Dropdown
-//           defaultValue="day(s)"
-//           options={goalOptions.timePeriod}
-//         />
-//       }
-//       labelPosition="right"
-//       type="number"
-//       min="1"
-//       step="1"
-//       defaultValue="100"
-//     />
-//   </Table.Cell>
-//   {goalOptions.editCell}
-//   {goalOptions.deleteCell}
-// </Table.Row>
-// <Table.Row>
-//   <Table.Cell collapsing>
-//     <Checkbox slider />
-//   </Table.Cell>
-//   <Table.Cell>
-//     Increase liabilities by{"   "}
-//     <Input
-//       label="%"
-//       labelPosition="right"
-//       type="number"
-//       min="0.01"
-//       step="0.01"
-//       defaultValue="2.5"
-//     />
-//     {"   "}
-//     every
-//     {"   "}
-//     <Input
-//       label={
-//         <Dropdown
-//           defaultValue="day(s)"
-//           options={goalOptions.timePeriod}
-//         />
-//       }
-//       labelPosition="right"
-//       type="number"
-//       min="1"
-//       step="1"
-//       defaultValue="100"
-//     />
-//   </Table.Cell>
-//   {goalOptions.editCell}
-//   {goalOptions.deleteCell}
-// </Table.Row>
-// <Table.Row>
-//   <Table.Cell collapsing>
-//     <Checkbox slider />
-//   </Table.Cell>
-//   <Table.Cell>
-//     Keep net income above{"   "}
-//     <Input
-//       label="$"
-//       labelPosition="left"
-//       type="number"
-//       min="1"
-//       step="1"
-//       defaultValue="50"
-//     />
-//     {"   "}
-//     every
-//     {"   "}
-//     <Input
-//       label={
-//         <Dropdown
-//           defaultValue="day(s)"
-//           options={goalOptions.timePeriod}
-//         />
-//       }
-//       labelPosition="right"
-//       type="number"
-//       min="1"
-//       step="1"
-//       defaultValue="1"
-//     />
-//   </Table.Cell>
-//   {goalOptions.editCell}
-//   {goalOptions.deleteCell}
-// </Table.Row>
-// <Table.Row>
-//   <Table.Cell collapsing>
-//     <Checkbox slider />
-//   </Table.Cell>
-//   <Table.Cell>
-//     Keep income above{"   "}
-//     <Input
-//       label="$"
-//       labelPosition="left"
-//       type="number"
-//       step="1"
-//       defaultValue="100"
-//     />
-//     {"   "}
-//     every
-//     {"   "}
-//     <Input
-//       label={
-//         <Dropdown
-//           defaultValue="day(s)"
-//           options={goalOptions.timePeriod}
-//         />
-//       }
-//       labelPosition="right"
-//       type="number"
-//       min="1"
-//       step="1"
-//       defaultValue="1"
-//     />
-//   </Table.Cell>
-//   {goalOptions.editCell}
-//   {goalOptions.deleteCell}
-// </Table.Row>
-// <Table.Row>
-//   <Table.Cell collapsing>
-//     <Checkbox slider />
-//   </Table.Cell>
-//   <Table.Cell>
-//     Keep spending below{"   "}
-//     <Input
-//       label="$"
-//       labelPosition="left"
-//       type="number"
-//       step="1"
-//       defaultValue="35"
-//     />
-//     {"   "}
-//     every
-//     {"   "}
-//     <Input
-//       label={
-//         <Dropdown
-//           defaultValue="day(s)"
-//           options={goalOptions.timePeriod}
-//         />
-//       }
-//       labelPosition="right"
-//       type="number"
-//       min="1"
-//       step="1"
-//       defaultValue="1"
-//     />
-//   </Table.Cell>
-//   {goalOptions.editCell}
-//   {goalOptions.deleteCell}
-// </Table.Row>
