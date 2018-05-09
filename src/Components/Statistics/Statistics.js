@@ -69,13 +69,15 @@ const Statistics = props => {
       <GraphOptions />
       <SubcategoryOptions />
       <br />{" "}
-      <Checkbox
-        slider
-        name="goalComparison"
-        label="Show goals"
-        checked={props.goalComparison}
-        onChange={handleChange}
-      />
+      {props.chartType === "line" ? (
+        <Checkbox
+          name="goalComparison"
+          slider
+          label="Show goals"
+          checked={props.goalComparison}
+          onChange={handleChange}
+        />
+      ) : null}
       {props.chartType === "bar" ? (
         <Checkbox
           name="hideInitial"
