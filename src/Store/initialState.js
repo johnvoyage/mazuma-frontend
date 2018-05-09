@@ -43,32 +43,32 @@ const accountContainer = {
 
 const goalContainer = {
   netWorth: {
-    show: false,
+    show: true,
     amount: 5,
     time: 100
   },
   assets: {
-    show: false,
+    show: true,
     amount: 6,
     time: 100
   },
   liabilities: {
-    show: false,
+    show: true,
     amount: 2.5,
     time: 100
   },
   netIncome: {
-    show: false,
+    show: true,
     amount: 50,
     time: 1
   },
   income: {
-    show: false,
+    show: true,
     amount: 100,
     time: 1
   },
   spending: {
-    show: false,
+    show: true,
     amount: 35,
     time: 1
   }

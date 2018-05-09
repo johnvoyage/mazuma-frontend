@@ -53,6 +53,7 @@ const LineGraph = props => {
         data: chartData[grabKey]
       };
     })
+
     // .concat(
     //   props.goalComparison
     //     ? props.showSubcategories.map(subcategory => {
@@ -80,6 +81,55 @@ const LineGraph = props => {
     // )
   };
 
+  const goalDataLinesToShow = Object.keys(props.goalContainer)
+    .filter(goal => props.goalComparison && props.goalContainer[goal].show)
+    .filter(goal => {
+      if (props.showSubcategories.indexOf("net worth") > -1) {
+        return ["netWorth", "assets", "liabilities"].indexOf(goal) > -1;
+      } else {
+        return ["netIncome", "income", "spending"].indexOf(goal) > -1;
+      }
+    });
+
+  const goalData = goal => {
+    let dataPoint = chartData[goal][0];
+    return lineDataPointsToMap.map((datapoint, index) => {
+      if (index === 0) {
+        return dataPoint;
+      } else {
+        if (["netWorth", "assets", "liabilities"].indexOf(goal) > -1) {
+          dataPoint *=
+            props.goalContainer[goal].amount /
+              100 /
+              props.goalContainer[goal].time +
+            1;
+          return dataPoint;
+        } else {
+          dataPoint += props.goalContainer[goal].amount;
+          return dataPoint;
+        }
+      }
+    });
+  };
+
+  const goalDataSet = goal => {
+    return {
+      ...lineChartOptions[`${goal}Goals`],
+      label: "GOAL",
+      data: goalData(goal)
+    };
+  };
+
+  const goalDataSets = () => goalDataLinesToShow.map(goal => goalDataSet(goal));
+
+  lineGraphData.datasets = lineGraphData.datasets.concat(
+    goalDataSets()
+    // lineChartGoalData()
+  );
+
+  // console.log(goalDataSets);
+  // console.log(lineGraphData.datasets);
+
   return props.showSubcategories.length !== 0 ? (
     <Segment>
       <Line data={lineGraphData} options={generalChartOptions.standardLine} />
@@ -102,7 +152,8 @@ const mapStateToProps = state => {
     endDate: state.chartContainer.endDate,
     showSubcategories: state.chartContainer.showSubcategories,
     chartType: state.chartContainer.chartType,
-    goalComparison: state.chartContainer.goalComparison
+    goalComparison: state.chartContainer.goalComparison,
+    goalContainer: state.goalContainer
   };
 };
 

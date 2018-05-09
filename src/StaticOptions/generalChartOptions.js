@@ -5,6 +5,17 @@ const standardLine = {
       fontColor: "grey"
     }
   }
+
+  // scales: {
+  //   yAxes: [
+  //     {
+  //       ticks: {
+  //         beginAtZero: true
+  //       }
+  //     }
+  //   ]
+  // }
+
   // scales: {
   //   yAxes: [
   //     {
