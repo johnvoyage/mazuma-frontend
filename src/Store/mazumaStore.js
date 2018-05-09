@@ -20,17 +20,6 @@ const rootReducer = (state = initialState.whole, action) => {
         },
         activeMenuItem: "Account"
       };
-    // case "LOG_USER_IN":
-    //   // debugger
-    //   return {
-    //     ...state,
-    //     userInfo: {
-    //       ...state.userInfo,
-    //       id: action.userInfo.id,
-    //       email: action.userInfo.email
-    //     },
-    //     activeMenuItem: "Account"
-    //   };
     case "LOG_USER_OUT":
       return {
         ...state,

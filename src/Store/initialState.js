@@ -37,11 +37,15 @@ const chartContainer = {
   endDate: dateHelpers.dateHelpersJavaScript(new Date())
 };
 
+const accountContainer = {
+  accountsToShow: [1, 2, 3, 4, 5, 6, 8, 9]
+};
+
 const whole = {
   loading: false,
   activeMenuItem: "Mazuma",
   userInfo,
-  // formInput: {},
+  accountContainer,
   transactionContainer,
   netIncomeContainer: {
     beginDate: "2018-01-01",
