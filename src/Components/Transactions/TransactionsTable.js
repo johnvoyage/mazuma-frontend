@@ -28,7 +28,7 @@ const TransactionsTable = props => {
     let keyCounter = 1;
     let tableRows = [];
     entries.forEach((entry, index) => {
-      console.log(entry.transactions);
+      // console.log(entry.transactions);
       tableRows.push(
         <Table.Row key={`${keyCounter++}`}>
           <Table.Cell

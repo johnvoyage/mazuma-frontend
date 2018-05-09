@@ -8,21 +8,23 @@ const userInfo = {
   dateCreated: null
 };
 
+const transactionFilters = {
+  numMin: 60,
+  numMax: 100,
+  amountMin: 5,
+  amountMax: 500,
+  dateMin: "2018-01-01",
+  dateMax: dateHelpers.dateHelpersJavaScript(new Date()),
+  accountsIncluded: [],
+  descriptionFilter: ""
+};
+
 const transactionContainer = {
   topRow: "new transaction", //view transactions
   showFilters: false,
   showDescriptions: true,
   showEditDelete: true,
-  transactionFilters: {
-    numMin: null,
-    numMax: null,
-    amountMin: null,
-    amountMax: null,
-    dateMin: null,
-    dateMax: null,
-    accountsIncluded: [],
-    descriptionFilter: null
-  },
+  transactionFilters,
   formDebitFields: 1,
   formCreditFields: 1,
   transactionBalance: 0

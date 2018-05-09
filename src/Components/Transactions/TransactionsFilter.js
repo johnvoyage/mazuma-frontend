@@ -12,10 +12,7 @@ const TransactionsFilter = props => {
   });
 
   const handleChange = event => {
-    // debugger;
-
     let filterVal;
-
     const filterName = event.target.name
       ? event.target.name
       : "accountsIncluded";
@@ -23,24 +20,22 @@ const TransactionsFilter = props => {
     if (event.target.value) {
       filterVal = event.target.value;
     } else {
-      // console.log(event.target.innerText);
-      // console.log(event.target.parentElement.innerText);
-      // debugger;
-      debugger;
       filterVal = [...props.transactionFilters.accountsIncluded];
-      // console.log(filterVal);
       event.key === "Enter"
-        ? event.target.parentElement.children[0].children[
-            event.target.parentElement.children[0].children.length - 3
-          ].innerText
+        ? filterVal.push(
+            event.target.parentElement.children[0].children[
+              event.target.parentElement.children[0].children.length - 4
+            ].innerText
+          )
         : event.target.innerText
           ? filterVal.push(event.target.innerText)
-          : filterVal.splice(
-              filterVal.indexOf(event.target.parentElement.innerText),
-              1
-            );
+          : filterVal.length === 1
+            ? (filterVal.length = 0)
+            : filterVal.splice(
+                filterVal.indexOf(event.target.parentElement.innerText),
+                1
+              );
     }
-
     props.changeTransactionFilter(filterName, filterVal);
   };
 
@@ -56,6 +51,7 @@ const TransactionsFilter = props => {
             type="number"
             min="1"
             step="1"
+            value={props.transactionFilters.numMin}
             width={4}
           />
           <Form.Input
@@ -65,6 +61,7 @@ const TransactionsFilter = props => {
             type="number"
             min="1"
             step="1"
+            value={props.transactionFilters.numMax}
             width={4}
           />
           <Form.Input type="hidden" width={4} />
@@ -78,6 +75,7 @@ const TransactionsFilter = props => {
             type="number"
             min="0.01"
             step="0.01"
+            value={props.transactionFilters.amountMax}
             width={4}
           />
           <Form.Input
@@ -87,6 +85,7 @@ const TransactionsFilter = props => {
             type="number"
             min="0.01"
             step="0.01"
+            value={props.transactionFilters.amountMax}
             width={4}
           />
           <Form.Input type="hidden" width={4} />
@@ -98,6 +97,7 @@ const TransactionsFilter = props => {
             onChange={handleChange}
             label="Dated between..."
             type="date"
+            value={props.transactionFilters.dateMin}
             width={4}
           />
           <Form.Input
@@ -105,6 +105,7 @@ const TransactionsFilter = props => {
             onChange={handleChange}
             label="and..."
             type="date"
+            value={props.transactionFilters.dateMax}
             width={4}
           />
           <Form.Input type="hidden" width={4} />
@@ -131,6 +132,7 @@ const TransactionsFilter = props => {
             name="descriptionFilter"
             onChange={handleChange}
             label="Description includes..."
+            value={props.transactionFilters.description}
             width={8}
           />
           <Form.Input type="hidden" width={4} />

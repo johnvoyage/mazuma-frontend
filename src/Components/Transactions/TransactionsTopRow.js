@@ -100,7 +100,7 @@ const SelectedFilters = props => {
             onChange={handleChange}
           />
           {"  "}
-          <Button size="mini" content="Clear filters" floated="right" />
+          <Button size="mini" content="Reset filters" floated="right" />
           <br />
           <br />
         </div>

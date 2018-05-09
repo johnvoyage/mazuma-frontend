@@ -128,7 +128,11 @@ const rootReducer = (state = initialState.whole, action) => {
     case "CHANGE_ACTIVE_MENU_ITEM":
       return {
         ...state,
-        activeMenuItem: action.activeMenuItem
+        activeMenuItem: action.activeMenuItem,
+        transactionFilters: {
+          ...state.transactionContainer.transactionFilters,
+          accountsIncluded: []
+        }
       };
 
     /* STATE OF THE TRANSACTIONS TABLE */
@@ -230,18 +234,33 @@ const rootReducer = (state = initialState.whole, action) => {
         ...state,
         transactionContainer: {
           ...state.transactionContainer,
-          topRow: action.topRow
+          topRow: action.topRow,
+          transactionFilters: {
+            ...state.transactionContainer.transactionFilters,
+            accountsIncluded: []
+          }
         }
       };
     case "TOGGLE_TRANSACTION_SECONDARY_ROW":
-      // console.log(action);
-      return {
-        ...state,
-        transactionContainer: {
-          ...state.transactionContainer,
-          [action.checkBox]: !state.transactionContainer[action.checkBox]
-        }
-      };
+      return action.checkBox !== "showFilters"
+        ? {
+            ...state,
+            transactionContainer: {
+              ...state.transactionContainer,
+              [action.checkBox]: !state.transactionContainer[action.checkBox]
+            }
+          }
+        : {
+            ...state,
+            transactionContainer: {
+              ...state.transactionContainer,
+              [action.checkBox]: !state.transactionContainer[action.checkBox],
+              transactionFilters: {
+                ...state.transactionContainer.transactionFilters,
+                accountsIncluded: []
+              }
+            }
+          };
     /* GENERIC FORM UPDATE */
     case "UPDATE_DATE":
       return {
