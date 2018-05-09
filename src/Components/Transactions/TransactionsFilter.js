@@ -1,36 +1,57 @@
 import React from "react";
-// import { Header, Button, Popup, Grid } from 'semantic-ui-react';
-// import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import { Segment, Form, Dropdown } from "semantic-ui-react";
 
-const options = [
-  { key: "angular", text: "Angular", value: "angular" },
-  { key: "css", text: "CSS", value: "css" },
-  { key: "design", text: "Graphic Design", value: "design" },
-  { key: "ember", text: "Ember", value: "ember" },
-  { key: "html", text: "HTML", value: "html" },
-  { key: "ia", text: "Information Architecture", value: "ia" },
-  { key: "javascript", text: "Javascript", value: "javascript" },
-  { key: "mech", text: "Mechanical Engineering", value: "mech" },
-  { key: "meteor", text: "Meteor", value: "meteor" },
-  { key: "node", text: "NodeJS", value: "node" },
-  { key: "plumbing", text: "Plumbing", value: "plumbing" },
-  { key: "python", text: "Python", value: "python" },
-  { key: "rails", text: "Rails", value: "rails" },
-  { key: "react", text: "React", value: "react" },
-  { key: "repair", text: "Kitchen Repair", value: "repair" },
-  { key: "ruby", text: "Ruby", value: "ruby" },
-  { key: "ui", text: "UI Design", value: "ui" },
-  { key: "ux", text: "User Experience", value: "ux" }
-];
-
 const TransactionsFilter = props => {
+  const options = props.accounts.map(account => {
+    return {
+      key: account.name,
+      text: account.name.toUpperCase(),
+      value: account.name
+    };
+  });
+
+  const handleChange = event => {
+    // debugger;
+
+    let filterVal;
+
+    const filterName = event.target.name
+      ? event.target.name
+      : "accountsIncluded";
+
+    if (event.target.value) {
+      filterVal = event.target.value;
+    } else {
+      // console.log(event.target.innerText);
+      // console.log(event.target.parentElement.innerText);
+      // debugger;
+      debugger;
+      filterVal = [...props.transactionFilters.accountsIncluded];
+      // console.log(filterVal);
+      event.key === "Enter"
+        ? event.target.parentElement.children[0].children[
+            event.target.parentElement.children[0].children.length - 3
+          ].innerText
+        : event.target.innerText
+          ? filterVal.push(event.target.innerText)
+          : filterVal.splice(
+              filterVal.indexOf(event.target.parentElement.innerText),
+              1
+            );
+    }
+
+    props.changeTransactionFilter(filterName, filterVal);
+  };
+
   return (
     <Segment>
       <Form>
         <Form.Group>
           <Form.Input type="hidden" width={4} />
           <Form.Input
+            name="numMin"
+            onChange={handleChange}
             label="Transaction # ≥ ..."
             type="number"
             min="1"
@@ -38,6 +59,8 @@ const TransactionsFilter = props => {
             width={4}
           />
           <Form.Input
+            name="numMax"
+            onChange={handleChange}
             label="and ≤ ..."
             type="number"
             min="1"
@@ -49,6 +72,8 @@ const TransactionsFilter = props => {
         <Form.Group>
           <Form.Input type="hidden" width={4} />
           <Form.Input
+            name="amountMin"
+            onChange={handleChange}
             label="$ Amount  ≥ ... "
             type="number"
             min="0.01"
@@ -56,6 +81,8 @@ const TransactionsFilter = props => {
             width={4}
           />
           <Form.Input
+            name="amountMax"
+            onChange={handleChange}
             label="and ≤ ..."
             type="number"
             min="0.01"
@@ -66,8 +93,20 @@ const TransactionsFilter = props => {
         </Form.Group>
         <Form.Group>
           <Form.Input type="hidden" width={4} />
-          <Form.Input label="Dated between..." type="date" width={4} />
-          <Form.Input label="and..." type="date" width={4} />
+          <Form.Input
+            name="dateMin"
+            onChange={handleChange}
+            label="Dated between..."
+            type="date"
+            width={4}
+          />
+          <Form.Input
+            name="dateMax"
+            onChange={handleChange}
+            label="and..."
+            type="date"
+            width={4}
+          />
           <Form.Input type="hidden" width={4} />
         </Form.Group>
 
@@ -75,7 +114,9 @@ const TransactionsFilter = props => {
           <Form.Input type="hidden" width={4} />
           <Form.Input label="Includes account(s)..." type="hidden" width={8}>
             <Dropdown
-              placeholder="Skills"
+              id="accountsIncluded"
+              onChange={handleChange}
+              placeholder="Accounts..."
               fluid
               multiple
               selection
@@ -86,7 +127,12 @@ const TransactionsFilter = props => {
         </Form.Group>
         <Form.Group>
           <Form.Input type="hidden" width={4} />
-          <Form.Input label="Description includes..." width={8} />
+          <Form.Input
+            name="descriptionFilter"
+            onChange={handleChange}
+            label="Description includes..."
+            width={8}
+          />
           <Form.Input type="hidden" width={4} />
         </Form.Group>
       </Form>
@@ -94,4 +140,19 @@ const TransactionsFilter = props => {
   );
 };
 
-export default TransactionsFilter;
+const mapStateToProps = state => {
+  return {
+    transactionFilters: state.transactionContainer.transactionFilters,
+    accounts: state.userInfo.accounts
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    changeTransactionFilter: (filterName, filterVal) => {
+      dispatch({ type: "CHANGE_TRANSACTION_FILTER", filterName, filterVal });
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TransactionsFilter);

@@ -1,35 +1,5 @@
-// import faker from 'faker'
-// import _ from 'lodash'
 import React from "react";
 import { Segment, Input, Select, Button } from "semantic-ui-react";
-
-// const panels = _.times(3, () => ({
-//   title: 'this is a title',
-//   content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-// }))
-
-// console.log(panels)
-
-const firstOptions = [
-  { key: "increase", text: "Increase", value: "increase" },
-  { key: "decrease", text: "Decrease", value: "decrease" }
-];
-
-const increaseOptions = [
-  { key: "net worth", text: "net worth", value: "net worth" },
-  { key: "earnings", text: "earnings", value: "earnings" },
-  { key: "assets", text: "assets", value: "assets" }
-];
-
-// const decreaseOptions = [
-//   { key: "liabilities", text: "liabilities", value: "liabilities" },
-//   { key: "spending", text: "spending", value: "spending" }
-// ];
-
-const percentOrAmount = [
-  { key: "%", text: "%", value: "%" },
-  { key: "$", text: "$", value: "$" }
-];
 
 const timeframe = [
   { key: "week", text: "week", value: "week" },
@@ -60,7 +30,6 @@ const NewGoal = () => {
     console.log(
       `${firstDropdown} ${secondDropdown} by ${dollar}${numberInput}${percent} every ${timePeriod}`
     );
-    // debugger;
   };
   return (
     <Segment>

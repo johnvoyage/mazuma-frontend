@@ -150,6 +150,17 @@ const rootReducer = (state = initialState.whole, action) => {
           descriptionToggle: !state.transactionContainer.descriptionToggle
         }
       };
+    case "CHANGE_TRANSACTION_FILTER":
+      return {
+        ...state,
+        transactionContainer: {
+          ...state.transactionContainer,
+          transactionFilters: {
+            ...state.transactionContainer.transactionFilters,
+            [action.filterName]: action.filterVal
+          }
+        }
+      };
     // case "TOGGLE_TRANSACTION_FILTER":
     //   return {
     //     ...state,
