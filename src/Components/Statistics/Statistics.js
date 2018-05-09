@@ -18,11 +18,11 @@ const Statistics = props => {
       <GraphOptions />
       <SubcategoryOptions />
       <br />{" "}
-      {props.chartType === "line" ? (
+      {props.chartType === "line" && props.showSubcategories.length > 0 ? (
         <Checkbox
           name="goalComparison"
           slider
-          label="Show goals"
+          label="Show goals (see 'Account' page)"
           checked={props.goalComparison}
           onChange={handleChange}
         />

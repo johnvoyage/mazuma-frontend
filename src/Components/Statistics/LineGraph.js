@@ -105,7 +105,8 @@ const LineGraph = props => {
             1;
           return dataPoint;
         } else {
-          dataPoint += props.goalContainer[goal].amount;
+          dataPoint +=
+            props.goalContainer[goal].amount / props.goalContainer[goal].time;
           return dataPoint;
         }
       }

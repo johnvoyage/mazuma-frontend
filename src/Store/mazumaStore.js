@@ -240,7 +240,8 @@ const rootReducer = (state = initialState.whole, action) => {
           [action.whichDate]: action.newDate
             ? action.newDate
             : dateHelpers.dateHelpersJavaScript(new Date())
-        }
+        },
+        chartContainer: { ...state.chartContainer, goalComparison: false }
       };
 
     case "UPDATE_CHART_TYPE":
@@ -258,7 +259,8 @@ const rootReducer = (state = initialState.whole, action) => {
         ...state,
         chartContainer: {
           ...state.chartContainer,
-          showSubcategories: action.arrayOfSubcategories
+          showSubcategories: action.arrayOfSubcategories,
+          goalComparison: false
         }
       };
     case "TOGGLE_CHART_CHECKBOX":

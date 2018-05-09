@@ -31,7 +31,7 @@ const transactionContainer = {
 const chartContainer = {
   chartType: "line",
   showSubcategories: [],
-  goalComparison: true,
+  goalComparison: false,
   hideInitial: true,
   beginDate: "2018-01-01",
   endDate: dateHelpers.dateHelpersJavaScript(new Date())
@@ -44,32 +44,32 @@ const accountContainer = {
 const goalContainer = {
   netWorth: {
     show: true,
-    amount: 5,
+    amount: 3,
     time: 100
   },
   assets: {
     show: true,
-    amount: 6,
+    amount: 3,
     time: 100
   },
   liabilities: {
     show: true,
-    amount: 2.5,
+    amount: 0.25,
     time: 100
   },
   netIncome: {
     show: true,
-    amount: 50,
+    amount: 200,
     time: 1
   },
   income: {
     show: true,
-    amount: 100,
+    amount: 300,
     time: 1
   },
   spending: {
     show: true,
-    amount: 35,
+    amount: 100,
     time: 1
   }
 };
