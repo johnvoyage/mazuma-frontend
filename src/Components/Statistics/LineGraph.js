@@ -5,17 +5,9 @@ import chartHelpers from "../../HelperFunctions/chartHelpers";
 import financialStatementHelpers from "../../HelperFunctions/financialStatementHelpers";
 import lineChartOptions from "../../StaticOptions/lineChartOptions";
 import generalChartOptions from "../../StaticOptions/generalChartOptions";
-// import { subcategoryNameToArrayOfIds } from "../../StaticOptions/subcategories";
 import { connect } from "react-redux";
-// import { lineGoals } from "../../HelperFunctions/lineGoals";
 
 const LineGraph = props => {
-  // const lineDataPointsToMap = chartHelpers.arrayOfDatesWithEntries(
-  //   props.beginDate,
-  //   props.endDate,
-  //   props.entries
-  // );
-
   const lineDataPointsToMap = chartHelpers
     .arrayOfDates(props.beginDate, props.endDate)
     .slice(1);
@@ -53,32 +45,6 @@ const LineGraph = props => {
         data: chartData[grabKey]
       };
     })
-
-    // .concat(
-    //   props.goalComparison
-    //     ? props.showSubcategories.map(subcategory => {
-    //         const grabKey =
-    //           subcategory === "net worth"
-    //             ? "netWorth"
-    //             : subcategory === "net income" ? "netIncome" : subcategory;
-    //         return {
-    //           ...lineChartOptions[`${grabKey}Goals`],
-    //           label: "GOALS",
-    //           data: lineGoals(
-    //             lineDataPointsToMap.length,
-    //             financialStatementHelpers.amountOfEntriesGivenSubcategories(
-    //               subcategoryNameToArrayOfIds(subcategory),
-    //               props.accounts,
-    //               props.entries,
-    //               0,
-    //               lineDataPointsToMap[0]
-    //             ),
-    //             0.00025
-    //           )
-    //         };
-    //       })
-    //     : []
-    // )
   };
 
   const goalDataLinesToShow = Object.keys(props.goalContainer)
@@ -123,13 +89,7 @@ const LineGraph = props => {
 
   const goalDataSets = () => goalDataLinesToShow.map(goal => goalDataSet(goal));
 
-  lineGraphData.datasets = lineGraphData.datasets.concat(
-    goalDataSets()
-    // lineChartGoalData()
-  );
-
-  // console.log(goalDataSets);
-  // console.log(lineGraphData.datasets);
+  lineGraphData.datasets = lineGraphData.datasets.concat(goalDataSets());
 
   return props.showSubcategories.length !== 0 ? (
     <Segment>
