@@ -41,11 +41,45 @@ const accountContainer = {
   accountsToShow: [1, 2, 3, 4, 5, 6, 8, 9]
 };
 
+const goalContainer = {
+  netWorth: {
+    show: false,
+    amount: 0.05,
+    time: 100
+  },
+  assets: {
+    show: false,
+    amount: 0.06,
+    time: 100
+  },
+  liabilities: {
+    show: false,
+    amount: 0.025,
+    time: 100
+  },
+  netIncome: {
+    show: false,
+    amount: 50,
+    time: 1
+  },
+  income: {
+    show: false,
+    amount: 100,
+    time: 1
+  },
+  spending: {
+    show: false,
+    amount: 35,
+    time: 1
+  }
+};
+
 const whole = {
   loading: false,
   activeMenuItem: "Mazuma",
   userInfo,
   accountContainer,
+  goalContainer,
   transactionContainer,
   netIncomeContainer: {
     beginDate: "2018-01-01",

@@ -177,7 +177,7 @@ const CurrentGoals = () => {
               <Checkbox slider />
             </Table.Cell>
             <Table.Cell>
-              Keep earning above{"   "}
+              Keep income above{"   "}
               <Input
                 label="$"
                 labelPosition="left"
