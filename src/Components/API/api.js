@@ -25,7 +25,7 @@ const getCurrentUser = () => {
   }).then(response => response.json());
 };
 
-const signUserUp = (email, password /*, tickerSymbol*/) => {
+const signUserUp = (email, password) => {
   return fetch(`${API_ROOT}/users/`, {
     method: "POST",
     headers: headers,
@@ -91,7 +91,6 @@ const readAccount = accountId => {
 };
 
 const getAccountId = (accountName, userId) => {
-  // const urlAccountName = accountName.split(" ").join("-space-here-");
   return fetch(`${API_ROOT}/accountname/${accountName}/${userId}`).then(
     response => response.json()
   );
@@ -108,8 +107,6 @@ const createTransaction = (amount, accountId, entryId) => {
     })
   });
 };
-
-// api.transaction.createTransaction(amount, account.id, entryId)
 
 export default {
   auth: {
