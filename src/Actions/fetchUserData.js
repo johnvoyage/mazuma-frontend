@@ -1,8 +1,3 @@
-// const API_ROOT = `http://localhost:3000`;
-// import React from "react";
-//
-// import { connect } from "react-redux";
-
 import api from "../Components/API/api";
 
 export const fetchUserData = userId => {
