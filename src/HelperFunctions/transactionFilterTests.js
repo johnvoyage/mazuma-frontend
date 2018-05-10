@@ -33,7 +33,6 @@ const entryMaxNum = entry => {
             .split(",")
             .join("")
         : transaction.amount.split(",").join("");
-    entry.number === 39 ? console.log("amount: ", amount) : null;
     return Math.abs(parseFloat(amount)) > aggr
       ? Math.abs(parseFloat(amount))
       : aggr;

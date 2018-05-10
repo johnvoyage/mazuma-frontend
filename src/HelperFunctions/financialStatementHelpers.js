@@ -1,17 +1,13 @@
 const filterEntriesWithinDateRange = (arrayOfEntries, beginDate, endDate) => {
-  // console.log(endDate);
-  // debugger;
   return arrayOfEntries.filter(entry => {
     const entryDate = entry.date.slice(0, 10);
     return (
       entryDate >= beginDate.toString() &&
       new Date(entryDate) <= new Date(endDate)
     );
-    // new Date(currentDate) < new Date(endDate)
-    // entryDate <= endDate;
   });
 };
-// amountOfEntriesGivenSubcategories
+
 const mapAccountIdsUsedInEntries = arrayOfEntries => {
   return arrayOfEntries.map(entry =>
     mapAccountIdsUsedInTransactions(entry.transactions)
@@ -91,34 +87,6 @@ const filterAccountIdsOfSubcategories = (
     .map(account => account.id);
 };
 
-// const amountOfEntriesGivenSubcategories = arrayOfSubcategoryIds => {
-//   const accountIdsOfSubcategoriesArray = financialStatementHelpers.filterAccountIdsOfSubcategories(
-//     arrayOfSubcategoryIds,
-//     props.accounts
-//   );
-//   return formatNumber.withoutCents(
-//     financialStatementHelpers
-//       .mapTransactionsOfEntries(
-//         financialStatementHelpers.filterEntriesWithinDateRange(
-//           props.entries,
-//           props.beginDate,
-//           props.endDate
-//         )
-//       )
-//       .reduce((aggr, arrayOfTransactions) => {
-//         arrayOfTransactions.forEach(transaction => {
-//           return accountIdsOfSubcategoriesArray.indexOf(
-//             transaction.account_id
-//           ) > -1
-//             ? (aggr += parseFloat(transaction.amount))
-//             : null;
-//         });
-//         return aggr;
-//       }, 0),
-//     " $ "
-//   );
-// };
-// amountOfEntriesGivenSubcategories
 const amountOfEntriesGivenSubcategories = (
   arrayOfSubcategoryIds,
   arrayOfAccounts,
@@ -130,7 +98,6 @@ const amountOfEntriesGivenSubcategories = (
     arrayOfSubcategoryIds,
     arrayOfAccounts
   );
-  // console.log(beginDate);
   return mapTransactionsOfEntries(
     filterEntriesWithinDateRange(entries, beginDate, endDate)
   ).reduce((aggr, arrayOfTransactions) => {
