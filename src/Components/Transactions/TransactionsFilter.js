@@ -36,6 +36,9 @@ const TransactionsFilter = props => {
                 1
               );
     }
+    if (filterName === "descriptionFilter" && filterVal.length === 0) {
+      filterVal = "";
+    }
     props.changeTransactionFilter(filterName, filterVal);
   };
 

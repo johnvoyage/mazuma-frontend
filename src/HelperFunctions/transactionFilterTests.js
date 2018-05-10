@@ -2,31 +2,48 @@ const passesTransactionFilterTests = (entry, filters) => {
   const entryMax = entryMaxNum(entry);
   const entryMin = entryMinNum(entry);
   const entrysAccounts = entrysAccountsArray(entry);
-  console.log(entrysAccounts);
-  return (
-    transactionMinTest(entry.number, filters.numMin) &&
-    transactionMaxTest(entry.number, filters.numMax) &&
-    amountMinTest(entryMin, filters.amountMin) &&
-    amountMaxTest(entryMax, filters.amountMax) &&
-    dateMinTest(entry.date, filters.dateMin) &&
-    dateMaxTest(entry.date, filters.dateMax) &&
-    accountsIncludedTest(entrysAccounts, filters.accountsIncluded) &&
-    descriptionTest(entry.description, filters.descriptionFilter)
-  );
+  return !transactionMinTest(entry.number, filters.numMin)
+    ? false
+    : !transactionMaxTest(entry.number, filters.numMax)
+      ? false
+      : !amountMinTest(entryMin, filters.amountMin)
+        ? false
+        : !amountMaxTest(entryMax, filters.amountMax)
+          ? false
+          : !dateMinTest(entry.date, filters.dateMin)
+            ? false
+            : !dateMaxTest(entry.date, filters.dateMax)
+              ? false
+              : !descriptionTest(entry.description, filters.descriptionFilter)
+                ? false
+                : !accountsIncludedTest(
+                    entrysAccounts,
+                    filters.accountsIncluded
+                  )
+                  ? false
+                  : true;
 };
 
 const entryMaxNum = entry => {
   return entry.transactions.reduce((aggr, transaction) => {
-    return Math.abs(parseFloat(transaction.amount)) > aggr
-      ? Math.abs(parseFloat(transaction.amount))
+    const amount =
+      transaction.amount[0] === "("
+        ? transaction.amount.slice(1, -1)
+        : transaction.amount;
+    return Math.abs(parseFloat(amount)) > aggr
+      ? Math.abs(parseFloat(amount))
       : aggr;
   }, 0);
 };
 
 const entryMinNum = entry => {
   return entry.transactions.reduce((aggr, transaction) => {
-    return Math.abs(parseFloat(transaction.amount)) < aggr
-      ? Math.abs(parseFloat(transaction.amount))
+    const amount =
+      transaction.amount[0] === "("
+        ? transaction.amount.slice(1, -1)
+        : transaction.amount;
+    return Math.abs(parseFloat(amount)) < aggr
+      ? Math.abs(parseFloat(amount))
       : aggr;
   }, 9999999);
 };
@@ -70,9 +87,13 @@ const dateMaxTest = (entryDate, filterDateMax) => {
 };
 
 const descriptionTest = (entryDescription, filtersDescription) => {
-  return entryDescription
-    .toLowerCase()
-    .includes(filtersDescription.toLowerCase());
+  if (filtersDescription.length === 0 && filtersDescription !== "") {
+    return false;
+  } else {
+    return entryDescription
+      .toLowerCase()
+      .includes(filtersDescription.toLowerCase());
+  }
 };
 
 const entrysAccountsArray = entry => {
@@ -80,16 +101,17 @@ const entrysAccountsArray = entry => {
 };
 
 const accountsIncludedTest = (entrysAccounts, filtersAccounts) => {
+  let truthiness = true;
   if (filtersAccounts.length === 0) {
     return true;
   } else {
     filtersAccounts.forEach(account => {
-      if (entrysAccounts.includes(account)) {
-        return true;
+      if (!entrysAccounts.includes(account)) {
+        truthiness = false;
       }
     });
   }
-  return false;
+  return truthiness;
 };
 
 export default {

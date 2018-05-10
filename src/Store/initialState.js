@@ -15,13 +15,13 @@ const transactionFilters = {
   amountMax: 1000,
   dateMin: "2018-01-01",
   // dateMax: dateHelpers.dateHelpersJavaScript(new Date()),
-  dateMax: "2018-12-31",
+  dateMax: "2018-12-28",
   accountsIncluded: [],
   descriptionFilter: ""
 };
 
 const transactionContainer = {
-  topRow: "new transaction", //view transactions
+  topRow: "view transaction",
   showFilters: false,
   showDescriptions: true,
   showEditDelete: true,
