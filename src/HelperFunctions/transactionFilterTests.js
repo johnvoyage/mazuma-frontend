@@ -28,8 +28,12 @@ const entryMaxNum = entry => {
   return entry.transactions.reduce((aggr, transaction) => {
     const amount =
       transaction.amount[0] === "("
-        ? transaction.amount.slice(1, -1)
-        : transaction.amount;
+        ? transaction.amount
+            .slice(1, -1)
+            .split(",")
+            .join("")
+        : transaction.amount.split(",").join("");
+    entry.number === 39 ? console.log("amount: ", amount) : null;
     return Math.abs(parseFloat(amount)) > aggr
       ? Math.abs(parseFloat(amount))
       : aggr;
@@ -40,8 +44,11 @@ const entryMinNum = entry => {
   return entry.transactions.reduce((aggr, transaction) => {
     const amount =
       transaction.amount[0] === "("
-        ? transaction.amount.slice(1, -1)
-        : transaction.amount;
+        ? transaction.amount
+            .slice(1, -1)
+            .split(",")
+            .join("")
+        : transaction.amount.split(",").join("");
     return Math.abs(parseFloat(amount)) < aggr
       ? Math.abs(parseFloat(amount))
       : aggr;
@@ -57,11 +64,19 @@ const transactionMaxTest = (transactionNum, transactionMax) => {
 };
 
 const amountMinTest = (entryMin, filterMin) => {
-  return entryMin >= filterMin;
+  if (filterMin.toString() === "") {
+    return true;
+  } else {
+    return entryMin >= filterMin;
+  }
 };
 
 const amountMaxTest = (entryMax, filterMax) => {
-  return entryMax <= filterMax;
+  if (filterMax.toString() === "") {
+    return true;
+  } else {
+    return entryMax <= filterMax;
+  }
 };
 
 const dateMinTest = (entryDate, filterDateMin) => {
