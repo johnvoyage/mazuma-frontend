@@ -11,6 +11,7 @@ const TimingFilter = props => {
       event.target.name,
       event.target.value
     );
+    props.resetGoalComparison();
   };
 
   return (
@@ -64,6 +65,9 @@ const mapDispatchToProps = dispatch => {
   return {
     updateAsOfDate: (container, whichDate, newDate) => {
       dispatch({ type: "UPDATE_DATE", container, whichDate, newDate });
+    },
+    resetGoalComparison: () => {
+      dispatch({ type: "RESET_GOAL_COMPARISON" });
     }
     // termsAgreementInit: () => {
     //   dispatch({ type: 'TERMS_AGREEMENT_INIT' })

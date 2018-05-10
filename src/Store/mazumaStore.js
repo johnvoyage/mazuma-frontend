@@ -271,6 +271,7 @@ const rootReducer = (state = initialState.whole, action) => {
           };
     /* GENERIC FORM UPDATE */
     case "UPDATE_DATE":
+      console.log("jere");
       return {
         ...state,
         [action.container]: {
@@ -278,7 +279,11 @@ const rootReducer = (state = initialState.whole, action) => {
           [action.whichDate]: action.newDate
             ? action.newDate
             : dateHelpers.dateHelpersJavaScript(new Date())
-        },
+        }
+      };
+    case "RESET_GOAL_COMPARISON":
+      return {
+        ...state,
         chartContainer: { ...state.chartContainer, goalComparison: false }
       };
     case "UPDATE_CHART_TYPE":
