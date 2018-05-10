@@ -100,7 +100,12 @@ const SelectedFilters = props => {
             onChange={handleChange}
           />
           {"  "}
-          <Button size="mini" content="Reset filters" floated="right" />
+          <Button
+            onClick={props.resetFilters}
+            size="mini"
+            content="Reset filters"
+            floated="right"
+          />
           <br />
           <br />
         </div>
@@ -143,6 +148,9 @@ const mapDispatchToProps = dispatch => {
     // toggleNewAccount: () => {
     //   dispatch({ type: "TOGGLE_NEW_ACCOUNT" });
     // },
+    resetFilters: () => {
+      dispatch({ type: "RESET_TRANSACTION_FILTER" });
+    },
     toggleTransactionPrimaryRow: topRow => {
       dispatch({ type: "TOGGLE_TRANSACTION_PRIMARY_ROW", topRow });
     },

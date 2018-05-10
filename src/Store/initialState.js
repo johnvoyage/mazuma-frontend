@@ -21,7 +21,7 @@ const transactionFilters = {
 };
 
 const transactionContainer = {
-  topRow: "view transaction",
+  topRow: "view transactions",
   showFilters: false,
   showDescriptions: true,
   showEditDelete: true,
@@ -95,5 +95,6 @@ const whole = {
 };
 
 export default {
-  whole
+  whole,
+  transactionFilters
 };

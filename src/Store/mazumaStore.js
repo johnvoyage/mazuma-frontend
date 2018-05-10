@@ -165,6 +165,14 @@ const rootReducer = (state = initialState.whole, action) => {
           }
         }
       };
+    case "RESET_TRANSACTION_FILTER":
+      return {
+        ...state,
+        transactionContainer: {
+          ...state.transactionContainer,
+          transactionFilters: initialState.transactionFilters
+        }
+      };
     // case "TOGGLE_TRANSACTION_FILTER":
     //   return {
     //     ...state,
@@ -273,7 +281,6 @@ const rootReducer = (state = initialState.whole, action) => {
         },
         chartContainer: { ...state.chartContainer, goalComparison: false }
       };
-
     case "UPDATE_CHART_TYPE":
       return {
         ...state,
@@ -283,7 +290,6 @@ const rootReducer = (state = initialState.whole, action) => {
           showSubcategories: []
         }
       };
-
     case "UPDATE_CHART_SUBCATEGORIES":
       return {
         ...state,
