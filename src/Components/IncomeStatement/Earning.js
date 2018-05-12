@@ -28,28 +28,6 @@ const Earning = props => {
     );
   };
 
-  // const subtotalFooter = subcategoryId => {
-  //   return (
-  //     <Table.Row key={-2}>
-  //       <Table.Cell textAlign="right" colSpan="2">
-  //         Subtotal:
-  //       </Table.Cell>
-  //       <Table.Cell>
-  //         {formatNumber.standard(
-  //           -financialStatementHelpers.amountOfEntriesGivenSubcategories(
-  //             [subcategoryId],
-  //             props.accounts,
-  //             props.entries,
-  //             props.beginDate,
-  //             props.endDate
-  //           ),
-  //           " $ "
-  //         )}
-  //       </Table.Cell>
-  //     </Table.Row>
-  //   );
-  // };
-
   const accountsToDisplay = subcategoryId => {
     return financialStatementHelpers.filterAccountsOfSubcategoryId(
       subcategoryId,
