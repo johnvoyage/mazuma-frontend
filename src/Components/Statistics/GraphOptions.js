@@ -40,7 +40,6 @@ const GraphOptions = props => {
 const mapStateToProps = state => {
   return {
     chartType: state.chartContainer.chartType
-    // showSubcategories: state.chartContainer.showSubcategories
   };
 };
 
@@ -49,10 +48,6 @@ const mapDispatchToProps = dispatch => {
     updateChartType: chartType => {
       dispatch({ type: "UPDATE_CHART_TYPE", chartType });
     }
-
-    // updateChartSubcategories: arrayOfSubcategories => {
-    //   dispatch({ type: "UPDATE_CHART_SUBCATEGORIES", arrayOfSubcategories });
-    // }
   };
 };
 

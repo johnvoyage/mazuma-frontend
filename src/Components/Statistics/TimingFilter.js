@@ -53,9 +53,6 @@ const TimingFilter = props => {
 
 const mapStateToProps = state => {
   return {
-    // showLiquid
-    // accounts: state.userInfo.accounts,
-    // entries: state.userInfo.entries
     endDate: state.chartContainer.endDate,
     beginDate: state.chartContainer.beginDate
   };
@@ -69,16 +66,6 @@ const mapDispatchToProps = dispatch => {
     resetGoalComparison: () => {
       dispatch({ type: "RESET_GOAL_COMPARISON" });
     }
-    // termsAgreementInit: () => {
-    //   dispatch({ type: 'TERMS_AGREEMENT_INIT' })
-    //   // },
-    //   toggleTermsAgreement: () => {
-    //     dispatch({ type: 'TOGGLE_TERMS_AGREEMENT' })
-    //   },
-    //   signUserUp: (userInfo) => {
-    //     console.log(userInfo)
-    //     dispatch({ type: 'SIGN_USER_UP', userInfo })
-    //   }
   };
 };
 

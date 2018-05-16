@@ -1,15 +1,12 @@
-import React from 'react';
-import { Dropdown, Icon } from 'semantic-ui-react';
+import React from "react";
+import { Dropdown, Icon } from "semantic-ui-react";
 
-
-
-const DropdownMenu = (props) => {
-
+const DropdownMenu = props => {
   return (
     <Dropdown.Menu>
       <Dropdown.Item>
-        <Icon name='dropdown' />
-        <span className='text'>New</span>
+        <Icon name="dropdown" />
+        <span className="text">New</span>
         <Dropdown.Menu>
           <Dropdown.Item>Document</Dropdown.Item>
           <Dropdown.Item>Image</Dropdown.Item>
@@ -22,7 +19,7 @@ const DropdownMenu = (props) => {
       <Dropdown.Header>Export</Dropdown.Header>
       <Dropdown.Item>Share</Dropdown.Item>
     </Dropdown.Menu>
-  )
-}
+  );
+};
 
-export default DropdownMenu
+export default DropdownMenu;

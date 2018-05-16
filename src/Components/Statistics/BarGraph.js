@@ -10,32 +10,21 @@ import generalChartOptions from "../../StaticOptions/generalChartOptions";
 import { connect } from "react-redux";
 
 const BarGraph = props => {
-  // const barDataPointsToMap = chartHelpers.arrayOfDatesWithEntries(
-  //   props.beginDate,
-  //   props.endDate,
-  //   props.entries
-  // );
-
   const barDataPointsToMap = chartHelpers
     .arrayOfDates(props.beginDate, props.endDate)
     .slice(1);
 
   const massAssignHelper = arrayOfSubcategories => {
     return barDataPointsToMap.map(date => {
-      // console.log(date);
-      // console.log(dateHelpers.yesterday(date));
       return financialStatementHelpers.amountOfEntriesGivenSubcategories(
         arrayOfSubcategories,
         props.accounts,
         props.entries,
         dateHelpers.yesterday(date),
-        // 0,
-        // date,
         date
       );
     });
   };
-  // console.log(massAssignHelper([1, 2, 3, 4, 5, 6]));
 
   const chartData = {};
   chartData.netWorth = props.hideInitial
@@ -82,16 +71,6 @@ const BarGraph = props => {
     />
   );
 };
-
-// <Segment>
-//   {props.chartType === "bar" ? (
-//     <Line data={barGraphData} />
-//   ) : props.chartType === "bar" ? (
-//     <Bar data={barGraphData} />
-//   ) : (
-//     <Pie data={barGraphData} />
-//   )}
-// </Segment>
 
 const mapStateToProps = state => {
   return {

@@ -17,8 +17,6 @@ import {
   calcDebitBalance,
   calcCreditBalance
 } from "./NewTransactionSubmitted";
-// import { bindActionCreators } from "redux";
-// import { fetchTransactions } from "../../Actions/fetchTransactions";
 import { fetchUserData } from "../../Actions/fetchUserData";
 
 import formatNumber from "../../HelperFunctions/formatNumber";
@@ -172,10 +170,6 @@ const mapDispatchToProps = dispatch => {
     fetchUserData: userId => {
       dispatch(fetchUserData(userId));
     }
-    // getTransactions: bindActionCreators(fetchTransactions, dispatch)
-    // addNewAccountOn: () => {
-    //   dispatch({ type: 'ADD_NEW_ACCOUNT_ON' })
-    // },
   };
 };
 

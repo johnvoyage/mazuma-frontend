@@ -57,28 +57,15 @@ const SignUpForm = props => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    // agreedToTerms: state.formValidity.signUpForm
-  };
-};
-
 const mapDispatchToProps = dispatch => {
   return {
     fetchUserData: userId => {
       dispatch(fetchUserData(userId));
     },
-    // termsAgreementInit: () => {
-    //   dispatch({ type: 'TERMS_AGREEMENT_INIT' })
-    // },
-    // fetchUsersInformation: (userId) => {
-    //   dispatch({ type: 'FETCH_USERS_INFORMATION', userId })
-    // },
     signUserIn: userInfo => {
-      // console.log(userInfo);
       dispatch({ type: "SIGN_USER_IN", userInfo });
     }
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignUpForm);
+export default connect(null, mapDispatchToProps)(SignUpForm);

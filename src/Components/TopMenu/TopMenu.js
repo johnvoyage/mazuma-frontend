@@ -1,21 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Menu } from "semantic-ui-react";
-// import DropdownMenu from './DropdownMenu';
 import {
   loggedInMenuOptions,
   loggedOutMenuOptions
 } from "../../StaticOptions/menuOptions";
 
 const TopMenu = props => {
-  // console.log(props)
   const loggedIn = !!props.userInfo.email;
 
-  // loggedIn ? loggedInMenuOptions[0] = props.userInfo.email : null
-
   const menuOptions = loggedIn ? loggedInMenuOptions : loggedOutMenuOptions;
-
-  // console.log(menuOptions)
 
   const renderMenuItems = () => {
     return menuOptions.map((menuOption, index) => {

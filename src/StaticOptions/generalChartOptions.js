@@ -5,7 +5,6 @@ const standardLine = {
       fontColor: "grey"
     }
   }
-
   // scales: {
   //   yAxes: [
   //     {
@@ -15,7 +14,6 @@ const standardLine = {
   //     }
   //   ]
   // }
-
   // scales: {
   //   yAxes: [
   //     {

@@ -85,10 +85,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    // updateChartType: chartType => {
-    //   dispatch({ type: "UPDATE_CHART_TYPE", chartType });
-    // },
-
     updateChartSubcategories: arrayOfSubcategories => {
       dispatch({ type: "UPDATE_CHART_SUBCATEGORIES", arrayOfSubcategories });
     }
@@ -96,53 +92,3 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SubcategoryOptions);
-
-// <Button.Group attached="top">
-//   <Button
-//     name="net worth"
-//     onClick={handleClick}
-//     positive={props.showSubcategories.indexOf("net worth") > -1}
-//   >
-//     Net Worth
-//   </Button>
-//   <Button.Or text="and" />
-//   <Button
-//     name="assets"
-//     onClick={handleClick}
-//     positive={props.showSubcategories.indexOf("assets") > -1}
-//   >
-//     Assets
-//   </Button>
-//   <Button.Or text="and" />
-//   <Button
-//     name="liabilities"
-//     onClick={handleClick}
-//     positive={props.showSubcategories.indexOf("liabilities") > -1}
-//   >
-//     Liabilities
-//   </Button>
-//   <Button.Or text="and" />
-//   <Button
-//     name="net income"
-//     onClick={handleClick}
-//     positive={props.showSubcategories.indexOf("net income") > -1}
-//   >
-//     Net Income
-//   </Button>
-//   <Button.Or text="and" />
-//   <Button
-//     name="income"
-//     onClick={handleClick}
-//     positive={props.showSubcategories.indexOf("income") > -1}
-//   >
-//     Income
-//   </Button>
-//   <Button.Or text="and" />
-//   <Button
-//     name="spending"
-//     onClick={handleClick}
-//     positive={props.showSubcategories.indexOf("spending") > -1}
-//   >
-//     Spending
-//   </Button>
-// </Button.Group>
