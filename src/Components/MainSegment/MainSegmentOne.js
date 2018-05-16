@@ -64,7 +64,6 @@ const MainSegmentOne = props => {
 const mapStateToProps = state => {
   return {
     loading: state.loading,
-    // loggedIn: state.loggedIn,
     activeMenuItem: state.activeMenuItem
   };
 };

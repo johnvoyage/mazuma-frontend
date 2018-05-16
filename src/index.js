@@ -6,9 +6,7 @@ import { createStore, applyMiddleware, compose } from "redux";
 import "semantic-ui-css/semantic.min.css"; // ../ deleted
 import { BrowserRouter as Router } from "react-router-dom";
 import rootReducer from "./Store/mazumaStore";
-// import { applyMiddleware } from "redux";
 import reduxThunk from "redux-thunk";
-// import configureStore from "./Store/configureStore";
 import "./index.css";
 
 const store = createStore(

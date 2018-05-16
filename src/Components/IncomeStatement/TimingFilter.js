@@ -5,7 +5,6 @@ import dateHelpers from "../../HelperFunctions/dateHelpers";
 
 const TimingFilter = props => {
   const handleChange = event => {
-    // debugger;
     props.updateAsOfDate(
       "netIncomeContainer",
       event.target.name,
@@ -52,9 +51,6 @@ const TimingFilter = props => {
 
 const mapStateToProps = state => {
   return {
-    // showLiquid
-    // accounts: state.userInfo.accounts,
-    // entries: state.userInfo.entries
     endDate: state.netIncomeContainer.endDate,
     beginDate: state.netIncomeContainer.beginDate
   };
@@ -65,16 +61,6 @@ const mapDispatchToProps = dispatch => {
     updateAsOfDate: (container, whichDate, newDate) => {
       dispatch({ type: "UPDATE_DATE", container, whichDate, newDate });
     }
-    // termsAgreementInit: () => {
-    //   dispatch({ type: 'TERMS_AGREEMENT_INIT' })
-    //   // },
-    //   toggleTermsAgreement: () => {
-    //     dispatch({ type: 'TOGGLE_TERMS_AGREEMENT' })
-    //   },
-    //   signUserUp: (userInfo) => {
-    //     console.log(userInfo)
-    //     dispatch({ type: 'SIGN_USER_UP', userInfo })
-    //   }
   };
 };
 

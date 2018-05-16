@@ -4,8 +4,6 @@ import { Button, Form } from "semantic-ui-react";
 import api from "../API/api";
 import { fetchUserData } from "../../Actions/fetchUserData";
 
-// import fetchUsersInformation from '../UserAccount/FetchUsersData';
-
 const SignInForm = props => {
   let formInput = {};
 
@@ -62,9 +60,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    // fetchUsersInformation: (userId) => {
-    //   dispatch({ type: 'FETCH_USERS_INFORMATION', userId })
-    // },
     fetchUserData: userId => {
       dispatch(fetchUserData(userId));
     },

@@ -3,7 +3,6 @@ import api from "../API/api";
 import { connect } from "react-redux";
 import { Accordion, Button, Checkbox, Form } from "semantic-ui-react";
 import panels from "./InitialEntry";
-// import fetchUsersInformation from '../UserAccount/FetchUsersData';
 import { fetchUserData } from "../../Actions/fetchUserData";
 
 const SignUpForm = props => {
@@ -11,22 +10,13 @@ const SignUpForm = props => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    api.auth
-      .signUserUp(
-        formInput.email,
-        formInput.password /*, formInput.tickerSymbol */
-      )
-      .then(user => {
-        if (user.error) {
-          console.log("ERROR");
-        } else {
-          // console.log('...')
-          // fetchUsersInformation(user.id)
-          // props.fetchUserData(user.id);
-
-          props.signUserIn(user);
-        }
-      });
+    api.auth.signUserUp(formInput.email, formInput.password).then(user => {
+      if (user.error) {
+        console.log("ERROR");
+      } else {
+        props.signUserIn(user);
+      }
+    });
   };
 
   const handleChange = event => {
@@ -34,7 +24,6 @@ const SignUpForm = props => {
       ...formInput,
       [event.target.name]: event.target.value
     };
-    // console.log(formInput);
   };
 
   return (
@@ -61,17 +50,9 @@ const SignUpForm = props => {
 
       <Accordion as={Form.Field} panels={panels} />
       <Form.Field required>
-        <Checkbox
-          label="I agree to the Terms and Conditions"
-          // onChange={ props.toggleTermsAgreement }
-        />
+        <Checkbox label="I agree to the Terms and Conditions" />
       </Form.Field>
-      <Button
-        type="submit"
-        // disabled={ !props.agreedToTerms }
-      >
-        Create Account
-      </Button>
+      <Button type="submit">Create Account</Button>
     </Form>
   );
 };
