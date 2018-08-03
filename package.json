@@ -4,12 +4,14 @@
   "private": true,
   "dependencies": {
     "chart.js": "^2.7.2",
+    "jest": "20.0.4",
     "react": "^16.3.2",
     "react-chartjs-2": "^2.7.0",
     "react-dom": "^16.3.2",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.4",
+    "redux": "^4.0.0",
     "redux-thunk": "^2.2.0",
     "semantic-ui-css": "^2.3.1",
     "semantic-ui-react": "^0.79.1"
@@ -19,5 +21,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "devDependencies": {}
 }
