@@ -1,4 +1,4 @@
-// test from create-react-app to json file--- "test": "react-scripts test --env=jsdom",
+import rootReducer from '../Store/mazumaStore.js';
 
 const add = (a, b) => a + b;
 
@@ -11,3 +11,18 @@ test('should add two numbers', () => {
 
   expect(result).toBe(7)
 });
+
+test('should start async loading for Thunk', () => {
+  const action = { type: 'ASYNC_START'}
+  const state = rootReducer(action)
+  expect(state.loading).toBe(true)
+});
+
+// test('should stop async loading for Thunk', () => {
+//   const action = { type: 'ASYNC_STOP'}
+// })
+//
+// case "ASYNC_START":
+//   return { ...state, loading: true };
+// case "ASYNC_STOP":
+//   return { ...state, loading: false };
